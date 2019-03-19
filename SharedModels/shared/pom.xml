@@ -9,14 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>InvoiceSystem</artifactId>
+    <artifactId>shared</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>proftaak-s6</groupId>
-            <artifactId>shared</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+
 </project>
