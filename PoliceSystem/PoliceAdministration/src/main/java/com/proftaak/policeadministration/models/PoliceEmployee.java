@@ -1,8 +1,18 @@
 package com.proftaak.policeadministration.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="tbl_policeEmployee")
 public class PoliceEmployee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column
     private String name;
+
+    @Column
     private String password;
 
     public PoliceEmployee() {

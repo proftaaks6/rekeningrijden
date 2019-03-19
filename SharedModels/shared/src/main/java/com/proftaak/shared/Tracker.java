@@ -1,14 +1,24 @@
 package com.proftaak.shared;
 
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name="tbl_tracker")
 public class Tracker {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column
     private boolean active;
 
+    @OneToMany
     private List<LocationPoint> locationPoints;
+
+    @ManyToMany(mappedBy = "trackers")
     private List<Vehicle> vehicles;
 
     public Tracker() {

@@ -2,10 +2,22 @@ package com.proftaak.invoicesystem.models;
 
 import com.proftaak.shared.Vehicle;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="tbl_invoice")
 public class Invoice {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @OneToOne
     private Vehicle vehicle;
+
+    @Column
     private double totalDistance;
+
+    @Column
     private double totalPrice;
 
     public Invoice() {

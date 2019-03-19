@@ -1,11 +1,22 @@
 package com.proftaak.shared;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name="tbl_locationPoint")
 public class LocationPoint {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column
     private double longitude;
+
+    @Column
     private double latitude;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     public LocationPoint() {

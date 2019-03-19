@@ -3,16 +3,30 @@ package com.proftaak.invoicesystem.models;
 import com.proftaak.shared.LocationPoint;
 import com.proftaak.shared.Vehicle;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(name="tbl_route")
+@Entity
 public class Route {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column
     private double distance;
+
+    @Column
     private double price;
+
+    @OneToOne
     private TaxRate taxRate;
+
+    @OneToMany
     private List<LocationPoint> locationPoints;
 
+    @OneToOne
     private Vehicle vehicle;
 
     public Route() {

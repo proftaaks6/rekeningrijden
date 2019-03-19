@@ -1,12 +1,25 @@
 package com.proftaak.usersystem.models;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name="tbl_clientUser")
 public class ClientUser {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column
     private String name;
+
+    @Column
     private String password;
+
+    @OneToMany
     private List<Integer> ownedCarIds;
+
+    @Column(unique = true)
     private String email;
 
     public ClientUser() {

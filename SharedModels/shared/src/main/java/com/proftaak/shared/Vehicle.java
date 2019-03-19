@@ -2,15 +2,30 @@ package com.proftaak.shared;
 
 import com.proftaak.movementregistrationservice.models.FuelType;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "tbl_vehicle")
 public class Vehicle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @OneToOne
     private VehicleType vehicleType;
+
+    @Column
     private String chassisNumber;
+
+    @OneToOne
     private FuelType fuelType;
+
+    @Column
     private double emission;
+
+    @ManyToMany(mappedBy = "vehicles")
     private List<Tracker> trackers;
 
     public Vehicle() {
