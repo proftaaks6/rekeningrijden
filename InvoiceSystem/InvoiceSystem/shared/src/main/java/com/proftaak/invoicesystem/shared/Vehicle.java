@@ -7,6 +7,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "tbl_vehicle")
+@NamedQueries({
+        @NamedQuery(name="Vehicle.getById",
+                query = "SELECT v FROM Vehicle v WHERE v.id = :id")
+
+})
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,6 +43,10 @@ public class Vehicle {
         this.emission = emission;
 
         trackers = new ArrayList<>();
+    }
+
+    public void addTracker(Tracker tracker){
+        trackers.add(tracker);
     }
 
     public long getId() {

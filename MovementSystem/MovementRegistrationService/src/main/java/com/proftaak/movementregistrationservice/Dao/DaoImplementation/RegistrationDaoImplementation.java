@@ -84,4 +84,17 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         }
         return true;
     }
+
+    @Override
+    public boolean addTrackerToVehicle(Tracker tracker, int vehicleId) {
+        try{
+            Vehicle databaseVehicle = em.createNamedQuery("Vehicle.getById", Vehicle.class).setParameter("id", vehicleId).getSingleResult();
+            //Todo: Am not sure whether or not this tracker already exists in database, if it does at this point then it will be duplicated unless the tracker object has an id. Subject to change if need be.
+            databaseVehicle.addTracker(tracker);
+            em.merge(databaseVehicle);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }
