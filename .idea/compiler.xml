@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DriverApplication" />
         <module name="GovernmentAdmin" />
+        <module name="InvoiceSystem.shared" />
         <module name="MovementProxy" />
         <module name="MovementRegistrationService" />
         <module name="PoliceAdministration" />
