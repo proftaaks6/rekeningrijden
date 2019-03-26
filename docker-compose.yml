@@ -1,5 +1,15 @@
-version: "2"
+version: "3.3"
 services:
+
+  movement_registration_service:
+    build:
+      context: ./MovementSystem/MovementRegistrationService/
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+
 
 #Rabbit mq
   rabbit_node_1:
