@@ -72,4 +72,16 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         }
         return true;
     }
+
+    @Override
+    public boolean addVehicle(Vehicle vehicle) {
+        try{
+            if(vehicle.getFuelType() != null && vehicle.getChassisNumber() != null && vehicle.getVehicleType() != null){
+                em.persist(vehicle);
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }
