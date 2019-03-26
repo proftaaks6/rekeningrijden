@@ -70,5 +70,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-debug-all:5.0.4" level="project" />
     <orderEntry type="module" module-name="MovementRegistrationService" />
+    <orderEntry type="module" module-name="InvoiceSystem.shared" />
   </component>
 </module>

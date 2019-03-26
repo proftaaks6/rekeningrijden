@@ -8,12 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DriverApplication" />
         <module name="GovernmentAdmin" />
+        <module name="InvoiceSystem.shared" />
         <module name="MovementProxy" />
-        <module name="MovementRegistrationService" />
         <module name="PoliceAdministration" />
         <module name="PoliceEuropeProxy" />
         <module name="PoliceFrontendProxy" />
-        <module name="shared" />
         <module name="UserSystem" />
       </profile>
     </annotationProcessing>
@@ -21,6 +20,7 @@
       <module name="DriverApplication" target="1.8" />
       <module name="GovernmentAdmin" target="1.8" />
       <module name="InvoiceSystem" target="1.8" />
+      <module name="InvoiceSystem.shared" target="1.8" />
       <module name="MovementProxy" target="1.8" />
       <module name="MovementRegistrationService" target="1.8" />
       <module name="PoliceAdministration" target="1.8" />
