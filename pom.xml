@@ -30,7 +30,6 @@
         <module>PoliceSystem/PoliceEuropeProxy</module>
         <module>PoliceSystem/PoliceFrontendProxy</module>
         <module>GovernmentSystem/GovernmentAdmin</module>
-        <module>shared</module>
     </modules>
 
     <dependencies>

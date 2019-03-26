@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DriverApplication" />
         <module name="GovernmentAdmin" />
-        <module name="InvoiceSystem" />
         <module name="MovementProxy" />
         <module name="MovementRegistrationService" />
         <module name="PoliceAdministration" />
@@ -18,5 +17,18 @@
         <module name="UserSystem" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DriverApplication" target="1.8" />
+      <module name="GovernmentAdmin" target="1.8" />
+      <module name="InvoiceSystem" target="1.8" />
+      <module name="MovementProxy" target="1.8" />
+      <module name="MovementRegistrationService" target="1.8" />
+      <module name="PoliceAdministration" target="1.8" />
+      <module name="PoliceEuropeProxy" target="1.8" />
+      <module name="PoliceFrontendProxy" target="1.8" />
+      <module name="rekeningrijden" target="1.8" />
+      <module name="shared" target="1.8" />
+      <module name="UserSystem" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.proftaak.shared;
+package com.proftaak.invoicesystem.shared;
 
 import com.proftaak.movementregistrationservice.models.FuelType;
 
