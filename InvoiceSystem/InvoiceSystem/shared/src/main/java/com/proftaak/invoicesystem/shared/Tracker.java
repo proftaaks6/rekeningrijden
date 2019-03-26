@@ -1,12 +1,18 @@
 package com.proftaak.invoicesystem.shared;
 
 
+import javax.inject.Named;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="tbl_tracker")
+@NamedQueries({
+        @NamedQuery(name="Tracker.getById",
+                query = "SELECT t FROM Tracker t WHERE t.id = :id")
+
+})
 public class Tracker {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,5 +51,17 @@ public class Tracker {
 
     public List<LocationPoint> getLocationPoints() {
         return locationPoints;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setLocationPoints(List<LocationPoint> locationPoints) {
+        this.locationPoints = locationPoints;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 }
