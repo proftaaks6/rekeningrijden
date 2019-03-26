@@ -6,10 +6,21 @@
         <artifactId>rekeningrijden</artifactId>
         <groupId>proftaak-s6</groupId>
         <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
+    <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>MovementRegistrationService</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>proftaak-s6</groupId>
+            <artifactId>InvoiceSystem.shared</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

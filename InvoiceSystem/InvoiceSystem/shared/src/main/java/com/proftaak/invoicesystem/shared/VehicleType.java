@@ -1,4 +1,4 @@
-package com.proftaak.shared;
+package com.proftaak.invoicesystem.shared;
 
 public enum VehicleType {
     BIG_TRUCK,

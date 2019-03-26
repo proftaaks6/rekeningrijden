@@ -1,4 +1,4 @@
-package com.proftaak.shared;
+package com.proftaak.invoicesystem.shared;
 
 import javax.persistence.*;
 import java.util.Date;
