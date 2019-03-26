@@ -142,12 +142,7 @@
             <version>2.22.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>proftaak-s6</groupId>
-            <artifactId>MovementRegistrationService</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
