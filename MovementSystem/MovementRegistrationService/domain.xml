@@ -63,13 +63,13 @@ Portions Copyright [2016] [C2B2 Consulting Limited and/or its affiliates]
     <managed-scheduled-executor-service core-pool-size="1" long-running-tasks="true" keep-alive-seconds="300" hung-after-seconds="300" jndi-name="concurrent/__defaultManagedScheduledExecutorService" object-type="system-all"></managed-scheduled-executor-service>
     <managed-thread-factory description="thread factory" jndi-name="concurrent/__defaultManagedThreadFactory" object-type="system-all"></managed-thread-factory>
     <jdbc-connection-pool driver-classname="com.mysql.cj.jdbc.Driver" name="mysql_auth" res-type="java.sql.Driver">
-      <property name="databaseName" value="jpa_auth"></property>
-      <property name="password" value="root"></property>
-      <property name="user" value="root"></property>
+      <property name="databaseName" value="movementdatabase"></property>
+      <property name="password" value="D!kkedatabasepw1"></property>
+      <property name="user" value="proftaak"></property>
       <property name="useSSL" value="false"></property>
       <property name="allowPublicKeyRetrieval" value="true"></property>
-      <property name="serverName" value="authentication_database"></property>
-      <property name="URL" value="jdbc:mysql://authentication_database:3306/jpa_auth"></property>
+      <property name="serverName" value="192.168.24.70"></property>
+      <property name="URL" value="jdbc:mysql://192.168.24.70:3306/movementdatabase"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="mysql_auth" jndi-name="jdbc/authentication"></jdbc-resource>
   </resources>
