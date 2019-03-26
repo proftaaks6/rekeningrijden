@@ -58,7 +58,8 @@
                     <artifactId>hamcrest-core</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependenc
+                y>
 
         <dependency>
             <groupId>org.hibernate</groupId>
