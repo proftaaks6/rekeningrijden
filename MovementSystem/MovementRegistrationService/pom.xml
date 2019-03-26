@@ -20,12 +20,6 @@
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>proftaak-s6</groupId>
-            <artifactId>InvoiceSystem.shared</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
 
