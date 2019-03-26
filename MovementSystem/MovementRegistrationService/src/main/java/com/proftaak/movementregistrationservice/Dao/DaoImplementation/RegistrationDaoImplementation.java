@@ -4,6 +4,7 @@ import com.proftaak.invoicesystem.shared.LocationPoint;
 import com.proftaak.invoicesystem.shared.Tracker;
 import com.proftaak.invoicesystem.shared.Vehicle;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
+import com.proftaak.invoicesystem.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

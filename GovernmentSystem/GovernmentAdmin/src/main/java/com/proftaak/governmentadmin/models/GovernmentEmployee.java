@@ -16,7 +16,9 @@ public class GovernmentEmployee {
     @Column
     private String password;
 
-    @OneToMany
+    @ElementCollection(targetClass = Role.class)
+    @CollectionTable(name="tbl_governmentEmployee_role")
+    @Enumerated(EnumType.STRING)
     private List<Role> roles;
 
     public GovernmentEmployee() {
