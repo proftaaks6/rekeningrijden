@@ -10,9 +10,11 @@
         <module name="GovernmentAdmin" />
         <module name="InvoiceSystem.shared" />
         <module name="MovementProxy" />
+        <module name="MovementRegistrationService" />
         <module name="PoliceAdministration" />
         <module name="PoliceEuropeProxy" />
         <module name="PoliceFrontendProxy" />
+        <module name="rabbitmq" />
         <module name="UserSystem" />
       </profile>
     </annotationProcessing>
@@ -26,6 +28,7 @@
       <module name="PoliceAdministration" target="1.8" />
       <module name="PoliceEuropeProxy" target="1.8" />
       <module name="PoliceFrontendProxy" target="1.8" />
+      <module name="rabbitmq" target="1.8" />
       <module name="rekeningrijden" target="1.8" />
       <module name="shared" target="1.8" />
       <module name="UserSystem" target="1.8" />

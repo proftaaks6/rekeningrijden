@@ -30,6 +30,7 @@
         <module>PoliceSystem/PoliceEuropeProxy</module>
         <module>PoliceSystem/PoliceFrontendProxy</module>
         <module>GovernmentSystem/GovernmentAdmin</module>
+        <module>Utils/rabbitmq</module>
     </modules>
 
     <dependencies>
@@ -41,11 +42,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-all</artifactId>
-            <version>${activemq.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>

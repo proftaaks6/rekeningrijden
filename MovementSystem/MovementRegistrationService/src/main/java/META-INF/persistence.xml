@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
-    <persistence-unit name="RegistrationPersistenceUnit"/>
+    <persistence-unit name="RegistrationPersistenceUnit">
+
+        <class>com.proftaak.invoicesystem.shared.Tracker</class>
+        <class>com.proftaak.invoicesystem.shared.Vehicle</class>
+        <class>com.proftaak.invoicesystem.shared.LocationPoint</class>
+        <class>com.proftaak.invoicesystem.shared.FuelType</class>
+        <class>com.proftaak.invoicesystem.shared.VehicleType</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.24.70:3306/movementdatabase"/>
+            <property name="javax.persistence.jdbc.user" value="proftaak" />
+            <property name="javax.persistence.jdbc.password" value="D!kkedatabasepw1" />
+
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+        </properties>
+
+    </persistence-unit>
 </persistence>

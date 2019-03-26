@@ -4,6 +4,7 @@ import com.proftaak.invoicesystem.shared.LocationPoint;
 import com.proftaak.invoicesystem.shared.Tracker;
 import com.proftaak.invoicesystem.shared.Vehicle;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
+import com.proftaak.invoicesystem.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -66,6 +67,31 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public boolean removeTracker(int targetTrackerId) {
         try{
             em.remove(em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", targetTrackerId).getSingleResult());
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addVehicle(Vehicle vehicle) {
+        try{
+            if(vehicle.getFuelType() != null && vehicle.getChassisNumber() != null && vehicle.getVehicleType() != null){
+                em.persist(vehicle);
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addTrackerToVehicle(Tracker tracker, int vehicleId) {
+        try{
+            Vehicle databaseVehicle = em.createNamedQuery("Vehicle.getById", Vehicle.class).setParameter("id", vehicleId).getSingleResult();
+            //Todo: Am not sure whether or not this tracker already exists in database, if it does at this point then it will be duplicated unless the tracker object has an id. Subject to change if need be.
+            databaseVehicle.addTracker(tracker);
+            em.merge(databaseVehicle);
         }catch (Exception e){
             return false;
         }

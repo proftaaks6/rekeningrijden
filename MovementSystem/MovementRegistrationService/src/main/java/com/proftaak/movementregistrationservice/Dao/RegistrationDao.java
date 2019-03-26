@@ -12,4 +12,6 @@ public interface RegistrationDao {
     boolean editTrackerLocationPoints(List<LocationPoint> points, int targetTrackerId);
     boolean editTrackerVehicles(List<Vehicle> vehicles, int targetTrackerId);
     boolean removeTracker(int targetTrackerId);
+    boolean addVehicle(Vehicle vehicle);
+    boolean addTrackerToVehicle(Tracker tracker, int vehicleId);
 }
