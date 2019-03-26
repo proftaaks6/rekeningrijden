@@ -20,7 +20,7 @@
       <module name="DriverApplication" target="1.8" />
       <module name="GovernmentAdmin" target="1.8" />
       <module name="InvoiceSystem" target="1.8" />
-      <module name="InvoiceSystem.shared" target="1.5" />
+      <module name="InvoiceSystem.shared" target="1.8" />
       <module name="MovementProxy" target="1.8" />
       <module name="MovementRegistrationService" target="1.8" />
       <module name="PoliceAdministration" target="1.8" />

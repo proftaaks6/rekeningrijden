@@ -1,4 +1,4 @@
-package com.proftaak.movementregistrationservice.models;
+package com.proftaak.invoicesystem.shared;
 
 public enum FuelType {
     GASOLINE,

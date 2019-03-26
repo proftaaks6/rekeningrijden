@@ -1,6 +1,5 @@
 package com.proftaak.invoicesystem.shared;
 
-import com.proftaak.movementregistrationservice.models.FuelType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
