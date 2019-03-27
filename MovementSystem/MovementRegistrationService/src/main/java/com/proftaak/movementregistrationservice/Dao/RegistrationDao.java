@@ -15,4 +15,7 @@ public interface RegistrationDao {
     boolean addVehicle(Vehicle vehicle);
     boolean addTrackerToVehicle(Tracker tracker, long vehicleId);
     boolean removeVehicle(long vehicleId);
+    Vehicle getVehicleByChassisNumber(String chassisNumber);
+    List<Vehicle> getStolenVehicles();
+    List<Vehicle> getAllVehicles();
 }

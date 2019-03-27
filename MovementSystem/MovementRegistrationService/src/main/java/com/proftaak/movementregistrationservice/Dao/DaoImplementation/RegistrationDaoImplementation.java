@@ -109,4 +109,23 @@ public class RegistrationDaoImplementation implements RegistrationDao{
             return false;
         }
     }
+
+    @Override
+    public Vehicle getVehicleByChassisNumber(String chassisNumber) {
+        Vehicle vehicle = em.createNamedQuery("Vehicle.getByChassisNumber", Vehicle.class).setParameter("chassisNumber", chassisNumber).getSingleResult();
+
+        return vehicle;
+    }
+
+    @Override
+    public List<Vehicle> getStolenVehicles() {
+        List<Vehicle> vehicles = em.createNamedQuery("Vehicle.getStolenVehicles", Vehicle.class).getResultList();
+        return vehicles;
+    }
+
+    @Override
+    public List<Vehicle> getAllVehicles() {
+        List<Vehicle> vehicles = em.createNamedQuery("Vehicle.getAll", Vehicle.class).getResultList();
+        return vehicles;
+    }
 }

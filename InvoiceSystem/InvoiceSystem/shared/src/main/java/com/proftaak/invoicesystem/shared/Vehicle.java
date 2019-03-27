@@ -9,7 +9,10 @@ import java.util.List;
 @Table(name = "tbl_vehicle")
 @NamedQueries({
         @NamedQuery(name="Vehicle.getById",
-                query = "SELECT v FROM Vehicle v WHERE v.id = :id")
+                query = "SELECT v FROM Vehicle v WHERE v.id = :id"),
+        @NamedQuery(name = "Vehicle.getByChassisNumber", query = "SELECT v FROM Vehicle v where v.chassisNumber = :chassisNumber"),
+        @NamedQuery(name = "Vehicle.getStolenVehicles", query = "SELECT v FROM Vehicle v WHERE v.isStolen = true "),
+        @NamedQuery(name = "Vehicle.getAll", query = "SELECT v FROM Vehicle v")
 
 })
 public class Vehicle {
@@ -32,15 +35,19 @@ public class Vehicle {
     @ManyToMany(mappedBy = "vehicles")
     private List<Tracker> trackers;
 
+    @Column
+    private boolean isStolen;
+
     public Vehicle() {
 
     }
 
-    public Vehicle(VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission) {
+    public Vehicle(VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
         this.vehicleType = vehicleType;
         this.chassisNumber = chassisNumber;
         this.fuelType = fuelType;
         this.emission = emission;
+        this.isStolen = isStolen;
 
         trackers = new ArrayList<>();
     }
@@ -71,5 +78,13 @@ public class Vehicle {
 
     public List<Tracker> getTrackers() {
         return trackers;
+    }
+
+    public boolean isStolen() {
+        return isStolen;
+    }
+
+    public void setStolen(boolean stolen) {
+        isStolen = stolen;
     }
 }

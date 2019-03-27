@@ -46,4 +46,16 @@ public class RegistrationService {
     public boolean removeVehicle(long vehicleId){
         return registrationDao.removeVehicle(vehicleId);
     }
+
+    public Vehicle getVehicleByChassisNumber(String chassisNumber){
+        return registrationDao.getVehicleByChassisNumber(chassisNumber);
+    }
+
+    public List<Vehicle> getStolenVehicles(){
+        return registrationDao.getStolenVehicles();
+    }
+
+    public List<Vehicle> getAllVehicles(){
+        return registrationDao.getAllVehicles();
+    }
 }
