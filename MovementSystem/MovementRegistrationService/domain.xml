@@ -76,6 +76,7 @@ Portions Copyright [2016] [C2B2 Consulting Limited and/or its affiliates]
   <servers>
     <server name="server" config-ref="server-config">
       <resource-ref ref="jdbc/__default" />
+      <resource-ref ref="jdbc/authentication"></resource-ref>
     </server>
   </servers>
   <configs>
@@ -109,6 +110,15 @@ Portions Copyright [2016] [C2B2 Consulting Limited and/or its affiliates]
         <module-log-levels />
       </log-service>
       <security-service activate-default-principal-to-role-mapping="true" jacc="simple">
+        <auth-realm classname="com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm" name="kwetter">
+          <property name="user-name-column" value="Username"></property>
+          <property name="password-column" value="Password"></property>
+          <property name="group-name-column" value="GroupId"></property>
+          <property name="group-table" value="Groups_auth"></property>
+          <property name="user-table" value="Users"></property>
+          <property name="datasource-jndi" value="jdbc/authentication"></property>
+          <property name="jaas-context" value="jdbcRealm"></property>
+        </auth-realm>
         <auth-realm classname="com.sun.enterprise.security.auth.realm.file.FileRealm" name="admin-realm">
           <property value="${com.sun.aas.instanceRoot}/config/admin-keyfile" name="file" />
           <property value="fileRealm" name="jaas-context" />

@@ -1,14 +1,21 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="MovementRegistrationService:war exploded">
     <output-path>$PROJECT_DIR$/MovementSystem/MovementRegistrationService/target/Rekeningrijden</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>MovementRegistrationService</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="MovementRegistrationService" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="InvoiceSystem.shared-1.0.jar">
-            <element id="module-output" name="InvoiceSystem.shared" />
+          <element id="archive" name="MovementRegistrationService.shared-1.0.jar">
+            <element id="module-output" name="MovementRegistrationService.shared" />
           </element>
           <element id="library" level="project" name="Maven: com.rabbitmq:amqp-client:5.1.2" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />

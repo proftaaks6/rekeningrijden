@@ -23,6 +23,7 @@
     <modules>
         <module>MovementSystem/MovementProxy</module>
         <module>MovementSystem/MovementRegistrationService</module>
+        <module>MovementSystem/MovementRegistrationService/shared</module>
         <module>InvoiceSystem/InvoiceSystem</module>
         <module>UserSystem/UserSystem</module>
         <module>DriverSystem/DriverApplication</module>

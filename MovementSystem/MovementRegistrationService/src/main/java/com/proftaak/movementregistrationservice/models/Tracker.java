@@ -1,7 +1,6 @@
-package com.proftaak.invoicesystem.shared;
+package com.proftaak.movementregistrationservice.models;
 
 
-import javax.inject.Named;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class Tracker {
     @OneToMany
     private List<LocationPoint> locationPoints;
 
-    @ManyToMany(mappedBy = "trackers")
+    @ManyToMany
     private List<Vehicle> vehicles;
 
     public Tracker() {

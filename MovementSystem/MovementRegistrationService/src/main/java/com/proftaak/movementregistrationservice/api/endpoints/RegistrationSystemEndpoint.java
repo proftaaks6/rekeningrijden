@@ -1,8 +1,8 @@
 package com.proftaak.movementregistrationservice.api.endpoints;
 
-import com.proftaak.invoicesystem.shared.LocationPoint;
-import com.proftaak.invoicesystem.shared.Tracker;
-import com.proftaak.invoicesystem.shared.Vehicle;
+import com.proftaak.movementregistrationservice.models.LocationPoint;
+import com.proftaak.movementregistrationservice.models.Tracker;
+import com.proftaak.movementregistrationservice.models.Vehicle;
 import com.proftaak.movementregistrationservice.service.RegistrationService;
 
 import javax.ejb.Stateless;
@@ -13,11 +13,12 @@ import javax.ws.rs.core.Response;
 
 import java.util.List;
 
-@Path(value = "/registration")
-@Produces(MediaType.APPLICATION_JSON)
-@Stateless
+//@Path(value = "/registration")
+//@Produces(MediaType.APPLICATION_JSON)
+//@Stateless
 public class RegistrationSystemEndpoint {
 
+    /*
     @Inject
     private RegistrationService registrationService;
     
@@ -149,4 +150,5 @@ public class RegistrationSystemEndpoint {
             return Response.status(400).entity(vehicles).build();
         }
     }
+    */
 }

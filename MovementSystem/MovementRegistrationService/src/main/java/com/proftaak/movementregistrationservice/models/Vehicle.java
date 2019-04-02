@@ -1,4 +1,4 @@
-package com.proftaak.invoicesystem.shared;
+package com.proftaak.movementregistrationservice.models;
 
 
 import javax.persistence.*;
@@ -20,13 +20,13 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
+    @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
     @Column
     private String chassisNumber;
 
-    @OneToOne
+    @Enumerated(EnumType.STRING)
     private FuelType fuelType;
 
     @Column
