@@ -5,11 +5,12 @@ services:
     build:
       context: ./MovementSystem/MovementRegistrationService/
       dockerfile: Dockerfile
+    networks:
+      - rabbit
     expose:
       - "8080"
     ports:
       - "8080:8080"
-
 
 
 #Rabbit mq
