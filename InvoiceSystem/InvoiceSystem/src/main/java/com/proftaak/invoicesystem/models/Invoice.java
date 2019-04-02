@@ -2,7 +2,7 @@ package com.proftaak.invoicesystem.models;
 
 
 
-import com.proftaak.invoicesystem.shared.Vehicle;
+import com.proftaak.movementregistrationservice.shared.Vehicle;
 
 import javax.persistence.*;
 

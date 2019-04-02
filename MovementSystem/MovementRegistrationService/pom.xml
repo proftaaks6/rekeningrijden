@@ -13,10 +13,11 @@
 
     <artifactId>MovementRegistrationService</artifactId>
 
+
     <dependencies>
         <dependency>
             <groupId>proftaak-s6</groupId>
-            <artifactId>InvoiceSystem.shared</artifactId>
+            <artifactId>MovementRegistrationService.shared</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>

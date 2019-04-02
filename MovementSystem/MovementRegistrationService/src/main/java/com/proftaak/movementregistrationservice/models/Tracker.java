@@ -1,7 +1,6 @@
-package com.proftaak.invoicesystem.shared;
+package com.proftaak.movementregistrationservice.models;
 
 
-import javax.inject.Named;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,9 @@ import java.util.List;
 @Table(name="tbl_tracker")
 @NamedQueries({
         @NamedQuery(name="Tracker.getById",
-                query = "SELECT t FROM Tracker t WHERE t.id = :id")
+                query = "SELECT t FROM Tracker t WHERE t.id = :id"),
+        @NamedQuery(name="Tracker.getAll",
+                query = "SELECT t FROM Tracker t"),
 
 })
 public class Tracker {
@@ -24,7 +25,7 @@ public class Tracker {
     @OneToMany
     private List<LocationPoint> locationPoints;
 
-    @ManyToMany(mappedBy = "trackers")
+    @ManyToMany
     private List<Vehicle> vehicles;
 
     public Tracker() {
