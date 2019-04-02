@@ -127,4 +127,10 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         List<Vehicle> vehicles = em.createNamedQuery("Vehicle.getAll", Vehicle.class).getResultList();
         return vehicles;
     }
+
+    @Override
+    public List<Tracker> getAllTrackers() {
+        List<Tracker> trackers = em.createNamedQuery("Tracker.getAll", Tracker.class).getResultList();
+        return trackers;
+    }
 }

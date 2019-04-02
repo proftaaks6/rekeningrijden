@@ -58,4 +58,7 @@ public class RegistrationService {
     public List<Vehicle> getAllVehicles(){
         return registrationDao.getAllVehicles();
     }
+    public List<Tracker> getAllTrackers(){
+        return registrationDao.getAllTrackers();
+    }
 }

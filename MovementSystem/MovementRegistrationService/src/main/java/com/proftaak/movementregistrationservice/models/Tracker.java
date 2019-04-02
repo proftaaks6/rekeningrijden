@@ -9,7 +9,9 @@ import java.util.List;
 @Table(name="tbl_tracker")
 @NamedQueries({
         @NamedQuery(name="Tracker.getById",
-                query = "SELECT t FROM Tracker t WHERE t.id = :id")
+                query = "SELECT t FROM Tracker t WHERE t.id = :id"),
+        @NamedQuery(name="Tracker.getAll",
+                query = "SELECT t FROM Tracker t"),
 
 })
 public class Tracker {

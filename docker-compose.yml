@@ -11,6 +11,7 @@ services:
       - "8080:8080"
 
 
+
 #Rabbit mq
   rabbit_node_1:
     environment:

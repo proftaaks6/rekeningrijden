@@ -18,4 +18,5 @@ public interface RegistrationDao {
     Vehicle getVehicleByChassisNumber(String chassisNumber);
     List<Vehicle> getStolenVehicles();
     List<Vehicle> getAllVehicles();
+    List<Tracker> getAllTrackers();
 }
