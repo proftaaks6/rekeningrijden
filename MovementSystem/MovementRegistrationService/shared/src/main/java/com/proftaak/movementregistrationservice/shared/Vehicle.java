@@ -11,6 +11,14 @@ public class Vehicle {
 
     private double emission;
 
+    public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission) {
+        this.id = id;
+        this.vehicleType = type;
+        this.chassisNumber = chassisNumber;
+        this.fuelType = fuelType;
+        this.emission = emission;
+    }
+
     public int getId() {
         return id;
     }

@@ -42,6 +42,31 @@ public class Vehicle {
 
     }
 
+    /**
+     * Null isStole nvalue means it has been converted using the VehicleConverter!
+     * Author: Rick Jeurissen
+     */
+    public Vehicle(long id, VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
+        this.id = id;
+        this.vehicleType = vehicleType;
+        this.chassisNumber = chassisNumber;
+        this.fuelType = fuelType;
+        this.emission = emission;
+        this.isStolen = isStolen;
+
+        trackers = new ArrayList<>();
+    }
+
+    public Vehicle(long id, VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission) {
+        this.id = id;
+        this.vehicleType = vehicleType;
+        this.chassisNumber = chassisNumber;
+        this.fuelType = fuelType;
+        this.emission = emission;
+
+        trackers = new ArrayList<>();
+    }
+
     public Vehicle(VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
         this.vehicleType = vehicleType;
         this.chassisNumber = chassisNumber;

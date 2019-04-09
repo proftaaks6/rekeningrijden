@@ -38,6 +38,11 @@ public class Tracker {
         this.locationPoints =  new ArrayList<>();
     }
 
+    public Tracker(long id, boolean active) {
+        this.id = id;
+        this.active = active;
+    }
+
     public long getId() {
         return id;
     }
