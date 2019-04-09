@@ -16,7 +16,8 @@ public class LocationPointConverter {
      * @return
      */
     public LocationPoint toEntity(com.proftaak.movementregistrationservice.shared.LocationPoint sharedPoint){
-        return new LocationPoint();
+
+        return new LocationPoint(sharedPoint.getId(), sharedPoint.getLongitude(), sharedPoint.getLatitude());
     }
 
     /**
@@ -25,6 +26,6 @@ public class LocationPointConverter {
      * @return
      */
     public com.proftaak.movementregistrationservice.shared.LocationPoint toShared(LocationPoint locationPoint){
-        return new com.proftaak.movementregistrationservice.shared.LocationPoint();
+        return new com.proftaak.movementregistrationservice.shared.LocationPoint((int)locationPoint.getId(), locationPoint.getLongitude(), locationPoint.getLatitude());
     }
 }

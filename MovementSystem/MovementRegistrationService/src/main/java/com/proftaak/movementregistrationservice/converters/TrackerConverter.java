@@ -14,7 +14,7 @@ public class TrackerConverter {
      * @return
      */
     public Tracker toEntity(com.proftaak.movementregistrationservice.shared.Tracker sharedTracker){
-        return new Tracker();
+        return new Tracker(sharedTracker.getId(), sharedTracker.isActive());
     }
 
     /**
@@ -23,6 +23,6 @@ public class TrackerConverter {
      * @return
      */
     public com.proftaak.movementregistrationservice.shared.Tracker toShared(Tracker tracker){
-        return new com.proftaak.movementregistrationservice.shared.Tracker();
+        return new com.proftaak.movementregistrationservice.shared.Tracker(tracker.getId(), tracker.isActive());
     }
 }
