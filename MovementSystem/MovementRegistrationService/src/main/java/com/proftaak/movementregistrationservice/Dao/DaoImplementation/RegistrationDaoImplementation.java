@@ -1,10 +1,9 @@
 package com.proftaak.movementregistrationservice.Dao.DaoImplementation;
 
-import com.proftaak.invoicesystem.shared.LocationPoint;
-import com.proftaak.invoicesystem.shared.Tracker;
-import com.proftaak.invoicesystem.shared.Vehicle;
+import com.proftaak.movementregistrationservice.models.LocationPoint;
+import com.proftaak.movementregistrationservice.models.Tracker;
+import com.proftaak.movementregistrationservice.models.Vehicle;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
-import com.proftaak.invoicesystem.*;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Stateless
 public class RegistrationDaoImplementation implements RegistrationDao{
-    @PersistenceContext(unitName = "RegistrationPersistenceUnit")
+    @PersistenceContext
     EntityManager em;
 
 
@@ -127,5 +126,11 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public List<Vehicle> getAllVehicles() {
         List<Vehicle> vehicles = em.createNamedQuery("Vehicle.getAll", Vehicle.class).getResultList();
         return vehicles;
+    }
+
+    @Override
+    public List<Tracker> getAllTrackers() {
+        List<Tracker> trackers = em.createNamedQuery("Tracker.getAll", Tracker.class).getResultList();
+        return trackers;
     }
 }

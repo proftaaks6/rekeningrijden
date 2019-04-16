@@ -16,7 +16,7 @@ public class ClientUser {
     @Column
     private String password;
 
-    @OneToMany
+    @ElementCollection
     private List<Integer> ownedCarIds;
 
     @Column(unique = true)

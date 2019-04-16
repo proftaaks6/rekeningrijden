@@ -12,5 +12,6 @@
 
     <artifactId>UserSystem</artifactId>
 
+    <packaging>war</packaging>
 
 </project>

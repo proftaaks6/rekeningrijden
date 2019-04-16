@@ -1,8 +1,10 @@
 package com.proftaak.movementregistrationservice.api.endpoints;
 
-import com.proftaak.invoicesystem.shared.LocationPoint;
-import com.proftaak.invoicesystem.shared.Tracker;
-import com.proftaak.invoicesystem.shared.Vehicle;
+
+import com.proftaak.movementregistrationservice.converters.LocationPointConverter;
+import com.proftaak.movementregistrationservice.converters.TrackerConverter;
+import com.proftaak.movementregistrationservice.converters.VehicleConverter;
+import com.proftaak.movementregistrationservice.models.*;
 import com.proftaak.movementregistrationservice.service.RegistrationService;
 
 import javax.ejb.Stateless;
@@ -10,8 +12,9 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Path(value = "/registration")
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,13 +23,21 @@ public class RegistrationSystemEndpoint {
 
     @Inject
     private RegistrationService registrationService;
-    
+
+    @Inject
+    private TrackerConverter trackerConverter;
+
+    @Inject
+    private VehicleConverter vehicleConverter;
+
+    @Inject
+    private LocationPointConverter pointConverter;
 
     @POST
-    @Path("addTracker")
+    @Path("/tracker")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addTracker(Tracker tracker){
-        if(registrationService.addTracker(tracker)){
+    public Response addTracker(com.proftaak.movementregistrationservice.shared.Tracker tracker){
+        if(registrationService.addTracker(trackerConverter.toEntity(tracker))){
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
@@ -34,9 +45,9 @@ public class RegistrationSystemEndpoint {
     }
 
     @POST
-    @Path("editTrackerStatus")
+    @Path("/tracker/{trackerId}/status")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response editTrackerStatus(boolean active, long targetTrackerId){
+    public Response editTrackerStatus(boolean active, @PathParam("trackerId") long targetTrackerId){
         if(registrationService.editTrackerActiveStatus(active, targetTrackerId)){
             return Response.status(200).build();
         } else {
@@ -45,10 +56,10 @@ public class RegistrationSystemEndpoint {
     }
 
     @POST
-    @Path("editTrackerLocationPoints")
+    @Path("/tracker/{trackerId}/points")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response editTrackerLocationPoints(List<LocationPoint> points, long targetTrackerId){
-        if(registrationService.editTrackerLocationPoints(points, targetTrackerId)){
+    public Response editTrackerLocationPoints(List<com.proftaak.movementregistrationservice.shared.LocationPoint> points, @PathParam("trackerId") long targetTrackerId){
+        if(registrationService.editTrackerLocationPoints(points.stream().map(x->pointConverter.toEntity(x)).collect(Collectors.toList()), targetTrackerId)){
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
@@ -56,10 +67,10 @@ public class RegistrationSystemEndpoint {
     }
 
     @POST
-    @Path("editTrackerVehicles")
+    @Path("/tracker/{trackerId}/vehicles")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response editTrackerVehicles(List<Vehicle> vehicles, long targetTrackerId){
-        if(registrationService.editTrackerVehicles(vehicles, targetTrackerId)){
+    public Response editTrackerVehicles(List<com.proftaak.movementregistrationservice.shared.Vehicle> vehicles, @PathParam("trackerId") long targetTrackerId){
+        if(registrationService.editTrackerVehicles(vehicles.stream().map(x->vehicleConverter.toEntity(x)).collect(Collectors.toList()), targetTrackerId)){
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
@@ -67,9 +78,8 @@ public class RegistrationSystemEndpoint {
     }
 
     @DELETE
-    @Path("removeTracker")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response removeTracker(long targetTrackerId){
+    @Path("/tracker/{trackerId}")
+    public Response removeTracker(@PathParam("trackerId") long targetTrackerId){
         if(registrationService.removeTracker(targetTrackerId)){
             return Response.status(200).build();
         } else {
@@ -78,10 +88,10 @@ public class RegistrationSystemEndpoint {
     }
 
     @POST
-    @Path("addVehicle")
+    @Path("/vehicle")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addVehicle(Vehicle vehicle){
-        if(registrationService.addVehicle(vehicle)){
+    public Response addVehicle(com.proftaak.movementregistrationservice.shared.Vehicle vehicle){
+        if(registrationService.addVehicle(vehicleConverter.toEntity(vehicle))){
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
@@ -89,10 +99,10 @@ public class RegistrationSystemEndpoint {
     }
 
     @POST
-    @Path("addTrackerToVehicle")
+    @Path("/vehicle/{vehicleId}/tracker")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addTrackerToVehicle(Tracker tracker, long vehicleId){
-        if(registrationService.addTrackerToVehicle(tracker, vehicleId)) {
+    public Response addTrackerToVehicle(com.proftaak.movementregistrationservice.shared.Tracker tracker, @PathParam("vehicleId") long vehicleId){
+        if(registrationService.addTrackerToVehicle(trackerConverter.toEntity(tracker), vehicleId)) {
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
@@ -100,9 +110,8 @@ public class RegistrationSystemEndpoint {
     }
 
     @DELETE
-    @Path("removeVehicle")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response removeVehicle(long vehicleId){
+    @Path("/vehicle/{vehicleId}")
+    public Response removeVehicle(@PathParam("vehicleId") long vehicleId){
         if(registrationService.removeVehicle(vehicleId)) {
             return Response.status(200).build();
         } else {
@@ -111,42 +120,26 @@ public class RegistrationSystemEndpoint {
     }
 
     @GET
-    @Path("getByChassis")
+    @Path("/vehicle/{chassis}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response getByChassis(String chassis){
+    public com.proftaak.movementregistrationservice.shared.Vehicle getByChassis(@PathParam("chassis") String chassis){
 
         Vehicle vehicle = registrationService.getVehicleByChassisNumber(chassis);
-
-        if(vehicle != null){
-            return Response.status(200).entity(vehicle).build();
-        } else {
-            return Response.status(400).build();
+        if(vehicle == null){
+            throw new NotFoundException();
         }
+        return vehicleConverter.toShared(vehicle);
     }
 
     @GET
-    @Path("getStolen")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response getStolen(){
-        List<Vehicle> vehicles = registrationService.getStolenVehicles();
-
-        if(vehicles != null){
-            return Response.status(200).entity(vehicles).build();
-        } else {
-            return Response.status(400).build();
-        }
+    @Path("stolen")
+    public List<com.proftaak.movementregistrationservice.shared.Vehicle> getStolen(){
+        return registrationService.getStolenVehicles().stream().map(x->vehicleConverter.toShared(x)).collect(Collectors.toList());
     }
 
     @GET
-    @Path("getAll")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response getAll(){
-        List<Vehicle> vehicles = registrationService.getAllVehicles();
-
-        if(vehicles != null){
-            return Response.status(200).entity(vehicles).build();
-        } else {
-            return Response.status(400).entity(vehicles).build();
-        }
+    @Path("vehicles")
+    public List<com.proftaak.movementregistrationservice.shared.Vehicle> getAll(){
+        return registrationService.getAllVehicles().stream().map(x->vehicleConverter.toShared(x)).collect(Collectors.toList());
     }
 }

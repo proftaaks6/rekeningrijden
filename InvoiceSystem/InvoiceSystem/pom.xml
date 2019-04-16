@@ -12,14 +12,11 @@
 
     <artifactId>InvoiceSystem</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>shared</module>
-    </modules>
 
     <dependencies>
         <dependency>
             <groupId>proftaak-s6</groupId>
-            <artifactId>InvoiceSystem.shared</artifactId>
+            <artifactId>MovementRegistrationService.shared</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>

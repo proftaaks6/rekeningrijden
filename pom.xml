@@ -23,6 +23,7 @@
     <modules>
         <module>MovementSystem/MovementProxy</module>
         <module>MovementSystem/MovementRegistrationService</module>
+        <module>MovementSystem/MovementRegistrationService/shared</module>
         <module>InvoiceSystem/InvoiceSystem</module>
         <module>UserSystem/UserSystem</module>
         <module>DriverSystem/DriverApplication</module>
@@ -137,6 +138,11 @@
             <artifactId>jersey-test-framework-provider-jdk-http</artifactId>
             <version>2.22.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
         </dependency>
 
     </dependencies>

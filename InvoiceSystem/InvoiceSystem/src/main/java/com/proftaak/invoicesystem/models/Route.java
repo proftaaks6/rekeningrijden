@@ -2,8 +2,8 @@ package com.proftaak.invoicesystem.models;
 
 
 
-import com.proftaak.invoicesystem.shared.LocationPoint;
-import com.proftaak.invoicesystem.shared.Vehicle;
+import com.proftaak.movementregistrationservice.shared.LocationPoint;
+import com.proftaak.movementregistrationservice.shared.Vehicle;
 
 import javax.persistence.*;
 import java.util.ArrayList;

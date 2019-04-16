@@ -1,4 +1,4 @@
-package com.proftaak.invoicesystem.shared;
+package com.proftaak.movementregistrationservice.models;
 
 
 import javax.persistence.*;
@@ -20,13 +20,13 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
+    @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
     @Column
     private String chassisNumber;
 
-    @OneToOne
+    @Enumerated(EnumType.STRING)
     private FuelType fuelType;
 
     @Column
@@ -40,6 +40,31 @@ public class Vehicle {
 
     public Vehicle() {
 
+    }
+
+    /**
+     * Null isStole nvalue means it has been converted using the VehicleConverter!
+     * Author: Rick Jeurissen
+     */
+    public Vehicle(long id, VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
+        this.id = id;
+        this.vehicleType = vehicleType;
+        this.chassisNumber = chassisNumber;
+        this.fuelType = fuelType;
+        this.emission = emission;
+        this.isStolen = isStolen;
+
+        trackers = new ArrayList<>();
+    }
+
+    public Vehicle(long id, VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission) {
+        this.id = id;
+        this.vehicleType = vehicleType;
+        this.chassisNumber = chassisNumber;
+        this.fuelType = fuelType;
+        this.emission = emission;
+
+        trackers = new ArrayList<>();
     }
 
     public Vehicle(VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
