@@ -32,13 +32,13 @@ public class Receive {
             channel = connection.createChannel();
             channel.queueDeclare(queueName, false, false, false, null);
             System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-            startReceiving(channel);
+            startReceiving(channel, queueName);
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
         }
     }
 
-    private void startReceiving(Channel channel){
+    private void startReceiving(Channel channel, String queueName){
         Consumer consumer = new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
@@ -48,7 +48,7 @@ public class Receive {
             }
         };
         try {
-            channel.basicConsume(QUEUE_NAME, true, consumer);
+            channel.basicConsume(queueName, true, consumer);
         } catch (IOException e) {
             e.printStackTrace();
         }
