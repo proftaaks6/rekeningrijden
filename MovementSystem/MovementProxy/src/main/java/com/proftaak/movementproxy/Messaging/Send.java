@@ -1,6 +1,6 @@
 package com.proftaak.movementproxy.Messaging;
 
-import com.rabbitmq.client.ConnectionFactory;
+import com.proftaak.rabbitmq.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import org.apache.log4j.BasicConfigurator;
@@ -20,7 +20,6 @@ public class Send {
     public void main() {
         BasicConfigurator.configure();
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
         try (Connection connection = factory.newConnection(); Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "Message queue initialized between MovementProxy and MovementRegistration.";
