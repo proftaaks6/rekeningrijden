@@ -70,7 +70,7 @@ public class Receive {
                     throws IOException {
                 String message = new String(body, "UTF-8");
                 MovementMessage movementMessage =  gson.fromJson(message, MovementMessage.class);
-                Logger.logMsg(1, movementMessage.toString());
+                System.out.println(movementMessage.toString());
             }
         };
         try {
