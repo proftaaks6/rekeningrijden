@@ -8,6 +8,12 @@ public class LocationPoint {
 
     private double latitude;
 
+    public LocationPoint(int id, double longitude, double latitude) {
+        this.id = id;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
     public int getId() {
         return id;
     }

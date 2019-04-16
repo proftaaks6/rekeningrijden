@@ -23,6 +23,16 @@ public class LocationPoint {
 
     }
 
+    /**
+     * A null date means it has been converted from shared/LocationPoint
+     * Author: Rick Jeurissen
+     */
+    public LocationPoint(long id, double longitude, double latitude) {
+        this.id = id;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
     public LocationPoint(double longitude, double latitude, Date date) {
         this.longitude = longitude;
         this.latitude = latitude;
@@ -39,5 +49,9 @@ public class LocationPoint {
 
     public Date getDate() {
         return date;
+    }
+
+    public long getId() {
+        return id;
     }
 }
