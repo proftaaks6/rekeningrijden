@@ -13,11 +13,16 @@ import java.util.concurrent.TimeoutException;
 @Startup
 public class Receive {
     private final static String QUEUE_NAME = "MovementRegistration_To_MovementProxy";
+    private final static String QUEUE_NAME2 = "Simulation_To_MovementProxy";
 
     @PostConstruct
     public void main() {
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        initQueue(QUEUE_NAME);
+        initQueue(QUEUE_NAME2);
+    }
 
+    private void initQueue(String queueName){
         ConnectionFactory factory = new ConnectionFactory();
         Connection connection = null;
         Channel channel = null;
@@ -25,7 +30,7 @@ public class Receive {
 
             connection = factory.newConnection();
             channel = connection.createChannel();
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            channel.queueDeclare(queueName, false, false, false, null);
             System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
             startReceiving(channel);
         } catch (IOException | TimeoutException e) {
