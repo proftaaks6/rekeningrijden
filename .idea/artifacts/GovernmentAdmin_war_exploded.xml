@@ -1,13 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="GovernmentAdmin:war exploded">
     <output-path>$PROJECT_DIR$/GovernmentSystem/GovernmentAdmin/target/Rekeningrijden</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>GovernmentAdmin</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -32,6 +25,7 @@
           <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator:6.0.15.Final" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:2.0.1.Final" />
           <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator-cdi:6.0.15.Final" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.5" />
         </element>
       </element>
       <element id="directory" name="META-INF">
