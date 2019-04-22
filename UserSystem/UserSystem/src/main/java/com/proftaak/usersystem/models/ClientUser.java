@@ -25,7 +25,8 @@ public class ClientUser {
     public ClientUser() {
     }
 
-    public ClientUser(String name, String password, List<Integer> ownedCarIds, String email) {
+    public ClientUser(long id, String name, String password, List<Integer> ownedCarIds, String email) {
+        this.id = id;
         this.name = name;
         this.password = password;
         this.ownedCarIds = ownedCarIds;
