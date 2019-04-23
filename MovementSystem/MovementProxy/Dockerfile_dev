@@ -3,6 +3,7 @@ COPY domain_dev.xml /opt/payara/appserver/glassfish/domains/production/config/do
 RUN curl -L -o /opt/payara/appserver/glassfish/domains/production/lib/mysql-connector-java-5.1.34.jar https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.34/mysql-connector-java-5.1.34.jar
 COPY target/Rekeningrijden.war /opt/payara/deployments/deploy.war
 COPY --chown=payara:payara ./startInForeground.sh ${SCRIPT_DIR}/startInForeground.sh
+RUN chmod 777 ${SCRIPT_DIR}/startInForeground.sh
 ENV PAYARA_ARGS="-d"
 EXPOSE 9009
 EXPOSE 8080

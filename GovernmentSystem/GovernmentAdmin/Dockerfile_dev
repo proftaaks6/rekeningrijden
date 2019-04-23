@@ -4,6 +4,7 @@ RUN curl -L -o /opt/payara/appserver/glassfish/domains/production/lib/mysql-conn
 COPY target/Rekeningrijden.war /opt/payara/deployments/deploy.war
 COPY --chown=payara:payara ./startInForeground.sh ${SCRIPT_DIR}/startInForeground.sh
 ENV PAYARA_ARGS="-d"
+RUN chmod 777 ${SCRIPT_DIR}/startInForeground.sh
 EXPOSE 9009
 EXPOSE 8080
 EXPOSE 4848
