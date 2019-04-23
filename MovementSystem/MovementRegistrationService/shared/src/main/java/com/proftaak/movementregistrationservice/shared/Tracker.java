@@ -6,6 +6,9 @@ public class Tracker {
 
     private boolean active;
 
+    public Tracker() {
+
+    }
     public Tracker(long id, boolean active) {
         this.id = id;
         this.active = active;
