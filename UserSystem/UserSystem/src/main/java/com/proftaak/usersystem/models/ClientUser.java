@@ -19,9 +19,6 @@ public class ClientUser {
     @Column
     private String residence;
 
-    @Column
-    private String password;
-
     @ElementCollection
     private List<Integer> ownedCarIds;
 
@@ -31,11 +28,10 @@ public class ClientUser {
     public ClientUser() {
     }
 
-    public ClientUser(String name, String address, String residence, String password, List<Integer> ownedCarIds, String email) {
+    public ClientUser(String name, String address, String residence, List<Integer> ownedCarIds, String email) {
         this.name = name;
         this.address = address;
         this.residence = residence;
-        this.password = password;
         this.ownedCarIds = ownedCarIds;
         this.email = email;
     }
@@ -46,10 +42,6 @@ public class ClientUser {
 
     public String getName() {
         return name;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public List<Integer> getOwnedCarIds() {
