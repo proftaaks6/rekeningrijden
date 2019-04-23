@@ -1,4 +1,4 @@
-package com.proftaak.usersystem.api.endpoints;
+package com.proftaak.usersystem.controller;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
@@ -22,7 +22,6 @@ import javax.ws.rs.core.MediaType;
  */
 
 @Path(value = "/health")
-@Produces(MediaType.APPLICATION_JSON)
 @Stateless
 public class HealthCheck {
 

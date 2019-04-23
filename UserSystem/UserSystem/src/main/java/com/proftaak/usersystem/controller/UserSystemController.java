@@ -22,7 +22,7 @@ public class UserSystemController {
     @POST
     @Path("/userInfo")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response addTracker(@FormParam("name") String name,
+    public Response addUser(@FormParam("name") String name,
                                @FormParam("address") String address,
                                @FormParam("residence") String residence,
                                @FormParam("email") String email) {
