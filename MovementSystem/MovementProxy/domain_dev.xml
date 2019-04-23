@@ -57,8 +57,8 @@
       <property name="useSSL" value="false"></property>
       <property name="allowPublicKeyRetrieval" value="true"></property>
       <property name="serverName" value="db"></property>
-      <property name="URL" value="jdbc:mysql://db:3306/userdatabase"></property>
-      <property name="databaseName" value="userdatabase"></property>
+      <property name="URL" value="jdbc:mysql://db:3306/invaliddatadatabase"></property>
+      <property name="databaseName" value="invaliddatadatabase"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="mysql_auth" jndi-name="jdbc/authentication"></jdbc-resource>
   </resources>
