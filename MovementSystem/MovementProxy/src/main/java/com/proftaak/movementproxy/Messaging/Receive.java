@@ -1,6 +1,7 @@
 package com.proftaak.movementproxy.Messaging;
 
 import com.google.gson.Gson;
+import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
 import com.proftaak.rabbitmq.ConnectionFactory;
 import com.rabbitmq.client.*;
@@ -10,6 +11,9 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 @Singleton
@@ -19,6 +23,7 @@ public class Receive {
     private final static String QUEUE_NAME2 = "Simulation_To_MovementProxy";
     private Gson gson = new Gson();
     private Send send;
+    private JMSConsumer consumer;
 
 
     @PostConstruct
@@ -33,19 +38,13 @@ public class Receive {
         ConnectionFactory factory = new ConnectionFactory();
         Connection connection = null;
         Channel channel = null;
-        try {
-
-            connection = factory.newConnection();
-            channel = connection.createChannel();
-            channel.queueDeclare(queueName, false, false, false, null);
-            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-            if(simulation){
-                startReceivingSimulation(channel, queueName);
-            }else{
-                startReceiving(channel, queueName);
-            }
-        } catch (IOException | TimeoutException e) {
-            e.printStackTrace();
+        consumer = new JMSConsumer();
+        channel = consumer.getChannel();
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        if(simulation){
+            startReceivingSimulation(channel, queueName);
+        }else{
+            startReceiving(channel, queueName);
         }
     }
 
@@ -86,7 +85,8 @@ public class Receive {
                     //Send message to registration service.
                     send.sendMessage(message);
                 }else{
-                    //Todo: Send to other database to invalid data
+                    //Todo: Send invalid data to separate database.
+
                 }
             }
         };

@@ -44,9 +44,18 @@ services:
     expose:
       - '3306'
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - database
+
+  rabbit_node_1:
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+  rabbit_node_2:
+    ports:
+    - "15673:15672"
+    - "5673:5672"
 volumes:
   backend_db:
 networks:
