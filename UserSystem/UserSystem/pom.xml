@@ -13,5 +13,13 @@
     <artifactId>UserSystem</artifactId>
 
     <packaging>war</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>proftaak-s6</groupId>
+            <artifactId>UserSystem.shared</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>
