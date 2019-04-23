@@ -36,6 +36,15 @@ public class ClientUser {
         this.email = email;
     }
 
+    public ClientUser(long id, String name, String address, String residence, List<Integer> ownedCarIds, String email) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.residence = residence;
+        this.ownedCarIds = ownedCarIds;
+        this.email = email;
+    }
+
     public long getId() {
         return id;
     }
