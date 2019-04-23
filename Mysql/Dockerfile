@@ -1,0 +1,2 @@
+FROM mysql:5.7.25
+RUN echo 'CREATE DATABASE IF NOT EXISTS driverapplicationdatabase; CREATE DATABASE IF NOT EXISTS governmentdatabase; CREATE DATABASE IF NOT EXISTS invaliddatadatabase; CREATE DATABASE IF NOT EXISTS invoicedatabase; CREATE DATABASE IF NOT EXISTS movementdatabase; CREATE DATABASE IF NOT EXISTS policedatabase; CREATE DATABASE IF NOT EXISTS userdatabase;' > /docker-entrypoint-initdb.d/init.sql

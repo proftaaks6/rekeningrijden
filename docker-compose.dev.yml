@@ -6,12 +6,16 @@ services:
       dockerfile: Dockerfile_dev
     ports:
       - "8080:8080"
+    networks:
+      - database
 
   movement_proxy:
     build:
       dockerfile: Dockerfile_dev
     ports:
       - "8081:8080"
+    networks:
+      - database
 
   government_admin:
     build:
@@ -19,9 +23,31 @@ services:
     ports:
       - "8082:8080"
       - "4848:4848"
+    networks:
+      - database
 
   user_system:
     build:
       dockerfile: Dockerfile_dev
     ports:
       - "8083:8080"
+    networks:
+      - database
+
+  db:
+    build:
+      context: ./Mysql/
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    expose:
+      - '3306'
+    ports:
+      - "3306:3306"
+    networks:
+      - database
+volumes:
+  backend_db:
+networks:
+  database:

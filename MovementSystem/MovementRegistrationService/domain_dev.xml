@@ -52,12 +52,13 @@
     <context-service object-type="system-all" jndi-name="concurrent/__defaultContextService"></context-service>
     <managed-thread-factory object-type="system-all" jndi-name="concurrent/__defaultManagedThreadFactory"></managed-thread-factory>
     <jdbc-connection-pool driver-classname="com.mysql.jdbc.Driver" datasource-classname="" name="mysql_auth" res-type="java.sql.Driver">
-      <property name="serverTimezone" value="UTC"></property>
-      <property name="password" value="D!kkedatabasepw1"></property>
-      <property name="user" value="wouter1q_proftaak"></property>
-      <property name="URL" value="jdbc:mysql://185.94.230.98/wouter1q_governmentdatabase"></property>
-      <property name="serverName" value="185.94.230.98"></property>
-      <property name="databaseName" value="governmentdatabase"></property>
+      <property name="password" value="root"></property>
+      <property name="user" value="root"></property>
+      <property name="useSSL" value="false"></property>
+      <property name="allowPublicKeyRetrieval" value="true"></property>
+      <property name="serverName" value="db"></property>
+      <property name="URL" value="jdbc:mysql://db:3306/movementdatabase"></property>
+      <property name="databaseName" value="movementdatabase"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="mysql_auth" jndi-name="jdbc/authentication"></jdbc-resource>
   </resources>
