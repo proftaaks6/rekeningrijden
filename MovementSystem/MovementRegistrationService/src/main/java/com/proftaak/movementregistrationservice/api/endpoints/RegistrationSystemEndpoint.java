@@ -35,9 +35,9 @@ public class RegistrationSystemEndpoint {
 
     @POST
     @Path("/tracker")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addTracker(com.proftaak.movementregistrationservice.shared.Tracker tracker){
-        if(registrationService.addTracker(trackerConverter.toEntity(tracker))){
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response addTracker(){
+        if(registrationService.addTracker(new Tracker())){
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
