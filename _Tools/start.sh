@@ -8,4 +8,4 @@ echo "###################"
 echo
 docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml up -d db
 sleep 20
-docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml up -d
+docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml up --build -d
