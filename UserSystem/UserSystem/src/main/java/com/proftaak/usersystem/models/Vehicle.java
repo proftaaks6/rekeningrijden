@@ -35,4 +35,12 @@ public class Vehicle {
     public ClientUser getOwner() {
         return owner;
     }
+
+    public void setChassisNumber(String chassisNumber) {
+        this.chassisNumber = chassisNumber;
+    }
+
+    public void setOwner(ClientUser owner) {
+        this.owner = owner;
+    }
 }
