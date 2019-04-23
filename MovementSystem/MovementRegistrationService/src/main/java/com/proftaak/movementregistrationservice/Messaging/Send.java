@@ -23,7 +23,12 @@ public class Send {
         try (Connection connection = factory.newConnection(); Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "Message queue initialized between MovementRegistration and MovementProxy.";
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+
+            //Todo: Remove
+            for(int i = 0; i < 1000; i++){
+                channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            }
+
             System.out.println(message);
         } catch (TimeoutException | IOException e) {
             e.printStackTrace();
