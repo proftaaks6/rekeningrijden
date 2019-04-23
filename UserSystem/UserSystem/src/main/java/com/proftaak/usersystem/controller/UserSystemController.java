@@ -39,7 +39,7 @@ public class UserSystemController {
 
     @POST
     @Path("/{id}/car/{chassisNumber}")
-    public Response addCarToUser(@QueryParam("id") int userId, @QueryParam("chassisNumber") String chassisNumber) {
+    public Response addCarToUser(@PathParam("id") int userId, @PathParam("chassisNumber") String chassisNumber) {
         if (vehicleService.addCarToUser(userService.getClientUserById(userId), chassisNumber)) {
             return Response.ok().build();
         } else {

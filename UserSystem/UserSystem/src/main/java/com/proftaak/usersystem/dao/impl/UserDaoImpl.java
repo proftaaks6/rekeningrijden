@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public ClientUser getClientUserById(int id) {
         try {
-            return em.find(ClientUser.class, id);
+            return em.createNamedQuery("ClientUser.getById", ClientUser.class).setParameter("id", id).getSingleResult();
         }catch (Exception e){
             return null;
         }

@@ -10,6 +10,10 @@ import java.util.List;
         @NamedQuery(
                 name = "ClientUser.getByName",
                 query="SELECT u FROM ClientUser u WHERE u.name = :name"
+        ),
+        @NamedQuery(
+                name = "ClientUser.getById",
+                query="SELECT u FROM ClientUser u WHERE u.id = :id"
         )
 })
 @Table(name="tbl_clientUser")
