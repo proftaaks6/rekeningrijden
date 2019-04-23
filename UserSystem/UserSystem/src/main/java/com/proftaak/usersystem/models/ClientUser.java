@@ -16,8 +16,8 @@ public class ClientUser {
     @Column
     private String password;
 
-    @ElementCollection
-    private List<Integer> ownedCarIds;
+    @OneToMany(mappedBy = "owner")
+    private List<Vehicle> ownedCarIds;
 
     @Column(unique = true)
     private String email;
@@ -25,7 +25,7 @@ public class ClientUser {
     public ClientUser() {
     }
 
-    public ClientUser(String name, String password, List<Integer> ownedCarIds, String email) {
+    public ClientUser(String name, String password, List<Vehicle> ownedCarIds, String email) {
         this.name = name;
         this.password = password;
         this.ownedCarIds = ownedCarIds;
@@ -44,7 +44,7 @@ public class ClientUser {
         return password;
     }
 
-    public List<Integer> getOwnedCarIds() {
+    public List<Vehicle> getOwnedCarIds() {
         return ownedCarIds;
     }
 
