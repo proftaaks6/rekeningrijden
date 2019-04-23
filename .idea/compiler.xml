@@ -16,6 +16,7 @@
         <module name="PoliceFrontendProxy" />
         <module name="rabbitmq" />
         <module name="UserSystem" />
+        <module name="UserSystem.shared" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,7 +31,9 @@
       <module name="PoliceFrontendProxy" target="1.8" />
       <module name="rabbitmq" target="1.8" />
       <module name="rekeningrijden" target="1.8" />
+      <module name="shared" target="1.5" />
       <module name="UserSystem" target="1.8" />
+      <module name="UserSystem.shared" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

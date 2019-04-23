@@ -19,11 +19,10 @@ public class ClientUser {
     @Column
     private String residence;
 
-    @Column
-    private String password;
 
     @OneToMany(mappedBy = "owner")
     private List<Vehicle> ownedCarIds;
+
 
     @Column(unique = true)
     private String email;
@@ -31,11 +30,20 @@ public class ClientUser {
     public ClientUser() {
     }
 
-    public ClientUser(String name, String address, String residence, String password, List<Vehicle> ownedCarIds, String email) {
+
+    public ClientUser(String name, String address, String residence, List<Vehicle> ownedCarIds, String email) {
         this.name = name;
         this.address = address;
         this.residence = residence;
-        this.password = password;
+        this.ownedCarIds = ownedCarIds;
+        this.email = email;
+    }
+
+    public ClientUser(long id, String name, String address, String residence, List<Vehicle> ownedCarIds, String email) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.residence = residence;
         this.ownedCarIds = ownedCarIds;
         this.email = email;
     }
@@ -46,10 +54,6 @@ public class ClientUser {
 
     public String getName() {
         return name;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public List<Vehicle> getOwnedCarIds() {
