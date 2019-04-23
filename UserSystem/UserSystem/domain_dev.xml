@@ -55,9 +55,9 @@
       <property name="serverTimezone" value="UTC"></property>
       <property name="password" value="D!kkedatabasepw1"></property>
       <property name="user" value="wouter1q_proftaak"></property>
-      <property name="URL" value="jdbc:mysql://185.94.230.98/wouter1q_governmentdatabase"></property>
+      <property name="URL" value="jdbc:mysql://185.94.230.98/wouter1q_userdatabase"></property>
       <property name="serverName" value="185.94.230.98"></property>
-      <property name="databaseName" value="governmentdatabase"></property>
+      <property name="databaseName" value="wouter1q_userdatabase"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="mysql_auth" jndi-name="jdbc/authentication"></jdbc-resource>
   </resources>
