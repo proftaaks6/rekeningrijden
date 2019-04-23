@@ -36,4 +36,13 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
     }
+
+    @Override
+    public ClientUser getClientUserById(int id) {
+        try {
+            return em.find(ClientUser.class, id);
+        }catch (Exception e){
+            return null;
+        }
+    }
 }

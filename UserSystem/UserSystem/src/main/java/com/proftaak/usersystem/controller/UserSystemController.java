@@ -1,6 +1,7 @@
 package com.proftaak.usersystem.controller;
 
 import com.proftaak.usersystem.service.UserService;
+import com.proftaak.usersystem.service.VehicleService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -19,6 +20,9 @@ public class UserSystemController {
     @Inject
     private UserService userService;
 
+    @Inject
+    private VehicleService vehicleService;
+
     @POST
     @Path("/userInfo")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -32,4 +36,15 @@ public class UserSystemController {
             return Response.serverError().build();
         }
     }
+
+    @POST
+    @Path("/{id}/car/{chassisNumber}")
+    public Response addCarToUser(@QueryParam("id") int userId, @QueryParam("chassisNumber") String chassisNumber) {
+        if (vehicleService.addCarToUser(userService.getClientUserById(userId), chassisNumber)) {
+            return Response.ok().build();
+        } else {
+            return Response.serverError().build();
+        }
+    }
+
 }

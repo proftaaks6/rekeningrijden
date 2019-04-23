@@ -36,4 +36,10 @@ public class HealthCheck {
     public boolean alive(){
         return true;
     }
+
+    @GET
+    @Path(value = "/who")
+    public String who() {
+        return "UserSystem";
+    }
 }
