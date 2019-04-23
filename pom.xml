@@ -26,6 +26,7 @@
         <module>MovementSystem/MovementRegistrationService/shared</module>
         <module>InvoiceSystem/InvoiceSystem</module>
         <module>UserSystem/UserSystem</module>
+        <module>UserSystem/UserSystem/shared</module>
         <module>DriverSystem/DriverApplication</module>
         <module>PoliceSystem/PoliceAdministration</module>
         <module>PoliceSystem/PoliceEuropeProxy</module>
