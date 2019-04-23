@@ -14,4 +14,25 @@ public class Vehicle {
 
     @ManyToOne
     private ClientUser owner;
+
+    public Vehicle() {
+
+    }
+
+    public Vehicle(String chassisNumber, ClientUser owner) {
+        this.chassisNumber = chassisNumber;
+        this.owner = owner;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getChassisNumber() {
+        return chassisNumber;
+    }
+
+    public ClientUser getOwner() {
+        return owner;
+    }
 }

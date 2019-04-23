@@ -1,9 +1,16 @@
 package com.proftaak.usersystem.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries( {
+        @NamedQuery(
+                name = "ClientUser.getByName",
+                query="SELECT u FROM ClientUser u WHERE u.name = :name"
+        )
+})
 @Table(name="tbl_clientUser")
 public class ClientUser {
     @Id
@@ -21,7 +28,7 @@ public class ClientUser {
 
 
     @OneToMany(mappedBy = "owner")
-    private List<Vehicle> ownedCarIds;
+    private List<Vehicle> ownedCars;
 
 
     @Column(unique = true)
@@ -31,20 +38,20 @@ public class ClientUser {
     }
 
 
-    public ClientUser(String name, String address, String residence, List<Vehicle> ownedCarIds, String email) {
+    public ClientUser(String name, String address, String residence, List<Vehicle> ownedCars, String email) {
         this.name = name;
         this.address = address;
         this.residence = residence;
-        this.ownedCarIds = ownedCarIds;
+        this.ownedCars = ownedCars;
         this.email = email;
     }
 
-    public ClientUser(long id, String name, String address, String residence, List<Vehicle> ownedCarIds, String email) {
+    public ClientUser(long id, String name, String address, String residence, List<Vehicle> ownedCars, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.residence = residence;
-        this.ownedCarIds = ownedCarIds;
+        this.ownedCars = ownedCars;
         this.email = email;
     }
 
@@ -56,8 +63,8 @@ public class ClientUser {
         return name;
     }
 
-    public List<Vehicle> getOwnedCarIds() {
-        return ownedCarIds;
+    public List<Vehicle> getOwnedCars() {
+        return ownedCars;
     }
 
     public String getEmail() {
@@ -70,5 +77,14 @@ public class ClientUser {
 
     public String getResidence() {
         return residence;
+    }
+
+    public List<Integer> getOwnedCarIdList() {
+        List<Integer> list = new ArrayList<>();
+        for (Vehicle v : ownedCars) {
+            list.add((int)v.getId());
+        }
+
+        return list;
     }
 }

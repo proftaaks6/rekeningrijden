@@ -1,5 +1,8 @@
 package com.proftaak.usersystem.dao;
 
+import com.proftaak.usersystem.models.ClientUser;
+
 public interface UserDao {
-    void saveUserInformation(String name, String email, String address, String residence);
+    boolean saveUserInformation(String name, String email, String address, String residence);
+    ClientUser getClientUserByName(String name);
 }
