@@ -12,8 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>MovementRegistrationService</artifactId>
-
-
+ 
     <dependencies>
         <dependency>
             <groupId>proftaak-s6</groupId>
