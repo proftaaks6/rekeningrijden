@@ -19,8 +19,10 @@ public class ClientUser {
     @Column
     private String residence;
 
-    @ElementCollection
-    private List<Integer> ownedCarIds;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Vehicle> ownedCarIds;
+
 
     @Column(unique = true)
     private String email;
@@ -28,7 +30,8 @@ public class ClientUser {
     public ClientUser() {
     }
 
-    public ClientUser(String name, String address, String residence, List<Integer> ownedCarIds, String email) {
+
+    public ClientUser(String name, String address, String residence, List<Vehicle> ownedCarIds, String email) {
         this.name = name;
         this.address = address;
         this.residence = residence;
@@ -36,7 +39,7 @@ public class ClientUser {
         this.email = email;
     }
 
-    public ClientUser(long id, String name, String address, String residence, List<Integer> ownedCarIds, String email) {
+    public ClientUser(long id, String name, String address, String residence, List<Vehicle> ownedCarIds, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -53,7 +56,7 @@ public class ClientUser {
         return name;
     }
 
-    public List<Integer> getOwnedCarIds() {
+    public List<Vehicle> getOwnedCarIds() {
         return ownedCarIds;
     }
 
