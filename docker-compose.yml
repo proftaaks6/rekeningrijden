@@ -9,8 +9,6 @@ services:
       - rabbit
     expose:
       - "8080"
-    ports:
-      - "8080:8080"
     depends_on:
       - rabbit_node_1
       - rabbit_node_2
@@ -23,8 +21,6 @@ services:
       - rabbit
     expose:
       - "8080"
-    ports:
-      - "8081:8080"
     depends_on:
       - rabbit_node_1
       - rabbit_node_2
@@ -35,13 +31,22 @@ services:
       dockerfile: Dockerfile
     networks:
       - rabbit
+      - government
     expose:
       - "8080"
-    ports:
-      - "8082:8080"
     depends_on:
       - rabbit_node_1
       - rabbit_node_2
+
+  government_frontend:
+    build: https://github.com/proftaaks6/GovermentSystemAngular.git
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - government
+    depends_on:
+      - government_admin
 
   user_system:
     build:
@@ -51,13 +56,11 @@ services:
       - rabbit
     expose:
       - "8080"
-    ports:
-      - "8083:8080"
     depends_on:
       - rabbit_node_1
       - rabbit_node_2
 
-#Rabbit mq
+  #Rabbit mq
   rabbit_node_1:
     environment:
       - RABBITMQ_ERLANG_COOKIE='7mG7R9HRDAkjfUT3kNCq5KsgVEgbTYR'
@@ -65,9 +68,6 @@ services:
       - rabbit
     hostname: rabbit_node_1
     image: "rabbitmq:3-management"
-    ports:
-      - "15672:15672"
-      - "5672:5672"
     tty: true
     volumes:
       - rabbit1:/var/lib/rabbitmq
@@ -82,9 +82,6 @@ services:
     depends_on:
       - rabbit_node_1
     image: "rabbitmq:3-management"
-    ports:
-      - "15673:15672"
-      - "5673:5672"
     tty: true
     volumes:
       - rabbit2:/var/lib/rabbitmq
@@ -98,3 +95,4 @@ volumes:
 
 networks:
   rabbit:
+  government:
