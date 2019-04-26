@@ -1,5 +1,8 @@
 package com.proftaak.movementregistrationservice.Messaging;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proftaak.movementregistrationservice.shared.Coordinate;
+import com.proftaak.movementregistrationservice.shared.MovementMessage;
 import com.proftaak.rabbitmq.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
@@ -22,8 +25,17 @@ public class Send {
         ConnectionFactory factory = new ConnectionFactory();
         try (Connection connection = factory.newConnection(); Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-            String message = "Message queue initialized between MovementRegistration and MovementProxy.";
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+
+            //Todo: Test code, can be removed once validated
+            MovementMessage movementMessage = new MovementMessage(-1, new Coordinate(1, 2));
+            ObjectMapper mapper = new ObjectMapper();
+            String message = mapper.writeValueAsString(movementMessage);
+
+            //Todo: Remove
+            for(int i = 0; i < 1000; i++){
+                channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            }
+
             System.out.println(message);
         } catch (TimeoutException | IOException e) {
             e.printStackTrace();

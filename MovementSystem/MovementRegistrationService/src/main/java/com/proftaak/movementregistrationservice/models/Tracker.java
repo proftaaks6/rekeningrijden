@@ -70,4 +70,10 @@ public class Tracker {
     public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;
     }
+
+    public void addLocationPoints(List<LocationPoint> locationPoints){
+        for(int i = 0; i < locationPoints.size(); i++){
+            this.locationPoints.add(locationPoints.get(i));
+        }
+    }
 }
