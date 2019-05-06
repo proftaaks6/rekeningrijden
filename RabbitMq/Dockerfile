@@ -1,4 +1,4 @@
-FROM rabbitmq:3-management
+FROM rabbitmq:management
 COPY ./conf/ /etc/rabbitmq/
 ENV RABBITMQ_ERLANG_COOKIE '7mG7R9HRDAkjfUT3kNCq5KsgVEgbTYR'
 RUN ['rabbitmqctl','add_user', 'username', 'password']
