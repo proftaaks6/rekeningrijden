@@ -86,7 +86,7 @@ public class Receive {
                     send.sendMessage(message);
                 }else{
                     //Todo: Send invalid data to separate database.
-
+                    //dao.saveInvalidObject(movementMessage);
                 }
             }
         };
