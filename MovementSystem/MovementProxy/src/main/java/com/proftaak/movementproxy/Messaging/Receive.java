@@ -55,10 +55,11 @@ public class Receive {
                 throws IOException {
                 String message = new String(body, "UTF-8");
                 System.out.println(" [x] received '" + message + "'");
+                MovementMessage movementMessage =  gson.fromJson(message, MovementMessage.class);
 
                 //Test code
                 //Check if message is valid.
-                if(validateMessage(new MovementMessage())){
+                if(validateMessage(movementMessage)){
                     //Send message to registration service.
                     send.sendMessage(message);
                 }
@@ -100,7 +101,11 @@ public class Receive {
     private boolean validateMessage(MovementMessage movementMessage){
 
         try{
-            if(movementMessage.getCoordinate() == null){
+            //Can't check if double or Double is null so instead we catch a nullpointer exception.
+            try{
+                if(movementMessage.getCoordinate().getLatitude() > 0 || movementMessage.getCoordinate().getLatitude() < 0){ }
+                if(movementMessage.getCoordinate().getLongitude() > 0 || movementMessage.getCoordinate().getLongitude() < 0){ }
+            }catch (Exception e){
                 System.out.println("No coordinates found in received location message from Tracker.");
                 return false;
             }
