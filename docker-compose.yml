@@ -68,8 +68,6 @@ services:
     networks:
       - rabbit
     tty: true
-    volumes:
-      - rabbit1:/var/lib/rabbitmq
 
   rabbit_node_2:
     build:
@@ -80,8 +78,6 @@ services:
     depends_on:
       - rabbit_node_1
     tty: true
-    volumes:
-      - rabbit2:/var/lib/rabbitmq
 volumes:
   rabbit1:
     driver: local
