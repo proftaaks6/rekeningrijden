@@ -6,6 +6,7 @@ import com.proftaak.usersystem.shared.ClientUser;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,10 +26,13 @@ public class GovernmentAdminEndpoint
     @POST
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addUser(String name, String email){
+    public Response addUser(@FormParam("name") String name,
+                            @FormParam("address") String address,
+                            @FormParam("residence") String residence,
+                            @FormParam("email") String email){
         ClientUser user = null;
         try {
-            user = governmentAdminService.addUser(name, email);
+            user = governmentAdminService.addUser(name, address, residence, email);
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }
