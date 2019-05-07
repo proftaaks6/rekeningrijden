@@ -36,6 +36,9 @@ public class Vehicle {
             fetch = FetchType.LAZY, optional = false)
     private Tracker tracker;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Tracker> historyTrackers;
+
     @Column
     private boolean isStolen;
 
@@ -56,6 +59,7 @@ public class Vehicle {
         this.isStolen = isStolen;
 
         this.tracker = new Tracker(true);
+        this.historyTrackers = new ArrayList<>();
     }
 
     public Vehicle(long id, VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission) {
@@ -66,6 +70,7 @@ public class Vehicle {
         this.emission = emission;
 
         this.tracker = new Tracker(true);
+        this.historyTrackers = new ArrayList<>();
     }
 
     public Vehicle(VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
@@ -76,6 +81,7 @@ public class Vehicle {
         this.isStolen = isStolen;
 
         this.tracker = new Tracker(true);
+        this.historyTrackers = new ArrayList<>();
     }
 
 
@@ -114,5 +120,13 @@ public class Vehicle {
 
     public void setTracker(Tracker tracker) {
         this.tracker = tracker;
+    }
+
+    public List<Tracker> getHistoryTrackers() {
+        return historyTrackers;
+    }
+
+    public void setHistoryTrackers(List<Tracker> historyTrackers) {
+        this.historyTrackers = historyTrackers;
     }
 }

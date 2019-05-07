@@ -3,6 +3,7 @@ package com.proftaak.movementregistrationservice.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -97,4 +98,5 @@ public class Tracker {
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
+
 }
