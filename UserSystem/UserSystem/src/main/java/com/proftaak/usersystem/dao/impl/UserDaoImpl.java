@@ -4,6 +4,7 @@ import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.models.ClientUser;
 import com.proftaak.usersystem.models.Vehicle;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,15 +17,17 @@ public class UserDaoImpl implements UserDao {
     private EntityManager em;
 
     @Override
-    public boolean saveUserInformation(String name, String email, String address, String residence) {
+    public ClientUser saveUserInformation(String name, String email, String address, String residence) {
         try {
-            em.persist(new ClientUser(name, address, residence, new ArrayList<>(), email));
-            return true;
+            ClientUser user = new ClientUser(name, address, residence, new ArrayList<>(), email);
+            em.persist(user);
+            em.flush();
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
-
-            return false;
         }
+
+        return null;
     }
 
     @Override
@@ -42,6 +45,16 @@ public class UserDaoImpl implements UserDao {
         try {
             return em.createNamedQuery("ClientUser.getById", ClientUser.class).setParameter("id", id).getSingleResult();
         }catch (Exception e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<ClientUser> getAll()
+    {
+        try {
+            return em.createNamedQuery("ClientUser.getAll", ClientUser.class).getResultList();
+        } catch (Exception e) {
             return null;
         }
     }

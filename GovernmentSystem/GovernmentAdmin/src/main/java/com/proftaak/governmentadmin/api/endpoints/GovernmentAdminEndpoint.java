@@ -46,12 +46,11 @@ public class GovernmentAdminEndpoint
     @Path("/linkcar")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
     public Response linkCar(@FormParam("userId") String userId,
-                            @FormParam("vehicleId") String vehicleId){
+                            @FormParam("vehicleChassis") String vehicleChassis){
         int user = Integer.parseInt(userId);
-        int vehicle = Integer.parseInt(vehicleId);
 
         try {
-            return Response.status(200).entity(governmentAdminService.linkCar(user, vehicle)).build();
+            return Response.status(200).entity(governmentAdminService.linkCar(user, vehicleChassis)).build();
         } catch (Exception e) {
             return Response.status(400).entity(false).build();
         }

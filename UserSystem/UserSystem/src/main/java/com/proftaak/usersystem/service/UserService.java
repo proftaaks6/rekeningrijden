@@ -4,6 +4,7 @@ import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.models.ClientUser;
 import com.proftaak.usersystem.models.Vehicle;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -12,12 +13,8 @@ public class UserService {
     @Inject
     private UserDao userDao;
 
-    public boolean saveUserInformation(String name, String email, String address, String residence) {
-        if (userDao.saveUserInformation(name, email, address, residence)) {
-            return true;
-        } else {
-            return false;
-        }
+    public ClientUser saveUserInformation(String name, String email, String address, String residence) {
+        return userDao.saveUserInformation(name, email, address, residence);
     }
 
     public ClientUser getClientUserByName(String name) {
@@ -28,4 +25,8 @@ public class UserService {
         return userDao.getClientUserById(id);
     }
 
+    public List<ClientUser> getAllUsers()
+    {
+        return userDao.getAll();
+    }
 }
