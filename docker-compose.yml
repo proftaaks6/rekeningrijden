@@ -32,6 +32,7 @@ services:
     networks:
       - rabbit
       - government
+      - user
     expose:
       - "8080"
     depends_on:
@@ -54,6 +55,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - rabbit
+      - user
     expose:
       - "8080"
     depends_on:
@@ -62,31 +64,22 @@ services:
 
   #Rabbit mq
   rabbit_node_1:
-    environment:
-      - RABBITMQ_ERLANG_COOKIE='7mG7R9HRDAkjfUT3kNCq5KsgVEgbTYR'
+    build:
+      context: ./RabbitMq
+      dockerfile: Dockerfile
     networks:
       - rabbit
-    hostname: rabbit_node_1
-    image: "rabbitmq:3-management"
     tty: true
-    volumes:
-      - rabbit1:/var/lib/rabbitmq
-      - ./conf/:/etc/rabbitmq/
-    command:  bash -c "sleep 10; rabbitmq-server;"
+
   rabbit_node_2:
-    environment:
-      - RABBITMQ_ERLANG_COOKIE='7mG7R9HRDAkjfUT3kNCq5KsgVEgbTYR'
+    build:
+      context: ./RabbitMq
+      dockerfile: Dockerfile
     networks:
       - rabbit
-    hostname: rabbit_node_2
     depends_on:
       - rabbit_node_1
-    image: "rabbitmq:3-management"
     tty: true
-    volumes:
-      - rabbit2:/var/lib/rabbitmq
-      - ./conf/:/etc/rabbitmq/
-    command:  bash -c "sleep 10; rabbitmq-server; "
 volumes:
   rabbit1:
     driver: local
@@ -96,3 +89,4 @@ volumes:
 networks:
   rabbit:
   government:
+  user:

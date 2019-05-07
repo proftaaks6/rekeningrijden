@@ -1,6 +1,9 @@
 package com.proftaak.movementproxy.Messaging;
 
 import com.google.gson.Gson;
+import com.proftaak.movementproxy.dao.ProxyDao;
+import com.proftaak.movementproxy.dao.daoImplementation.ProxyDaoImplementation;
+import com.proftaak.movementproxy.models.InvalidData;
 import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
 import com.proftaak.rabbitmq.ConnectionFactory;
@@ -10,6 +13,7 @@ import com.sun.media.jfxmedia.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +28,9 @@ public class Receive {
     private Gson gson = new Gson();
     private Send send;
     private JMSConsumer consumer;
+
+    @Inject
+    private ProxyDao dao;
 
 
     @PostConstruct
@@ -65,8 +72,11 @@ public class Receive {
                 //Test code
                 //Check if message is valid.
                 if(validateMessage(movementMessage)){
-                    //Send message to registration service.
-                    send.sendMessage(message);
+                    //Not sending data back to registration.
+                    //send.sendMessage(message);
+                }else{
+                    //Push invalid data to invalid data database.
+                    dao.addInvalidData(new InvalidData(message));
                 }
             }
         };
@@ -96,8 +106,8 @@ public class Receive {
                     //Send message to registration service.
                     send.sendMessage(message);
                 }else{
-                    //Todo: Send invalid data to separate database.
-
+                    //Push invalid data to invalid data database.
+                    dao.addInvalidData(new InvalidData(message));
                 }
             }
         };
@@ -111,11 +121,7 @@ public class Receive {
     private boolean validateMessage(MovementMessage movementMessage){
 
         try{
-            //Can't check if double or Double is null so instead we catch a nullpointer exception.
-            try{
-                if(movementMessage.getCoordinate().getLatitude() > 0 || movementMessage.getCoordinate().getLatitude() < 0){ }
-                if(movementMessage.getCoordinate().getLongitude() > 0 || movementMessage.getCoordinate().getLongitude() < 0){ }
-            }catch (Exception e){
+            if(movementMessage.getCoordinate() == null){
                 System.out.println("No coordinates found in received location message from Tracker.");
                 return false;
             }
