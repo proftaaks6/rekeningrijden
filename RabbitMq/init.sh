@@ -1,5 +1,7 @@
 !/bin/sh
 
+echo $RABBITMQ_ERLANG_COOKIE > /var/lib/rabbitmq/.erlang.cookie
+
 # Create Rabbitmq user
 ( sleep 15 ; \
 rabbitmqctl add_user $RABBITMQ_USER $RABBITMQ_PASSWORD 2>/dev/null ; \
