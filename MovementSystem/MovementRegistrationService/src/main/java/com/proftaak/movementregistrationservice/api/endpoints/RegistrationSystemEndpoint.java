@@ -140,7 +140,7 @@ public class RegistrationSystemEndpoint {
     }
 
     @GET
-    @Path("vehicles")
+    @Path("exi")
     public List<com.proftaak.movementregistrationservice.shared.Vehicle> getAll(){
         return registrationService.getAllVehicles().stream().map(x->vehicleConverter.toShared(x)).collect(Collectors.toList());
     }
