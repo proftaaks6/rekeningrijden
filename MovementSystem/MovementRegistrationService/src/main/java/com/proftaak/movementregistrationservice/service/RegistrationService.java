@@ -27,8 +27,8 @@ public class RegistrationService {
         return registrationDao.editTrackerLocationPoints(points, targetTrackerId);
     }
 
-    public boolean editTrackerVehicles(List<Vehicle> vehicles, long targetTrackerId){
-        return registrationDao.editTrackerVehicles(vehicles, targetTrackerId);
+    public boolean editTrackerVehicle(Vehicle vehicle, long targetTrackerId){
+        return registrationDao.editTrackerVehicle(vehicle, targetTrackerId);
     }
 
     public boolean removeTracker(long targetTrackerId){
