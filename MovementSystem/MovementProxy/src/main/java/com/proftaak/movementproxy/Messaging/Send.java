@@ -13,21 +13,34 @@ import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 
-@Singleton
-@Startup
 public class Send {
     private final static String QUEUE_NAME = "MovementProxy_To_MovementRegistration";
+    private Connection connection;
+    private Channel channel;
 
-    @PostConstruct
-    public void main() {
+    public Send() {
+        try {
         BasicConfigurator.configure();
         ConnectionFactory factory = new ConnectionFactory();
-        try (Connection connection = factory.newConnection(); Channel channel = connection.createChannel()) {
+        this.connection = factory.newConnection();
+        this.channel = connection.createChannel();
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "Message queue initialized between MovementProxy and MovementRegistration.";
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
             System.out.println(message);
-        } catch (TimeoutException | IOException e) {
+        } catch (IOException | TimeoutException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendMessage(String message){
+        BasicConfigurator.configure();
+        ConnectionFactory factory = new ConnectionFactory();
+        try {
+            this.channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            this.channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            System.out.println("Sent message: " + message);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

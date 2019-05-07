@@ -16,7 +16,7 @@ public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
         setPassword("guest");
         setVirtualHost("/");
     }
-
+    @Override
     public Connection newConnection() throws IOException, TimeoutException {
 
         Address address1 = new Address("rabbit_node_1", 5672);

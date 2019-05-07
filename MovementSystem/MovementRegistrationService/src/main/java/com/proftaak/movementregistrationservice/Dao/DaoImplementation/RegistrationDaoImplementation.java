@@ -41,8 +41,9 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     @Override
     public boolean editTrackerLocationPoints(List<LocationPoint> points, long targetTrackerId) {
         try{
+            //Todo: This is very slow code. You'd need to either push the entire list of points onto the tracker or get them from the database beforehand. Changed this to appender for better performance.
             Tracker databaseTracker = em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", targetTrackerId).getSingleResult();
-            databaseTracker.setLocationPoints(points);
+            databaseTracker.addLocationPoints(points);
             em.merge(databaseTracker);
         }catch (Exception e){
             return false;
