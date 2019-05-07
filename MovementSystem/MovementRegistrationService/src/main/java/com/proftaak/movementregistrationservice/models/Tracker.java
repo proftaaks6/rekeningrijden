@@ -25,8 +25,9 @@ public class Tracker {
     @OneToMany
     private List<LocationPoint> locationPoints;
 
-    @ManyToMany
-    private List<Vehicle> vehicles;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
 
     public Tracker() {
 
@@ -34,13 +35,27 @@ public class Tracker {
 
     public Tracker(boolean active) {
         this.active = active;
-        this.vehicles = new ArrayList<>();
         this.locationPoints =  new ArrayList<>();
     }
 
     public Tracker(long id, boolean active) {
         this.id = id;
         this.active = active;
+    }
+
+    public LocationPoint getMostRecentLocationPoint() {
+        long mostRecentDate = 0;
+        LocationPoint mostRecentLocationPoint = null;
+
+        for (LocationPoint p : locationPoints) {
+            if (p.getDate().getTime() > mostRecentDate) {
+                mostRecentDate = p.getDate().getTime();
+
+                mostRecentLocationPoint = p;
+            }
+        }
+
+        return mostRecentLocationPoint;
     }
 
     public long getId() {
@@ -51,9 +66,6 @@ public class Tracker {
         return active;
     }
 
-    public List<Vehicle> getVehicles() {
-        return vehicles;
-    }
 
     public List<LocationPoint> getLocationPoints() {
         return locationPoints;
@@ -67,13 +79,22 @@ public class Tracker {
         this.locationPoints = locationPoints;
     }
 
-    public void setVehicles(List<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
 
     public void addLocationPoints(List<LocationPoint> locationPoints){
         for(int i = 0; i < locationPoints.size(); i++){
             this.locationPoints.add(locationPoints.get(i));
         }
+    }
+
+    public void addLocationPoint(LocationPoint point) {
+        this.locationPoints.add(point);
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 }

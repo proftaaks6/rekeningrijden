@@ -69,13 +69,15 @@ public class RegistrationSystemEndpoint {
     @POST
     @Path("/tracker/{trackerId}/vehicles")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response editTrackerVehicles(List<com.proftaak.movementregistrationservice.shared.Vehicle> vehicles, @PathParam("trackerId") long targetTrackerId){
-        if(registrationService.editTrackerVehicles(vehicles.stream().map(x->vehicleConverter.toEntity(x)).collect(Collectors.toList()), targetTrackerId)){
+    public Response editTrackerVehicle(com.proftaak.movementregistrationservice.shared.Vehicle vehicle, @PathParam("trackerId") long targetTrackerId){
+        if (registrationService.editTrackerVehicle(vehicleConverter.toEntity(vehicle), targetTrackerId)) {
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
         }
     }
+
+
 
     @DELETE
     @Path("/tracker/{trackerId}")

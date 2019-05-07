@@ -52,10 +52,19 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     }
 
     @Override
-    public boolean editTrackerVehicles(List<Vehicle> vehicles, long targetTrackerId) {
+    public boolean addTrackerLocationPiont(LocationPoint point, long trackerId) {
+        Tracker tracker = em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", trackerId).getSingleResult();
+        tracker.addLocationPoint(point);
+
+        em.merge(tracker);
+        return true;
+    }
+
+    @Override
+    public boolean editTrackerVehicle(Vehicle vehicle, long targetTrackerId) {
         try{
             Tracker databaseTracker = em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", targetTrackerId).getSingleResult();
-            databaseTracker.setVehicles(vehicles);
+            databaseTracker.setVehicle(vehicle);
             em.merge(databaseTracker);
         }catch (Exception e){
             return false;
@@ -90,7 +99,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         try{
             Vehicle databaseVehicle = em.createNamedQuery("Vehicle.getById", Vehicle.class).setParameter("id", vehicleId).getSingleResult();
             //Todo: Am not sure whether or not this tracker already exists in database, if it does at this point then it will be duplicated unless the tracker object has an id. Subject to change if need be.
-            databaseVehicle.addTracker(tracker);
+            databaseVehicle.setTracker(tracker);
             em.merge(databaseVehicle);
         }catch (Exception e){
             return false;
@@ -108,6 +117,11 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Tracker getTrackedById(long trackerId) {
+        return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("trackerId", trackerId).getSingleResult();
     }
 
     @Override

@@ -48,6 +48,11 @@ public class Receive {
         }
     }
 
+    /**
+     * Consuemr for movement registration callback (location was wrong for instance)
+     * @param channel
+     * @param queueName
+     */
     private void startReceiving(Channel channel, String queueName){
         Consumer consumer = new DefaultConsumer(channel){
             @Override
@@ -72,6 +77,11 @@ public class Receive {
         }
     }
 
+    /**
+     * Consumer for simulated data
+     * @param channel
+     * @param queueName
+     */
     private void startReceivingSimulation(Channel channel, String queueName){
         Consumer consumer = new DefaultConsumer(channel){
             @Override

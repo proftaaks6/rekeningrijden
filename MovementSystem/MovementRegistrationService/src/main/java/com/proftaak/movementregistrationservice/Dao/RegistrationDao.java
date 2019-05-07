@@ -10,11 +10,13 @@ public interface RegistrationDao {
     boolean addTracker(Tracker tracker);
     boolean editTrackerActiveStatus(boolean active, long targetTrackerId);
     boolean editTrackerLocationPoints(List<LocationPoint> points, long targetTrackerId);
-    boolean editTrackerVehicles(List<Vehicle> vehicles, long targetTrackerId);
+    boolean addTrackerLocationPiont(LocationPoint point, long trackerId);
+    boolean editTrackerVehicle(Vehicle vehicles, long targetTrackerId);
     boolean removeTracker(long targetTrackerId);
     boolean addVehicle(Vehicle vehicle);
     boolean addTrackerToVehicle(Tracker tracker, long vehicleId);
     boolean removeVehicle(long vehicleId);
+    Tracker getTrackedById(long trackerId);
     Vehicle getVehicleByChassisNumber(String chassisNumber);
     List<Vehicle> getStolenVehicles();
     List<Vehicle> getAllVehicles();
