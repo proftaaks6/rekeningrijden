@@ -14,6 +14,10 @@ import java.util.List;
         @NamedQuery(
                 name = "ClientUser.getById",
                 query="SELECT u FROM ClientUser u WHERE u.id = :id"
+        ),
+        @NamedQuery(
+                name = "ClientUser.getAll",
+                query="SELECT u FROM ClientUser u"
         )
 })
 @Table(name="tbl_clientUser")
