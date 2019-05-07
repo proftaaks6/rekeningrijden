@@ -53,34 +53,41 @@ public class Receive {
                     // Get last location from user
                     LocationPoint lastLocation = dao.getTrackedById(movementMessage.getTrackerId()).getMostRecentLocationPoint();
 
-                    // Calculate distance from two points using some super duper complex math
-                    double distance = calculateDistance(
-                            lastLocation.getLongitude(),
-                            lastLocation.getLatitude(),
-                            movementMessage.getCoordinate().getLongitude(),
-                            movementMessage.getCoordinate().getLatitude());
+                    if (lastLocation != null) {
+                        // Calculate distance from two points using some super duper complex math
+                        double distance = calculateDistance(
+                                lastLocation.getLongitude(),
+                                lastLocation.getLatitude(),
+                                movementMessage.getCoordinate().getLongitude(),
+                                movementMessage.getCoordinate().getLatitude());
 
-                    // If distance is a negative number, convert to positive so it can be compared with value in config file
-                    if (distance < 0) {
-                        distance = Math.abs(-1);
-                    }
+                        // If distance is a negative number, convert to positive so it can be compared with value in config file
+                        if (distance < 0) {
+                            distance = Math.abs(-1);
+                        }
 
-                    // If the new received position exceeds this maximum allowed distance, then the MovementMessage should be send back as 'invalid'
-                    if (distance > Double.valueOf(new Config().getProperty("maxMovementMessageDistance"))) {
-                        // Maximum allowed distance exceeded! Send message back to proxy
-                        send.sendMessage(new String(body, "UTF-8"));
+                        // If the new received position exceeds this maximum allowed distance, then the MovementMessage should be send back as 'invalid'
+                        if (distance > Double.valueOf(new Config().getProperty("maxMovementMessageDistance"))) {
+                            // Maximum allowed distance exceeded! Send message back to proxy
+                            send.sendMessage(new String(body, "UTF-8"));
+                        } else {
+                            // Save location to db
+                            dao.addTrackerLocationPiont(
+                                    new LocationPoint(
+                                            movementMessage.getCoordinate().getLongitude(),
+                                            movementMessage.getCoordinate().getLatitude(),
+                                            new Date()), movementMessage.getTrackerId());
+                        }
                     } else {
-                        // Save location to db
                         dao.addTrackerLocationPiont(
                                 new LocationPoint(
                                         movementMessage.getCoordinate().getLongitude(),
                                         movementMessage.getCoordinate().getLatitude(),
                                         new Date()), movementMessage.getTrackerId());
                     }
-                }catch (JsonSyntaxException e){
+                } catch (JsonSyntaxException e){
                     System.out.println(e);
                 }
-
             }
         };
 

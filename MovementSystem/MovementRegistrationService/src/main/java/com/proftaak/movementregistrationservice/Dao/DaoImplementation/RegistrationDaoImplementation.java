@@ -121,7 +121,12 @@ public class RegistrationDaoImplementation implements RegistrationDao{
 
     @Override
     public Tracker getTrackedById(long trackerId) {
-        return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("trackerId", trackerId).getSingleResult();
+        try {
+            return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("trackerId", trackerId).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     @Override
