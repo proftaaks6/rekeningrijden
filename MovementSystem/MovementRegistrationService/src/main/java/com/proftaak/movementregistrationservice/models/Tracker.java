@@ -1,6 +1,5 @@
 package com.proftaak.movementregistrationservice.models;
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

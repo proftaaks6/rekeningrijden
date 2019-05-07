@@ -3,6 +3,11 @@ package com.proftaak.movementproxy.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tbl_invalidData")
+@NamedQueries({
+        @NamedQuery(name="InvalidData.getInvalidData",
+                query="SELECT d FROM InvalidData d WHERE d.id = :id"),
+})
 public class InvalidData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -10,6 +15,13 @@ public class InvalidData {
 
     @Column
     private String data;
+
+    public InvalidData() {
+    }
+
+    public InvalidData(String data) {
+        this.data = data;
+    }
 
     public String getData() {
         return data;

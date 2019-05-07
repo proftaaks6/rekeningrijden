@@ -3,12 +3,10 @@ package com.proftaak.movementregistrationservice.Messaging;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.proftaak.movementregistrationservice.Dao.DaoImplementation.RegistrationDaoImplementation;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
 import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
-import com.proftaak.rabbitmq.ConnectionFactory;
 import com.rabbitmq.client.*;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 @Singleton
 @Startup

@@ -1,6 +1,9 @@
 package com.proftaak.movementproxy.Messaging;
 
 import com.google.gson.Gson;
+import com.proftaak.movementproxy.dao.ProxyDao;
+import com.proftaak.movementproxy.dao.daoImplementation.ProxyDaoImplementation;
+import com.proftaak.movementproxy.models.InvalidData;
 import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
 import com.proftaak.rabbitmq.ConnectionFactory;
@@ -10,6 +13,7 @@ import com.sun.media.jfxmedia.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +28,9 @@ public class Receive {
     private Gson gson = new Gson();
     private Send send;
     private JMSConsumer consumer;
+
+    @Inject
+    private ProxyDao dao;
 
 
     @PostConstruct
@@ -55,12 +62,16 @@ public class Receive {
                 throws IOException {
                 String message = new String(body, "UTF-8");
                 System.out.println(" [x] received '" + message + "'");
+                MovementMessage movementMessage =  gson.fromJson(message, MovementMessage.class);
 
                 //Test code
                 //Check if message is valid.
-                if(validateMessage(new MovementMessage())){
-                    //Send message to registration service.
-                    send.sendMessage(message);
+                if(validateMessage(movementMessage)){
+                    //Not sending data back to registration.
+                    //send.sendMessage(message);
+                }else{
+                    //Push invalid data to invalid data database.
+                    dao.addInvalidData(new InvalidData(message));
                 }
             }
         };
@@ -85,8 +96,8 @@ public class Receive {
                     //Send message to registration service.
                     send.sendMessage(message);
                 }else{
-                    //Todo: Send invalid data to separate database.
-                    //dao.saveInvalidObject(movementMessage);
+                    //Push invalid data to invalid data database.
+                    dao.addInvalidData(new InvalidData(message));
                 }
             }
         };
