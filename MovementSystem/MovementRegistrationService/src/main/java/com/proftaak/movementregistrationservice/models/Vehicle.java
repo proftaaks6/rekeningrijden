@@ -32,8 +32,9 @@ public class Vehicle {
     @Column
     private double emission;
 
-    @ManyToMany(mappedBy = "vehicles")
-    private List<Tracker> trackers;
+    @OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private Tracker tracker;
 
     @Column
     private boolean isStolen;
@@ -54,7 +55,7 @@ public class Vehicle {
         this.emission = emission;
         this.isStolen = isStolen;
 
-        trackers = new ArrayList<>();
+        this.tracker = new Tracker(true);
     }
 
     public Vehicle(long id, VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission) {
@@ -64,7 +65,7 @@ public class Vehicle {
         this.fuelType = fuelType;
         this.emission = emission;
 
-        trackers = new ArrayList<>();
+        this.tracker = new Tracker(true);
     }
 
     public Vehicle(VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
@@ -74,12 +75,9 @@ public class Vehicle {
         this.emission = emission;
         this.isStolen = isStolen;
 
-        trackers = new ArrayList<>();
+        this.tracker = new Tracker(true);
     }
 
-    public void addTracker(Tracker tracker){
-        trackers.add(tracker);
-    }
 
     public long getId() {
         return id;
@@ -101,9 +99,6 @@ public class Vehicle {
         return emission;
     }
 
-    public List<Tracker> getTrackers() {
-        return trackers;
-    }
 
     public boolean isStolen() {
         return isStolen;
@@ -111,5 +106,13 @@ public class Vehicle {
 
     public void setStolen(boolean stolen) {
         isStolen = stolen;
+    }
+
+    public Tracker getTracker() {
+        return tracker;
+    }
+
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
     }
 }

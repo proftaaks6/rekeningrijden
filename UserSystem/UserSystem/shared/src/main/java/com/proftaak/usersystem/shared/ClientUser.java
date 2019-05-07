@@ -31,7 +31,6 @@ public class ClientUser
 		return name;
 	}
 
-
 	public List<Integer> getOwnedCarIds() {
 		return ownedCarIds;
 	}

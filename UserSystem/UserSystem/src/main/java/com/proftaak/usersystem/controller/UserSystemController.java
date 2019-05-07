@@ -1,15 +1,16 @@
 package com.proftaak.usersystem.controller;
 
+import com.proftaak.usersystem.converters.ClientUserConverter;
 import com.proftaak.usersystem.service.UserService;
 import com.proftaak.usersystem.service.VehicleService;
 
+import com.proftaak.usersystem.shared.ClientUser;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Path(value = "/usersystem")
@@ -26,14 +27,15 @@ public class UserSystemController {
     @POST
     @Path("/userInfo")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response addUser(@FormParam("name") String name,
-                               @FormParam("address") String address,
-                               @FormParam("residence") String residence,
-                               @FormParam("email") String email) {
-        if (userService.saveUserInformation(name, address, residence, email)) {
-            return Response.ok().build();
-        } else {
-            return Response.serverError().build();
+    public ClientUser addUser(@FormParam("name") String name,
+                              @FormParam("address") String address,
+                              @FormParam("residence") String residence,
+                              @FormParam("email") String email) {
+        try
+        {
+            return new ClientUserConverter().toShared(userService.saveUserInformation(name, email, address, residence));
+        } catch (Exception e) {
+            throw new BadRequestException();
         }
     }
 
@@ -44,6 +46,19 @@ public class UserSystemController {
             return Response.ok().build();
         } else {
             return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/users")
+    public List<ClientUser> getUsers()
+    {
+        try
+        {
+            return new ClientUserConverter().toShared(userService.getAllUsers());
+        } catch (Exception e)
+        {
+            throw new BadRequestException();
         }
     }
 
