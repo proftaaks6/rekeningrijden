@@ -25,9 +25,6 @@ public class Send {
         this.connection = factory.newConnection();
         this.channel = connection.createChannel();
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-            String message = "Message queue initialized between MovementProxy and MovementRegistration.";
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-            System.out.println(message);
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 version: "3.3"
 services:
-
   movement_registration_service:
     build:
       context: ./MovementSystem/MovementRegistrationService/
@@ -12,7 +11,7 @@ services:
       - "8080"
     depends_on:
       - rabbit_node_1
-      - rabbit_node_2
+#      - rabbit_node_2
 
   movement_proxy:
     build:
@@ -24,7 +23,7 @@ services:
       - "8080"
     depends_on:
       - rabbit_node_1
-      - rabbit_node_2
+#      - rabbit_node_2
 
   government_admin:
     build:
@@ -38,7 +37,7 @@ services:
       - "8080"
     depends_on:
       - rabbit_node_1
-      - rabbit_node_2
+#      - rabbit_node_2
 
   government_frontend:
     build: https://github.com/proftaaks6/GovermentSystemAngular.git
@@ -61,7 +60,7 @@ services:
       - "8080"
     depends_on:
       - rabbit_node_1
-      - rabbit_node_2
+#      - rabbit_node_2
 
   #Rabbit mq
   rabbit_node_1:
@@ -72,20 +71,20 @@ services:
       - rabbit
     tty: true
 
-  rabbit_node_2:
-    build:
-      context: ./RabbitMq
-      dockerfile: Dockerfile
-    networks:
-      - rabbit
-    depends_on:
-      - rabbit_node_1
-    tty: true
+#  rabbit_node_2:
+#    build:
+#      context: ./RabbitMq
+#      dockerfile: Dockerfile
+#    networks:
+#      - rabbit
+#    depends_on:
+#      - rabbit_node_1
+#    tty: true
 volumes:
   rabbit1:
     driver: local
-  rabbit2:
-    driver: local
+#  rabbit2:
+#    driver: local
 
 networks:
   rabbit:

@@ -18,7 +18,7 @@ public class JMSConsumer {
             Connection connection = null;
             connection = factory.newConnection();
             channel = connection.createChannel();
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             this.channel = channel;
         }catch (Exception e){
             System.out.println(e);
