@@ -66,6 +66,14 @@ public class RegistrationSystemEndpoint {
         }
     }
 
+    @GET
+    @Path("/tracker/{trackerId}/points")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
+    public Response getLocationPoints(@PathParam("trackerId") long targetTrackerId){
+        LocationPointConverter converter = new LocationPointConverter();
+        return Response.ok(registrationService.getLocationPointsByTracker(targetTrackerId).stream().map(x->converter.toShared(x)).collect(Collectors.toList())).build();
+    }
+
     @POST
     @Path("/tracker/{trackerId}/vehicles")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
@@ -140,8 +148,8 @@ public class RegistrationSystemEndpoint {
     }
 
     @GET
-    @Path("exi")
-    public List<com.proftaak.movementregistrationservice.shared.Vehicle> getAll(){
-        return registrationService.getAllVehicles().stream().map(x->vehicleConverter.toShared(x)).collect(Collectors.toList());
+    @Path("vehicles")
+    public Response getAll(){
+        return Response.ok(registrationService.getAllVehicles().stream().map(x->vehicleConverter.toShared(x)).collect(Collectors.toList())).build();
     }
 }

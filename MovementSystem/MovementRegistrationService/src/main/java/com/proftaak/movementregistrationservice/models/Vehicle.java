@@ -12,8 +12,7 @@ import java.util.List;
                 query = "SELECT v FROM Vehicle v WHERE v.id = :id"),
         @NamedQuery(name = "Vehicle.getByChassisNumber", query = "SELECT v FROM Vehicle v where v.chassisNumber = :chassisNumber"),
         @NamedQuery(name = "Vehicle.getStolenVehicles", query = "SELECT v FROM Vehicle v WHERE v.isStolen = true "),
-        @NamedQuery(name = "Vehicle.getAll", query = "SELECT v FROM Vehicle v")
-
+        @NamedQuery(name = "Vehicle.getAll", query = "SELECT v FROM Vehicle v"),
 })
 public class Vehicle {
     @Id

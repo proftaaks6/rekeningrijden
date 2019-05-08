@@ -61,4 +61,5 @@ public class RegistrationService {
     public List<Tracker> getAllTrackers(){
         return registrationDao.getAllTrackers();
     }
+    public List<LocationPoint> getLocationPointsByTracker(long id) {return registrationDao.getLocationpointsByTracker(id);}
 }

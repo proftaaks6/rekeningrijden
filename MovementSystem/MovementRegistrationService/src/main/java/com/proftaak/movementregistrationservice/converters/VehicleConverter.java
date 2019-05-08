@@ -31,6 +31,9 @@ public class VehicleConverter {
      * @return
      */
     public com.proftaak.movementregistrationservice.shared.Vehicle toShared(Vehicle vehicle){
-        return new com.proftaak.movementregistrationservice.shared.Vehicle((int)vehicle.getId(), VehicleType.valueOf(vehicle.getVehicleType().getType()), vehicle.getChassisNumber(), FuelType.valueOf(vehicle.getFuelType().getType()), vehicle.getEmission());
+        if(vehicle == null){
+            return null;
+        }
+       return new  com.proftaak.movementregistrationservice.shared.Vehicle((int)vehicle.getId(), VehicleType.valueOf(vehicle.getVehicleType().getType()), vehicle.getChassisNumber(), FuelType.valueOf(vehicle.getFuelType().getType()), vehicle.getEmission(), (new TrackerConverter()).toShared(vehicle.getTracker()));
     }
 }

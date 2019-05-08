@@ -11,12 +11,16 @@ public class Vehicle {
 
     private double emission;
 
-    public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission) {
+    private Tracker tracker;
+
+
+    public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission, Tracker tracker) {
         this.id = id;
         this.vehicleType = type;
         this.chassisNumber = chassisNumber;
         this.fuelType = fuelType;
         this.emission = emission;
+        this.tracker = tracker;
     }
 
     public int getId() {
@@ -57,5 +61,13 @@ public class Vehicle {
 
     public void setEmission(double emission) {
         this.emission = emission;
+    }
+
+    public Tracker getTracker() {
+        return tracker;
+    }
+
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
     }
 }

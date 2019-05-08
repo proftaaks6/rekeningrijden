@@ -8,6 +8,7 @@ import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.List;
 
 @Stateless
@@ -122,7 +123,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     @Override
     public Tracker getTrackedById(long trackerId) {
         try {
-            return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("trackerId", trackerId).getSingleResult();
+            return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", trackerId).getSingleResult();
         } catch (Exception e) {
             return null;
         }
@@ -152,5 +153,14 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public List<Tracker> getAllTrackers() {
         List<Tracker> trackers = em.createNamedQuery("Tracker.getAll", Tracker.class).getResultList();
         return trackers;
+    }
+
+    @Override
+    public List<LocationPoint> getLocationpointsByTracker(long id) {
+        Tracker tracker = getTrackedById(id);
+        if(tracker == null){
+            return Collections.emptyList();
+        }
+        return tracker.getLocationPoints();
     }
 }
