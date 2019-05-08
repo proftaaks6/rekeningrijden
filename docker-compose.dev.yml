@@ -60,13 +60,13 @@ services:
     ports:
       - "15682:15672"
       - "5682:5672"
-  rabbit_node_2:
-    expose:
-      - '15672'
-      - '5672'
-    ports:
-      - "15683:15672"
-      - "5683:5672"
+#  rabbit_node_2:
+#    expose:
+#      - '15672'
+#      - '5672'
+#    ports:
+#      - "15683:15672"
+#      - "5683:5672"
 volumes:
   backend_db:
 networks:
