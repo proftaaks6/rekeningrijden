@@ -62,9 +62,9 @@ public class Receive {
                                 movementMessage.getCoordinate().getLatitude());
 
                         // If distance is a negative number, convert to positive so it can be compared with value in config file
-//                        if (distance < 0) {
-//                            distance = Math.abs(-1);
-//                        }
+                        if (distance < 0) {
+                            distance = Math.abs(-1);
+                        }
 
                         // If the new received position exceeds this maximum allowed distance, then the MovementMessage should be send back as 'invalid'
                         if (distance > Double.valueOf(new Config().getProperty("maxMovementMessageDistance"))) {
