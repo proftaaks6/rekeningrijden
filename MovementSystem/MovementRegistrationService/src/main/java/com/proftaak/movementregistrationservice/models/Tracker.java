@@ -42,19 +42,23 @@ public class Tracker {
     public Tracker(long id, boolean active) {
         this.id = id;
         this.active = active;
+        this.locationPoints = new ArrayList<>();
     }
 
     public LocationPoint getMostRecentLocationPoint() {
         long mostRecentDate = 0;
         LocationPoint mostRecentLocationPoint = null;
 
-        for (LocationPoint p : locationPoints) {
-            if (p.getDate().getTime() > mostRecentDate) {
-                mostRecentDate = p.getDate().getTime();
+        if (locationPoints != null) {
+            for (LocationPoint p : locationPoints) {
+                if (p.getDate().getTime() > mostRecentDate) {
+                    mostRecentDate = p.getDate().getTime();
 
-                mostRecentLocationPoint = p;
+                    mostRecentLocationPoint = p;
+                }
             }
         }
+
 
         return mostRecentLocationPoint;
     }
