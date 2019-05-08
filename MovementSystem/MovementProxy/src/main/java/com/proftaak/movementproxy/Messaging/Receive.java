@@ -48,19 +48,30 @@ public class Receive {
         consumer = new JMSConsumer();
         channel = consumer.getChannel();
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+
+        //Open queue
         if(simulation){
-            startReceivingSimulation(channel, queueName);
+            try {
+                connection = factory.newConnection();
+                channel = connection.createChannel();
+                channel.queueDeclare(QUEUE_NAME2, false, false, false, null);
+            } catch (IOException | TimeoutException e) {
+                e.printStackTrace();
+            }
+            startReceivingSimulation(consumer, channel, queueName);
         }else{
-            startReceiving(channel, queueName);
+            try {
+                connection = factory.newConnection();
+                channel = connection.createChannel();
+                channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            } catch (IOException | TimeoutException e) {
+                e.printStackTrace();
+            }
+            startReceiving(consumer, channel, queueName);
         }
     }
 
-    /**
-     * Consuemr for movement registration callback (location was wrong for instance)
-     * @param channel
-     * @param queueName
-     */
-    private void startReceiving(Channel channel, String queueName){
+    private void startReceiving(JMSConsumer jmsConsumer, Channel channel, String queueName){
         Consumer consumer = new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
@@ -80,19 +91,11 @@ public class Receive {
                 }
             }
         };
-        try {
-            channel.basicConsume(queueName, true, consumer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //channel.basicConsume(queueName, true, consumer);
+        jmsConsumer.startReceiving(consumer, queueName);
     }
 
-    /**
-     * Consumer for simulated data
-     * @param channel
-     * @param queueName
-     */
-    private void startReceivingSimulation(Channel channel, String queueName){
+    private void startReceivingSimulation(JMSConsumer jmsConsumer, Channel channel, String queueName){
         Consumer consumer = new DefaultConsumer(channel){
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
@@ -111,11 +114,7 @@ public class Receive {
                 }
             }
         };
-        try {
-            channel.basicConsume(queueName, true, consumer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        jmsConsumer.startReceiving(consumer, queueName);
     }
 
     private boolean validateMessage(MovementMessage movementMessage){

@@ -1,6 +1,7 @@
 version: "3.3"
 
 services:
+
   movement_registration_service:
     build:
       dockerfile: Dockerfile_dev
@@ -59,13 +60,13 @@ services:
     ports:
       - "15682:15672"
       - "5682:5672"
-  rabbit_node_2:
-    expose:
-      - '15672'
-      - '5672'
-    ports:
-      - "15683:15672"
-      - "5683:5672"
+#  rabbit_node_2:
+#    expose:
+#      - '15672'
+#      - '5672'
+#    ports:
+#      - "15683:15672"
+#      - "5683:5672"
 volumes:
   backend_db:
 networks:

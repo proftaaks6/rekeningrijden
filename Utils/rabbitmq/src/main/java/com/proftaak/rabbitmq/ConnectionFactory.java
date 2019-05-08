@@ -12,8 +12,8 @@ import java.util.concurrent.TimeoutException;
 public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
     public ConnectionFactory(){
         super();
-        setUsername("username");
-        setPassword("password");
+        setUsername("guest");
+        setPassword("guest");
         setVirtualHost("/");
     }
     @Override
