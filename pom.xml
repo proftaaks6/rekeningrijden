@@ -33,6 +33,7 @@
         <module>PoliceSystem/PoliceFrontendProxy</module>
         <module>GovernmentSystem/GovernmentAdmin</module>
         <module>Utils/rabbitmq</module>
+        <module>MonitoringSystem/MonitoringSystem</module>
     </modules>
 
     <dependencies>
