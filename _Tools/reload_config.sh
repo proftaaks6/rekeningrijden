@@ -1,6 +1,6 @@
 echo Stop script started!
-echo
+echo ""
 echo RUNNING IN DEVELOPMENT
-echo
+echo ""
 docker-compose -f "../docker-compose.yml" -f "../docker-compose.dev.yml" build $1
 docker-compose -f "../docker-compose.yml" -f "../docker-compose.dev.yml" up --no-deps -d $1
