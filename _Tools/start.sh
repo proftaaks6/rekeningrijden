@@ -7,13 +7,13 @@ echo "#### Please note: Make sure you have recompiled the sources. This script o
 echo "###################"
 echo
 
-cp -Rf ../docker_samples/ ../DriverSystem/DriverApplication
-cp -Rf ../docker_samples/ ../GovernmentSystem/GovernmentAdmin
-cp -Rf ../docker_samples/ ../InvoiceSystem/InvoiceSystem
-cp -Rf ../docker_samples/ ../MovementSystem/MovementProxy
-cp -Rf ../docker_samples/ ../MovementSystem/MovementRegistrationService
-cp -Rf ../docker_samples/ ../UserSystem/UserSystem
-cp -Rf ../docker_samples/ ../DriverSystem/DriverApplication
+cp -Rf ../docker_samples/. ../DriverSystem/DriverApplication/
+cp -Rf ../docker_samples/. ../GovernmentSystem/GovernmentAdmin/
+cp -Rf ../docker_samples/. ../InvoiceSystem/InvoiceSystem/
+cp -Rf ../docker_samples/. ../MovementSystem/MovementProxy/
+cp -Rf ../docker_samples/. ../MovementSystem/MovementRegistrationService/
+cp -Rf ../docker_samples/. ../UserSystem/UserSystem/
+cp -Rf ../docker_samples/. ../DriverSystem/DriverApplication/
 
 
 docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml up -d db
