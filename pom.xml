@@ -28,6 +28,7 @@
         <module>UserSystem/UserSystem</module>
         <module>UserSystem/UserSystem/shared</module>
         <module>DriverSystem/DriverApplication</module>
+        <module>DriverSystem/DriverApplication/shared</module>
         <module>PoliceSystem/PoliceAdministration</module>
         <module>PoliceSystem/PoliceEuropeProxy</module>
         <module>PoliceSystem/PoliceFrontendProxy</module>
