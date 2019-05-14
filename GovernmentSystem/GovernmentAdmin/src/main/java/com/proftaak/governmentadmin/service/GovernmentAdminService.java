@@ -35,6 +35,7 @@ import sun.net.www.http.HttpClient;
 @Stateless
 public class GovernmentAdminService
 {
+<<<<<<< HEAD
     @Inject
     private UserDao userDao;
 
@@ -123,4 +124,7 @@ public class GovernmentAdminService
         CloseableHttpResponse response = httpclient.execute(httppost);
         return response.getStatusLine().getStatusCode() == 200;
     }
+=======
+
+>>>>>>> origin/development
 }

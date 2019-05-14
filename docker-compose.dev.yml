@@ -30,12 +30,22 @@ services:
     networks:
       - database
 
+
   user_system:
     build:
       dockerfile: Dockerfile_dev
     ports:
       - "8083:8080"
       - "9012:9009"
+    networks:
+      - database
+
+  driver_application:
+    build:
+      dockerfile: Dockerfile_dev
+    ports:
+      - "8084:8080"
+      - "9013:9009"
     networks:
       - database
 
