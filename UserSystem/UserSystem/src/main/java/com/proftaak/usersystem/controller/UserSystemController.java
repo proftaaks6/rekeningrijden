@@ -1,16 +1,21 @@
 package com.proftaak.usersystem.controller;
 
 import com.proftaak.usersystem.converters.ClientUserConverter;
+import com.proftaak.usersystem.models.Vehicle;
 import com.proftaak.usersystem.service.UserService;
 import com.proftaak.usersystem.service.VehicleService;
 
 import com.proftaak.usersystem.shared.ClientUser;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.registry.infomodel.User;
 
 
 @Path(value = "/usersystem")
@@ -58,6 +63,18 @@ public class UserSystemController {
             return new ClientUserConverter().toShared(userService.getAllUsers());
         } catch (Exception e)
         {
+            throw new BadRequestException();
+        }
+    }
+
+    @POST
+    @Path("/change")
+    public Response change(com.proftaak.usersystem.models.ClientUser user) {
+        try
+        {
+            ClientUser editedUser = new ClientUserConverter().toShared(userService.editUser(user));
+            return Response.ok(user).build();
+        } catch (Exception e) {
             throw new BadRequestException();
         }
     }
