@@ -50,6 +50,7 @@ public class Receive {
                     // Get location from received message
                     MovementMessage movementMessage = gson.fromJson(new String(body, "UTF-8"), MovementMessage.class);
 
+
                     // Get last location from user
                     LocationPoint lastLocation = dao.getTrackedById(movementMessage.getTrackerId()).getMostRecentLocationPoint();
 
