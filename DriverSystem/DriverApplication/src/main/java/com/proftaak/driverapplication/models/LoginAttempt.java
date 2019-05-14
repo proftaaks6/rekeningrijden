@@ -31,6 +31,7 @@ import javax.persistence.TemporalType;
 @Table(name="tbl_loginAttempt")
 public class LoginAttempt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	private long id;
 
 	@Column()
