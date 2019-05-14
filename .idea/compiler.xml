@@ -7,7 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DriverApplication" />
+        <module name="DriverApplication.shared" />
         <module name="GovernmentAdmin" />
+        <module name="InvoiceSystem" />
         <module name="MovementProxy" />
         <module name="MovementRegistrationService" />
         <module name="MovementRegistrationService.shared" />
@@ -21,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="DriverApplication" target="1.8" />
+      <module name="DriverApplication.shared" target="1.8" />
       <module name="GovernmentAdmin" target="1.8" />
       <module name="InvoiceSystem" target="1.8" />
       <module name="MovementProxy" target="1.8" />

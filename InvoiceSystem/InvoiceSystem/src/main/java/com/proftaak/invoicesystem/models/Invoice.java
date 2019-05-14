@@ -13,8 +13,8 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToOne
-    private Vehicle vehicle;
+    @Column
+    private int vehicleId;
 
     @Column
     private double totalDistance;
@@ -26,8 +26,8 @@ public class Invoice {
 
     }
 
-    public Invoice(Vehicle vehicle, double totalDistance, double totalPrice) {
-        this.vehicle = vehicle;
+    public Invoice(int vehicleId, double totalDistance, double totalPrice) {
+        this.vehicleId = vehicleId;
         this.totalDistance = totalDistance;
         this.totalPrice = totalPrice;
     }
@@ -36,8 +36,8 @@ public class Invoice {
         return id;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public int getVehicle() {
+        return vehicleId;
     }
 
     public double getTotalDistance() {

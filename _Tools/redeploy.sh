@@ -16,8 +16,14 @@ case $1 in
         target='MovementSystem/MovementProxy/target/Rekeningrijden.war'
         ;;
     user_system)
-        target='UserSystem/UserSystem/target/Rekeningrijden.war'
-        ;;
+            target='UserSystem/UserSystem/target/Rekeningrijden.war'
+            ;;
+    driver_application)
+                target='DriverSystem/DriverApplication/target/Rekeningrijden.war'
+                ;;
+    invoice_system)
+                target='InvoiceSystem/InvoiceSystem/target/Rekeningrijden.war'
+                ;;
 
 esac
 target=../$target
