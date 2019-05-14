@@ -14,7 +14,7 @@ public class DriverUserConverter
 	private DriverApplicationService driverApplicationService;
 
 	public DriverUser toEntity(com.proftaak.driverapplication.shared.DriverUser user) {
-		return driverApplicationService.getById(user.getId());
+		return driverApplicationService.getUserById(user.getId());
 	}
 
 	public com.proftaak.driverapplication.shared.DriverUser toShared(DriverUser user) {
