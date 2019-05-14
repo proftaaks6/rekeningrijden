@@ -8,6 +8,7 @@ import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
+import javax.xml.stream.Location;
 
 @Stateless
 public class RegistrationService {
@@ -60,5 +61,9 @@ public class RegistrationService {
     }
     public List<Tracker> getAllTrackers(){
         return registrationDao.getAllTrackers();
+    }
+
+    public List<LocationPoint> getLocationPointsForTracker(long trackerId) {
+        return registrationDao.getLocationPointsForTracker(trackerId);
     }
 }

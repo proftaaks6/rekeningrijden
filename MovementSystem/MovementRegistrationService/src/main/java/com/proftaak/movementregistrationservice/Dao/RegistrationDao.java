@@ -21,4 +21,5 @@ public interface RegistrationDao {
     List<Vehicle> getStolenVehicles();
     List<Vehicle> getAllVehicles();
     List<Tracker> getAllTrackers();
+    List<LocationPoint> getLocationPointsForTracker(long trackerId);
 }

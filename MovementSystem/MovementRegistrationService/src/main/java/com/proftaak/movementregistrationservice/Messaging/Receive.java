@@ -7,6 +7,7 @@ import com.proftaak.movementregistrationservice.Dao.DaoImplementation.Registrati
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import com.proftaak.movementregistrationservice.config.Config;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
+import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
 import com.proftaak.rabbitmq.ConnectionFactory;
@@ -52,7 +53,14 @@ public class Receive {
 
 
                     // Get last location from user
-                    LocationPoint lastLocation = dao.getTrackedById(movementMessage.getTrackerId()).getMostRecentLocationPoint();
+                    Tracker tracker = dao.getTrackedById(movementMessage.getTrackerId());
+
+                    if (tracker == null) {
+                        dao.addTracker(new Tracker(movementMessage.getTrackerId(), true));
+                        tracker = dao.getTrackedById(movementMessage.getTrackerId());
+                    }
+
+                    LocationPoint lastLocation = tracker.getMostRecentLocationPoint();
 
                     if (lastLocation != null) {
                         // Calculate distance from two points using some super duper complex math
