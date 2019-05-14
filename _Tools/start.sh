@@ -14,6 +14,7 @@ cp -Rf ../docker_samples/. ../MovementSystem/MovementProxy/
 cp -Rf ../docker_samples/. ../MovementSystem/MovementRegistrationService/
 cp -Rf ../docker_samples/. ../UserSystem/UserSystem/
 cp -Rf ../docker_samples/. ../DriverSystem/DriverApplication/
+cp -Rf ../docker_samples/. ../InvoiceSystem/InvoiceSystem/
 
 
 docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml up -d db
@@ -28,6 +29,7 @@ docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml build movem
 docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml build user_system
 docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml build government_admin
 docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml build driver_application
+docker-compose -f ../docker-compose.yml -f ../docker-compose.dev.yml build invoice_system
 
 echo
 echo "# Sleep for 15 seconds"

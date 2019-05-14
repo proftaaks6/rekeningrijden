@@ -42,6 +42,13 @@ services:
       - user_system
       - government_admin
 
+  driver_frontend:
+    build: https://github.com/proftaaks6/DriverApplicationAngular.git
+    ports:
+      - "81:80"
+    depends_on:
+      - user_system
+
   user_system:
     build:
       context: ./UserSystem/UserSystem/
@@ -51,6 +58,18 @@ services:
     depends_on:
       - rabbit_node_1
 #      - rabbit_node_2
+
+
+  invoice_system:
+    build:
+      context: ./InvoiceSystem/InvoiceSystem/
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    depends_on:
+      - rabbit_node_1
+      - movement_registration_service
+
 
   driver_application:
     build:

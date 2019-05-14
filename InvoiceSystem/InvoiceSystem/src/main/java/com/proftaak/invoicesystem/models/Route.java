@@ -2,9 +2,6 @@ package com.proftaak.invoicesystem.models;
 
 
 
-import com.proftaak.movementregistrationservice.shared.LocationPoint;
-import com.proftaak.movementregistrationservice.shared.Vehicle;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +25,18 @@ public class Route {
     @OneToMany
     private List<LocationPoint> locationPoints;
 
-    @OneToOne
-    private Vehicle vehicle;
+    @Column
+    private int vehicleId;
 
     public Route() {
 
     }
 
-    public Route(double distance, double price, TaxRate taxRate, Vehicle vehicle) {
+    public Route(double distance, double price, TaxRate taxRate, int vehicle) {
         this.distance = distance;
         this.price = price;
         this.taxRate = taxRate;
-        this.vehicle = vehicle;
+        this.vehicleId = vehicle;
 
         this.locationPoints = new ArrayList<>();
     }
@@ -64,7 +61,7 @@ public class Route {
         return locationPoints;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public int getVehicleId() {
+        return vehicleId;
     }
 }
