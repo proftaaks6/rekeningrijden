@@ -8,8 +8,7 @@ services:
     ports:
       - "8080:8080"
       - "9009:9009"
-    networks:
-      - database
+
 
   movement_proxy:
     build:
@@ -17,8 +16,7 @@ services:
     ports:
       - "8081:8080"
       - "9010:9009"
-    networks:
-      - database
+
 
   government_admin:
     build:
@@ -27,9 +25,6 @@ services:
       - "8082:8080"
       - "4848:4848"
       - "9011:9009"
-    networks:
-      - database
-
 
   user_system:
     build:
@@ -37,8 +32,6 @@ services:
     ports:
       - "8083:8080"
       - "9012:9009"
-    networks:
-      - database
 
   driver_application:
     build:
@@ -46,8 +39,6 @@ services:
     ports:
       - "8084:8080"
       - "9013:9009"
-    networks:
-      - database
 
   db:
     build:
@@ -60,8 +51,6 @@ services:
       - '3306'
     ports:
       - "3307:3306"
-    networks:
-      - database
 
   rabbit_node_1:
     expose:
@@ -79,5 +68,3 @@ services:
 #      - "5683:5672"
 volumes:
   backend_db:
-networks:
-  database:
