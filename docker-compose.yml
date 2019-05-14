@@ -42,6 +42,13 @@ services:
       - user_system
       - government_admin
 
+  driver_frontend:
+    build: https://github.com/proftaaks6/DriverApplicationAngular.git
+    ports:
+      - "81:80"
+    depends_on:
+      - user_system
+
   user_system:
     build:
       context: ./UserSystem/UserSystem/
