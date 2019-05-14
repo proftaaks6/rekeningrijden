@@ -4,9 +4,6 @@ services:
     build:
       context: ./MovementSystem/MovementRegistrationService/
       dockerfile: Dockerfile
-    networks:
-      - rabbit
-      - movement
     expose:
       - "8080"
     depends_on:
@@ -17,8 +14,6 @@ services:
     build:
       context: ./MovementSystem/MovementProxy/
       dockerfile: Dockerfile
-    networks:
-      - rabbit
     expose:
       - "8080"
     depends_on:
@@ -29,10 +24,6 @@ services:
     build:
       context: ./GovernmentSystem/GovernmentAdmin/
       dockerfile: Dockerfile
-    networks:
-      - rabbit
-      - government
-      - user
     expose:
       - "8080"
     depends_on:
@@ -46,37 +37,43 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    networks:
-      - government
-      - user
-      - driver
-      - movement
     depends_on:
       - movement_registration_service
       - user_system
       - government_admin
 
+  driver_frontend:
+    build: https://github.com/proftaaks6/DriverApplicationAngular.git
+    ports:
+      - "81:80"
+    depends_on:
+      - user_system
+
   user_system:
     build:
       context: ./UserSystem/UserSystem/
       dockerfile: Dockerfile
-    networks:
-      - rabbit
-      - user
     expose:
       - "8080"
     depends_on:
       - rabbit_node_1
 #      - rabbit_node_2
 
+
+  invoice_system:
+    build:
+      context: ./InvoiceSystem/InvoiceSystem/
+      dockerfile: Dockerfile
+    expose:
+      - "8080"
+    depends_on:
+      - rabbit_node_1
+      - movement_registration_service
+
+
   driver_application:
     build:
       context: ./DriverSystem/DriverApplication
-      dockerfile: Dockerfile
-    networks:
-      - rabbit
-      - user
-      - driver
     depends_on:
       - user_system
 
@@ -85,28 +82,12 @@ services:
     build:
       context: ./RabbitMq
       dockerfile: Dockerfile
-    networks:
-      - rabbit
     tty: true
 
 #  rabbit_node_2:
 #    build:
 #      context: ./RabbitMq
 #      dockerfile: Dockerfile
-#    networks:
-#      - rabbit
 #    depends_on:
 #      - rabbit_node_1
 #    tty: true
-volumes:
-  rabbit1:
-    driver: local
-#  rabbit2:
-#    driver: local
-
-networks:
-  rabbit:
-  government:
-  user:
-  driver:
-  movement:

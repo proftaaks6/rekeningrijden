@@ -19,8 +19,11 @@ case $1 in
             target='UserSystem/UserSystem/target/Rekeningrijden.war'
             ;;
     driver_application)
-            target='DriverSystem/DriverApplication/target/Rekeningrijden.war'
-            ;;
+                target='DriverSystem/DriverApplication/target/Rekeningrijden.war'
+                ;;
+    invoice_system)
+                target='InvoiceSystem/InvoiceSystem/target/Rekeningrijden.war'
+                ;;
 
 esac
 target=../$target

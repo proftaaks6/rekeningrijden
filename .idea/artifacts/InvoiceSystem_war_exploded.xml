@@ -1,22 +1,26 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="DriverApplication:war exploded">
-    <output-path>$PROJECT_DIR$/DriverSystem/DriverApplication/target/Rekeningrijden</output-path>
+  <artifact type="exploded-war" name="InvoiceSystem:war exploded">
+    <output-path>$PROJECT_DIR$/InvoiceSystem/InvoiceSystem/target/Rekeningrijden</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
-        <module>DriverApplication</module>
+        <module>InvoiceSystem</module>
         <packaging>war</packaging>
       </options>
     </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="DriverApplication" />
+          <element id="module-output" name="InvoiceSystem" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="DriverApplication.shared-1.0.jar">
-            <element id="module-output" name="DriverApplication.shared" />
+          <element id="archive" name="MovementRegistrationService.shared-1.0.jar">
+            <element id="module-output" name="MovementRegistrationService.shared" />
           </element>
+          <element id="archive" name="rabbitmq-1.0.jar">
+            <element id="module-output" name="rabbitmq" />
+          </element>
+          <element id="library" level="project" name="Maven: com.rabbitmq:amqp-client:5.6.0" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.2.10.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" />
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
@@ -39,9 +43,9 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/DriverSystem/DriverApplication/target/Rekeningrijden/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/InvoiceSystem/InvoiceSystem/target/Rekeningrijden/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="DriverApplication/web/Web" />
+      <element id="javaee-facet-resources" facet="InvoiceSystem/web/Web" />
     </root>
   </artifact>
 </component>
