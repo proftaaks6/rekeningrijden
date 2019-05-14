@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - rabbit
-      - government
+      - movement
     expose:
       - "8080"
     depends_on:
@@ -48,7 +48,9 @@ services:
       - "8080"
     depends_on:
       - rabbit_node_1
-#     - rabbit_node_2
+      - user_system
+
+#      - rabbit_node_2
 
   government_frontend:
     build: https://github.com/proftaaks6/GovermentSystemAngular.git
@@ -57,7 +59,12 @@ services:
       - "443:443"
     networks:
       - government
+      - user
+      - driver
+      - movement
     depends_on:
+      - movement_registration_service
+      - user_system
       - government_admin
 
   user_system:
@@ -73,6 +80,16 @@ services:
       - rabbit_node_1
 #     - rabbit_node_2
 
+  driver_application:
+    build:
+      context: ./DriverSystem/DriverApplication
+      dockerfile: Dockerfile
+    networks:
+      - rabbit
+      - user
+      - driver
+    depends_on:
+      - user_system
 
   #Rabbit mq
   rabbit_node_1:
@@ -104,3 +121,5 @@ networks:
   rabbit:
   government:
   user:
+  driver:
+  movement:
