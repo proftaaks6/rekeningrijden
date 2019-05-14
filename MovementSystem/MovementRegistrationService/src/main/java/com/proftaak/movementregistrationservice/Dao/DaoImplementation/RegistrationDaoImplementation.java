@@ -126,7 +126,6 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         } catch (Exception e) {
             return null;
         }
-
     }
 
     @Override

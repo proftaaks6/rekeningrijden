@@ -25,10 +25,8 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 public class AuthEndpoint {
     private static final Logger LOGGER = Logger.getLogger(AuthEndpoint.class.getName());
 
-
     @Inject
     private GovernmentAdminService service;
-
 
     @POST
     @Path("login")
@@ -47,6 +45,7 @@ public class AuthEndpoint {
                 return Response.status(UNAUTHORIZED).build();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.status(UNAUTHORIZED).build();
         }
     }

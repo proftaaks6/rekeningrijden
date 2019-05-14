@@ -25,7 +25,7 @@ public class GovernmentEmployee {
     private long id;
 
     @Column
-    private String name;
+    private String username;
 
     @Column
     private String password;
@@ -39,8 +39,8 @@ public class GovernmentEmployee {
 
     }
 
-    public GovernmentEmployee(String name, String password, List<Role> roles) {
-        this.name = name;
+    public GovernmentEmployee(String username, String password, List<Role> roles) {
+        this.username = username;
         this.password = password;
         this.roles = roles;
     }
@@ -49,8 +49,8 @@ public class GovernmentEmployee {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {

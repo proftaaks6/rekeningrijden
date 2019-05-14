@@ -35,7 +35,6 @@ import sun.net.www.http.HttpClient;
 @Stateless
 public class GovernmentAdminService
 {
-<<<<<<< HEAD
     @Inject
     private UserDao userDao;
 
@@ -51,14 +50,14 @@ public class GovernmentAdminService
             user.setPassword(AuthenticationUtils.encodeSHA256(user.getPassword()));
 
                 if (userDao.addUser(user)) {
-                    return "User registered with username: " + user.getName();
+                    return "User registered with username: " + user.getUsername();
                 }
 
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
 
-        return "Failed to register user with username: " + user.getName();
+        return "Failed to register user with username: " + user.getUsername();
     }
 
 
@@ -124,7 +123,4 @@ public class GovernmentAdminService
         CloseableHttpResponse response = httpclient.execute(httppost);
         return response.getStatusLine().getStatusCode() == 200;
     }
-=======
-
->>>>>>> origin/development
 }
