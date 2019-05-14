@@ -1,10 +1,24 @@
 package com.proftaak.governmentadmin.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
 @Table(name="tbl_governmentEmployee")
+@NamedQueries({
+        @NamedQuery(
+                name = "GovernmentEmployee.findByUsername",
+                query = "SELECT u FROM GovernmentEmployee u WHERE u.username = :username"),
+        @NamedQuery(
+                name = "GovernmentEmployee.getAll",
+                query = "SELECT u FROM GovernmentEmployee u"),
+        @NamedQuery(
+                name = "GovernmentEmployee.validateUser",
+                query = "SELECT u FROM GovernmentEmployee u WHERE u.username = :username AND u.password = :password"
+        )
+})
 public class GovernmentEmployee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,5 +59,9 @@ public class GovernmentEmployee {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

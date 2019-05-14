@@ -2,15 +2,22 @@ package com.proftaak.governmentadmin.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.proftaak.governmentadmin.dao.UserDao;
+import com.proftaak.governmentadmin.models.GovernmentEmployee;
+import com.proftaak.governmentadmin.utility.AuthenticationUtils;
 import com.proftaak.usersystem.shared.ClientUser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.mail.MessagingException;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -28,7 +35,31 @@ import sun.net.www.http.HttpClient;
 @Stateless
 public class GovernmentAdminService
 {
+    @Inject
+    private UserDao userDao;
+
+
     private static final Gson gson = new Gson();
+
+    public GovernmentEmployee validateUser(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        return userDao.validateUser(username, AuthenticationUtils.encodeSHA256(password));
+    }
+
+    public String registerUser(GovernmentEmployee user) {
+        try {
+            user.setPassword(AuthenticationUtils.encodeSHA256(user.getPassword()));
+
+                if (userDao.addUser(user)) {
+                    return "User registered with username: " + user.getName();
+                }
+
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return "Failed to register user with username: " + user.getName();
+    }
+
 
     public ClientUser addUser(String name,
                               String address,
