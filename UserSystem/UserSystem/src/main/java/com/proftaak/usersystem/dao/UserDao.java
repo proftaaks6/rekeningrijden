@@ -1,6 +1,8 @@
 package com.proftaak.usersystem.dao;
 
 import com.proftaak.usersystem.models.ClientUser;
+
+import javax.ws.rs.client.Client;
 import java.util.List;
 
 public interface UserDao {
@@ -8,4 +10,5 @@ public interface UserDao {
     ClientUser getClientUserByName(String name);
     ClientUser getClientUserById(int id);
 	List<ClientUser> getAll();
+	ClientUser editUser(ClientUser user);
 }
