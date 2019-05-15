@@ -10,6 +10,7 @@
         <module name="DriverApplication.shared" />
         <module name="GovernmentAdmin" />
         <module name="InvoiceSystem" />
+        <module name="InvoiceSystem.shared" />
         <module name="MovementProxy" />
         <module name="MovementRegistrationService" />
         <module name="MovementRegistrationService.shared" />
@@ -26,6 +27,7 @@
       <module name="DriverApplication.shared" target="1.8" />
       <module name="GovernmentAdmin" target="1.8" />
       <module name="InvoiceSystem" target="1.8" />
+      <module name="InvoiceSystem.shared" target="1.8" />
       <module name="MovementProxy" target="1.8" />
       <module name="MovementRegistrationService" target="1.8" />
       <module name="MovementRegistrationService.shared" target="1.8" />

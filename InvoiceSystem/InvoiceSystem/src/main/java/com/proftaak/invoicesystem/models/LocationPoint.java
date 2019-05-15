@@ -2,6 +2,7 @@ package com.proftaak.invoicesystem.models;
 
 import javax.ejb.Local;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="tbl_locationPoint")
@@ -10,6 +11,15 @@ public class LocationPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column
+    private int originalId;
+
+    @Column
+    private int vehicleId;
+
+    @Column
+    private Date date;
 
     @Column
     private double longitude;
@@ -52,5 +62,29 @@ public class LocationPoint {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public int getOriginalId() {
+        return originalId;
+    }
+
+    public void setOriginalId(int originalId) {
+        this.originalId = originalId;
+    }
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

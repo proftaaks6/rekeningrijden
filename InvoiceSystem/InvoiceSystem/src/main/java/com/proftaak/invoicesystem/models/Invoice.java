@@ -2,9 +2,9 @@ package com.proftaak.invoicesystem.models;
 
 
 
-import com.proftaak.movementregistrationservice.shared.Vehicle;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="tbl_invoice")
@@ -21,6 +21,44 @@ public class Invoice {
 
     @Column
     private double totalPrice;
+
+    @Column
+    private boolean isPaid;
+
+    @Column
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public void setTotalDistance(double totalDistance) {
+        this.totalDistance = totalDistance;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
 
     public Invoice() {
 

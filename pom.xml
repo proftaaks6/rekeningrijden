@@ -25,6 +25,7 @@
         <module>MovementSystem/MovementRegistrationService</module>
         <module>MovementSystem/MovementRegistrationService/shared</module>
         <module>InvoiceSystem/InvoiceSystem</module>
+        <module>InvoiceSystem/InvoiceSystem/shared</module>
         <module>UserSystem/UserSystem</module>
         <module>UserSystem/UserSystem/shared</module>
         <module>DriverSystem/DriverApplication</module>

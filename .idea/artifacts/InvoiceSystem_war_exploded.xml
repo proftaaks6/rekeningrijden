@@ -14,8 +14,8 @@
           <element id="module-output" name="InvoiceSystem" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="MovementRegistrationService.shared-1.0.jar">
-            <element id="module-output" name="MovementRegistrationService.shared" />
+          <element id="archive" name="InvoiceSystem.shared-1.0.jar">
+            <element id="module-output" name="InvoiceSystem.shared" />
           </element>
           <element id="archive" name="rabbitmq-1.0.jar">
             <element id="module-output" name="rabbitmq" />

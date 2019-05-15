@@ -1,7 +1,5 @@
 package com.proftaak.invoicesystem.models;
 
-
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +17,6 @@ public class Route {
     @Column
     private double price;
 
-    @OneToOne
-    private TaxRate taxRate;
 
     @OneToMany
     private List<LocationPoint> locationPoints;
@@ -32,15 +28,6 @@ public class Route {
 
     }
 
-    public Route(double distance, double price, TaxRate taxRate, int vehicle) {
-        this.distance = distance;
-        this.price = price;
-        this.taxRate = taxRate;
-        this.vehicleId = vehicle;
-
-        this.locationPoints = new ArrayList<>();
-    }
-
     public long getId() {
         return id;
     }
@@ -49,19 +36,31 @@ public class Route {
         return distance;
     }
 
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     public double getPrice() {
         return price;
     }
 
-    public TaxRate getTaxRate() {
-        return taxRate;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public List<LocationPoint> getLocationPoints() {
         return locationPoints;
     }
 
+    public void setLocationPoints(List<LocationPoint> locationPoints) {
+        this.locationPoints = locationPoints;
+    }
+
     public int getVehicleId() {
         return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
     }
 }
