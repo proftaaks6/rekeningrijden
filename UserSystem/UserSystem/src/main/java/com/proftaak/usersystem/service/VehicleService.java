@@ -11,13 +11,17 @@ import javax.inject.Inject;
 @Stateless
 public class VehicleService {
     @Inject
-    private VehicleDao userDao;
+    private VehicleDao vehicleDao;
 
     public boolean addCarToUser(ClientUser user, String chassisNumber){
         Vehicle vehicle = new Vehicle();
-        vehicle.setChassisNumber(chassisNumber);
         vehicle.setOwner( user );
-        userDao.save(vehicle);
+        vehicle.setChassisNumber(chassisNumber);
+        vehicleDao.save(vehicle);
         return true;
+    }
+
+    public Vehicle getByChassis(String chassis) {
+        return vehicleDao.getByChassis(chassis);
     }
 }

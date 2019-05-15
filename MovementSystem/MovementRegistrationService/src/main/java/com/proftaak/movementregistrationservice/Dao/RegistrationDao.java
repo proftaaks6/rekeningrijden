@@ -4,6 +4,8 @@ import com.proftaak.movementregistrationservice.models.LocationPoint;
 import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
 
+import com.proftaak.movementregistrationservice.models.VehicleTracker;
+import java.util.Date;
 import java.util.List;
 
 public interface RegistrationDao {
@@ -21,4 +23,7 @@ public interface RegistrationDao {
     List<Vehicle> getStolenVehicles();
     List<Vehicle> getAllVehicles();
     List<Tracker> getAllTrackers();
+    List<LocationPoint> getLocationPointsForTracker(long trackerId);
+    List<LocationPoint> getLocationPointsForVehicle(long vehicleId, Date start, Date end);
+    VehicleTracker getVehicleTracker(long vehicleId, long trackerId);
 }

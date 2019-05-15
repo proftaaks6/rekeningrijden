@@ -5,10 +5,12 @@ import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 
+import com.proftaak.movementregistrationservice.models.VehicleTracker;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Date;
 
 @Stateless
 public class RegistrationDaoImplementation implements RegistrationDao{
@@ -20,6 +22,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public boolean addTracker(Tracker tracker) {
         try{
             em.persist(tracker);
+            em.flush();
         }catch (Exception e){
             return false;
         }
@@ -98,8 +101,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public boolean addTrackerToVehicle(Tracker tracker, long vehicleId) {
         try{
             Vehicle databaseVehicle = em.createNamedQuery("Vehicle.getById", Vehicle.class).setParameter("id", vehicleId).getSingleResult();
-            //Todo: Am not sure whether or not this tracker already exists in database, if it does at this point then it will be duplicated unless the tracker object has an id. Subject to change if need be.
-            databaseVehicle.setTracker(tracker);
+            databaseVehicle.addTracker(new VehicleTracker(databaseVehicle, tracker, new Date()));
             em.merge(databaseVehicle);
         }catch (Exception e){
             return false;
@@ -122,11 +124,10 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     @Override
     public Tracker getTrackedById(long trackerId) {
         try {
-            return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("trackerId", trackerId).getSingleResult();
+            return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", trackerId).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-
     }
 
     @Override
@@ -152,5 +153,35 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public List<Tracker> getAllTrackers() {
         List<Tracker> trackers = em.createNamedQuery("Tracker.getAll", Tracker.class).getResultList();
         return trackers;
+    }
+
+	@Override
+	public List<LocationPoint> getLocationPointsForTracker(long trackerId)
+	{
+		List<LocationPoint> locationPoints = em.createNamedQuery("Tracker.getLocationPointsForTracker", LocationPoint.class).getResultList();
+		return locationPoints;
+	}
+
+    @Override
+    public List<LocationPoint> getLocationPointsForVehicle(long vehicleId, Date start, Date end)
+    {
+        List<LocationPoint> locationPoints = em
+                .createNamedQuery("LocationPoint.getLocationPointsForVehicleWithStartAndEndDate", LocationPoint.class)
+                .setParameter("id", vehicleId)
+                .setParameter("startDate", start)
+                .setParameter("endDate", end)
+                .getResultList();
+        return locationPoints;
+    }
+
+	@Override
+    public VehicleTracker getVehicleTracker(long vehicleId, long trackerId) {
+        VehicleTracker vehicleTracker = em
+                .createNamedQuery("VehicleTracker.get", VehicleTracker.class)
+                .setParameter("vehicleId", vehicleId)
+                .setParameter("trackerId", trackerId)
+                .getSingleResult();
+
+        return vehicleTracker;
     }
 }

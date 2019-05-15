@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="tbl_tracker")
@@ -13,17 +14,18 @@ import java.util.List;
                 query = "SELECT t FROM Tracker t WHERE t.id = :id"),
         @NamedQuery(name="Tracker.getAll",
                 query = "SELECT t FROM Tracker t"),
+        @NamedQuery(name="Tracker.getLocationPointsForTracker",
+                query = "SELECT t.locationPoints FROM Tracker t WHERE t.id = :id"),
 
 })
 public class Tracker {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column
     private boolean active;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tracker")
     private List<LocationPoint> locationPoints;
 
     @OneToOne(fetch = FetchType.LAZY)

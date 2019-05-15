@@ -7,6 +7,7 @@ import com.proftaak.movementregistrationservice.converters.VehicleConverter;
 import com.proftaak.movementregistrationservice.models.*;
 import com.proftaak.movementregistrationservice.service.RegistrationService;
 
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -35,7 +36,6 @@ public class RegistrationSystemEndpoint {
 
     @POST
     @Path("/tracker")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response addTracker(){
         if(registrationService.addTracker(new Tracker())){
             return Response.status(200).build();
@@ -64,6 +64,21 @@ public class RegistrationSystemEndpoint {
         } else {
             return Response.status(400).build();
         }
+    }
+
+    @GET
+    @Path("/tracker/{trackerId}/points")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
+    public Response getTrackerLocationPoints(@PathParam("trackerId") long trackerId){
+        return Response.ok().entity(pointConverter.toShared(registrationService.getLocationPointsForTracker(trackerId))).build();
+    }
+
+    @GET
+    @Path("/vehicle/{vehicleId}/points/from/{startValue}/to/{endValue}")
+    public Response getVehicleLocationPoints(@PathParam("vehicleId") long vehicleId, @PathParam("startValue") long startValue, @PathParam("endValue") long endValue){
+        Date startDate = new Date(startValue);
+        Date endDate = new Date(endValue);
+        return Response.ok().entity(pointConverter.toShared(registrationService.getLocationPointsForVehicle(vehicleId, startDate, endDate))).build();
     }
 
     @POST
@@ -143,5 +158,11 @@ public class RegistrationSystemEndpoint {
     @Path("vehicles")
     public List<com.proftaak.movementregistrationservice.shared.Vehicle> getAll(){
         return registrationService.getAllVehicles().stream().map(x->vehicleConverter.toShared(x)).collect(Collectors.toList());
+    }
+
+    @GET
+    @Path("trackers")
+    public List<com.proftaak.movementregistrationservice.shared.Tracker> getAllTrackers(){
+        return trackerConverter.toShared(registrationService.getAllTrackers());
     }
 }

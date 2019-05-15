@@ -1,6 +1,7 @@
 package com.proftaak.governmentadmin.api.endpoints;
 
 
+import com.proftaak.governmentadmin.security.Secured;
 import com.proftaak.governmentadmin.service.GovernmentAdminService;
 import com.proftaak.usersystem.shared.ClientUser;
 import java.util.List;
@@ -19,9 +20,9 @@ import javax.ws.rs.core.Response;
 @Path(value = "/government")
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
+@Secured
 public class GovernmentAdminEndpoint
 {
-
     @Inject
     private GovernmentAdminService governmentAdminService;
 
@@ -29,4 +30,6 @@ public class GovernmentAdminEndpoint
     public Response defaultRoute(){
         return Response.ok().build();
     }
+
+
 }

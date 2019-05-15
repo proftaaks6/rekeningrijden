@@ -13,6 +13,14 @@
 
     <artifactId>MovementRegistrationService</artifactId>
 
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+
 
     <dependencies>
         <dependency>
