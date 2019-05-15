@@ -2,13 +2,13 @@ package com.proftaak.movementregistrationservice.shared;
 
 public class LocationPoint {
 
-    private int id;
+    private long id;
 
     private double longitude;
 
     private double latitude;
 
-    public LocationPoint(int id, double longitude, double latitude) {
+    public LocationPoint(long id, double longitude, double latitude) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -19,11 +19,11 @@ public class LocationPoint {
         this.latitude = latitude;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

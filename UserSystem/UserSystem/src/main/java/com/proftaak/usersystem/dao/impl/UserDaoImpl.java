@@ -2,6 +2,7 @@ package com.proftaak.usersystem.dao.impl;
 
 import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.models.ClientUser;
+import com.proftaak.usersystem.models.UserVehicle;
 import com.proftaak.usersystem.models.Vehicle;
 
 import java.util.List;
@@ -54,6 +55,19 @@ public class UserDaoImpl implements UserDao {
     {
         try {
             return em.createNamedQuery("ClientUser.getAll", ClientUser.class).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public UserVehicle getUserVehicle(long vehicleId, long userId) {
+        try
+        {
+            return em.createNamedQuery("UserVehicle.get", UserVehicle.class)
+                    .setParameter("vehicleId", vehicleId)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
         } catch (Exception e) {
             return null;
         }
