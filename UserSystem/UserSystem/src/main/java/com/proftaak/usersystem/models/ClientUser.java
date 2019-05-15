@@ -86,7 +86,7 @@ public class ClientUser {
         return residence;
     }
 
-    public List<Integer> getOwnedCarIdList() {
+    public List<Integer> getOwnedVehicleIds() {
         List<Integer> list = new ArrayList<>();
         for (UserVehicle v : ownedVehicles) {
             list.add((int)v.getVehicle().getId());

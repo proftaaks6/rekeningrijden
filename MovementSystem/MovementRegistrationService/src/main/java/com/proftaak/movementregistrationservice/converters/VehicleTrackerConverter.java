@@ -1,6 +1,7 @@
 package com.proftaak.movementregistrationservice.converters;
 
 import com.proftaak.movementregistrationservice.models.VehicleTracker;
+import com.proftaak.movementregistrationservice.service.RegistrationService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -13,14 +14,11 @@ public class VehicleTrackerConverter {
 	VehicleConverter vehicleConverter;
 	@Inject
 	TrackerConverter trackerConverter;
+	@Inject
+	RegistrationService registrationService;
 
 	public VehicleTracker toEntity(com.proftaak.movementregistrationservice.shared.VehicleTracker shared) {
-		return new VehicleTracker(
-				vehicleConverter.toEntity(shared.getVehicle()),
-				trackerConverter.toEntity(shared.getTracker()),
-				shared.getStartDate(),
-				shared.getEndDate()
-		);
+		return registrationService.getVehicleTracker(shared.getVehicle().getId(), shared.getTracker().getId());
 	}
 
 	public com.proftaak.movementregistrationservice.shared.VehicleTracker toShared(VehicleTracker entity) {
