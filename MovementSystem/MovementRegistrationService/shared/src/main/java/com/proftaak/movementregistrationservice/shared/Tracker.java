@@ -12,7 +12,7 @@ public class Tracker {
     private List<LocationPoint> locationPoints;
 
     public Tracker() {
-
+        this.active = true;
     }
 
     public Tracker(long id, boolean active, List<LocationPoint> locationPoints) {

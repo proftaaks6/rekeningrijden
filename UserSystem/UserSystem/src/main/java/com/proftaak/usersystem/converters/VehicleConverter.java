@@ -15,6 +15,7 @@ public class VehicleConverter
 	@Inject
 	private VehicleService vehicleService;
 	@Inject ClientUserConverter clientUserConverter;
+	@Inject UserVehicleConverter userVehicleConverter;
 
 	public Vehicle toEntity(com.proftaak.usersystem.shared.Vehicle vehicle) {
 		return vehicleService.getByChassis(vehicle.getChassisNumber());
@@ -23,7 +24,7 @@ public class VehicleConverter
 	public com.proftaak.usersystem.shared.Vehicle toShared(Vehicle vehicle) {
 		return new com.proftaak.usersystem.shared.Vehicle(
 				vehicle.getChassisNumber(),
-				clientUserConverter.toShared(vehicle.getOwner())
+				userVehicleConverter.toShared(vehicle.getOwners())
 		);
 	}
 

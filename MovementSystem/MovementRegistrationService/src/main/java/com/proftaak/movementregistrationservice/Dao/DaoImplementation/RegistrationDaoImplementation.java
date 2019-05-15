@@ -67,7 +67,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public boolean editTrackerVehicle(Vehicle vehicle, long targetTrackerId) {
         try{
             Tracker databaseTracker = em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", targetTrackerId).getSingleResult();
-            databaseTracker.setVehicle(vehicle);
+            databaseTracker.addVehicleTracker(new VehicleTracker(vehicle, databaseTracker, new Date()));
             em.merge(databaseTracker);
         }catch (Exception e){
             return false;

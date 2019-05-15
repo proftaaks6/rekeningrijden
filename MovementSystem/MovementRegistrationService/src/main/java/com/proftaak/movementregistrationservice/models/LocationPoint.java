@@ -8,7 +8,8 @@ import java.util.Date;
         @NamedQuery(name="LocationPoint.getLocationPointsForVehicleWithStartAndEndDate",
                 query = "SELECT lp FROM LocationPoint lp " +
                         "   JOIN lp.tracker t " +
-                        "   JOIN t.vehicle v " +
+                        "   JOIN t.vehicleTrackers vts " +
+                        "   JOIN vts.vehicle v "+
                         "WHERE v.id = :id AND lp.date >= :startDate AND lp.date < :endDate"),
 
 })

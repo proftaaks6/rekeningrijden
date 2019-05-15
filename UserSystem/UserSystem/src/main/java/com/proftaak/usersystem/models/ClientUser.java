@@ -21,7 +21,7 @@ import java.util.List;
         )
 })
 @Table(name="tbl_clientUser")
-public class ClientUser {
+public class ClientUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -35,7 +35,7 @@ public class ClientUser {
     @Column
     private String residence;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<UserVehicle> ownedVehicles;
 
     @Column(unique = true)
