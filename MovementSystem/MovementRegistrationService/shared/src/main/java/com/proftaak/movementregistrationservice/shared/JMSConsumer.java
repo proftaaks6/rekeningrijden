@@ -35,7 +35,13 @@ public class JMSConsumer {
         try {
             this.channel.basicConsume(QUEUE_NAME, true, consumer);
         } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                System.out.println("Retry, queue was not found");
+                Thread.sleep(1000);
+                startReceiving(consumer, queueName);
+            } catch (InterruptedException ignore) {
+
+            }
         }
     }
 

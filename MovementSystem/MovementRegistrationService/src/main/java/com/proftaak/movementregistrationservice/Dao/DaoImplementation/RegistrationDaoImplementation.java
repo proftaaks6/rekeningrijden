@@ -20,6 +20,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     public boolean addTracker(Tracker tracker) {
         try{
             em.persist(tracker);
+            em.flush();
         }catch (Exception e){
             return false;
         }
@@ -122,7 +123,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
     @Override
     public Tracker getTrackedById(long trackerId) {
         try {
-            return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("trackerId", trackerId).getSingleResult();
+            return em.createNamedQuery("Tracker.getById", Tracker.class).setParameter("id", trackerId).getSingleResult();
         } catch (Exception e) {
             return null;
         }
@@ -152,4 +153,11 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         List<Tracker> trackers = em.createNamedQuery("Tracker.getAll", Tracker.class).getResultList();
         return trackers;
     }
+
+	@Override
+	public List<LocationPoint> getLocationPointsForTracker(long trackerId)
+	{
+		List<LocationPoint> locationPoints = em.createNamedQuery("Tracker.getLocationPointsForTracker", LocationPoint.class).getResultList();
+		return locationPoints;
+	}
 }

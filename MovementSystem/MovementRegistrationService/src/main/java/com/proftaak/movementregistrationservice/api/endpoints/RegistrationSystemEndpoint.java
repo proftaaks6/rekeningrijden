@@ -35,7 +35,6 @@ public class RegistrationSystemEndpoint {
 
     @POST
     @Path("/tracker")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response addTracker(){
         if(registrationService.addTracker(new Tracker())){
             return Response.status(200).build();
@@ -64,6 +63,13 @@ public class RegistrationSystemEndpoint {
         } else {
             return Response.status(400).build();
         }
+    }
+
+    @GET
+    @Path("/tracker/{trackerId}/points")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
+    public Response getTrackerLocationPoints(@PathParam("trackerId") long trackerId){
+        return Response.ok().entity(pointConverter.toShared(registrationService.getLocationPointsForTracker(trackerId))).build();
     }
 
     @POST

@@ -16,4 +16,14 @@ public class VehicleDaoImpl implements VehicleDao {
     public void save(Vehicle vehicle) {
         em.persist(vehicle);
     }
+
+    @Override
+    public Vehicle getByChassis(String chassis)
+    {
+        try {
+            return em.createNamedQuery("Vehicle.getByChassis", Vehicle.class).setParameter("chassis", chassis).getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+    }
 }

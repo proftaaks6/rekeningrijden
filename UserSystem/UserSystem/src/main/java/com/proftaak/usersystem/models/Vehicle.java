@@ -2,8 +2,23 @@ package com.proftaak.usersystem.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import org.hibernate.annotations.Cascade;
 
 @Entity
+@NamedQueries( {
+        @NamedQuery(
+                name = "Vehicle.getByChassis",
+                query="SELECT v FROM Vehicle v WHERE v.chassisNumber = :chassis"
+        ),
+        @NamedQuery(
+                name = "Vehicle.getById",
+                query="SELECT v FROM Vehicle v WHERE v.id = :id"
+        ),
+        @NamedQuery(
+                name = "Vehicle.getAll",
+                query="SELECT v FROM Vehicle v"
+        )
+})
 @Table(name="tbl_car")
 public class Vehicle implements Serializable {
     @Id
