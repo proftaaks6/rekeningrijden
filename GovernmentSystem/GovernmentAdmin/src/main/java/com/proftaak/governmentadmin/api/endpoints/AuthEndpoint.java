@@ -3,6 +3,7 @@ package com.proftaak.governmentadmin.api.endpoints;
 import com.proftaak.governmentadmin.models.GovernmentEmployee;
 import com.proftaak.governmentadmin.models.Role;
 import com.proftaak.governmentadmin.security.AuthenticationFilter;
+import com.proftaak.governmentadmin.security.Secured;
 import com.proftaak.governmentadmin.service.GovernmentAdminService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
@@ -27,6 +28,13 @@ public class AuthEndpoint {
 
     @Inject
     private GovernmentAdminService service;
+
+    @GET
+    @Secured
+    @Path("check")
+    public Response checkJWT() {
+            return Response.status(200).build();
+    }
 
     @POST
     @Path("login")
