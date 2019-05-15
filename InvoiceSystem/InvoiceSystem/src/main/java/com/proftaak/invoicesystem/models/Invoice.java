@@ -5,6 +5,7 @@ package com.proftaak.invoicesystem.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="tbl_invoice")
@@ -27,6 +28,9 @@ public class Invoice {
 
     @Column
     private Date date;
+
+    @OneToMany
+    private List<PriceRow> priceRowList;
 
     public Date getDate() {
         return date;
@@ -84,5 +88,13 @@ public class Invoice {
 
     public double getTotalPrice() {
         return totalPrice;
+    }
+
+    public List<PriceRow> getPriceRowList() {
+        return priceRowList;
+    }
+
+    public void setPriceRowList(List<PriceRow> priceRowList) {
+        this.priceRowList = priceRowList;
     }
 }

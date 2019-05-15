@@ -13,12 +13,6 @@ public class LocationPoint {
     private int id;
 
     @Column
-    private int originalId;
-
-    @Column
-    private int vehicleId;
-
-    @Column
     private Date date;
 
     @Column
@@ -27,15 +21,19 @@ public class LocationPoint {
     @Column
     private double latitude;
 
+    @Column
+    private long originalId;
     public LocationPoint(int id, double longitude, double latitude) {
         this.id = id;
         this.longitude = longitude;
         this.latitude = latitude;
     }
 
-    public LocationPoint(double longitude, double latitude) {
+    public LocationPoint(double longitude, double latitude, Date date, long originalId) {
         this.longitude = longitude;
         this.latitude = latitude;
+        this.date = date;
+        this.originalId = originalId;
     }
 
     public LocationPoint(){}
@@ -64,21 +62,6 @@ public class LocationPoint {
         this.latitude = latitude;
     }
 
-    public int getOriginalId() {
-        return originalId;
-    }
-
-    public void setOriginalId(int originalId) {
-        this.originalId = originalId;
-    }
-
-    public int getVehicleId() {
-        return vehicleId;
-    }
-
-    public void setVehicleId(int vehicleId) {
-        this.vehicleId = vehicleId;
-    }
 
     public Date getDate() {
         return date;

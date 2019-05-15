@@ -7,7 +7,9 @@ import com.proftaak.invoicesystem.models.SquareRegion;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Stateless
@@ -20,6 +22,7 @@ public class RegionService {
     @Inject
     private RegionPointDao regionPointDao;
 
+    private List<SquareRegion> regions = new ArrayList<>();
     public boolean saveSquareRegion(SquareRegion region){
         if(region.getPoints().size() != 4){
             return false;
@@ -34,5 +37,18 @@ public class RegionService {
 
         region.setPoints(region.getPoints().stream().map(x->regionPointDao.getOrCreateRegionPoint(x.getLongitude(), x.getLatitude())).collect(Collectors.toList()));
         return regionDao.saveRegion(region);
+    }
+
+    public void reloadRegionsInMemory(){
+        regions = regionDao.getAllRegions();
+    }
+
+    public SquareRegion getRegionContainingPoint(double longitude, double latitude){
+        for (SquareRegion region : regions) {
+            if(region.isPointInside(longitude, latitude)){
+                return region;
+            }
+        }
+        return null;
     }
 }

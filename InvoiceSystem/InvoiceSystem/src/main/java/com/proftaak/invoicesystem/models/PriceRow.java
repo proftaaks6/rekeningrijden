@@ -6,26 +6,32 @@ import java.util.List;
 
 @Table(name="tbl_route")
 @Entity
-public class Route {
+public class PriceRow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column
-    private double distance;
+    private double distance = 0;
 
     @Column
     private double price;
 
+    @ManyToOne
+    private SquareRegion region;
 
     @OneToMany
-    private List<LocationPoint> locationPoints;
+    private List<LocationPoint> locationPoints = new ArrayList<>();
 
     @Column
     private int vehicleId;
 
-    public Route() {
+    public PriceRow() {
 
+    }
+
+    public PriceRow(SquareRegion region) {
+        this.region = region;
     }
 
     public long getId() {
@@ -62,5 +68,21 @@ public class Route {
 
     public void setVehicleId(int vehicleId) {
         this.vehicleId = vehicleId;
+    }
+
+    public SquareRegion getRegion() {
+        return region;
+    }
+
+    public void setRegion(SquareRegion region) {
+        this.region = region;
+    }
+
+    public void calculatePriceBasedOnDistance(){
+        if(region == null){
+            price = 0;
+            return;
+        }
+        price = distance * region.getPrice();
     }
 }

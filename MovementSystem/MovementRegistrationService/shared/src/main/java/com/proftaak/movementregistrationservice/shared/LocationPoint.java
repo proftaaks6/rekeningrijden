@@ -1,5 +1,7 @@
 package com.proftaak.movementregistrationservice.shared;
 
+import java.util.Date;
+
 public class LocationPoint {
 
     private long id;
@@ -7,6 +9,16 @@ public class LocationPoint {
     private double longitude;
 
     private double latitude;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    private Date date;
 
     public LocationPoint(long id, double longitude, double latitude) {
         this.id = id;

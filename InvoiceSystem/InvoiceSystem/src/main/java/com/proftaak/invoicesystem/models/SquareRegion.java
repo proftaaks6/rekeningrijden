@@ -7,7 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
+
 @Entity
+@NamedQueries({
+        @NamedQuery(name="SquareRegion.all",
+                query = "SELECT sr FROM SquareRegion sr")
+
+})
 public class SquareRegion {
 
     @Id
@@ -35,7 +42,7 @@ public class SquareRegion {
         this.points = points;
     }
 
-    public boolean isPointInside(int x, int y){
+    public boolean isPointInside(double x, double y){
         return isPointInside(new RegionPoint(x,y));
     }
 
@@ -96,5 +103,13 @@ public class SquareRegion {
             return null;
         }
         return getCachedOrderedPoints().get(3);
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
