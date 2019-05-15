@@ -25,7 +25,7 @@ public class Tracker {
     @Column
     private boolean active;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tracker")
     private List<LocationPoint> locationPoints;
 
     @OneToOne(fetch = FetchType.LAZY)

@@ -13,6 +13,8 @@ public class Vehicle {
 
     private double emission;
 
+    private Tracker activeTracker;
+
     private List<VehicleTracker> trackers;
 
     public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission, List<VehicleTracker> trackers) {
@@ -22,6 +24,7 @@ public class Vehicle {
         this.fuelType = fuelType;
         this.emission = emission;
         this.trackers = trackers;
+        this.activeTracker = this.getActiveTracker();
     }
 
     public int getId() {
@@ -71,6 +74,6 @@ public class Vehicle {
             }
         }
 
-        throw new UnsupportedOperationException("No active tracker");
+        return null;
     }
 }

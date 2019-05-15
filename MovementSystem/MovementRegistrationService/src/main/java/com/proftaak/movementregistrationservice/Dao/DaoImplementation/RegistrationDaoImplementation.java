@@ -163,6 +163,18 @@ public class RegistrationDaoImplementation implements RegistrationDao{
 		return locationPoints;
 	}
 
+    @Override
+    public List<LocationPoint> getLocationPointsForVehicle(long vehicleId, Date start, Date end)
+    {
+        List<LocationPoint> locationPoints = em
+                .createNamedQuery("LocationPoint.getLocationPointsForVehicleWithStartAndEndDate", LocationPoint.class)
+                .setParameter("id", vehicleId)
+                .setParameter("startDate", start)
+                .setParameter("endDate", end)
+                .getResultList();
+        return locationPoints;
+    }
+
 	@Override
     public VehicleTracker getVehicleTracker(long vehicleId, long trackerId) {
         VehicleTracker vehicleTracker = em
