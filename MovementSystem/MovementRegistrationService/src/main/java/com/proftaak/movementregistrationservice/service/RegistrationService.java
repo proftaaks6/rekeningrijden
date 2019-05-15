@@ -5,6 +5,7 @@ import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 
+import com.proftaak.movementregistrationservice.models.VehicleTracker;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
@@ -65,5 +66,9 @@ public class RegistrationService {
 
     public List<LocationPoint> getLocationPointsForTracker(long trackerId) {
         return registrationDao.getLocationPointsForTracker(trackerId);
+    }
+
+    public VehicleTracker getVehicleTracker(long vehicleId, long trackerId) {
+        return registrationDao.getVehicleTracker(vehicleId, trackerId);
     }
 }

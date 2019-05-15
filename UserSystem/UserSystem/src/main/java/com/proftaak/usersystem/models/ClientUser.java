@@ -35,10 +35,8 @@ public class ClientUser {
     @Column
     private String residence;
 
-
-    @OneToMany(mappedBy = "owner")
-    private List<Vehicle> ownedCars;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<UserVehicle> ownedVehicles;
 
     @Column(unique = true)
     private String email;
@@ -47,20 +45,20 @@ public class ClientUser {
     }
 
 
-    public ClientUser(String name, String address, String residence, List<Vehicle> ownedCars, String email) {
+    public ClientUser(String name, String address, String residence, List<UserVehicle> ownedVehicles, String email) {
         this.name = name;
         this.address = address;
         this.residence = residence;
-        this.ownedCars = ownedCars;
+        this.ownedVehicles = ownedVehicles;
         this.email = email;
     }
 
-    public ClientUser(long id, String name, String address, String residence, List<Vehicle> ownedCars, String email) {
+    public ClientUser(long id, String name, String address, String residence, List<UserVehicle> ownedVehicles, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.residence = residence;
-        this.ownedCars = ownedCars;
+        this.ownedVehicles = ownedVehicles;
         this.email = email;
     }
 
@@ -72,8 +70,8 @@ public class ClientUser {
         return name;
     }
 
-    public List<Vehicle> getOwnedCars() {
-        return ownedCars;
+    public List<UserVehicle> getOwnedVehicles() {
+        return ownedVehicles;
     }
 
     public String getEmail() {
@@ -90,8 +88,8 @@ public class ClientUser {
 
     public List<Integer> getOwnedCarIdList() {
         List<Integer> list = new ArrayList<>();
-        for (Vehicle v : ownedCars) {
-            list.add((int)v.getId());
+        for (UserVehicle v : ownedVehicles) {
+            list.add((int)v.getVehicle().getId());
         }
 
         return list;

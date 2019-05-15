@@ -1,5 +1,7 @@
 package com.proftaak.movementregistrationservice.shared;
 
+import java.util.List;
+
 public class Vehicle {
     private int id;
 
@@ -11,15 +13,15 @@ public class Vehicle {
 
     private double emission;
 
-    private Tracker tracker;
+    private List<VehicleTracker> trackers;
 
-    public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission, Tracker tracker) {
+    public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission, List<VehicleTracker> trackers) {
         this.id = id;
         this.vehicleType = type;
         this.chassisNumber = chassisNumber;
         this.fuelType = fuelType;
         this.emission = emission;
-        this.tracker = tracker;
+        this.trackers = trackers;
     }
 
     public int getId() {
@@ -62,13 +64,13 @@ public class Vehicle {
         this.emission = emission;
     }
 
-    public Tracker getTracker()
-    {
-        return tracker;
-    }
+    public Tracker getActiveTracker() {
+        for (VehicleTracker vehicleTracker : trackers) {
+            if(vehicleTracker.getEndDate() != null) {
+                return vehicleTracker.getTracker();
+            }
+        }
 
-    public void setTracker(Tracker tracker)
-    {
-        this.tracker = tracker;
+        throw new UnsupportedOperationException("No active tracker");
     }
 }

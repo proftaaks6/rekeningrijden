@@ -20,4 +20,8 @@ public class VehicleService {
         vehicleDao.save(vehicle);
         return true;
     }
+
+    public Vehicle getByChassis(String chassis) {
+        return vehicleDao.getByChassis(chassis);
+    }
 }

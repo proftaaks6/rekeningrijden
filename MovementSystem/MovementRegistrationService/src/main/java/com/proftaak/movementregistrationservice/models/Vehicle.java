@@ -32,12 +32,8 @@ public class Vehicle {
     @Column
     private double emission;
 
-    @OneToOne(mappedBy = "vehicle", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private Tracker tracker;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Tracker> historyTrackers;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<VehicleTracker> trackers;
 
     @Column
     private boolean isStolen;
@@ -57,9 +53,7 @@ public class Vehicle {
         this.fuelType = fuelType;
         this.emission = emission;
         this.isStolen = isStolen;
-
-        this.tracker = new Tracker(true);
-        this.historyTrackers = new ArrayList<>();
+        this.trackers = new ArrayList<>();
     }
 
     public Vehicle(long id, VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission) {
@@ -69,8 +63,7 @@ public class Vehicle {
         this.fuelType = fuelType;
         this.emission = emission;
 
-        this.tracker = new Tracker(true);
-        this.historyTrackers = new ArrayList<>();
+        this.trackers = new ArrayList<>();
     }
 
     public Vehicle(VehicleType vehicleType, String chassisNumber, FuelType fuelType, double emission, boolean isStolen) {
@@ -80,8 +73,7 @@ public class Vehicle {
         this.emission = emission;
         this.isStolen = isStolen;
 
-        this.tracker = new Tracker(true);
-        this.historyTrackers = new ArrayList<>();
+        this.trackers = new ArrayList<>();
     }
 
 
@@ -105,6 +97,16 @@ public class Vehicle {
         return emission;
     }
 
+    public Tracker getActiveTracker() {
+        for (VehicleTracker vehicleTracker : this.trackers) {
+            if (vehicleTracker.getEndDate() == null) {
+                return vehicleTracker.getTracker();
+            }
+        }
+
+        throw new UnsupportedOperationException("No active tracker");
+    }
+
 
     public boolean isStolen() {
         return isStolen;
@@ -114,19 +116,17 @@ public class Vehicle {
         isStolen = stolen;
     }
 
-    public Tracker getTracker() {
-        return tracker;
+    public List<VehicleTracker> getTrackers()
+    {
+        return trackers;
     }
 
-    public void setTracker(Tracker tracker) {
-        this.tracker = tracker;
+    public void setTrackers(List<VehicleTracker> trackers)
+    {
+        this.trackers = trackers;
     }
 
-    public List<Tracker> getHistoryTrackers() {
-        return historyTrackers;
-    }
-
-    public void setHistoryTrackers(List<Tracker> historyTrackers) {
-        this.historyTrackers = historyTrackers;
+    public void addTracker(VehicleTracker vehicleTracker) {
+        this.trackers.add(vehicleTracker);
     }
 }

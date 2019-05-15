@@ -1,7 +1,7 @@
 package com.proftaak.movementregistrationservice.converters;
 
-import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
+import com.proftaak.movementregistrationservice.service.RegistrationService;
 import com.proftaak.movementregistrationservice.shared.FuelType;
 import com.proftaak.movementregistrationservice.shared.VehicleType;
 
@@ -15,20 +15,19 @@ import javax.inject.Inject;
 public class VehicleConverter {
 
     @Inject
-    TrackerConverter trackerConverter;
+    VehicleTrackerConverter vehicleTrackerConverter;
+
+    @Inject
+	RegistrationService registrationService;
 
     public Vehicle toEntity(com.proftaak.movementregistrationservice.shared.Vehicle sharedVehicle){
-            return new Vehicle(sharedVehicle.getId(),
-                    com.proftaak.movementregistrationservice.models.VehicleType.valueOf(sharedVehicle.getVehicleType().getType()),
-                            sharedVehicle.getChassisNumber(),
-                            com.proftaak.movementregistrationservice.models.FuelType.valueOf(sharedVehicle.getFuelType().getType()),
-                                    sharedVehicle.getEmission());
+    	return registrationService.getVehicleByChassisNumber(sharedVehicle.getChassisNumber());
     }
 
     public com.proftaak.movementregistrationservice.shared.Vehicle toShared(Vehicle vehicle){
         return new com.proftaak.movementregistrationservice.shared.Vehicle((int)vehicle.getId(),
                 VehicleType.valueOf(vehicle.getVehicleType().getType()), vehicle.getChassisNumber(),
-                FuelType.valueOf(vehicle.getFuelType().getType()), vehicle.getEmission(), trackerConverter.toShared(vehicle.getTracker()));
+                FuelType.valueOf(vehicle.getFuelType().getType()), vehicle.getEmission(), vehicleTrackerConverter.toShared(vehicle.getTrackers()));
     }
 
     public List<com.proftaak.movementregistrationservice.shared.Vehicle> toShared(List<Vehicle> vehicles){

@@ -2,6 +2,7 @@ package com.proftaak.usersystem.service;
 
 import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.models.ClientUser;
+import com.proftaak.usersystem.models.UserVehicle;
 import com.proftaak.usersystem.models.Vehicle;
 
 import java.util.List;
@@ -28,5 +29,9 @@ public class UserService {
     public List<ClientUser> getAllUsers()
     {
         return userDao.getAll();
+    }
+
+    public UserVehicle getUserVehicle(long vehicleId, long userId) {
+        return userDao.getUserVehicle(vehicleId, userId);
     }
 }
