@@ -116,10 +116,10 @@ public class RegistrationSystemEndpoint {
     }
 
     @POST
-    @Path("/vehicle/{vehicleId}/tracker")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addTrackerToVehicle(com.proftaak.movementregistrationservice.shared.Tracker tracker, @PathParam("vehicleId") long vehicleId){
-        if(registrationService.addTrackerToVehicle(trackerConverter.toEntity(tracker), vehicleId)) {
+    @Path("/vehicle/{vehicleId}/tracker/{trackerId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addTrackerToVehicle(@PathParam("trackerId") long trackerId, @PathParam("vehicleId") long vehicleId){
+        if(registrationService.addTrackerToVehicle(trackerId, vehicleId)) {
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
