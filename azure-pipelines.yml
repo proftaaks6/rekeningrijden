@@ -19,9 +19,9 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: PowerShell@2
+- task: CmdLine@2
   inputs:
-    filePath: '_Tools/copy_docker_files.sh'
+    script: 'cd _Tools && sh copy_docker_files.sh && cd ..'
 - task: Docker@2
   inputs:
     repository: 'carlotheunissen'
