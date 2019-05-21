@@ -1,0 +1,21 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- development
+
+resources:
+  containers:
+  - container: mvn # reusable alias
+    image: maven:3.3-jdk-8
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    container: mvn
+    steps:
+    - script: mvn package -DskipTests
+
