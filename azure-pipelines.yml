@@ -21,12 +21,17 @@ steps:
     goals: 'package'
 - task: CmdLine@2
   inputs:
-    script: 'cd _Tools && sh copy_docker_files.sh && cd ..'
+    script: 'cd _Tools && sh copy_docker_files.sh && cd ..'  
 - task: Docker@2
   inputs:
-    repository: 'carlotheunissen'
+    containerRegistry: 'carlotheunissen dockerhub'
+    command: 'login'
+- task: Docker@2
+  inputs:
+    repository: 'carlotheunissen/governmentadmin'
     command: 'buildAndPush'
     Dockerfile: 'GovernmentSystem/GovernmentAdmin/Dockerfile'
     buildContext: 'GovernmentSystem/GovernmentAdmin'
+    containerRegistry: 'carlotheunissen dockerhub'
     tags: 'latest'
 
