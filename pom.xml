@@ -19,16 +19,21 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
+
     <modules>
         <module>MovementSystem/MovementProxy</module>
         <module>MovementSystem/MovementRegistrationService</module>
+        <module>MovementSystem/MovementRegistrationService/shared</module>
         <module>InvoiceSystem/InvoiceSystem</module>
         <module>UserSystem/UserSystem</module>
+        <module>UserSystem/UserSystem/shared</module>
         <module>DriverSystem/DriverApplication</module>
+        <module>DriverSystem/DriverApplication/shared</module>
         <module>PoliceSystem/PoliceAdministration</module>
         <module>PoliceSystem/PoliceEuropeProxy</module>
         <module>PoliceSystem/PoliceFrontendProxy</module>
         <module>GovernmentSystem/GovernmentAdmin</module>
+        <module>Utils/rabbitmq</module>
     </modules>
 
     <dependencies>
@@ -40,11 +45,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-all</artifactId>
-            <version>${activemq.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -141,6 +141,12 @@
             <version>2.22.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>

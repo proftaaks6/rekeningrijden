@@ -1,0 +1,77 @@
+version: "3.3"
+
+services:
+
+  movement_registration_service:
+    build:
+      dockerfile: Dockerfile_dev
+    ports:
+      - "8080:8080"
+      - "9009:9009"
+
+  movement_proxy:
+    build:
+      dockerfile: Dockerfile_dev
+    ports:
+      - "8081:8080"
+      - "9010:9009"
+
+  government_admin:
+    build:
+      dockerfile: Dockerfile_dev
+    ports:
+      - "8082:8080"
+      - "4848:4848"
+      - "9011:9009"
+
+  user_system:
+    build:
+      dockerfile: Dockerfile_dev
+    ports:
+      - "8083:8080"
+      - "9012:9009"
+
+  driver_application:
+    build:
+      dockerfile: Dockerfile_dev
+    ports:
+      - "8084:8080"
+      - "9013:9009"
+
+  invoice_system:
+    build:
+      dockerfile: Dockerfile_dev
+    expose:
+      - "8080"
+    ports:
+      - "8085:8080"
+      - "9014:9009"
+
+  db:
+    build:
+      context: ./Mysql/
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    expose:
+      - '3306'
+    ports:
+      - "3307:3306"
+
+  rabbit_node_1:
+    expose:
+      - '15672'
+      - '5672'
+    ports:
+      - "15682:15672"
+      - "5682:5672"
+#  rabbit_node_2:
+#    expose:
+#      - '15672'
+#      - '5672'
+#    ports:
+#      - "15683:15672"
+#      - "5683:5672"
+volumes:
+  backend_db:
