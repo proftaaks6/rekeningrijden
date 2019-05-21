@@ -23,7 +23,7 @@ steps:
   inputs:
     repository: 'carlotheunissen'
     command: 'buildAndPush'
-    Dockerfile: './Dockerfile'
+    Dockerfile: 'GovernmentSystem/GovernmentAdmin/Dockerfile'
     buildContext: 'GovernmentSystem/GovernmentAdmin'
     tags: 'latest'
 
