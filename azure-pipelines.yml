@@ -10,6 +10,11 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'fontys carlo'
+    organization: 'theunissen-carlo-c-f68151'
+    scannerMode: 'Other'
 - task: Maven@3
   inputs:
     mavenOptions: '-Xmx3072m'
@@ -19,6 +24,9 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 - task: CmdLine@2
   inputs:
     script: 'cd _Tools && sh copy_docker_files.sh && cd ..'  
