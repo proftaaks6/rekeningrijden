@@ -23,15 +23,62 @@ steps:
   inputs:
     script: 'cd _Tools && sh copy_docker_files.sh && cd ..'  
 - task: Docker@2
+  displayName: 'login with carlotheunissen dockerhub'
   inputs:
     containerRegistry: 'carlotheunissen dockerhub'
     command: 'login'
 - task: Docker@2
+  displayName: 'publishing governmentAdmin'
   inputs:
     repository: 'carlotheunissen/governmentadmin'
     command: 'buildAndPush'
     Dockerfile: 'GovernmentSystem/GovernmentAdmin/Dockerfile'
     buildContext: 'GovernmentSystem/GovernmentAdmin'
+    containerRegistry: 'carlotheunissen dockerhub'
+    tags: 'latest'
+- task: Docker@2
+  displayName: 'publishing driversystem'
+  inputs:
+    repository: 'carlotheunissen/driversystem'
+    command: 'buildAndPush'
+    Dockerfile: 'DriverSystem/DriverApplication/Dockerfile'
+    buildContext: 'DriverSystem/DriverApplication'
+    containerRegistry: 'carlotheunissen dockerhub'
+    tags: 'latest'
+- task: Docker@2
+  displayName: 'publishing invoicesystem'
+  inputs:
+    repository: 'carlotheunissen/invoicesystem'
+    command: 'buildAndPush'
+    Dockerfile: ' InvoiceSystem/InvoiceSystem/Dockerfile'
+    buildContext: ' InvoiceSystem/InvoiceSystem'
+    containerRegistry: 'carlotheunissen dockerhub'
+    tags: 'latest'
+- task: Docker@2
+  displayName: 'publishing movementproxy'
+  inputs:
+    repository: 'carlotheunissen/movementproxy'
+    command: 'buildAndPush'
+    Dockerfile: 'MovementSystem/MovementProxy/Dockerfile'
+    buildContext: 'MovementSystem/MovementProxy'
+    containerRegistry: 'carlotheunissen dockerhub'
+    tags: 'latest'
+- task: Docker@2
+  displayName: 'publishing movementregistrationservice'
+  inputs:
+    repository: 'carlotheunissen/movementregistrationservice'
+    command: 'buildAndPush'
+    Dockerfile: 'MovementSystem/MovementRegistrationService/Dockerfile'
+    buildContext: 'MovementSystem/MovementRegistrationService'
+    containerRegistry: 'carlotheunissen dockerhub'
+    tags: 'latest'
+- task: Docker@2
+  displayName: 'publishing usersystem'
+  inputs:
+    repository: 'carlotheunissen/usersystem'
+    command: 'buildAndPush'
+    Dockerfile: 'UserSystem/UserSystem/Dockerfile'
+    buildContext: 'UserSystem/UserSystem'
     containerRegistry: 'carlotheunissen dockerhub'
     tags: 'latest'
 
