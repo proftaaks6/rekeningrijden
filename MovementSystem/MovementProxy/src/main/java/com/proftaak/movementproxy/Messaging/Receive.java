@@ -8,7 +8,6 @@ import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
 import com.proftaak.rabbitmq.ConnectionFactory;
 import com.rabbitmq.client.*;
-import com.sun.media.jfxmedia.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
