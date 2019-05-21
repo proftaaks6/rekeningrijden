@@ -62,4 +62,17 @@ public class UserSystemController {
         }
     }
 
+    @GET
+    @Path("/users/{id}")
+    public ClientUser getUser(@PathParam("id") int userId)
+    {
+        try
+        {
+            return new ClientUserConverter().toShared(userService.getClientUserById(userId));
+        } catch (Exception e)
+        {
+            throw new BadRequestException();
+        }
+    }
+
 }

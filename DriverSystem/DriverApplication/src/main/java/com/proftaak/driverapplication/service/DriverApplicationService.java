@@ -32,4 +32,8 @@ public class DriverApplicationService
 	public LoginAttempt getUserStatisticById(long id) {
 		return loginAttemptDao.getById(id);
 	}
+
+	public LoginAttempt addLoginAttempt(LoginAttempt loginAttempt) {
+		return loginAttemptDao.add(loginAttempt);
+	}
 }

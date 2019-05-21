@@ -40,4 +40,11 @@ public class LoginAttemptDaoImpl implements LoginAttemptDao
 			return null;
 		}
 	}
+
+	@Override
+	public LoginAttempt add(LoginAttempt loginAttempt) {
+		em.persist(loginAttempt);
+		em.flush();
+		return loginAttempt;
+	}
 }
