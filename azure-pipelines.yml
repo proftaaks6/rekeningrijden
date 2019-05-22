@@ -16,16 +16,17 @@ steps:
     SonarCloud: 'SonarCloud'
     organization: 'theunissen-carlo-c-f68151'
     scannerMode: 'Other'
-    projectKey: 'rekeningrijden'
-    projectName: 'rekeningrijden'
+    extraProperties: '
+      sonar.projectName=Rekeningrijden
+      sonar.projectKey=rekeningrijden'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     codeCoverageToolOption: 'JaCoCo'
-    codeCoverageClassFilesDirectories: '**/target/**/*.class'
-    codeCoverageSourceDirectories: '**/src/**/*.java'
+    codeCoverageClassFilesDirectories: '**/target/**/*'
+    codeCoverageSourceDirectories: '**/src/**/*'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     mavenVersionOption: 'Default'
