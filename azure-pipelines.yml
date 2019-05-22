@@ -22,6 +22,8 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     codeCoverageToolOption: 'JaCoCo'
+    codeCoverageClassFilesDirectories: '**/target/*.class'
+    codeCoverageSourceDirectories: '**/src/*.java'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     mavenVersionOption: 'Default'
