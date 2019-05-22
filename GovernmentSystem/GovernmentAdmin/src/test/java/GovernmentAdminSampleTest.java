@@ -2,10 +2,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class SampleTest {
+class GovernmentAdminSampleTest {
 
     @Test
     void sample(){
-        assertThat( "User System werkt!", true);
+        assertThat( "Government Admin werkt!", true);
     }
 }

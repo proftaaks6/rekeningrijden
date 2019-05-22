@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class SampleTest {
+class MovementProxySampleTest {
 
     @Test
     void sample(){

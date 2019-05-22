@@ -2,10 +2,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class SampleTest {
+class DriverApplicationSampleTest {
 
     @Test
     void sample(){
-        assertThat( "Invoice System werkt!", true);
+        assertThat( "Driver Application werkt!", true);
     }
 }
