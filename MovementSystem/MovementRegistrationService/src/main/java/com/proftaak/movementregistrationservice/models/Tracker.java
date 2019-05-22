@@ -96,6 +96,7 @@ public class Tracker {
 
     public void addLocationPoint(LocationPoint point) {
         this.locationPoints.add(point);
+        point.setTracker(this);
     }
 
 	public List<VehicleTracker> getVehicleTrackers()
