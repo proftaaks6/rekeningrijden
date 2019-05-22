@@ -9,20 +9,13 @@ public class Tracker {
 
     private boolean active;
 
-    private List<LocationPoint> locationPoints;
-
     public Tracker() {
         this.active = true;
     }
 
-    public Tracker(long id, boolean active, List<LocationPoint> locationPoints) {
+    public Tracker(long id, boolean active) {
         this.id = id;
         this.active = active;
-        this.locationPoints = locationPoints;
-    }
-
-    public Tracker(long id, boolean active) {
-        this(id, active, new ArrayList<>());
     }
 
     public long getId() {
@@ -39,15 +32,5 @@ public class Tracker {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public List<LocationPoint> getLocationPoints()
-    {
-        return locationPoints;
-    }
-
-    public void setLocationPoints(List<LocationPoint> locationPoints)
-    {
-        this.locationPoints = locationPoints;
     }
 }
