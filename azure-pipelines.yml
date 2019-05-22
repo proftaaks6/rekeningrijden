@@ -14,11 +14,11 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloud'
-    organization: 'rekeningrijden'
+    organization: 'proftaaks6'
     scannerMode: 'Other'
-    cliProjectKey: 'proftaak-s6:rekeningrijden'
-    projectKey: 'proftaak-s6:rekeningrijden'
-    extraProperties: 'sonar.projectKey=proftaak-s6:rekeningrijden'
+    cliProjectKey: 'proftaaks6_rekeningrijden'
+    projectKey: 'proftaaks6_rekeningrijden'
+    extraProperties: 'sonar.projectKey=proftaaks6_rekeningrijden'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
