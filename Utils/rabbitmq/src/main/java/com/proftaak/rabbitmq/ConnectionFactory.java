@@ -23,7 +23,6 @@ public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
     public Connection newConnection() throws IOException, TimeoutException {
 
         Address address1;
-        System.out.println("NIGGGAAAAAA");
 
         if(Boolean.valueOf(config.getProperty("isProduction"))){
             address1 = new Address("rabbit_node_1", 5682);
