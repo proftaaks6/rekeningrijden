@@ -33,7 +33,7 @@
   <resources>
     <jdbc-resource pool-name="__TimerPool" object-type="system-all" jndi-name="jdbc/__TimerPool"></jdbc-resource>
     <jdbc-resource pool-name="DerbyPool" object-type="system-all" jndi-name="jdbc/__derby"></jdbc-resource>
-    <jdbc-resource pool-name="H2Pool" object-type="system-all" jndi-name="jdbc/__default"></jdbc-resource>
+    <jdbc-resource pool-name="mysql_auth" object-type="system-all" jndi-name="jdbc/__default"></jdbc-resource>
     <jdbc-connection-pool datasource-classname="org.apache.derby.jdbc.EmbeddedXADataSource" name="__TimerPool" res-type="javax.sql.XADataSource">
       <property name="databaseName" value="${com.sun.aas.instanceRoot}/lib/databases/ejbtimer"></property>
       <property name="connectionAttributes" value=";create=true"></property>
@@ -42,8 +42,8 @@
       <property name="databaseName" value="${com.sun.aas.instanceRoot}/lib/databases/derby_default"></property>
       <property name="connectionAttributes" value=";create=true"></property>
     </jdbc-connection-pool>
-    <jdbc-connection-pool is-isolation-level-guaranteed="false" datasource-classname="org.h2.jdbcx.JdbcDataSource" name="H2Pool" res-type="javax.sql.DataSource">
-      <property name="URL" value="jdbc:h2:${com.sun.aas.instanceRoot}/lib/databases/embedded_default;AUTO_SERVER=TRUE"></property>
+    <jdbc-connection-pool is-isolation-level-guaranteed="false" datasource-classname="com.mysql.jdbc.Driver" name="mysql_auth" res-type="java.sql.Driver">
+      <property name="URL" value="jdbc:mysql://localhost:3307/governmentdatabase"></property>
     </jdbc-connection-pool>
     <connector-connection-pool resource-adapter-name="jmsra" max-pool-size="250" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" object-type="system-all-req" jndi-name="jms/__defaultConnectionFactory"></connector-resource>
@@ -56,8 +56,8 @@
       <property name="user" value="root"></property>
       <property name="useSSL" value="false"></property>
       <property name="allowPublicKeyRetrieval" value="true"></property>
-      <property name="serverName" value="db"></property>
-      <property name="URL" value="jdbc:mysql://db:3306/governmentdatabase"></property>
+      <!--<property name="serverName" value="db"></property>-->
+      <property name="URL" value="jdbc:mysql://localhost:3307/governmentdatabase"></property>
       <property name="databaseName" value="governmentdatabase"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="mysql_auth" jndi-name="jdbc/authentication"></jdbc-resource>

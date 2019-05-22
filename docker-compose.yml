@@ -1,81 +1,81 @@
 version: "3.3"
 services:
-  movement_registration_service:
-    build:
-      context: ./MovementSystem/MovementRegistrationService/
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    depends_on:
-      - rabbit_node_1
-#      - rabbit_node_2
-
-  movement_proxy:
-    build:
-      context: ./MovementSystem/MovementProxy/
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    depends_on:
-      - rabbit_node_1
-#      - rabbit_node_2
-
-  government_admin:
-    build:
-      context: ./GovernmentSystem/GovernmentAdmin/
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    depends_on:
-      - rabbit_node_1
-      - user_system
-
-#      - rabbit_node_2
-
-  government_frontend:
-    build: https://github.com/proftaaks6/GovermentSystemAngular.git
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - movement_registration_service
-      - user_system
-      - government_admin
-
-  driver_frontend:
-    build: https://github.com/proftaaks6/DriverApplicationAngular.git
-    ports:
-      - "81:80"
-    depends_on:
-      - user_system
-
-  user_system:
-    build:
-      context: ./UserSystem/UserSystem/
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    depends_on:
-      - rabbit_node_1
-#      - rabbit_node_2
-
-
-  invoice_system:
-    build:
-      context: ./InvoiceSystem/InvoiceSystem/
-      dockerfile: Dockerfile
-    expose:
-      - "8080"
-    depends_on:
-      - rabbit_node_1
-      - movement_registration_service
-
-
-  driver_application:
-    build:
-      context: ./DriverSystem/DriverApplication
-    depends_on:
-      - user_system
+#  movement_registration_service:
+#    build:
+#      context: ./MovementSystem/MovementRegistrationService/
+#      dockerfile: Dockerfile
+#    expose:
+#      - "8080"
+#    depends_on:
+#      - rabbit_node_1
+##      - rabbit_node_2
+#
+#  movement_proxy:
+#    build:
+#      context: ./MovementSystem/MovementProxy/
+#      dockerfile: Dockerfile
+#    expose:
+#      - "8080"
+#    depends_on:
+#      - rabbit_node_1
+##      - rabbit_node_2
+#
+#  government_admin:
+#    build:
+#      context: ./GovernmentSystem/GovernmentAdmin/
+#      dockerfile: Dockerfile
+#    expose:
+#      - "8080"
+#    depends_on:
+#      - rabbit_node_1
+#      - user_system
+#
+##      - rabbit_node_2
+#
+#  government_frontend:
+#    build: https://github.com/proftaaks6/GovermentSystemAngular.git
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    depends_on:
+#      - movement_registration_service
+#      - user_system
+#      - government_admin
+#
+#  driver_frontend:
+#    build: https://github.com/proftaaks6/DriverApplicationAngular.git
+#    ports:
+#      - "81:80"
+#    depends_on:
+#      - user_system
+#
+#  user_system:
+#    build:
+#      context: ./UserSystem/UserSystem/
+#      dockerfile: Dockerfile
+#    expose:
+#      - "8080"
+#    depends_on:
+#      - rabbit_node_1
+##      - rabbit_node_2
+#
+#
+#  invoice_system:
+#    build:
+#      context: ./InvoiceSystem/InvoiceSystem/
+#      dockerfile: Dockerfile
+#    expose:
+#      - "8080"
+#    depends_on:
+#      - rabbit_node_1
+#      - movement_registration_service
+#
+#
+#  driver_application:
+#    build:
+#      context: ./DriverSystem/DriverApplication
+#    depends_on:
+#      - user_system
 
   #Rabbit mq
   rabbit_node_1:
