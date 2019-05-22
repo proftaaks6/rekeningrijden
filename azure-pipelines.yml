@@ -10,12 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'fontys carlo'
     organization: 'theunissen-carlo-c-f68151'
     scannerMode: 'Other'
-    projectKey: 'rekeningrijden'
+    projectKey: 'proftaak-s6:rekeningrijden'
+    projectName: 'rekeningrijden'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
