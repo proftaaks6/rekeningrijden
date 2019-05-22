@@ -16,7 +16,7 @@ steps:
     SonarCloud: 'SonarCloud'
     organization: 'theunissen-carlo-c-f68151'
     scannerMode: 'Other'
-    projectKey: 'proftaak-s6:rekeningrijden'
+    projectKey: 'rekeningrijden'
     projectName: 'rekeningrijden'
 - task: Maven@3
   inputs:
