@@ -13,7 +13,7 @@ steps:
 
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'fontys carlo'
+    SonarCloud: 'SonarCloud'
     organization: 'theunissen-carlo-c-f68151'
     scannerMode: 'Other'
     projectKey: 'proftaak-s6:rekeningrijden'
@@ -24,8 +24,8 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     codeCoverageToolOption: 'JaCoCo'
-    codeCoverageClassFilesDirectories: '**/target/*.class'
-    codeCoverageSourceDirectories: '**/src/*.java'
+    codeCoverageClassFilesDirectories: '**/target/**/*.class'
+    codeCoverageSourceDirectories: '**/src/**/*.java'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     mavenVersionOption: 'Default'
