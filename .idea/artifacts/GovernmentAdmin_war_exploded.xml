@@ -46,7 +46,12 @@
           <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator:6.0.15.Final" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:2.0.1.Final" />
           <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator-cdi:6.0.15.Final" />
+          <element id="library" level="project" name="Maven: org.ow2.asm:asm-debug-all:5.0.4" />
           <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.5" />
+          <element id="library" level="project" name="Maven: org.jacoco:org.jacoco.ant:0.7.4.201502262128" />
+          <element id="library" level="project" name="Maven: org.jacoco:org.jacoco.core:0.7.4.201502262128" />
+          <element id="library" level="project" name="Maven: org.jacoco:org.jacoco.report:0.7.4.201502262128" />
+          <element id="library" level="project" name="Maven: org.jacoco:org.jacoco.agent:0.7.4.201502262128" />
         </element>
       </element>
       <element id="directory" name="META-INF">
