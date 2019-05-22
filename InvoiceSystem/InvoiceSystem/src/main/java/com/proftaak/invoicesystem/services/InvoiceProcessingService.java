@@ -2,6 +2,7 @@ package com.proftaak.invoicesystem.services;
 
 import com.proftaak.invoicesystem.dao.InvoiceProcessingDao;
 import com.proftaak.invoicesystem.models.Invoice;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -24,6 +25,6 @@ public class InvoiceProcessingService {
     }
 
     public boolean regenerateInvoice(int invoiceId) {
-
+        throw new NotImplementedException();
     }
 }

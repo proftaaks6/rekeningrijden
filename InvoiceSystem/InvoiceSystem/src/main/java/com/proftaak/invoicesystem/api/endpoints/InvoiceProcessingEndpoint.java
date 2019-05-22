@@ -46,10 +46,10 @@ public class InvoiceProcessingEndpoint {
         }
     }
 
-    @POST
-    @Path("/generate")
-    public Response generateInvoice(
-            @FormParam("vehicleId") int vehicleId,
-            @FormParam("totalDistance") int
-    )
+//    @POST
+//    @Path("/generate")
+//    public Response generateInvoice(
+//            @FormParam("vehicleId") int vehicleId,
+//            @FormParam("totalDistance") int
+//    )
 }
