@@ -28,8 +28,13 @@ public class InvoiceGenerator {
 
     @Schedule(hour = "*", minute = "*", second = "*/1",  persistent = false)
     public void generatePeriodically() {
-        Date from = new Date(); //todo: change new Date() into the current date minus one month
+        // Subtract 1 month from date
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date from = cal.getTime();
+
         Date now = new Date(); //don't touch this
+
         int vehicleId = generator.getNextVehicleId(from, now);
 
         if (vehicleId <= 0) {

@@ -1,13 +1,18 @@
 package com.proftaak.movementregistrationservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
 import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 
 import com.proftaak.movementregistrationservice.models.VehicleTracker;
+import com.proftaak.movementregistrationservice.utils.RestCommuncationHelper;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.List;
 import javax.xml.stream.Location;
 import java.util.Date;
@@ -38,8 +43,20 @@ public class RegistrationService {
         return registrationDao.removeTracker(targetTrackerId);
     }
 
-    public boolean addVehicle(Vehicle vehicle){
-        return registrationDao.addVehicle(vehicle);
+    public boolean addVehicle(Vehicle vehicle) throws IOException {
+        try {
+            // Add vehicle to db
+            Vehicle v = registrationDao.addVehicle(vehicle);
+
+            // Make rest call to invoice system to add vehicle
+            RestCommuncationHelper.postRequest("http://invoice_system/deploy/v1/processing/vehicle", new ObjectMapper().writeValueAsString(v));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
     }
 
     public boolean addTrackerToVehicle(Tracker tracker, long vehicleId){

@@ -9,7 +9,11 @@ import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
 @NamedQueries({
         @NamedQuery(name="VehicleProcessingState.get",
                 query = "SELECT vpt FROM VehicleProcessingState vpt WHERE vpt.lastProcessed < :lastProcessed",
-                lockMode = PESSIMISTIC_WRITE)
+                lockMode = PESSIMISTIC_WRITE),
+        @NamedQuery(
+                name = "VehicleProcessingState.getAll",
+                query = "SELECT p FROM VehicleProcessingState p"
+        )
 
 })
 public class VehicleProcessingState {
@@ -23,6 +27,12 @@ public class VehicleProcessingState {
     @Column
     private Date lastProcessed;
 
+    public VehicleProcessingState() { }
+
+    public VehicleProcessingState(int vehicleId) {
+        this.vehicleId = vehicleId;
+        this.lastProcessed = new Date();
+    }
 
     public int getId() {
         return id;

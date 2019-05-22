@@ -7,6 +7,7 @@ import com.proftaak.movementregistrationservice.converters.VehicleConverter;
 import com.proftaak.movementregistrationservice.models.*;
 import com.proftaak.movementregistrationservice.service.RegistrationService;
 
+import java.io.IOException;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -107,7 +108,7 @@ public class RegistrationSystemEndpoint {
     @POST
     @Path("/vehicle")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addVehicle(com.proftaak.movementregistrationservice.shared.Vehicle vehicle){
+    public Response addVehicle(com.proftaak.movementregistrationservice.shared.Vehicle vehicle) throws IOException {
         if(registrationService.addVehicle(vehicleConverter.toEntity(vehicle))){
             return Response.status(200).build();
         } else {

@@ -4,10 +4,6 @@ import com.proftaak.invoicesystem.models.SquareRegion;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless

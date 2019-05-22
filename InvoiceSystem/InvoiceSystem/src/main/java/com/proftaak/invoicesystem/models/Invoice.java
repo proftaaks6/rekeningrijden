@@ -9,6 +9,17 @@ import java.util.List;
 
 @Entity
 @Table(name="tbl_invoice")
+@NamedQueries({
+        @NamedQuery(
+                name = "Invoice.GetById",
+                query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
+        ),
+        @NamedQuery(
+                name = "Invoice.GetByVehicleId",
+                query = "SELECT a FROM Invoice a WHERE a.vehicleId = :vehicleId"
+        )
+}
+)
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -72,6 +83,8 @@ public class Invoice {
         this.vehicleId = vehicleId;
         this.totalDistance = totalDistance;
         this.totalPrice = totalPrice;
+        this.date = new Date();
+        this.isPaid = false;
     }
 
     public int getId() {

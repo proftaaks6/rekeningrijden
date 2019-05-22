@@ -37,8 +37,4 @@ public class NextVehicleGenerator {
         }
         return -1;
     }
-
-
-
-
 }
