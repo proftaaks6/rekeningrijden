@@ -14,19 +14,17 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloud'
-    organization: 'theunissen-carlo-c-f68151'
+    organization: 'proftaaks6'
     scannerMode: 'Other'
-    extraProperties: '
-      sonar.projectName=Rekeningrijden
-      sonar.projectKey=rekeningrijden'
+    cliProjectKey: 'proftaaks6_rekeningrijden'
+    projectKey: 'proftaaks6_rekeningrijden'
+    extraProperties: 'sonar.projectKey=proftaaks6_rekeningrijden'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    codeCoverageToolOption: 'JaCoCo'
-    codeCoverageClassFilesDirectories: '**/target/**/*'
-    codeCoverageSourceDirectories: '**/src/**/*'
+    codeCoverageToolOption: 'None'
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     mavenVersionOption: 'Default'
