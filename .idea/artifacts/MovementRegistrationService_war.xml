@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MovementRegistrationService:war">
+    <output-path>$PROJECT_DIR$/MovementSystem/MovementRegistrationService/target</output-path>
+    <root id="archive" name="MovementRegistration.war">
+      <element id="artifact" artifact-name="MovementRegistrationService:war exploded" />
+    </root>
+  </artifact>
+</component>

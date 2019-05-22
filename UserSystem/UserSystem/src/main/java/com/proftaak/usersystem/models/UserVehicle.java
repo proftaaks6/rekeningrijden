@@ -3,8 +3,11 @@ package com.proftaak.usersystem.models;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -14,7 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "tbl_userVehicle",
-		indexes = { @Index(name = "IDX_UserVehicle", columnList = "vehicle,user")}
+		indexes = { @Index(name = "IDX_UserVehicle", columnList = "vehicle_id,user_id")}
 )
 @NamedQueries({
 		@NamedQuery(name="UserVehicle.get",
@@ -24,10 +27,11 @@ import javax.persistence.TemporalType;
 public class UserVehicle
 {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@OneToOne
+	@ManyToOne
 	private Vehicle vehicle;
-	@OneToOne
+	@ManyToOne
 	private ClientUser user;
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
@@ -46,6 +50,11 @@ public class UserVehicle
 		this.user = user;
 		this.startDate = startDate;
 		this.endDate = endDate;
+	}
+
+	public UserVehicle(Vehicle vehicle, ClientUser user, Date startDate)
+	{
+		this(vehicle, user, startDate, new Date());
 	}
 
 	public Vehicle getVehicle()

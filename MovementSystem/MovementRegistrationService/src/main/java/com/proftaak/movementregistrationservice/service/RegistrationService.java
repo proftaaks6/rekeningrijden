@@ -59,8 +59,8 @@ public class RegistrationService {
         return true;
     }
 
-    public boolean addTrackerToVehicle(Tracker tracker, long vehicleId){
-        return registrationDao.addTrackerToVehicle(tracker, vehicleId);
+    public boolean addTrackerToVehicle(long trackerId, long vehicleId){
+        return registrationDao.addTrackerToVehicle(getTrackerById(trackerId), vehicleId);
     }
 
     public boolean removeVehicle(long vehicleId){
@@ -93,4 +93,8 @@ public class RegistrationService {
     public VehicleTracker getVehicleTracker(long vehicleId, long trackerId) {
         return registrationDao.getVehicleTracker(vehicleId, trackerId);
     }
+
+    public Tracker getTrackerById(long trackerId) {
+    	return registrationDao.getTrackedById(trackerId);
+	}
 }

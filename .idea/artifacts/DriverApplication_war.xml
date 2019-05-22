@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="DriverApplication:war">
+    <output-path>$PROJECT_DIR$/DriverSystem/DriverApplication/target</output-path>
+    <root id="archive" name="DriverSystem.war">
+      <element id="artifact" artifact-name="DriverApplication:war exploded" />
+    </root>
+  </artifact>
+</component>

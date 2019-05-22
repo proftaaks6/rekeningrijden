@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GovernmentAdmin:war">
+    <output-path>$PROJECT_DIR$/GovernmentSystem/GovernmentAdmin/target</output-path>
+    <root id="archive" name="GovernmentAdmin.war">
+      <element id="artifact" artifact-name="GovernmentAdmin:war exploded" />
+    </root>
+  </artifact>
+</component>

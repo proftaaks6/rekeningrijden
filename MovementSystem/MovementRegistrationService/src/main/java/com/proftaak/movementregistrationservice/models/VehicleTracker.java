@@ -4,19 +4,23 @@ package com.proftaak.movementregistrationservice.models;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(
 		name = "tbl_vehicleTracker",
-		indexes = { @Index(name = "IDX_VehicleTracker", columnList = "vehicle,tracker")}
+		indexes = { @Index(name = "IDX_VehicleTracker", columnList = "vehicle_id,tracker_id", unique = true)}
 		)
 @NamedQueries({
 		@NamedQuery(name="VehicleTracker.get",
@@ -26,10 +30,11 @@ import javax.persistence.TemporalType;
 public class VehicleTracker
 {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@OneToOne
+	@ManyToOne
 	private Vehicle vehicle;
-	@OneToOne
+	@ManyToOne
 	private Tracker tracker;
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)

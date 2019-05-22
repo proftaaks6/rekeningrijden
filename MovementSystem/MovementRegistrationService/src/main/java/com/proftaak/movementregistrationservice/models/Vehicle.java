@@ -1,6 +1,7 @@
 package com.proftaak.movementregistrationservice.models;
 
 
+import java.util.Date;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Vehicle {
     @Column
     private double emission;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "vehicle")
     private List<VehicleTracker> trackers;
 
     @Column
@@ -127,6 +128,12 @@ public class Vehicle {
     }
 
     public void addTracker(VehicleTracker vehicleTracker) {
+        try {
+            Tracker activeTracker = getActiveTracker();
+            activeTracker.disableActiveTracker();
+        } catch(UnsupportedOperationException ignored) {
+
+        }
         this.trackers.add(vehicleTracker);
     }
 }

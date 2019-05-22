@@ -1,6 +1,7 @@
 package com.proftaak.usersystem.shared;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Vehicle implements Serializable {
 
@@ -8,15 +9,15 @@ public class Vehicle implements Serializable {
 
     private String chassisNumber;
 
-    private ClientUser owner;
+    private List<UserVehicle> owners;
 
     public Vehicle() {
 
     }
 
-    public Vehicle(String chassisNumber, ClientUser owner) {
+    public Vehicle(String chassisNumber, List<UserVehicle> owners) {
         this.chassisNumber = chassisNumber;
-        this.owner = owner;
+        this.owners = owners;
     }
 
     public long getId() {
@@ -27,15 +28,15 @@ public class Vehicle implements Serializable {
         return chassisNumber;
     }
 
-    public ClientUser getOwner() {
-        return owner;
+    public List<UserVehicle>  getOwner() {
+        return owners;
     }
 
     public void setChassisNumber(String chassisNumber) {
         this.chassisNumber = chassisNumber;
     }
 
-    public void setOwner(ClientUser owner) {
-        this.owner = owner;
+    public void setOwner(List<UserVehicle>  owners) {
+        this.owners = owners;
     }
 }
