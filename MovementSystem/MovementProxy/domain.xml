@@ -57,13 +57,13 @@
     <managed-scheduled-executor-service core-pool-size="1" long-running-tasks="true" keep-alive-seconds="300" hung-after-seconds="300" jndi-name="concurrent/__defaultManagedScheduledExecutorService" object-type="system-all"></managed-scheduled-executor-service>
     <managed-thread-factory description="thread factory" jndi-name="concurrent/__defaultManagedThreadFactory" object-type="system-all"></managed-thread-factory>
     <jdbc-connection-pool driver-classname="com.mysql.jdbc.Driver" name="mysql_auth" res-type="java.sql.Driver">
-      <property name="databaseName" value="userdatabase"></property>
+      <property name="databaseName" value="invaliddatadatabase"></property>
       <property name="password" value="root"></property>
       <property name="user" value="root"></property>
       <property name="useSSL" value="false"></property>
       <property name="allowPublicKeyRetrieval" value="true"></property>
       <property name="serverName" value="db"></property>
-      <property name="URL" value="jdbc:mysql://db:3306/userdatabase"></property>
+      <property name="URL" value="jdbc:mysql://db:3306/invaliddatadatabase"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="mysql_auth" jndi-name="jdbc/authentication"></jdbc-resource>
   </resources>
