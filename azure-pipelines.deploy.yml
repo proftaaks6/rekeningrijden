@@ -10,6 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloud'
+      organization: 'proftaaks6'
+      scannerMode: 'Other'
+      cliProjectKey: 'proftaaks6_rekeningrijden'
+      projectKey: 'proftaaks6_rekeningrijden'
+      extraProperties: 'sonar.projectKey=proftaaks6_rekeningrijden'
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
@@ -21,6 +29,9 @@ steps:
       mavenVersionOption: 'Default'
       mavenAuthenticateFeed: false
       sqMavenPluginVersionChoice: 'latest'
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
   - task: CmdLine@2
     inputs:
       script: 'cd _Tools && sh copy_docker_files.sh && cd ..'
