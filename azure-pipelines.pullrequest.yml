@@ -6,8 +6,11 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
+pr:
+- development
+- master
 
+steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloud'
