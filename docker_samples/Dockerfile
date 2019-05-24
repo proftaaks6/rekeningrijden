@@ -9,9 +9,9 @@ RUN dos2unix domain.xml
 
 FROM payara/micro as build
 
-COPY --from=convert --chown=payara:payara ./domain.xml domain.xml
 COPY --from=convert --chown=payara:payara mysql.jar mysql.jar
-COPY --chown=payara:payara ./target/Rekeningrijden.war deploy.war
+COPY --chown=payara:payara ./target/_NAME_.war deploy.war
+COPY --from=convert --chown=payara:payara ./domain.xml domain.xml
 
 #java -jar /opt/payara/payara-micro.jar  --addJars mysql.jar --domainConfig domain.xml --deploy deploy.war --outputUberJar uber.jar
 RUN ["java", "-jar", "/opt/payara/payara-micro.jar", "--addJars", "mysql.jar", "--domainConfig", "domain.xml", "--deploy", "deploy.war", "--outputUberJar",  "uber.jar"]
