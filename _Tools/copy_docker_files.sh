@@ -15,10 +15,10 @@ sed -i 's/_DATABASE_/invaliddatadatabase/g' ../MovementSystem/MovementProxy/doma
 sed -i 's/_DATABASE_/movementdatabase/g' ../MovementSystem/MovementRegistrationService/domain.xml
 sed -i 's/_DATABASE_/userdatabase/g' ../UserSystem/UserSystem/domain.xml
 
-sed -i 's/_NAME_/DriverSystem/g' ../DriverSystem/DriverApplication/DockerFile
-sed -i 's/_NAME_/GovernmentAdmin/g' ../GovernmentSystem/GovernmentAdmin/DockerFile
-sed -i 's/_NAME_/InvoiceSystem/g' ../InvoiceSystem/InvoiceSystem/DockerFile
-sed -i 's/_NAME_/MovementProxy/g' ../MovementSystem/MovementProxy/DockerFile
-sed -i 's/_NAME_/MovementRegistration/g' ../MovementSystem/MovementRegistrationService/DockerFile
-sed -i 's/_NAME_/UserSystem/g' ../UserSystem/UserSystem/DockerFile
-sed -i 's/_NAME_/driverapplicationdatabase/g' ../DriverSystem/DriverApplication/DockerFile
+sed -i 's/_NAME_/DriverSystem/g' ../DriverSystem/DriverApplication/Dockerfile
+sed -i 's/_NAME_/GovernmentAdmin/g' ../GovernmentSystem/GovernmentAdmin/Dockerfile
+sed -i 's/_NAME_/InvoiceSystem/g' ../InvoiceSystem/InvoiceSystem/Dockerfile
+sed -i 's/_NAME_/MovementProxy/g' ../MovementSystem/MovementProxy/Dockerfile
+sed -i 's/_NAME_/MovementRegistration/g' ../MovementSystem/MovementRegistrationService/Dockerfile
+sed -i 's/_NAME_/UserSystem/g' ../UserSystem/UserSystem/Dockerfile
+sed -i 's/_NAME_/driverapplicationdatabase/g' ../DriverSystem/DriverApplication/Dockerfile
