@@ -22,3 +22,7 @@ sed -i 's/_NAME_/MovementProxy/g' ../MovementSystem/MovementProxy/Dockerfile
 sed -i 's/_NAME_/MovementRegistration/g' ../MovementSystem/MovementRegistrationService/Dockerfile
 sed -i 's/_NAME_/UserSystem/g' ../UserSystem/UserSystem/Dockerfile
 sed -i 's/_NAME_/driverapplicationdatabase/g' ../DriverSystem/DriverApplication/Dockerfile
+
+
+rm -rf ../Utils/rabbitmq/src/main/resources/config.cfg
+mv ../Utils/rabbitmq/src/main/resources/config_prod.cfg ../Utils/rabbitmq/src/main/resources/config.cfg
