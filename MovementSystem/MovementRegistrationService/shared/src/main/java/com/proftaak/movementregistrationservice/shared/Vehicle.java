@@ -17,6 +17,9 @@ public class Vehicle {
 
     private List<VehicleTracker> trackers;
 
+    public Vehicle() {
+    }
+
     public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission, List<VehicleTracker> trackers) {
         this.id = id;
         this.vehicleType = type;
