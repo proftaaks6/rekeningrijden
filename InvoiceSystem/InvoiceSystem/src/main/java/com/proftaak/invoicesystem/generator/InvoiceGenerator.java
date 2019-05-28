@@ -30,7 +30,7 @@ public class InvoiceGenerator {
     @Inject
     private InvoiceProcessingService processingService;
 
-    @Schedule(hour = "*", minute = "*", second = "*/1",  persistent = false)
+    @Schedule(dayOfWeek = "Sun", hour = "0", persistent = false)
     public void generatePeriodically() {
         Invoice invoice = generateInvoice(new Invoice());
         processingService.addInvoice(invoice);
