@@ -60,6 +60,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public ClientUser editUser(ClientUser user) {
+        try {
+            return em.merge(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public UserVehicle getUserVehicle(long vehicleId, long userId) {
         try
         {
