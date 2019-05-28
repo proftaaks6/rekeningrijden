@@ -8,4 +8,5 @@ public interface LoginAttemptDao
 	LoginAttempt getById(long id);
 	List<LoginAttempt> getByUserId(long userId);
 	List<LoginAttempt> getAll();
+	LoginAttempt add(LoginAttempt loginAttempt);
 }
