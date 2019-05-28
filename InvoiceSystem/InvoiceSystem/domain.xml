@@ -1,44 +1,38 @@
-<!--
 
-    DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
-
-    Copyright (c) 2010-2013 Oracle and/or its affiliates. All rights reserved.
-
-    The contents of this file are subject to the terms of either the GNU
-    General Public License Version 2 only ("GPL") or the Common Development
-    and Distribution License("CDDL") (collectively, the "License").  You
-    may not use this file except in compliance with the License.  You can
-    obtain a copy of the License at
-    https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html
-    or packager/legal/LICENSE.txt.  See the License for the specific
-    language governing permissions and limitations under the License.
-
-    When distributing the software, include this License Header Notice in each
-    file and include the License file at packager/legal/LICENSE.txt.
-
-    GPL Classpath Exception:
-    Oracle designates this particular file as subject to the "Classpath"
-    exception as provided by Oracle in the GPL Version 2 section of the License
-    file that accompanied this code.
-
-    Modifications:
-    If applicable, add the following below the License Header, with the fields
-    enclosed by brackets [] replaced by your own identifying information:
-    "Portions Copyright [year] [name of copyright owner]"
-
-    Contributor(s):
-    If you wish your version of this file to be governed by only the CDDL or
-    only the GPL Version 2, indicate your decision by adding "[Contributor]
-    elects to include this software in this distribution under the [CDDL or GPL
-    Version 2] license."  If you don't indicate a single choice of license, a
-    recipient has the option to distribute your version of this file under
-    either the CDDL, the GPL Version 2 or to extend the choice of license to
-    its licensees as provided above.  However, if you add GPL Version 2 code
-    and therefore, elected the GPL Version 2 license, then the option applies
-    only if the new code is made subject to such option by the copyright
-    holder.
-Portions Copyright [2016] [C2B2 Consulting Limited and/or its affiliates]
--->
+        <!--
+            DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+            Copyright (c) 2010-2013 Oracle and/or its affiliates. All rights reserved.
+            The contents of this file are subject to the terms of either the GNU
+            General Public License Version 2 only ("GPL") or the Common Development
+            and Distribution License("CDDL") (collectively, the "License").  You
+            may not use this file except in compliance with the License.  You can
+            obtain a copy of the License at
+            https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html
+            or packager/legal/LICENSE.txt.  See the License for the specific
+            language governing permissions and limitations under the License.
+            When distributing the software, include this License Header Notice in each
+            file and include the License file at packager/legal/LICENSE.txt.
+            GPL Classpath Exception:
+            Oracle designates this particular file as subject to the "Classpath"
+            exception as provided by Oracle in the GPL Version 2 section of the License
+            file that accompanied this code.
+            Modifications:
+            If applicable, add the following below the License Header, with the fields
+            enclosed by brackets [] replaced by your own identifying information:
+            "Portions Copyright [year] [name of copyright owner]"
+            Contributor(s):
+            If you wish your version of this file to be governed by only the CDDL or
+            only the GPL Version 2, indicate your decision by adding "[Contributor]
+            elects to include this software in this distribution under the [CDDL or GPL
+            Version 2] license."  If you don't indicate a single choice of license, a
+            recipient has the option to distribute your version of this file under
+            either the CDDL, the GPL Version 2 or to extend the choice of license to
+            its licensees as provided above.  However, if you add GPL Version 2 code
+            and therefore, elected the GPL Version 2 license, then the option applies
+            only if the new code is made subject to such option by the copyright
+            holder.
+        Portions Copyright [2016] [C2B2 Consulting Limited and/or its affiliates]
+        -->
 
 <domain log-root="${com.sun.aas.instanceRoot}/logs" application-root="${com.sun.aas.instanceRoot}/applications" version="10.0">
   <security-configurations>
@@ -62,14 +56,14 @@ Portions Copyright [2016] [C2B2 Consulting Limited and/or its affiliates]
     <managed-executor-service maximum-pool-size="200" core-pool-size="1" long-running-tasks="true" keep-alive-seconds="300" hung-after-seconds="300" task-queue-capacity="20000" jndi-name="concurrent/__defaultManagedExecutorService" object-type="system-all"></managed-executor-service>
     <managed-scheduled-executor-service core-pool-size="1" long-running-tasks="true" keep-alive-seconds="300" hung-after-seconds="300" jndi-name="concurrent/__defaultManagedScheduledExecutorService" object-type="system-all"></managed-scheduled-executor-service>
     <managed-thread-factory description="thread factory" jndi-name="concurrent/__defaultManagedThreadFactory" object-type="system-all"></managed-thread-factory>
-    <jdbc-connection-pool driver-classname="com.mysql.cj.jdbc.Driver" name="mysql_auth" res-type="java.sql.Driver">
-      <property name="databaseName" value="invoicedatabase"></property>
-      <property name="password" value="D!kkedatabasepw1"></property>
-      <property name="user" value="proftaak"></property>
+    <jdbc-connection-pool driver-classname="com.mysql.jdbc.Driver" name="mysql_auth" res-type="java.sql.Driver">
+      <property name="databaseName" value="_DATABASE_"></property>
+      <property name="password" value="root"></property>
+      <property name="user" value="root"></property>
       <property name="useSSL" value="false"></property>
       <property name="allowPublicKeyRetrieval" value="true"></property>
-      <property name="serverName" value="192.168.24.70"></property>
-      <property name="URL" value="jdbc:mysql://192.168.24.70:3306/invoicedatabase"></property>
+      <property name="serverName" value="db"></property>
+      <property name="URL" value="jdbc:mysql://db:3306/_DATABASE_"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="mysql_auth" jndi-name="jdbc/authentication"></jdbc-resource>
   </resources>
