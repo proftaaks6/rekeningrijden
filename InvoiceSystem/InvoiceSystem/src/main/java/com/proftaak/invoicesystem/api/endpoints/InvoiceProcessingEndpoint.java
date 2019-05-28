@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path(value = "/invoicesystem")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,9 +22,9 @@ public class InvoiceProcessingEndpoint {
     private InvoiceProcessingService service;
 
     @POST
-    @Path("/markAsPaid")
+    @Path("/markAsPaid/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response markAsPaid(int invoiceId){
+    public Response markAsPaid(@PathParam("id") int invoiceId){
         if (service.markAsPaid(invoiceId)) {
             return Response.ok().build();
         } else {
@@ -33,8 +34,13 @@ public class InvoiceProcessingEndpoint {
 
     @GET
     @Path("/vehicle/{vehicleIds}")
-    public String getInvoicesForUser(@PathParam("vehicleIds") String unparsedVehicleIds) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(service.getInvoicesForUser(unparsedVehicleIds));
+    public Response getInvoicesForUser(@PathParam("vehicleIds") String unparsedVehicleIds) throws JsonProcessingException {
+        List<Invoice> invoices = service.getInvoicesForUser(unparsedVehicleIds);
+        if(invoices.size() > 0){
+            return Response.ok(invoices).build();
+        } else  {
+            return Response.noContent().build();
+        }
     }
 
     @POST
@@ -45,6 +51,17 @@ public class InvoiceProcessingEndpoint {
             return Response.ok().build();
         } else {
             return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/id/{id}")
+    public Response getInvoiceById(@PathParam("id") long id){
+        Invoice invoice = service.getInvoiceById(id);
+        if(invoice != null){
+            return Response.ok(invoice).build();
+        } else {
+            return Response.noContent().build();
         }
     }
 
