@@ -1,6 +1,5 @@
 package com.proftaak.invoicesystem.models;
 
-import javax.ejb.Local;
 import javax.persistence.*;
 
 @Entity

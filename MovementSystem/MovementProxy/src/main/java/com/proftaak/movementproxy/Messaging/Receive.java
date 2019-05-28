@@ -2,7 +2,6 @@ package com.proftaak.movementproxy.Messaging;
 
 import com.google.gson.Gson;
 import com.proftaak.movementproxy.dao.ProxyDao;
-import com.proftaak.movementproxy.dao.daoImplementation.ProxyDaoImplementation;
 import com.proftaak.movementproxy.models.InvalidData;
 import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
@@ -14,9 +13,6 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 @Singleton

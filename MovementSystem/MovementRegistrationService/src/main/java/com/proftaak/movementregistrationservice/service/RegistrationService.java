@@ -1,16 +1,15 @@
 package com.proftaak.movementregistrationservice.service;
 
+import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
 import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
-import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
-
 import com.proftaak.movementregistrationservice.models.VehicleTracker;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.List;
-import javax.xml.stream.Location;
 import java.util.Date;
+import java.util.List;
 
 @Stateless
 public class RegistrationService {

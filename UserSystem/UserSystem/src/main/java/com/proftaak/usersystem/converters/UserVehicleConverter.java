@@ -1,12 +1,12 @@
 package com.proftaak.usersystem.converters;
 
-import com.proftaak.usersystem.models.ClientUser;
 import com.proftaak.usersystem.models.UserVehicle;
 import com.proftaak.usersystem.service.UserService;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class UserVehicleConverter

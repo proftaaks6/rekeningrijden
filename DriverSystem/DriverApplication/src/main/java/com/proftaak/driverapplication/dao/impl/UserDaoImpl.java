@@ -2,11 +2,11 @@ package com.proftaak.driverapplication.dao.impl;
 
 import com.proftaak.driverapplication.dao.UserDao;
 import com.proftaak.driverapplication.models.DriverUser;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 public class UserDaoImpl implements UserDao

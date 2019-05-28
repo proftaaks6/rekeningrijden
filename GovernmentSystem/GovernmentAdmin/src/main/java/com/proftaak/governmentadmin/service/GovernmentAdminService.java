@@ -6,21 +6,8 @@ import com.proftaak.governmentadmin.dao.UserDao;
 import com.proftaak.governmentadmin.models.GovernmentEmployee;
 import com.proftaak.governmentadmin.utility.AuthenticationUtils;
 import com.proftaak.usersystem.shared.ClientUser;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.mail.MessagingException;
-
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
+import org.apache.http.HttpException;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -30,7 +17,13 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import sun.net.www.http.HttpClient;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class GovernmentAdminService
@@ -82,7 +75,7 @@ public class GovernmentAdminService
         HttpEntity entity = response.getEntity();
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            throw new Exception();
+            throw new HttpException();
         }
 
         if (entity != null) {
@@ -93,7 +86,7 @@ public class GovernmentAdminService
         return null;
     }
 
-    public List<ClientUser> getUsers() throws Exception
+    public List<ClientUser> getUsers() throws IOException, HttpException
     {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet("http://user_system:8080/deploy/v1/usersystem/users");
@@ -103,7 +96,7 @@ public class GovernmentAdminService
         HttpEntity entity = response.getEntity();
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            throw new Exception();
+            throw new HttpException();
         }
 
         if (entity != null) {

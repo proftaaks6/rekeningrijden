@@ -1,11 +1,10 @@
 package com.proftaak.movementregistrationservice.converters;
 
 import com.proftaak.movementregistrationservice.models.LocationPoint;
-import com.proftaak.movementregistrationservice.models.Vehicle;
 
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.Stateless;
 
 
 @Stateless

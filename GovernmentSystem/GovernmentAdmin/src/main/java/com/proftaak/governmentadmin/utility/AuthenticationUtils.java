@@ -18,8 +18,9 @@ public class AuthenticationUtils {
         md.update(password.getBytes("UTF-8"));
         byte[] digest = md.digest();
 
-        return DatatypeConverter.printBase64Binary(digest).toString();
+        return DatatypeConverter.printBase64Binary(digest);
     }
 
-
+    private AuthenticationUtils() {
+    }
 }
