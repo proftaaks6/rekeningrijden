@@ -1,6 +1,7 @@
 package com.proftaak.usersystem.controller;
 
 import com.proftaak.usersystem.converters.ClientUserConverter;
+import com.proftaak.usersystem.models.UserVehicle;
 import com.proftaak.usersystem.models.Vehicle;
 import com.proftaak.usersystem.service.UserService;
 import com.proftaak.usersystem.service.VehicleService;
@@ -19,6 +20,7 @@ import javax.xml.registry.infomodel.User;
 
 @Path(value = "/usersystem")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
 @Stateless
 public class UserSystemController {
 
@@ -84,11 +86,12 @@ public class UserSystemController {
 
     @POST
     @Path("/change")
-    public Response change(com.proftaak.usersystem.models.ClientUser user) {
+    public Response change(@FormParam("name") String name, @FormParam("address") String address, @FormParam("residence") String residence, @FormParam("email") String email) {
         try
         {
+            com.proftaak.usersystem.models.ClientUser user = new com.proftaak.usersystem.models.ClientUser(name,address,residence,new ArrayList<UserVehicle>(),email);
             ClientUser editedUser = new ClientUserConverter().toShared(userService.editUser(user));
-            return Response.ok(user).build();
+            return Response.ok(editedUser).build();
         } catch (Exception e) {
             throw new BadRequestException();
         }
