@@ -6,6 +6,9 @@ import java.util.List;
 
 @Table(name="tbl_route")
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "getPriceRowByVehicle", query = "SELECT p FROM PriceRow p WHERE p.vehicleId = :vehicleId")
+})
 public class PriceRow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

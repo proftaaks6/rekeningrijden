@@ -5,6 +5,7 @@ import com.proftaak.invoicesystem.shared.Region;
 
 public class RegionConverter {
     private RegionPointConverter pointConverter = new RegionPointConverter();
+
     public Region fromSquareEntity(SquareRegion region){
         Region region1 = new Region();
         region1.setTopLeft(pointConverter.fromEntity(region.getTopLeft()));

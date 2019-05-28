@@ -51,4 +51,8 @@ public class RegionService {
         }
         return null;
     }
+
+    public List<SquareRegion> getRegions(){
+        return regionDao.getAllRegions();
+    }
 }

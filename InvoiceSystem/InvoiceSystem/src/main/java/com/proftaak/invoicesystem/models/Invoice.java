@@ -23,10 +23,10 @@ import java.util.List;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Column
-    private int vehicleId;
+    private long vehicleId;
 
     @Column
     private double totalDistance;
@@ -51,11 +51,11 @@ public class Invoice {
         this.date = date;
     }
 
-    public int getVehicleId() {
+    public long getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleId(int vehicleId) {
+    public void setVehicleId(long vehicleId) {
         this.vehicleId = vehicleId;
     }
 
@@ -87,11 +87,11 @@ public class Invoice {
         this.isPaid = false;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getVehicle() {
+    public long getVehicle() {
         return vehicleId;
     }
 

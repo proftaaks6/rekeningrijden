@@ -24,7 +24,9 @@ public class InvoiceProcessingService {
         return processingDao.getInvoicesForUser(unparsedVehicleIds);
     }
 
-    public boolean regenerateInvoice(int invoiceId) {
-        throw new NotImplementedException();
-    }
+    public Invoice regenerateInvoice(long invoiceId) {return processingDao.regenerateInvoice(invoiceId);}
+
+    public Invoice addInvoice(Invoice invoice){return processingDao.addInvoice(invoice);}
+
+    public Invoice getInvoiceById(long id){return processingDao.getInvoiceById(id);}
 }

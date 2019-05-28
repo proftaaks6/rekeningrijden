@@ -4,6 +4,7 @@ import com.proftaak.invoicesystem.converters.LocationPointConverter;
 import com.proftaak.invoicesystem.models.Invoice;
 import com.proftaak.invoicesystem.models.PriceRow;
 import com.proftaak.invoicesystem.models.SquareRegion;
+import com.proftaak.invoicesystem.services.InvoiceProcessingService;
 import com.proftaak.invoicesystem.services.LocationPointService;
 import com.proftaak.invoicesystem.services.RegionService;
 import com.proftaak.movementregistrationservice.shared.LocationPoint;
@@ -26,8 +27,22 @@ public class InvoiceGenerator {
     @Inject
     private RegionService regionService;
 
+    @Inject
+    private InvoiceProcessingService processingService;
+
     @Schedule(hour = "*", minute = "*", second = "*/1",  persistent = false)
     public void generatePeriodically() {
+        Invoice invoice = generateInvoice(new Invoice());
+        processingService.addInvoice(invoice);
+    }
+
+    public Invoice regenerateInvoice(Invoice invoice){
+        Invoice regeneratedInvoice = generateInvoice(invoice);
+        return processingService.regenerateInvoice(regeneratedInvoice);
+    }
+
+    private Invoice generateInvoice(Invoice invoice){
+
         // Subtract 1 month from date
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -1);
@@ -35,18 +50,25 @@ public class InvoiceGenerator {
 
         Date now = new Date(); //don't touch this
 
-        int vehicleId = generator.getNextVehicleId(from, now);
+        long vehicleId = 0;
 
-        if (vehicleId <= 0) {
-            return; //there are no vehicles to process
+        if(invoice == null){
+            vehicleId = generator.getNextVehicleId(from, now);
+        } else {
+            vehicleId = invoice.getVehicleId();
         }
+
+        if(vehicleId <= 0){
+            return null;
+        }
+
         List<LocationPoint> locationPoints = locationPointService.getLocationPoints(vehicleId, from, now);
 
         Map<SquareRegion, PriceRow> priceRows = new HashMap<>();
         LocationPoint last = null;
         regionService.reloadRegionsInMemory();
-        for (LocationPoint locationPoint : locationPoints) {
-            SquareRegion region = regionService.getRegionContainingPoint(locationPoint.getLongitude(), locationPoint.getLatitude());
+        for(LocationPoint locationPoint : locationPoints){
+            SquareRegion region = regionService.getRegionContainingPoint(locationPoint.getLatitude(), locationPoint.getLongitude());
             priceRows.putIfAbsent(region, new PriceRow(region));
             PriceRow row = priceRows.get(region);
             if(last != null){
@@ -55,10 +77,9 @@ public class InvoiceGenerator {
                 row.setDistance(total);
                 row.getLocationPoints().add(new LocationPointConverter().toEntity(locationPoint));
             }
+
             last = locationPoint;
         }
-
-        Invoice invoice = new Invoice();
 
         ArrayList<PriceRow> rows = new ArrayList<>(priceRows.values());
         rows.forEach(PriceRow::calculatePriceBasedOnDistance);
@@ -71,7 +92,7 @@ public class InvoiceGenerator {
         invoice.setTotalPrice(rows.stream().mapToDouble(PriceRow::getPrice).sum());
         invoice.setVehicleId(vehicleId);
 
-        //todo: add invoice to database
+        return invoice;
     }
 
     private double degreesToRadians(double degrees) {

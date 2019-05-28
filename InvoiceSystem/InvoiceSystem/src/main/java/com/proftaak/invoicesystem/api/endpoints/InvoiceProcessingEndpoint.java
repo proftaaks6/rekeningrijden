@@ -2,6 +2,7 @@ package com.proftaak.invoicesystem.api.endpoints;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proftaak.invoicesystem.models.Invoice;
 import com.proftaak.invoicesystem.services.InvoiceProcessingService;
 import com.proftaak.invoicesystem.services.VehicleProcessingService;
 
@@ -38,8 +39,9 @@ public class InvoiceProcessingEndpoint {
 
     @POST
     @Path("/regenerate/{id}")
-    public Response regenerateInvoice(@PathParam("id") int invoiceId) {
-        if (service.regenerateInvoice(invoiceId)) {
+    public Response regenerateInvoice(@PathParam("id") long invoiceId) {
+
+        if (service.regenerateInvoice(invoiceId)  != null) {
             return Response.ok().build();
         } else {
             return Response.serverError().build();

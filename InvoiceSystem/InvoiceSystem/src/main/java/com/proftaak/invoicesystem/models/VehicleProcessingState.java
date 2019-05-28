@@ -13,6 +13,10 @@ import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
         @NamedQuery(
                 name = "VehicleProcessingState.getAll",
                 query = "SELECT p FROM VehicleProcessingState p"
+        ),
+        @NamedQuery(
+                name = "VehicleProcessingState.getById",
+                query = "SELECT p FROM VehicleProcessingState p where p.vehicleId = :vehicleId"
         )
 
 })

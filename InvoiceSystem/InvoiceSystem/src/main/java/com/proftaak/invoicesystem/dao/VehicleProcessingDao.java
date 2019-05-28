@@ -8,4 +8,5 @@ import java.util.List;
 public interface VehicleProcessingDao {
     boolean addNewVehicle(int vehicleId);
     List<VehicleProcessingState> getAllVehicles();
+    VehicleProcessingState getVehicleById(long id);
 }

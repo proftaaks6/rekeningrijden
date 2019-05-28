@@ -16,7 +16,7 @@ import static com.proftaak.invoicesystem.helpers.RestCommuncationHelper.getRespo
 
 @Stateless
 public class LocationPointService {
-    public List<LocationPoint> getLocationPoints(int vehicleId, Date from, Date to){
+    public List<LocationPoint> getLocationPoints(long vehicleId, Date from, Date to){
         try {
             return (List<LocationPoint>) callUrlAndCastResultMethode(
                     (new TypeLiteral<List<LocationPoint>>(){}).getType(),

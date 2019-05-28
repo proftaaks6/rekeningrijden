@@ -1,5 +1,6 @@
 package com.proftaak.invoicesystem.dao;
 
+import com.proftaak.invoicesystem.generator.InvoiceGenerator;
 import com.proftaak.invoicesystem.models.Invoice;
 import com.proftaak.invoicesystem.models.SquareRegion;
 
@@ -46,5 +47,40 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
         }
 
         return invoices;
+    }
+
+    @Override
+    public Invoice addInvoice(Invoice invoice) {
+        try {
+            em.persist(invoice);
+            em.flush();
+            return invoice;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Invoice regenerateInvoice(Invoice invoice) {
+        try {
+            em.merge(invoice);
+            return invoice;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Invoice getInvoiceById(long id) {
+        try {
+            Invoice invoice = em.createNamedQuery("Invoice.GetById", Invoice.class).setParameter("invoiceId", id).getSingleResult();
+            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+            return invoiceGenerator.regenerateInvoice(invoice);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

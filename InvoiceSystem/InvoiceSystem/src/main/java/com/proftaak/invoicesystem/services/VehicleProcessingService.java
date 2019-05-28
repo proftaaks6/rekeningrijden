@@ -28,4 +28,6 @@ public class VehicleProcessingService {
     public List<VehicleProcessingState> getAllVehicles() {
         return processingDao.getAllVehicles();
     }
+
+    public VehicleProcessingState getVehicleById(long vehicleId){return processingDao.getVehicleById(vehicleId);}
 }

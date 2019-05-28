@@ -32,4 +32,9 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
             return null;
         }
     }
+
+    @Override
+    public VehicleProcessingState getVehicleById(long vehicleId) {
+        return em.createNamedQuery("VehicleProcessingState.getById", VehicleProcessingState.class).setParameter("vehicleId", vehicleId).getSingleResult();
+    }
 }
