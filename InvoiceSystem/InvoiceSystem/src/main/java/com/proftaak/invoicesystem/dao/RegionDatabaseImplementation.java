@@ -22,4 +22,10 @@ public class RegionDatabaseImplementation implements RegionDao{
     public List<SquareRegion> getAllRegions() {
         return provider.getEm().createNamedQuery("SquareRegion.all").getResultList();
     }
+
+    @Override
+    public boolean removeRegions() {
+        provider.getEm().remove(getAllRegions());
+        return true;
+    }
 }
