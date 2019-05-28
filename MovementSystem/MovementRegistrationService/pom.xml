@@ -13,6 +13,15 @@
 
     <artifactId>MovementRegistrationService</artifactId>
 
+    <build>
+        <finalName>MovementRegistration</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
+
 
     <dependencies>
         <dependency>
@@ -20,11 +29,6 @@
             <artifactId>MovementRegistrationService.shared</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>amqp-client</artifactId>
-            <version>5.1.2</version>
         </dependency>
         <dependency>
             <groupId>proftaak-s6</groupId>

@@ -2,11 +2,11 @@ package com.proftaak.usersystem.service;
 
 import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.models.ClientUser;
-import com.proftaak.usersystem.models.Vehicle;
+import com.proftaak.usersystem.models.UserVehicle;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 @Stateless
 public class UserService {
@@ -31,4 +31,8 @@ public class UserService {
     }
 
     public ClientUser editUser(ClientUser user){return userDao.editUser(user);}
+
+    public UserVehicle getUserVehicle(long vehicleId, long userId) {
+        return userDao.getUserVehicle(vehicleId, userId);
+    }
 }

@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.registry.infomodel.User;
 
-
 @Path(value = "/usersystem")
 @Produces(MediaType.APPLICATION_JSON)
 @Stateless
@@ -28,6 +27,9 @@ public class UserSystemController {
 
     @Inject
     private VehicleService vehicleService;
+
+    @Inject
+    private ClientUserConverter clientUserConverter;
 
     @POST
     @Path("/userInfo")
@@ -48,7 +50,7 @@ public class UserSystemController {
     @Path("/{id}/car/{chassisNumber}")
     public Response addCarToUser(@PathParam("id") int userId, @PathParam("chassisNumber") String chassisNumber) {
         if (vehicleService.addCarToUser(userService.getClientUserById(userId), chassisNumber)) {
-            return Response.ok().build();
+            return Response.ok().entity(true).build();
         } else {
             return Response.serverError().build();
         }
@@ -60,7 +62,20 @@ public class UserSystemController {
     {
         try
         {
-            return new ClientUserConverter().toShared(userService.getAllUsers());
+            return clientUserConverter.toShared(userService.getAllUsers());
+        } catch (Exception e)
+        {
+            throw new BadRequestException();
+        }
+    }
+
+    @GET
+    @Path("/users/{id}")
+    public ClientUser getUser(@PathParam("id") int userId)
+    {
+        try
+        {
+            return new ClientUserConverter().toShared(userService.getClientUserById(userId));
         } catch (Exception e)
         {
             throw new BadRequestException();

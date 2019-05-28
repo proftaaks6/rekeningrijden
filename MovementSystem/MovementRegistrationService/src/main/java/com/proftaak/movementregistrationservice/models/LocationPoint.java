@@ -4,6 +4,15 @@ import javax.persistence.*;
 import java.util.Date;
 @Entity
 @Table(name="tbl_locationPoint")
+@NamedQueries({
+        @NamedQuery(name="LocationPoint.getLocationPointsForVehicleWithStartAndEndDate",
+                query = "SELECT lp FROM LocationPoint lp " +
+                        "   JOIN lp.tracker t " +
+                        "   JOIN t.vehicleTrackers vts " +
+                        "   JOIN vts.vehicle v "+
+                        "WHERE v.id = :id AND lp.date >= :startDate AND lp.date < :endDate"),
+
+})
 public class LocationPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +23,9 @@ public class LocationPoint {
 
     @Column
     private double latitude;
+
+    @ManyToOne
+    private Tracker tracker;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,5 +65,15 @@ public class LocationPoint {
 
     public long getId() {
         return id;
+    }
+
+    public Tracker getTracker()
+    {
+        return tracker;
+    }
+
+    public void setTracker(Tracker tracker)
+    {
+        this.tracker = tracker;
     }
 }

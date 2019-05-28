@@ -8,6 +8,10 @@
         <version>1.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+
+    <build>
+        <finalName>InvoiceSystem</finalName>
+    </build>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>InvoiceSystem</artifactId>
@@ -16,9 +20,21 @@
     <dependencies>
         <dependency>
             <groupId>proftaak-s6</groupId>
+            <artifactId>InvoiceSystem.shared</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>proftaak-s6</groupId>
             <artifactId>MovementRegistrationService.shared</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.8</version>
+        </dependency>
+
     </dependencies>
 </project>

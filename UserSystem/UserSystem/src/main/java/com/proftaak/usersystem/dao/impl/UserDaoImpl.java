@@ -2,13 +2,13 @@ package com.proftaak.usersystem.dao.impl;
 
 import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.models.ClientUser;
-import com.proftaak.usersystem.models.Vehicle;
+import com.proftaak.usersystem.models.UserVehicle;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class UserDaoImpl implements UserDao {
@@ -65,6 +65,19 @@ public class UserDaoImpl implements UserDao {
             return em.merge(user);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public UserVehicle getUserVehicle(long vehicleId, long userId) {
+        try
+        {
+            return em.createNamedQuery("UserVehicle.get", UserVehicle.class)
+                    .setParameter("vehicleId", vehicleId)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+        } catch (Exception e) {
             return null;
         }
     }

@@ -1,5 +1,7 @@
 package com.proftaak.movementregistrationservice.shared;
 
+import java.util.List;
+
 public class Vehicle {
     private int id;
 
@@ -11,12 +13,21 @@ public class Vehicle {
 
     private double emission;
 
-    public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission) {
+    private Tracker activeTracker;
+
+    private List<VehicleTracker> trackers;
+
+    public Vehicle() {
+    }
+
+    public Vehicle(int id, VehicleType type, String chassisNumber, FuelType fuelType, double emission, List<VehicleTracker> trackers) {
         this.id = id;
         this.vehicleType = type;
         this.chassisNumber = chassisNumber;
         this.fuelType = fuelType;
         this.emission = emission;
+        this.trackers = trackers;
+        this.activeTracker = this.getActiveTracker();
     }
 
     public int getId() {
@@ -57,5 +68,15 @@ public class Vehicle {
 
     public void setEmission(double emission) {
         this.emission = emission;
+    }
+
+    public Tracker getActiveTracker() {
+        for (VehicleTracker vehicleTracker : trackers) {
+            if(vehicleTracker.getEndDate() != null) {
+                return vehicleTracker.getTracker();
+            }
+        }
+
+        return null;
     }
 }

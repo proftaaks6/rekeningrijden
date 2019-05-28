@@ -17,11 +17,11 @@ import javax.persistence.TemporalType;
 @NamedQueries( {
 		@NamedQuery(
 				name = "LoginAttempt.getByUserId",
-				query="SELECT u FROM LoginAttempt u WHERE userId = :id"
+				query="SELECT u FROM LoginAttempt u WHERE u.userId = :id"
 		),
 		@NamedQuery(
 				name = "LoginAttempt.getById",
-				query="SELECT u FROM LoginAttempt u WHERE id = :id"
+				query="SELECT u FROM LoginAttempt u WHERE u.id = :id"
 		),
 		@NamedQuery(
 				name = "LoginAttempt.getAll",

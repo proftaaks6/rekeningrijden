@@ -1,12 +1,15 @@
 package com.proftaak.movementregistrationservice.api.endpoints;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proftaak.movementregistrationservice.converters.LocationPointConverter;
 import com.proftaak.movementregistrationservice.converters.TrackerConverter;
 import com.proftaak.movementregistrationservice.converters.VehicleConverter;
 import com.proftaak.movementregistrationservice.models.*;
 import com.proftaak.movementregistrationservice.service.RegistrationService;
 
+import java.io.IOException;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -35,7 +38,6 @@ public class RegistrationSystemEndpoint {
 
     @POST
     @Path("/tracker")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response addTracker(){
         if(registrationService.addTracker(new Tracker())){
             return Response.status(200).build();
@@ -66,6 +68,21 @@ public class RegistrationSystemEndpoint {
         }
     }
 
+    @GET
+    @Path("/tracker/{trackerId}/points")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
+    public Response getTrackerLocationPoints(@PathParam("trackerId") long trackerId){
+        return Response.ok().entity(pointConverter.toShared(registrationService.getLocationPointsForTracker(trackerId))).build();
+    }
+
+    @GET
+    @Path("/vehicle/{vehicleId}/points/from/{startValue}/to/{endValue}")
+    public Response getVehicleLocationPoints(@PathParam("vehicleId") long vehicleId, @PathParam("startValue") long startValue, @PathParam("endValue") long endValue){
+        Date startDate = new Date(startValue);
+        Date endDate = new Date(endValue);
+        return Response.ok().entity(pointConverter.toShared(registrationService.getLocationPointsForVehicle(vehicleId, startDate, endDate))).build();
+    }
+
     @POST
     @Path("/tracker/{trackerId}/vehicles")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
@@ -92,7 +109,7 @@ public class RegistrationSystemEndpoint {
     @POST
     @Path("/vehicle")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addVehicle(com.proftaak.movementregistrationservice.shared.Vehicle vehicle){
+    public Response addVehicle(com.proftaak.movementregistrationservice.shared.Vehicle vehicle) throws IOException {
         if(registrationService.addVehicle(vehicleConverter.toEntity(vehicle))){
             return Response.status(200).build();
         } else {
@@ -101,10 +118,10 @@ public class RegistrationSystemEndpoint {
     }
 
     @POST
-    @Path("/vehicle/{vehicleId}/tracker")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    public Response addTrackerToVehicle(com.proftaak.movementregistrationservice.shared.Tracker tracker, @PathParam("vehicleId") long vehicleId){
-        if(registrationService.addTrackerToVehicle(trackerConverter.toEntity(tracker), vehicleId)) {
+    @Path("/vehicle/{vehicleId}/tracker/{trackerId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addTrackerToVehicle(@PathParam("trackerId") long trackerId, @PathParam("vehicleId") long vehicleId){
+        if(registrationService.addTrackerToVehicle(trackerId, vehicleId)) {
             return Response.status(200).build();
         } else {
             return Response.status(400).build();
@@ -142,6 +159,14 @@ public class RegistrationSystemEndpoint {
     @GET
     @Path("vehicles")
     public List<com.proftaak.movementregistrationservice.shared.Vehicle> getAll(){
-        return registrationService.getAllVehicles().stream().map(x->vehicleConverter.toShared(x)).collect(Collectors.toList());
+        List<Vehicle> vehicles = registrationService.getAllVehicles();
+
+        return vehicleConverter.toShared(vehicles);
+    }
+
+    @GET
+    @Path("trackers")
+    public List<com.proftaak.movementregistrationservice.shared.Tracker> getAllTrackers(){
+        return trackerConverter.toShared(registrationService.getAllTrackers());
     }
 }

@@ -3,13 +3,12 @@ package com.proftaak.movementregistrationservice.Messaging;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.proftaak.movementregistrationservice.Dao.DaoImplementation.RegistrationDaoImplementation;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import com.proftaak.movementregistrationservice.config.Config;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
+import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.shared.JMSConsumer;
 import com.proftaak.movementregistrationservice.shared.MovementMessage;
-import com.proftaak.rabbitmq.ConnectionFactory;
 import com.rabbitmq.client.*;
 
 import javax.annotation.PostConstruct;
@@ -17,10 +16,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 @Singleton
 @Startup
@@ -43,15 +39,20 @@ public class Receive {
         Consumer defaultConsumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-                // String message = new String(body, "UTF-8");
-                // System.out.println(" [x] received '" + message + "'");
-
                 try{
                     // Get location from received message
                     MovementMessage movementMessage = gson.fromJson(new String(body, "UTF-8"), MovementMessage.class);
 
+
                     // Get last location from user
-                    LocationPoint lastLocation = dao.getTrackedById(movementMessage.getTrackerId()).getMostRecentLocationPoint();
+                    Tracker tracker = dao.getTrackedById(movementMessage.getTrackerId());
+
+                    if (tracker == null) {
+                        dao.addTracker(new Tracker(movementMessage.getTrackerId(), true));
+                        tracker = dao.getTrackedById(movementMessage.getTrackerId());
+                    }
+
+                    LocationPoint lastLocation = tracker.getMostRecentLocationPoint();
 
                     if (lastLocation != null) {
                         // Calculate distance from two points using some super duper complex math

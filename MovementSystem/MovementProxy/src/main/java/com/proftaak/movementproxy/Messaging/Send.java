@@ -3,16 +3,10 @@ package com.proftaak.movementproxy.Messaging;
 import com.proftaak.rabbitmq.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
-import com.sun.media.jfxmedia.logging.Logger;
 import org.apache.log4j.BasicConfigurator;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
-
 public class Send {
     private final static String QUEUE_NAME = "MovementProxy_To_MovementRegistration";
     private Connection connection;

@@ -13,22 +13,23 @@ import java.util.List;
                 query = "SELECT t FROM Tracker t WHERE t.id = :id"),
         @NamedQuery(name="Tracker.getAll",
                 query = "SELECT t FROM Tracker t"),
+        @NamedQuery(name="Tracker.getLocationPointsForTracker",
+                query = "SELECT t.locationPoints FROM Tracker t WHERE t.id = :id"),
 
 })
 public class Tracker {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column
     private boolean active;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tracker")
     private List<LocationPoint> locationPoints;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tracker")
+	private List<VehicleTracker> vehicleTrackers;
 
     public Tracker() {
 
@@ -43,6 +44,7 @@ public class Tracker {
         this.id = id;
         this.active = active;
         this.locationPoints = new ArrayList<>();
+        this.vehicleTrackers = new ArrayList<>();
     }
 
     public LocationPoint getMostRecentLocationPoint() {
@@ -93,14 +95,33 @@ public class Tracker {
 
     public void addLocationPoint(LocationPoint point) {
         this.locationPoints.add(point);
+        point.setTracker(this);
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
+	public List<VehicleTracker> getVehicleTrackers()
+	{
+		return vehicleTrackers;
+	}
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
+	public void setVehicleTrackers(List<VehicleTracker> vehicleTrackers)
+	{
+		this.vehicleTrackers = vehicleTrackers;
+	}
 
+	public void addVehicleTracker(VehicleTracker vehicleTracker) {
+    	this.disableActiveTracker();
+    	this.vehicleTrackers.add(vehicleTracker);
+	}
+
+	public void disableActiveTracker() {
+    	for (int i = 0 ; i < vehicleTrackers.size(); i++) {
+    		VehicleTracker vehicleTracker = vehicleTrackers.get(i);
+    		if (vehicleTracker.getEndDate() == null) {
+    			vehicleTracker.setEndDate(new Date());
+    			vehicleTrackers.set(i, vehicleTracker);
+    			break;
+			}
+		}
+	}
 }
+

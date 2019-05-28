@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
+
+    private Config config = new Config();
+
     public ConnectionFactory(){
         super();
         setUsername("guest");
@@ -19,15 +22,19 @@ public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
     @Override
     public Connection newConnection() throws IOException, TimeoutException {
 
-        Address address1 = new Address("rabbit_node_1", 5672);
-        Address a2 = new Address("rabbit_node_2", 5672);
+        Address address1;
+
+        if(Boolean.valueOf(config.getProperty("isProduction"))){
+            address1 = new Address("rabbitmq", 5682);
+
+        }else{
+            address1 = new Address("localhost", 5682);
+        }
         List<Address> list = new ArrayList<>();
         list.add(address1);
-        list.add(a2);
 
         AddressResolver addressResolver = createAddressResolver(list);
         return newConnection(addressResolver);
-
     }
 
 }

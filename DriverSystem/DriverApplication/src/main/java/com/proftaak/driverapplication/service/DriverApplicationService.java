@@ -4,6 +4,10 @@ import com.proftaak.driverapplication.dao.LoginAttemptDao;
 import com.proftaak.driverapplication.dao.UserDao;
 import com.proftaak.driverapplication.models.DriverUser;
 import com.proftaak.driverapplication.models.LoginAttempt;
+import com.proftaak.driverapplication.utility.AuthenticationUtils;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,9 +24,8 @@ public class DriverApplicationService
 		return userDao.getDriverUserById(id);
 	}
 
-	public DriverUser saveNewUser(long id) {
-		// Default password for now, in future a new user receives an email to reset his/her password.
-		return userDao.saveNewUser(id, "WELKOM123");
+	public DriverUser saveNewUser(String username, String password) {
+		return userDao.saveNewUser(username, password);
 	}
 
 	public List<LoginAttempt> getUserStatistics(long userId) {
@@ -31,5 +34,13 @@ public class DriverApplicationService
 
 	public LoginAttempt getUserStatisticById(long id) {
 		return loginAttemptDao.getById(id);
+	}
+
+	public DriverUser validateUser(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+		return userDao.verifyUser(username, AuthenticationUtils.encodeSHA256(password));
+	}
+
+	public LoginAttempt addLoginAttempt(LoginAttempt loginAttempt) {
+		return loginAttemptDao.add(loginAttempt);
 	}
 }

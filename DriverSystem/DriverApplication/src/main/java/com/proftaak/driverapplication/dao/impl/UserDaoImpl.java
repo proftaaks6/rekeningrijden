@@ -2,11 +2,11 @@ package com.proftaak.driverapplication.dao.impl;
 
 import com.proftaak.driverapplication.dao.UserDao;
 import com.proftaak.driverapplication.models.DriverUser;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 public class UserDaoImpl implements UserDao
@@ -16,10 +16,10 @@ public class UserDaoImpl implements UserDao
     private EntityManager em;
 
     @Override
-    public DriverUser saveNewUser(long id, String password)
+    public DriverUser saveNewUser(String username, String password)
     {
         try {
-            DriverUser user = new DriverUser(id, password);
+            DriverUser user = new DriverUser(username, password);
             em.persist(user);
             em.flush();
             return user;
@@ -48,5 +48,18 @@ public class UserDaoImpl implements UserDao
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public DriverUser verifyUser(String username, String password) {
+        DriverUser user = null;
+
+        try {
+            return em.createNamedQuery("DriverUser.validateUser", DriverUser.class).setParameter("username", username).setParameter("password", password).setMaxResults(1).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -8,7 +8,7 @@ public class ClientUser
 	private String name;
 	private String address;
 	private String residence;
-	private List<Integer> ownedCarIds;
+	private List<Integer> ownedVehicleIds;
 	private String email;
 
 	public ClientUser() {
@@ -19,7 +19,7 @@ public class ClientUser
 		this.name = name;
 		this.address = address;
 		this.residence = residence;
-		this.ownedCarIds = ownedCarIds;
+		this.ownedVehicleIds = ownedCarIds;
 		this.email = email;
 	}
 
@@ -31,8 +31,8 @@ public class ClientUser
 		return name;
 	}
 
-	public List<Integer> getOwnedCarIds() {
-		return ownedCarIds;
+	public List<Integer> getOwnedVehicleIds() {
+		return ownedVehicleIds;
 	}
 
 	public String getEmail() {

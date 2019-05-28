@@ -9,7 +9,6 @@
     <version>1.0</version>
     <packaging>pom</packaging>
 
-    <name>Rekeningrijden</name>
     <properties>
         <javaee.api.version>8.0</javaee.api.version>
         <junit.version>4.11</junit.version>
@@ -25,6 +24,7 @@
         <module>MovementSystem/MovementRegistrationService</module>
         <module>MovementSystem/MovementRegistrationService/shared</module>
         <module>InvoiceSystem/InvoiceSystem</module>
+        <module>InvoiceSystem/InvoiceSystem/shared</module>
         <module>UserSystem/UserSystem</module>
         <module>UserSystem/UserSystem/shared</module>
         <module>DriverSystem/DriverApplication</module>
@@ -147,6 +147,12 @@
             <version>2.8.5</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.ant</artifactId>
+            <version>0.7.4.201502262128</version>
+        </dependency>
     </dependencies>
 
     <build>
