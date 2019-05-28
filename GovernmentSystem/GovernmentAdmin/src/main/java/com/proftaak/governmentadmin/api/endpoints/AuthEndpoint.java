@@ -24,8 +24,6 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 @Path("/auth")
 public class AuthEndpoint {
-    private static final Logger LOGGER = Logger.getLogger(AuthEndpoint.class.getName());
-
     @Inject
     private GovernmentAdminService service;
 
@@ -90,14 +88,13 @@ public class AuthEndpoint {
         DefaultClaims claims = new DefaultClaims();
         claims.put("username", username);
 
-        String jws = Jwts.builder()
+        return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
                 .setExpiration(new Date(new Date().getTime() + 300000))
                 .setClaims(claims)
                 .signWith(AuthenticationFilter.serverKey).compact();
 
-        return jws;
     }
 
 }

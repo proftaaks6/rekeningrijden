@@ -46,8 +46,6 @@ public class UserDaoDatabaseImpl implements UserDao {
     }
 
     public GovernmentEmployee validateUser(String username, String password) {
-        GovernmentEmployee user = null;
-
         try {
             return em.createNamedQuery("GovernmentEmployee.validateUser", GovernmentEmployee.class).setParameter("username", username).setParameter("password", password).setMaxResults(1).getSingleResult();
         } catch (Exception e) {

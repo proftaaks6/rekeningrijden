@@ -6,7 +6,6 @@ import com.proftaak.movementproxy.models.InvalidData;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 @Stateless
 public class ProxyDaoImplementation implements ProxyDao {

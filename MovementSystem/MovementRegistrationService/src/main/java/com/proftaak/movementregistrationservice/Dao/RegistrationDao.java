@@ -15,7 +15,7 @@ public interface RegistrationDao {
     boolean addTrackerLocationPiont(LocationPoint point, long trackerId);
     boolean editTrackerVehicle(Vehicle vehicles, long targetTrackerId);
     boolean removeTracker(long targetTrackerId);
-    boolean addVehicle(Vehicle vehicle);
+    Vehicle addVehicle(Vehicle vehicle);
     boolean addTrackerToVehicle(Tracker tracker, long vehicleId);
     boolean removeVehicle(long vehicleId);
     Tracker getTrackedById(long trackerId);

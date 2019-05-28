@@ -16,26 +16,21 @@ import javax.persistence.*;
 @Table(name="tbl_driverUser")
 public class DriverUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private long id;
 
     @Column(unique = true)
-    @Id
-    private long userId;
+    private String username;
 
     @Column
     private String passwordHash;
 
     public DriverUser(){}
-    public DriverUser(long userId){
-        this.userId = userId;
-    }
-    public DriverUser(long userId, String password){
-        this.userId = userId;
-        this.passwordHash = password;
-    }
 
-    public long getUserId() {
-        return userId;
+    public DriverUser(String username, String password) {
+        this.username = username;
+        this.passwordHash = password;
+
     }
 
     public long getId() {
@@ -48,5 +43,13 @@ public class DriverUser {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

@@ -2,7 +2,6 @@ package com.proftaak.governmentadmin.utility;
 
 import com.proftaak.governmentadmin.dao.UserDao;
 import com.proftaak.governmentadmin.models.GovernmentEmployee;
-import com.proftaak.governmentadmin.models.Role;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;

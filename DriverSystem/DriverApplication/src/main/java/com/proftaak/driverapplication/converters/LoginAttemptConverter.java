@@ -1,16 +1,15 @@
 package com.proftaak.driverapplication.converters;
 
-import com.proftaak.driverapplication.models.DriverUser;
 import com.proftaak.driverapplication.models.LoginAttempt;
 import com.proftaak.driverapplication.service.DriverApplicationService;
-import java.sql.Date;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 @Stateless
 public class LoginAttemptConverter

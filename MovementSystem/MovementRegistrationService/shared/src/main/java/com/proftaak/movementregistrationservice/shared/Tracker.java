@@ -1,8 +1,5 @@
 package com.proftaak.movementregistrationservice.shared;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Tracker {
 
     private long id;

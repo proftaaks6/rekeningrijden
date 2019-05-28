@@ -1,10 +1,9 @@
 package com.proftaak.usersystem.models;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
 import java.io.Serializable;
-import org.hibernate.annotations.Cascade;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries( {

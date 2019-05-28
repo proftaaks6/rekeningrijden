@@ -3,13 +3,12 @@ package com.proftaak.usersystem.dao.impl;
 import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.models.ClientUser;
 import com.proftaak.usersystem.models.UserVehicle;
-import com.proftaak.usersystem.models.Vehicle;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class UserDaoImpl implements UserDao {
