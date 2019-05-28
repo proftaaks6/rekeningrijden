@@ -3,11 +3,13 @@ package com.proftaak.invoicesystem.dao;
 import com.proftaak.invoicesystem.generator.InvoiceGenerator;
 import com.proftaak.invoicesystem.models.Invoice;
 import com.proftaak.invoicesystem.models.SquareRegion;
+import sun.nio.cs.Surrogate;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +64,9 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     }
 
     @Override
-    public Invoice regenerateInvoice(Invoice invoice) {
+    public Invoice regenerateInvoice(long invoiceid) {
+
+        Invoice invoice = new InvoiceGenerator().regenerateInvoice(em.find(Invoice.class, invoiceid));
         try {
             em.merge(invoice);
             return invoice;
