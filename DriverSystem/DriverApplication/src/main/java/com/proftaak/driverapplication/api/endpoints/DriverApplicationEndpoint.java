@@ -49,4 +49,16 @@ public class DriverApplicationEndpoint
             return Response.serverError().build();
         }
     }
+
+    @POST
+    @Path("/loginattempt")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addLoginAttempt(com.proftaak.driverapplication.shared.LoginAttempt loginAttempt) {
+        try {
+            driverApplicationService.addLoginAttempt(loginAttemptConverter.toEntity(loginAttempt));
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
 }

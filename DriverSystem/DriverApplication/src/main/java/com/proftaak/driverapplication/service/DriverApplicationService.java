@@ -39,4 +39,8 @@ public class DriverApplicationService
 	public DriverUser validateUser(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		return userDao.verifyUser(username, AuthenticationUtils.encodeSHA256(password));
 	}
+
+	public LoginAttempt addLoginAttempt(LoginAttempt loginAttempt) {
+		return loginAttemptDao.add(loginAttempt);
+	}
 }

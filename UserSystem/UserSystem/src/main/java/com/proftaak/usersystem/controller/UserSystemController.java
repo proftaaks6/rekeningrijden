@@ -23,6 +23,9 @@ public class UserSystemController {
     @Inject
     private VehicleService vehicleService;
 
+    @Inject
+    private ClientUserConverter clientUserConverter;
+
     @POST
     @Path("/userInfo")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -54,7 +57,20 @@ public class UserSystemController {
     {
         try
         {
-            return new ClientUserConverter().toShared(userService.getAllUsers());
+            return clientUserConverter.toShared(userService.getAllUsers());
+        } catch (Exception e)
+        {
+            throw new BadRequestException();
+        }
+    }
+
+    @GET
+    @Path("/users/{id}")
+    public ClientUser getUser(@PathParam("id") int userId)
+    {
+        try
+        {
+            return new ClientUserConverter().toShared(userService.getClientUserById(userId));
         } catch (Exception e)
         {
             throw new BadRequestException();

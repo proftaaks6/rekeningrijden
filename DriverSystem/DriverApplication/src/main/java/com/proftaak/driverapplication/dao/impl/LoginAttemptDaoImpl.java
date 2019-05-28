@@ -25,7 +25,7 @@ public class LoginAttemptDaoImpl implements LoginAttemptDao
 	public List<LoginAttempt> getByUserId(long userId)
 	{
 		try {
-			return em.createNamedQuery("LoginAttempt.getUserById", LoginAttempt.class).setParameter("userId", userId).getResultList();
+			return em.createNamedQuery("LoginAttempt.getByUserId", LoginAttempt.class).setParameter("id", userId).getResultList();
 		}catch (Exception e){
 			return null;
 		}
@@ -39,5 +39,12 @@ public class LoginAttemptDaoImpl implements LoginAttemptDao
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	@Override
+	public LoginAttempt add(LoginAttempt loginAttempt) {
+		em.persist(loginAttempt);
+		em.flush();
+		return loginAttempt;
 	}
 }
