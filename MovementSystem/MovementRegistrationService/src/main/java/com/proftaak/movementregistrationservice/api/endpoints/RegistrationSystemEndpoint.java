@@ -108,18 +108,9 @@ public class RegistrationSystemEndpoint {
 
     @POST
     @Path("/vehicle")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response addVehicle(String message){
-        ObjectMapper mapper = new ObjectMapper();
-
-        Vehicle vehicle = null;
-        try {
-            vehicle = mapper.readValue(message, Vehicle.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(registrationService.addVehicle(vehicle)){
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
+    public Response addVehicle(com.proftaak.movementregistrationservice.shared.Vehicle vehicle) throws IOException {
+        if(registrationService.addVehicle(vehicleConverter.toEntity(vehicle))){
             return Response.status(200).build();
         } else {
             return Response.status(400).build();

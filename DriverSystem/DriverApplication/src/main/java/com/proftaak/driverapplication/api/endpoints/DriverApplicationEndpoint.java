@@ -9,12 +9,7 @@ import com.proftaak.driverapplication.service.DriverApplicationService;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -34,10 +29,10 @@ public class DriverApplicationEndpoint
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
-    @Path("/{id}")
-    public Response addNewUser(@PathParam("id") long id) {
+    @Path("/createUser")
+    public Response addNewUser(@FormParam("username") String username, @FormParam("password") String password) {
         try {
-            DriverUser user = driverApplicationService.saveNewUser(id);
+            DriverUser user = driverApplicationService.saveNewUser(username, password);
             return Response.ok().entity(driverUserConverter.toShared(user)).build();
         } catch (Exception e) {
             return Response.serverError().build();
