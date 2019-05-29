@@ -22,5 +22,22 @@
         <module name="UserSystem.shared" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DriverApplication" target="1.8" />
+      <module name="DriverApplication.shared" target="1.8" />
+      <module name="GovernmentAdmin" target="1.8" />
+      <module name="InvoiceSystem" target="1.8" />
+      <module name="InvoiceSystem.shared" target="1.8" />
+      <module name="MovementProxy" target="1.8" />
+      <module name="MovementRegistrationService" target="1.8" />
+      <module name="MovementRegistrationService.shared" target="1.8" />
+      <module name="PoliceAdministration" target="1.8" />
+      <module name="PoliceEuropeProxy" target="1.8" />
+      <module name="PoliceFrontendProxy" target="1.8" />
+      <module name="rabbitmq" target="1.8" />
+      <module name="rekeningrijden" target="1.8" />
+      <module name="UserSystem" target="1.8" />
+      <module name="UserSystem.shared" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
