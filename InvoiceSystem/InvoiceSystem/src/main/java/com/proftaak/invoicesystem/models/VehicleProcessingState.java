@@ -6,6 +6,7 @@ import java.util.Date;
 import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
 
 @Entity
+@Table(name="tbl_vehicleproccessing")
 @NamedQueries({
         @NamedQuery(name="VehicleProcessingState.get",
                 query = "SELECT vpt FROM VehicleProcessingState vpt WHERE vpt.lastProcessed < :lastProcessed",

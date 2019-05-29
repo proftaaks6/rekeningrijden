@@ -135,7 +135,12 @@ public class RegistrationDaoImplementation implements RegistrationDao{
 
     @Override
     public Vehicle getVehicleByChassisNumber(String chassisNumber) {
-        Vehicle vehicle = em.createNamedQuery("Vehicle.getByChassisNumber", Vehicle.class).setParameter("chassisNumber", chassisNumber).getSingleResult();
+        Vehicle vehicle = null;
+        try {
+            vehicle = em.createNamedQuery("Vehicle.getByChassisNumber", Vehicle.class).setParameter("chassisNumber", chassisNumber).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return vehicle;
     }
