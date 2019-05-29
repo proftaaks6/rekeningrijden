@@ -30,6 +30,8 @@ public class UserService {
         return userDao.getAll();
     }
 
+    public ClientUser editUser(ClientUser user){return userDao.editUser(user);}
+
     public UserVehicle getUserVehicle(long vehicleId, long userId) {
         return userDao.getUserVehicle(vehicleId, userId);
     }

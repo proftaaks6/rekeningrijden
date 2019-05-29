@@ -25,7 +25,7 @@ public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
         Address address1;
 
         if(Boolean.valueOf(config.getProperty("isProduction"))){
-            address1 = new Address("rabbitmq", 5682);
+            address1 = new Address("rabbitmq", 5672);
 
         }else{
             address1 = new Address("localhost", 5682);
