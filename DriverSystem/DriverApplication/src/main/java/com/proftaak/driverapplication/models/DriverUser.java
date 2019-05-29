@@ -11,6 +11,10 @@ import javax.persistence.*;
         @NamedQuery(
                 name = "DriverUser.getAll",
                 query="SELECT u FROM DriverUser u"
+        ),
+        @NamedQuery(
+                name = "DriverUser.validateUser",
+                query = "SELECT u FROM DriverUser u WHERE u.username = :username AND u.password = :password"
         )
 })
 @Table(name="tbl_driverUser")
@@ -23,13 +27,13 @@ public class DriverUser {
     private String username;
 
     @Column
-    private String passwordHash;
+    private String password;
 
     public DriverUser(){}
 
     public DriverUser(String username, String password) {
         this.username = username;
-        this.passwordHash = password;
+        this.password = password;
 
     }
 
@@ -37,12 +41,12 @@ public class DriverUser {
         return id;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {

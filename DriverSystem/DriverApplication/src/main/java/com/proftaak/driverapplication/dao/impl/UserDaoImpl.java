@@ -21,7 +21,8 @@ public class UserDaoImpl implements UserDao
         try {
             DriverUser user = new DriverUser(username, password);
             em.persist(user);
-            em.flush();
+//            em.flush();
+
             return user;
         } catch (Exception e) {
             e.printStackTrace();
