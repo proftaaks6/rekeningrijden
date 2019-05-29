@@ -22,8 +22,6 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 @Path("/auth")
 public class AuthEndpoint {
-    private static final Logger LOGGER = Logger.getLogger(AuthEndpoint.class.getName());
-
     @Inject
     private DriverApplicationService service;
 
