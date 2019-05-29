@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
 
 @Entity
+@Table(name="tbl_squareregion")
 @NamedQueries({
         @NamedQuery(name="SquareRegion.all",
                 query = "SELECT sr FROM SquareRegion sr")

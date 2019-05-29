@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name="tbl_regionpoint")
 @NamedQueries({
         @NamedQuery(name="RegionPoint.getByLongitudeLatitude",
                 query = "SELECT r FROM RegionPoint r WHERE r.longitude = :longitude AND r.latitude = :latitude"),
