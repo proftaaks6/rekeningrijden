@@ -24,10 +24,10 @@ public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
 
         Address address1;
 
-        if(Boolean.valueOf(config.getProperty("isProduction"))){
-            address1 = new Address("rabbitmq", 5682);
+        if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
+            address1 = new Address("rabbitmq", 5672);
 
-        }else{
+        } else {
             address1 = new Address("localhost", 5682);
         }
         List<Address> list = new ArrayList<>();

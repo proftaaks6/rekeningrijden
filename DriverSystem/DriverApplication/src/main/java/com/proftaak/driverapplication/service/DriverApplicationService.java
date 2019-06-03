@@ -8,6 +8,7 @@ import com.proftaak.driverapplication.utility.AuthenticationUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -37,10 +38,19 @@ public class DriverApplicationService
 	}
 
 	public DriverUser validateUser(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-		return userDao.verifyUser(username, AuthenticationUtils.encodeSHA256(password));
+		DriverUser user = userDao.verifyUser(username, AuthenticationUtils.encodeSHA256(password));
+		if (user != null) {
+			addLoginAttempt(new LoginAttempt(user.getId(), new Date(), true));
+			return user;
+		} else {
+			addLoginAttempt(new LoginAttempt(new Date(), false));
+		}
+
+		return null;
 	}
 
 	public LoginAttempt addLoginAttempt(LoginAttempt loginAttempt) {
+
 		return loginAttemptDao.add(loginAttempt);
 	}
 }

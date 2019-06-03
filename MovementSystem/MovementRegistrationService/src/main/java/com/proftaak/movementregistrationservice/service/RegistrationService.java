@@ -3,6 +3,7 @@ package com.proftaak.movementregistrationservice.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
+import com.proftaak.movementregistrationservice.converters.VehicleConverter;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
 import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
@@ -19,6 +20,9 @@ import java.util.List;
 
 @Stateless
 public class RegistrationService {
+
+    @Inject
+    private VehicleConverter vehicleConverter;
 
     @Inject
     private RegistrationDao registrationDao;
@@ -48,8 +52,9 @@ public class RegistrationService {
             // Add vehicle to db
             Vehicle v = registrationDao.addVehicle(vehicle);
 
+            //Todo: Fix this "Unknown host exception" error.
             // Make rest call to invoice system to add vehicle
-            RestCommuncationHelper.postRequest("http://invoice_system/deploy/v1/processing/vehicle", new ObjectMapper().writeValueAsString(v));
+            RestCommuncationHelper.postRequest("http://localhost:8080/InvoiceSystem/v1/vehicleprocessing/vehicle/" + v.getId());
         } catch (Exception e) {
             e.printStackTrace();
             return false;

@@ -14,7 +14,6 @@ public class JMSConsumer {
         try {
             //Set up consumer
             ConnectionFactory factory = new ConnectionFactory();
-            factory.setHost("localhost");
             Connection connection = null;
             connection = factory.newConnection();
             channel = connection.createChannel();
@@ -31,7 +30,7 @@ public class JMSConsumer {
         System.out.println(channel);
         System.out.println("Consumer is not not null?");
         System.out.println(consumer);
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        System.out.println(" [*] Waiting for messages.");
         try {
             this.channel.basicConsume(QUEUE_NAME, true, consumer);
         } catch (IOException e) {

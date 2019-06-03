@@ -86,12 +86,14 @@ public class UserSystemController {
 
     @POST
     @Path("/change")
-    public Response change(@FormParam("name") String name, @FormParam("address") String address, @FormParam("residence") String residence, @FormParam("email") String email) {
+    public ClientUser editUser(@FormParam("name") String name,
+                              @FormParam("address") String address,
+                              @FormParam("residence") String residence,
+                              @FormParam("email") String email) {
         try
         {
             com.proftaak.usersystem.models.ClientUser user = new com.proftaak.usersystem.models.ClientUser(name,address,residence,new ArrayList<UserVehicle>(),email);
-            ClientUser editedUser = new ClientUserConverter().toShared(userService.editUser(user));
-            return Response.ok(editedUser).build();
+            return new ClientUserConverter().toShared(userService.editUser(user));
         } catch (Exception e) {
             throw new BadRequestException();
         }

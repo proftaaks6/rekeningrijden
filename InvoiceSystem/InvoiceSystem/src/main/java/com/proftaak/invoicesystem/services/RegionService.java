@@ -39,6 +39,10 @@ public class RegionService {
         return regionDao.saveRegion(region);
     }
 
+    public boolean removeRegions(){
+        return regionDao.removeRegions();
+    }
+
     public void reloadRegionsInMemory(){
         regions = regionDao.getAllRegions();
     }

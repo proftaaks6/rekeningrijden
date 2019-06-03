@@ -27,6 +27,11 @@ public class RegionsEndpoint {
     @POST
     @Path("")
     public boolean postNewRegion(Region region){
+        //Remove old regions first
+        //removeRegions();
+
+        //Add new regions
+        regionService.reloadRegionsInMemory();
         return regionService.saveSquareRegion(new RegionConverter().toSquareEntity(region));
     }
 
@@ -34,5 +39,9 @@ public class RegionsEndpoint {
     public Response getAllRegions(){
         List<Region> regions = regionService.getRegions().stream().map(x->regionConverter.fromSquareEntity(x)).collect(Collectors.toList());
         return Response.ok(regions).build();
+    }
+
+    private void removeRegions(){
+        regionService.removeRegions();
     }
 }
