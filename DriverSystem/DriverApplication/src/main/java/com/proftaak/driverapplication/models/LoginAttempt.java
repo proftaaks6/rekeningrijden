@@ -34,7 +34,7 @@ public class LoginAttempt {
 	@Id
 	private long id;
 
-	@Column()
+	@Column
 	private long userId;
 
 	@Column
@@ -43,6 +43,20 @@ public class LoginAttempt {
 
 	@Column
 	private boolean success;
+
+	public LoginAttempt(Date date, boolean success) {
+		this.date = date;
+		this.success = success;
+	}
+
+	public LoginAttempt() {
+	}
+
+	public LoginAttempt(long userId, Date date, boolean success) {
+		this.userId = userId;
+		this.date = date;
+		this.success = success;
+	}
 
 	public long getId()
 	{

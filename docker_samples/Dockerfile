@@ -14,7 +14,7 @@ COPY --chown=payara:payara ./target/_NAME_.war deploy.war
 COPY --from=convert --chown=payara:payara ./domain.xml domain.xml
 
 #java -jar /opt/payara/payara-micro.jar  --addJars mysql.jar --domainConfig domain.xml --deploy deploy.war --outputUberJar uber.jar
-RUN ["java", "-jar", "/opt/payara/payara-micro.jar", "--addJars", "mysql.jar", "--domainConfig", "domain.xml", "--deploy", "deploy.war", "--outputUberJar",  "uber.jar"]
+RUN ["java", "-jar", "/opt/payara/payara-micro.jar", "--addJars", "mysql.jar", "--domainConfig", "domain.xml", "--deploy", "deploy.war", "--nocluster", "--outputUberJar",  "uber.jar"]
 CMD [""]
 ENTRYPOINT [""]
 

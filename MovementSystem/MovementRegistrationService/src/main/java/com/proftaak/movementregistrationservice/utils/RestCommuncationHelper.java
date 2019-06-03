@@ -21,18 +21,15 @@ public class RestCommuncationHelper {
         return getResponseFromConnection(con);
     }
 
-    public static String postRequest(String url, String data) throws IOException {
+    public static String postRequest(String url) throws IOException {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-        con.setRequestProperty("Accept", "application/json");
-        con.setRequestProperty("User-Agent", USER_AGENT);
         con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(data);
-        wr.flush();
-        wr.close();
+//        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+//        wr.writeBytes(data);
+//        wr.flush();
+//        wr.close();
 
         return getResponseFromConnection(con);
     }

@@ -54,7 +54,7 @@ public class RegistrationService {
 
             //Todo: Fix this "Unknown host exception" error.
             // Make rest call to invoice system to add vehicle
-            RestCommuncationHelper.postRequest("http://InvoiceSystem/v1/processing/vehicle", new ObjectMapper().writeValueAsString(vehicleConverter.toShared(v)));
+            RestCommuncationHelper.postRequest("http://localhost:8080/InvoiceSystem/v1/vehicleprocessing/vehicle/" + v.getId());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
