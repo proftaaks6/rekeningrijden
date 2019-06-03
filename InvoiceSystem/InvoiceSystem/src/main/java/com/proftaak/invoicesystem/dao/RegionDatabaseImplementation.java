@@ -14,7 +14,7 @@ public class RegionDatabaseImplementation implements RegionDao{
 
     @Override
     public boolean saveRegion(SquareRegion region) {
-        provider.getEm().persist(region);
+        provider.getEm().merge(region);
         return true;
     }
 
