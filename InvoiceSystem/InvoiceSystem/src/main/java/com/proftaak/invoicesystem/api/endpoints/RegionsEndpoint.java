@@ -1,7 +1,10 @@
 package com.proftaak.invoicesystem.api.endpoints;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proftaak.invoicesystem.converters.RegionConverter;
+import com.proftaak.invoicesystem.models.JsonRegion;
 import com.proftaak.invoicesystem.services.RegionService;
+import com.proftaak.invoicesystem.shared.Point;
 import com.proftaak.invoicesystem.shared.Region;
 
 import javax.ejb.Stateless;
@@ -9,6 +12,8 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,20 +30,40 @@ public class RegionsEndpoint {
     private RegionConverter regionConverter;
 
     @POST
-    @Path("")
-    public boolean postNewRegion(Region region){
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean postNewRegion(String message){
         //Remove old regions first
         //removeRegions();
 
         //Add new regions
+        ObjectMapper mapper = new ObjectMapper();
+        JsonRegion jsonRegion = null;
+        Region region = null;
+        try {
+            jsonRegion = mapper.readValue(message, JsonRegion.class);
+            region = new Region((long)jsonRegion.getId(), new Point(jsonRegion.getTopLeftLat(), jsonRegion.getTopLeftLong()), new Point(jsonRegion.getBottomRightLat(), jsonRegion.getBottomRightLong()), jsonRegion.getTaxRate());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         regionService.reloadRegionsInMemory();
         return regionService.saveSquareRegion(new RegionConverter().toSquareEntity(region));
     }
 
     @GET
     public Response getAllRegions(){
+        List<JsonRegion> jsonRegions = new ArrayList<>();
         List<Region> regions = regionService.getRegions().stream().map(x->regionConverter.fromSquareEntity(x)).collect(Collectors.toList());
-        return Response.ok(regions).build();
+        for(Region region : regions){
+            jsonRegions.add(new JsonRegion(region.getId(), region.getTopLeft().getLatitude(), region.getTopLeft().getLongitude(), region.getBottomRight().getLatitude(), region.getBottomRight().getLongitude(), region.getPrice()));
+        }
+        return Response.ok(jsonRegions).build();
+    }
+
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{id}")
+    public boolean deleteRegion(@PathParam("id") String id){
+        return regionService.removeRegionById(Integer.parseInt(id));
     }
 
     private void removeRegions(){

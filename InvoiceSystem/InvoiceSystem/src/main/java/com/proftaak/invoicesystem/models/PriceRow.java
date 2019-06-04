@@ -23,7 +23,7 @@ public class PriceRow {
     @ManyToOne
     private SquareRegion region;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<LocationPoint> locationPoints = new ArrayList<>();
 
     @Column

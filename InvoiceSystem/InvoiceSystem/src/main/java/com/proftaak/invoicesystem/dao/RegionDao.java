@@ -9,4 +9,5 @@ public interface RegionDao {
     boolean saveRegion(SquareRegion region);
     List<SquareRegion> getAllRegions();
     boolean removeRegions();
+    boolean removeRegionById(int id);
 }

@@ -14,18 +14,31 @@ public class RegionDatabaseImplementation implements RegionDao{
 
     @Override
     public boolean saveRegion(SquareRegion region) {
-        provider.getEm().persist(region);
+        provider.getEm().merge(region);
         return true;
     }
 
     @Override
     public List<SquareRegion> getAllRegions() {
-        return provider.getEm().createNamedQuery("SquareRegion.all").getResultList();
+        return provider.getEm().createNamedQuery("SquareRegion.allNonDeleted").getResultList();
     }
 
     @Override
     public boolean removeRegions() {
         provider.getEm().remove(getAllRegions());
         return true;
+    }
+
+    @Override
+    public boolean removeRegionById(int id) {
+        try{
+            SquareRegion region = provider.getEm().createNamedQuery("SquareRegion.getById", SquareRegion.class).setParameter("id", id).getSingleResult();
+            region.setDeleted(true);
+            provider.getEm().merge(region);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }
