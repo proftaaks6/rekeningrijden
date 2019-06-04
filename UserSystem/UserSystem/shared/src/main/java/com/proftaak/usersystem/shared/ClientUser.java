@@ -15,12 +15,11 @@ public class ClientUser
 	public ClientUser() {
 	}
 
-	public ClientUser(long id, String name, String address, String residence, List<Integer> ownedCarIds, List<String> chassis, String email) {
+	public ClientUser(long id, String name, String address, String residence, List<String> chassis, String email) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.residence = residence;
-		this.ownedVehicleIds = ownedCarIds;
 		this.ownedVihiclesChassis = chassis;
 		this.email = email;
 	}
