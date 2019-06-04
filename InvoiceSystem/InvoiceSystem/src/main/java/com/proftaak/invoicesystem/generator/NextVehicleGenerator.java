@@ -33,7 +33,7 @@ public class NextVehicleGenerator {
             state.setLastProcessed(now);
             em.merge(state);
             em.flush();
-            return state.getId();
+            return state.getVehicleId();
         }
         return -1;
     }

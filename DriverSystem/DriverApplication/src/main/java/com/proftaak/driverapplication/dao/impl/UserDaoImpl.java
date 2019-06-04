@@ -58,9 +58,7 @@ public class UserDaoImpl implements UserDao
         try {
             return em.createNamedQuery("DriverUser.validateUser", DriverUser.class).setParameter("username", username).setParameter("password", password).setMaxResults(1).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 }
