@@ -20,7 +20,7 @@ public class LocationPointService {
         try {
             return (List<LocationPoint>) callUrlAndCastResultMethode(
                     (new TypeLiteral<List<LocationPoint>>(){}).getType(),
-                    "http://movement_registration_service/deploy/v1/registration/vehicle/"+vehicleId+"/points/from/"+from.getTime()+"/to/"+to.getTime(), "GET");
+                    "http://movementregistrationservice/deploy/v1/registration/vehicle/"+vehicleId+"/points/from/"+from.getTime()+"/to/"+to.getTime(), "GET");
         } catch (IOException e) {
             e.printStackTrace();
         }
