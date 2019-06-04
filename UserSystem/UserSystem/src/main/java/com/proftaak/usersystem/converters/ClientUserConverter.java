@@ -19,7 +19,7 @@ public class ClientUserConverter
 	}
 
 	public com.proftaak.usersystem.shared.ClientUser toShared(ClientUser user) {
-		return new com.proftaak.usersystem.shared.ClientUser(user.getId(), user.getName(), user.getAddress(), user.getResidence(), user.getOwnedVehicleIds(), user.getEmail());
+		return new com.proftaak.usersystem.shared.ClientUser(user.getId(), user.getName(), user.getAddress(), user.getResidence(), user.getOwnedVehicleIds(), user.getOwnedVehicleChassis(), user.getEmail());
 	}
 
 	public List<com.proftaak.usersystem.shared.ClientUser> toShared(List<ClientUser> users) {

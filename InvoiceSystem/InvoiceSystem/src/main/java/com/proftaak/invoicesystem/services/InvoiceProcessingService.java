@@ -7,6 +7,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -27,7 +28,9 @@ public class InvoiceProcessingService {
             String id = parsedVehicleIds[i];
             vehicleIds[i] = Long.parseLong(id);
         }
+
         return processingDao.getInvoicesForUser(vehicleIds);
+
     }
 
     public Invoice regenerateInvoice(long invoiceId) {return processingDao.regenerateInvoice(invoiceId);}
