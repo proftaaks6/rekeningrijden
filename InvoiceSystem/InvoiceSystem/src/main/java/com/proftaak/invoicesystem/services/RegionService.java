@@ -31,7 +31,7 @@ public class RegionService {
             return false;
         }
 
-        if(region.getTopLeft().getLatitude() < region.getBottomRight().getLatitude() || region.getTopLeft().getLongitude() > region.getBottomRight().getLongitude()){
+        if(region.getTopLeft().getLatitude() < region.getBottomRight().getLatitude() || region.getTopLeft().getLongitude() < region.getBottomRight().getLongitude()){
             return false;
         }
 
@@ -54,6 +54,10 @@ public class RegionService {
             }
         }
         return null;
+    }
+
+    public boolean removeRegionById(int id){
+        return regionDao.removeRegionById(id);
     }
 
     public List<SquareRegion> getRegions(){
