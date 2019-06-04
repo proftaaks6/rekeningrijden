@@ -77,7 +77,7 @@ public class UserSystemController {
     {
         try
         {
-            return new ClientUserConverter().toShared(userService.getClientUserById(userId));
+            return clientUserConverter.toShared(userService.getClientUserById(userId));
         } catch (Exception e)
         {
             throw new BadRequestException();

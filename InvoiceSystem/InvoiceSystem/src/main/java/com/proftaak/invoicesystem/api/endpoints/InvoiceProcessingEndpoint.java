@@ -21,7 +21,7 @@ public class InvoiceProcessingEndpoint {
     @Inject
     private InvoiceProcessingService service;
 
-    @POST
+    @GET
     @Path("/markAsPaid/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response markAsPaid(@PathParam("id") int invoiceId){
@@ -36,11 +36,7 @@ public class InvoiceProcessingEndpoint {
     @Path("/vehicle/{vehicleIds}")
     public Response getInvoicesForUser(@PathParam("vehicleIds") String unparsedVehicleIds) throws JsonProcessingException {
         List<Invoice> invoices = service.getInvoicesForUser(unparsedVehicleIds);
-        if(invoices.size() > 0){
-            return Response.ok(invoices).build();
-        } else  {
-            return Response.noContent().build();
-        }
+        return Response.ok(invoices).build();
     }
 
     @POST
