@@ -18,17 +18,21 @@ public class UserService {
     public ClientUser saveUserInformation(String name, String email, String address, String residence) throws IOException {
         ClientUser user = userDao.saveUserInformation(name, email, address, residence);
 
-        // Create this user in driversystem.
-        // Username will be the field: name without the spaces for demo purposes
-        String username = name.replace(" ", "");
-        RestCommuncationHelper.postRequest("http://localhost:8080/DriverSystem/v1/driverapplication/createUser",
-                "username=" + username + "&password=welkom123");
+        // Create this user in driversystem
+        if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
+            RestCommuncationHelper.postRequest("http://driversystem:8080/deploy/v1/driverapplication/createUser",
+                    "username=" + name + "&password=welkom123");
+        } else {
+            RestCommuncationHelper.postRequest("http://localhost:8080/DriverSystem/v1/driverapplication/createUser",
+                    "username=" + name + "&password=welkom123");
+        }
 
         return user;
     }
 
     public ClientUser getClientUserByName(String name) {
         return userDao.getClientUserByName(name);
+
     }
 
     public ClientUser getClientUserById(int id){

@@ -8,18 +8,20 @@ public class ClientUser
 	private String name;
 	private String address;
 	private String residence;
-	private List<String> ownedVehicles;
+	private List<Integer> ownedVehicleIds;
+	private List<String> ownedVihiclesChassis;
 	private String email;
 
 	public ClientUser() {
 	}
 
-	public ClientUser(long id, String name, String address, String residence, List<String> ownedVehicles, String email) {
+	public ClientUser(long id, String name, String address, String residence, List<Integer> ownedCarIds, List<String> chassis, String email) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.residence = residence;
-		this.ownedVehicles = ownedVehicles;
+		this.ownedVehicleIds = ownedCarIds;
+		this.ownedVihiclesChassis = chassis;
 		this.email = email;
 	}
 
@@ -31,8 +33,8 @@ public class ClientUser
 		return name;
 	}
 
-	public List<String> getOwnedVehicles() {
-		return ownedVehicles;
+	public List<Integer> getOwnedVehicleIds() {
+		return ownedVehicleIds;
 	}
 
 	public String getEmail() {
@@ -45,5 +47,9 @@ public class ClientUser
 
 	public String getResidence() {
 		return residence;
+	}
+
+	public List<String> getOwnedVihiclesChassis() {
+		return ownedVihiclesChassis;
 	}
 }
