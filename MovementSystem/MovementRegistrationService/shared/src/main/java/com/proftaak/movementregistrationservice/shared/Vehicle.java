@@ -1,5 +1,6 @@
 package com.proftaak.movementregistrationservice.shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vehicle {
@@ -15,7 +16,7 @@ public class Vehicle {
 
     private Tracker activeTracker;
 
-    private List<VehicleTracker> trackers;
+    private List<Tracker> trackers;
 
     public Vehicle() {
     }
@@ -26,8 +27,13 @@ public class Vehicle {
         this.chassisNumber = chassisNumber;
         this.fuelType = fuelType;
         this.emission = emission;
-        this.trackers = trackers;
-        this.activeTracker = this.getActiveTracker();
+        this.trackers = new ArrayList<>();
+        for (VehicleTracker vehicleTracker : trackers) {
+            if (vehicleTracker.getEndDate() == null) {
+                this.activeTracker = vehicleTracker.getTracker();
+            }
+            this.trackers.add(vehicleTracker.getTracker());
+        }
     }
 
     public int getId() {
@@ -70,13 +76,23 @@ public class Vehicle {
         this.emission = emission;
     }
 
-    public Tracker getActiveTracker() {
-        for (VehicleTracker vehicleTracker : trackers) {
-            if(vehicleTracker.getEndDate() != null) {
-                return vehicleTracker.getTracker();
-            }
-        }
+    public Tracker getActiveTracker()
+    {
+        return activeTracker;
+    }
 
-        return null;
+    public void setActiveTracker(Tracker activeTracker)
+    {
+        this.activeTracker = activeTracker;
+    }
+
+    public List<Tracker> getTrackers()
+    {
+        return trackers;
+    }
+
+    public void setTrackers(List<Tracker> trackers)
+    {
+        this.trackers = trackers;
     }
 }

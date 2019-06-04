@@ -75,7 +75,7 @@ public class SquareRegion {
             } else {
                 //o2 is at the same x or at the right side
                 if(o1.getLatitude() > o2.getLatitude()){ //o1 is above o2
-                    return -1;
+                    return 1;
                 }
                 else {
                     if(o1.getLongitude() == o2.getLongitude() && o1.getLatitude() == o2.getLatitude()){

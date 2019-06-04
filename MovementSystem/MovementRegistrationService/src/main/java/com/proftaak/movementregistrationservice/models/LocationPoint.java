@@ -3,7 +3,7 @@ package com.proftaak.movementregistrationservice.models;
 import javax.persistence.*;
 import java.util.Date;
 @Entity
-@Table(name="tbl_locationPoint")
+@Table(name="tbl_locationMessage")
 @NamedQueries({
         @NamedQuery(name="LocationPoint.getLocationPointsForVehicleWithStartAndEndDate",
                 query = "SELECT lp FROM LocationPoint lp " +

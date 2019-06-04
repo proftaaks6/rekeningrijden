@@ -36,13 +36,12 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     }
 
     @Override
-    public List<Invoice> getInvoicesForUser(String unparsedVehicleIds) {
-        String[] vehicleIds = unparsedVehicleIds.split(",");
+    public List<Invoice> getInvoicesForUser(long[] ids) {
         List<Invoice> invoices = new ArrayList<>();
 
-        for (String s : vehicleIds) {
+        for (long id : ids) {
             try {
-                invoices.add(em.createNamedQuery("Invoice.GetByVehicleId", Invoice.class).setParameter("vehicleId", s).getSingleResult());
+                invoices.add(em.createNamedQuery("Invoice.GetByVehicleId", Invoice.class).setParameter("vehicleId", id).getSingleResult());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,8 +79,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     public Invoice getInvoiceById(long id) {
         try {
             Invoice invoice = em.createNamedQuery("Invoice.GetById", Invoice.class).setParameter("invoiceId", id).getSingleResult();
-            InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
-            return invoiceGenerator.regenerateInvoice(invoice);
+            return invoice;
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -18,9 +18,19 @@ import static com.proftaak.invoicesystem.helpers.RestCommuncationHelper.getRespo
 public class LocationPointService {
     public List<LocationPoint> getLocationPoints(long vehicleId, Date from, Date to){
         try {
+            String url = "http://localhost:8080/MovementRegistration/v1/registration/vehicle/";
+
+            if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
+                url = "http://movementregistrationservice:8080/deploy/v1/registration/vehicle/";
+            }
+
+            url += vehicleId+"/points/from/"+from.getTime()+"/to/"+to.getTime();
+
+            System.out.println(url);
+
             return (List<LocationPoint>) callUrlAndCastResultMethode(
                     (new TypeLiteral<List<LocationPoint>>(){}).getType(),
-                    "http://movement_registration_service/deploy/v1/registration/vehicle/"+vehicleId+"/points/from/"+from.getTime()+"/to/"+to.getTime(), "GET");
+                    url, "GET");
         } catch (IOException e) {
             e.printStackTrace();
         }

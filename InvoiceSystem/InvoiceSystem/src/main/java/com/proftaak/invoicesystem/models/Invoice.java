@@ -40,7 +40,7 @@ public class Invoice {
     @Column
     private Date date;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<PriceRow> priceRowList;
 
     public Date getDate() {

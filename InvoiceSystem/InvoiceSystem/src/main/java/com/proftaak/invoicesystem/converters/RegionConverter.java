@@ -8,6 +8,7 @@ public class RegionConverter {
 
     public Region fromSquareEntity(SquareRegion region){
         Region region1 = new Region();
+
         region1.setTopLeft(pointConverter.fromEntity(region.getTopLeft()));
         region1.setBottomRight(pointConverter.fromEntity(region.getBottomRight()));
         region1.setId(region.getId());
