@@ -25,8 +25,8 @@ public class DriverApplicationService
 		return userDao.getDriverUserById(id);
 	}
 
-	public DriverUser saveNewUser(String username, String password) {
-		return userDao.saveNewUser(username, password);
+	public DriverUser saveNewUser(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+		return userDao.saveNewUser(username, AuthenticationUtils.encodeSHA256(password));
 	}
 
 	public List<LoginAttempt> getUserStatistics(long userId) {

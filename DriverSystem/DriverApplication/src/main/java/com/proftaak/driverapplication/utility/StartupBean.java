@@ -14,18 +14,18 @@ import java.util.ArrayList;
 @Startup
 @Singleton
 public class StartupBean {
-    @Inject
-    UserDao userDao;
+//    @Inject
+//    UserDao userDao;
 
     @PostConstruct
     public void init() {
-        DriverUser user = null;
-        try {
-            userDao.saveNewUser("driveruser" , AuthenticationUtils.encodeSHA256("driveruser" ));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+//        DriverUser user = null;
+//        try {
+//            userDao.saveNewUser("driveruser" , AuthenticationUtils.encodeSHA256("driveruser" ));
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
     }
 }
