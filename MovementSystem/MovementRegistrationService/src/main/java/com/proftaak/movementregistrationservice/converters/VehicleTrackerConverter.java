@@ -30,6 +30,24 @@ public class VehicleTrackerConverter {
 		);
 	}
 
+	public com.proftaak.movementregistrationservice.shared.VehicleTracker toShared(VehicleTracker entity, boolean withoutVehicle) {
+		return new com.proftaak.movementregistrationservice.shared.VehicleTracker(
+				withoutVehicle ? null : vehicleConverter.toShared(entity.getVehicle()),
+				trackerConverter.toShared(entity.getTracker()),
+				entity.getStartDate(),
+				entity.getEndDate()
+		);
+	}
+
+	public List<com.proftaak.movementregistrationservice.shared.VehicleTracker> toShared(List<VehicleTracker> entities, boolean withoutVehicle) {
+		List<com.proftaak.movementregistrationservice.shared.VehicleTracker> sharedModels = new ArrayList<>();
+		for (VehicleTracker vehicleTracker : entities) {
+			sharedModels.add(toShared(vehicleTracker, withoutVehicle));
+		}
+
+		return sharedModels;
+	}
+
 	public List<com.proftaak.movementregistrationservice.shared.VehicleTracker> toShared(List<VehicleTracker> entities) {
 		List<com.proftaak.movementregistrationservice.shared.VehicleTracker> sharedModels = new ArrayList<>();
 		for (VehicleTracker vehicleTracker : entities) {

@@ -30,10 +30,13 @@ public class InvoiceGenerator {
     @Inject
     private InvoiceProcessingService processingService;
 
-    @Schedule(dayOfWeek = "Sun", hour = "0", persistent = false)
+    @Schedule(hour = "*", minute = "*", second = "*/30", persistent = false)
     public void generatePeriodically() {
-        Invoice invoice = generateInvoice(new Invoice());
-        processingService.addInvoice(invoice);
+        System.out.println("tick");
+        Invoice invoice = generateInvoice(null);
+        if(invoice != null) {
+            processingService.addInvoice(invoice);
+        }
     }
 
     public Invoice regenerateInvoice(Invoice invoice){
@@ -54,9 +57,12 @@ public class InvoiceGenerator {
 
         if(invoice == null){
             vehicleId = generator.getNextVehicleId(from, now);
+            invoice = new Invoice();
         } else {
             vehicleId = invoice.getVehicleId();
         }
+
+        System.out.println("Processing "+ vehicleId);
 
         if(vehicleId <= 0){
             return null;
@@ -92,6 +98,7 @@ public class InvoiceGenerator {
         invoice.setTotalPrice(rows.stream().mapToDouble(PriceRow::getPrice).sum());
         invoice.setVehicleId(vehicleId);
 
+        System.out.println("Total price "+ invoice.getTotalPrice());
         return invoice;
     }
 
