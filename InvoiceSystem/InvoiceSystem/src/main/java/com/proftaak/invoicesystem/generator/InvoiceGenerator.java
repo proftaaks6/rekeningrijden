@@ -41,7 +41,7 @@ public class InvoiceGenerator {
 
     public Invoice regenerateInvoice(Invoice invoice){
         Invoice regeneratedInvoice = generateInvoice(invoice);
-        return processingService.regenerateInvoice(regeneratedInvoice.getId());
+        return regeneratedInvoice;
     }
 
     private Invoice generateInvoice(Invoice invoice){
@@ -53,22 +53,22 @@ public class InvoiceGenerator {
 
         Date now = new Date(); //don't touch this
 
-        long vehicleId = 0;
+        String vehicleChassis = "";
 
         if(invoice == null){
-            vehicleId = generator.getNextVehicleId(from, now);
+            vehicleChassis = generator.getNextVehicleId(from, now);
             invoice = new Invoice();
         } else {
-            vehicleId = invoice.getVehicleId();
+            vehicleChassis = invoice.getVehicleChassis();
         }
 
-        System.out.println("Processing "+ vehicleId);
+        System.out.println("Processing "+ vehicleChassis);
 
-        if(vehicleId <= 0){
+        if(vehicleChassis.equals("")){
             return null;
         }
 
-        List<LocationPoint> locationPoints = locationPointService.getLocationPoints(vehicleId, from, now);
+        List<LocationPoint> locationPoints = locationPointService.getLocationPoints(vehicleChassis, from, now);
 
         Map<SquareRegion, PriceRow> priceRows = new HashMap<>();
         LocationPoint last = null;
@@ -89,14 +89,14 @@ public class InvoiceGenerator {
 
         ArrayList<PriceRow> rows = new ArrayList<>(priceRows.values());
         rows.forEach(PriceRow::calculatePriceBasedOnDistance);
-        rows = (ArrayList<PriceRow>) rows.stream().filter(x->x.getPrice() > 0).collect(Collectors.toList());
+        //rows = (ArrayList<PriceRow>) rows.stream().filter(x->x.getPrice() >= 0).collect(Collectors.toList());
 
         invoice.setPriceRowList(rows);
         invoice.setDate(now);
         invoice.setPaid(false);
         invoice.setTotalDistance(rows.stream().mapToDouble(PriceRow::getDistance).sum());
         invoice.setTotalPrice(rows.stream().mapToDouble(PriceRow::getPrice).sum());
-        invoice.setVehicleId(vehicleId);
+        invoice.setVehicleChassis(vehicleChassis);
 
         System.out.println("Total price "+ invoice.getTotalPrice());
         return invoice;

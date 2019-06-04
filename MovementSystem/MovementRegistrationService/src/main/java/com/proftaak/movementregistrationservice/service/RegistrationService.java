@@ -57,7 +57,7 @@ public class RegistrationService {
             if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
                 RestCommuncationHelper.postRequest("http://invoicesystem:8080/deploy/v1/vehicleprocessing/vehicle/" + v.getId());
             } else {
-                RestCommuncationHelper.postRequest("http://localhost:8080/InvoiceSystem/v1/vehicleprocessing/vehicle/" + v.getId());
+                RestCommuncationHelper.postRequest("http://localhost:8080/InvoiceSystem/v1/vehicleprocessing/vehicle/" + v.getChassisNumber());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,8 +95,8 @@ public class RegistrationService {
         return registrationDao.getLocationPointsForTracker(trackerId);
     }
 
-    public List<LocationPoint> getLocationPointsForVehicle(long vehicleId, Date startDate, Date endDate) {
-        return registrationDao.getLocationPointsForVehicle(vehicleId, startDate, endDate);
+    public List<LocationPoint> getLocationPointsForVehicle(String chassis, Date startDate, Date endDate) {
+        return registrationDao.getLocationPointsForVehicle(chassis, startDate, endDate);
     }
 
     public VehicleTracker getVehicleTracker(long vehicleId, long trackerId) {

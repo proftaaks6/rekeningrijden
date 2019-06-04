@@ -42,7 +42,7 @@ public class UserVehicle
 
 	public UserVehicle(Vehicle vehicle, ClientUser user, Date startDate)
 	{
-		this(vehicle, user, startDate, new Date());
+		this(vehicle, user, startDate, null);
 	}
 
 	public Vehicle getVehicle()

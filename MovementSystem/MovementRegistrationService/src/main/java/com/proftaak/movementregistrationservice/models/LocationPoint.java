@@ -10,7 +10,7 @@ import java.util.Date;
                         "   JOIN lp.tracker t " +
                         "   JOIN t.vehicleTrackers vts " +
                         "   JOIN vts.vehicle v "+
-                        "WHERE v.id = :id AND lp.date >= :startDate AND lp.date < :endDate"),
+                        "WHERE v.chassisNumber = :chassis AND lp.date >= :startDate AND lp.date < :endDate"),
 
 })
 public class LocationPoint {
