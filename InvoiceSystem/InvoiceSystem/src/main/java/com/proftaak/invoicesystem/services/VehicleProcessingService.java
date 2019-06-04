@@ -21,13 +21,13 @@ public class VehicleProcessingService {
     @Inject
     private VehicleProcessingDao processingDao;
 
-    public boolean addNewVehicle(int vehicleId){
-        return processingDao.addNewVehicle(vehicleId);
+    public boolean addNewVehicle(String vehicleChassis){
+        return processingDao.addNewVehicle(vehicleChassis);
     }
 
     public List<VehicleProcessingState> getAllVehicles() {
         return processingDao.getAllVehicles();
     }
 
-    public VehicleProcessingState getVehicleById(long vehicleId){return processingDao.getVehicleById(vehicleId);}
+    public VehicleProcessingState getVehicleByChassis(String chassis){return processingDao.getVehicleByChassis(chassis);}
 }

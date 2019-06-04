@@ -24,7 +24,7 @@ public class NextVehicleGenerator {
      * @param before the date in which the new period is started.
      * @return
      */
-    public synchronized int getNextVehicleId(Date before, Date now){
+    public synchronized String getNextVehicleId(Date before, Date now){
 
         //acquire a lock in this transaction
         List<VehicleProcessingState> stateList = em.createNamedQuery("VehicleProcessingState.get").setParameter("lastProcessed", before).setLockMode(LockModeType.PESSIMISTIC_WRITE).setMaxResults(1).getResultList();
@@ -33,8 +33,8 @@ public class NextVehicleGenerator {
             state.setLastProcessed(now);
             em.merge(state);
             em.flush();
-            return state.getVehicleId();
+            return state.getVehicleChassis();
         }
-        return -1;
+        return "";
     }
 }

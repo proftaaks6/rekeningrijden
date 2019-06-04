@@ -19,6 +19,9 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     @PersistenceContext
     private EntityManager em;
 
+    @Inject
+    private InvoiceGenerator invoiceGenerator;
+
     @Override
     public boolean markAsPaid(int invoiceId) {
         try {
@@ -36,12 +39,13 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     }
 
     @Override
-    public List<Invoice> getInvoicesForUser(long[] ids) {
+    public List<Invoice> getInvoicesForUser(String[] chassisNumbers) {
         List<Invoice> invoices = new ArrayList<>();
 
-        for (long id : ids) {
+        for (String chassis : chassisNumbers) {
             try {
-                invoices.add(em.createNamedQuery("Invoice.GetByVehicleId", Invoice.class).setParameter("vehicleId", id).getSingleResult());
+                List<Invoice> invoicesForVehicle = em.createNamedQuery("Invoice.GetByVehicleChassis", Invoice.class).setParameter("chassis", chassis).getResultList();
+                invoices.addAll(invoicesForVehicle);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -65,7 +69,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     @Override
     public Invoice regenerateInvoice(long invoiceid) {
 
-        Invoice invoice = new InvoiceGenerator().regenerateInvoice(em.find(Invoice.class, invoiceid));
+        Invoice invoice = invoiceGenerator.regenerateInvoice(em.find(Invoice.class, invoiceid));
         try {
             em.merge(invoice);
             return invoice;

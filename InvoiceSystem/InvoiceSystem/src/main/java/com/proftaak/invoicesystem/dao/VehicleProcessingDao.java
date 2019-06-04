@@ -6,7 +6,7 @@ import com.proftaak.invoicesystem.models.VehicleProcessingState;
 import java.util.List;
 
 public interface VehicleProcessingDao {
-    boolean addNewVehicle(int vehicleId);
+    boolean addNewVehicle(String chassisNumber);
     List<VehicleProcessingState> getAllVehicles();
-    VehicleProcessingState getVehicleById(long id);
+    VehicleProcessingState getVehicleByChassis(String chassis);
 }

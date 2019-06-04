@@ -16,8 +16,8 @@ import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
                 query = "SELECT p FROM VehicleProcessingState p"
         ),
         @NamedQuery(
-                name = "VehicleProcessingState.getById",
-                query = "SELECT p FROM VehicleProcessingState p where p.vehicleId = :vehicleId"
+                name = "VehicleProcessingState.getByChassis",
+                query = "SELECT p FROM VehicleProcessingState p where p.vehicleChassis = :chassis"
         )
 
 })
@@ -27,15 +27,15 @@ public class VehicleProcessingState {
     private int id;
 
     @Column(unique = true)
-    private int vehicleId;
+    private String vehicleChassis;
 
     @Column
     private Date lastProcessed;
 
     public VehicleProcessingState() { }
 
-    public VehicleProcessingState(int vehicleId) {
-        this.vehicleId = vehicleId;
+    public VehicleProcessingState(String vehicleChassis) {
+        this.vehicleChassis = vehicleChassis;
         this.lastProcessed = new Date();
     }
 
@@ -47,12 +47,12 @@ public class VehicleProcessingState {
         this.id = id;
     }
 
-    public int getVehicleId() {
-        return vehicleId;
+    public String getVehicleChassis() {
+        return vehicleChassis;
     }
 
-    public void setVehicleId(int vehicleId) {
-        this.vehicleId = vehicleId;
+    public void setVehicleChassis(String vehicleChassis) {
+        this.vehicleChassis = vehicleChassis;
     }
 
     public Date getLastProcessed() {

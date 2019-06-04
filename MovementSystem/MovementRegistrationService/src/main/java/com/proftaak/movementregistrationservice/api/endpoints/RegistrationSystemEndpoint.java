@@ -76,11 +76,11 @@ public class RegistrationSystemEndpoint {
     }
 
     @GET
-    @Path("/vehicle/{vehicleId}/points/from/{startValue}/to/{endValue}")
-    public Response getVehicleLocationPoints(@PathParam("vehicleId") long vehicleId, @PathParam("startValue") long startValue, @PathParam("endValue") long endValue){
+    @Path("/vehicle/{vehicleChassis}/points/from/{startValue}/to/{endValue}")
+    public Response getVehicleLocationPoints(@PathParam("vehicleChassis") String chassis, @PathParam("startValue") long startValue, @PathParam("endValue") long endValue){
         Date startDate = new Date(startValue);
         Date endDate = new Date(endValue);
-        return Response.ok().entity(pointConverter.toShared(registrationService.getLocationPointsForVehicle(vehicleId, startDate, endDate))).build();
+        return Response.ok().entity(pointConverter.toShared(registrationService.getLocationPointsForVehicle(chassis, startDate, endDate))).build();
     }
 
     @POST
