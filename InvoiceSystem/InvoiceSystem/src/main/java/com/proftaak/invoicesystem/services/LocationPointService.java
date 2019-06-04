@@ -21,7 +21,7 @@ public class LocationPointService {
             String url = "http://localhost:8080/MovementRegistration/v1/registration/vehicle/";
 
             if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
-                url = "http://movementregistrationservice/deploy/v1/registration/vehicle/";
+                url = "http://movementregistrationservice:8080/deploy/v1/registration/vehicle/";
             }
 
             url += vehicleId+"/points/from/"+from.getTime()+"/to/"+to.getTime();
