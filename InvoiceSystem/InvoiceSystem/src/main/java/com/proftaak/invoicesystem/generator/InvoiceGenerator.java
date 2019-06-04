@@ -30,9 +30,9 @@ public class InvoiceGenerator {
     @Inject
     private InvoiceProcessingService processingService;
 
-    @Schedule(dayOfWeek = "Sun", hour = "0", persistent = false)
+    @Schedule(hour = "*", minute = "*", second = "*/30", persistent = false)
     public void generatePeriodically() {
-        Invoice invoice = generateInvoice(new Invoice());
+        Invoice invoice = generateInvoice(null);
         processingService.addInvoice(invoice);
     }
 
@@ -54,6 +54,7 @@ public class InvoiceGenerator {
 
         if(invoice == null){
             vehicleId = generator.getNextVehicleId(from, now);
+            invoice = new Invoice();
         } else {
             vehicleId = invoice.getVehicleId();
         }
