@@ -34,7 +34,9 @@ public class InvoiceGenerator {
     public void generatePeriodically() {
         System.out.println("tick");
         Invoice invoice = generateInvoice(null);
-        processingService.addInvoice(invoice);
+        if(invoice != null) {
+            processingService.addInvoice(invoice);
+        }
     }
 
     public Invoice regenerateInvoice(Invoice invoice){
