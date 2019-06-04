@@ -12,9 +12,9 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
     private EntityManager em;
 
     @Override
-    public boolean addNewVehicle(int vehicleId) {
+    public boolean addNewVehicle(String chassisNumber) {
         try {
-            em.persist(new VehicleProcessingState(vehicleId));
+            em.persist(new VehicleProcessingState(chassisNumber));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,7 +34,7 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
     }
 
     @Override
-    public VehicleProcessingState getVehicleById(long vehicleId) {
-        return em.createNamedQuery("VehicleProcessingState.getById", VehicleProcessingState.class).setParameter("vehicleId", vehicleId).getSingleResult();
+    public VehicleProcessingState getVehicleByChassis(String chassis) {
+        return em.createNamedQuery("VehicleProcessingState.getByChassis", VehicleProcessingState.class).setParameter("chassis", chassis).getSingleResult();
     }
 }

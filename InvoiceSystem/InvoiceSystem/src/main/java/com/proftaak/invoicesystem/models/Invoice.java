@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
 @Table(name="tbl_invoice")
 @NamedQueries({
@@ -15,8 +16,8 @@ import java.util.List;
                 query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
         ),
         @NamedQuery(
-                name = "Invoice.GetByVehicleId",
-                query = "SELECT a FROM Invoice a WHERE a.vehicleId = :vehicleId"
+                name = "Invoice.GetByVehicleChassis",
+                query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis"
         )
 }
 )
@@ -26,7 +27,7 @@ public class Invoice {
     private long id;
 
     @Column
-    private long vehicleId;
+    private String vehicleChassis;
 
     @Column
     private double totalDistance;
@@ -51,12 +52,12 @@ public class Invoice {
         this.date = date;
     }
 
-    public long getVehicleId() {
-        return vehicleId;
+    public String getVehicleChassis() {
+        return vehicleChassis;
     }
 
-    public void setVehicleId(long vehicleId) {
-        this.vehicleId = vehicleId;
+    public void setVehicleChassis(String vehicleChassis) {
+        this.vehicleChassis = vehicleChassis;
     }
 
     public void setTotalDistance(double totalDistance) {
@@ -79,8 +80,8 @@ public class Invoice {
 
     }
 
-    public Invoice(int vehicleId, double totalDistance, double totalPrice) {
-        this.vehicleId = vehicleId;
+    public Invoice(String vehicleChassis, double totalDistance, double totalPrice) {
+        this.vehicleChassis = vehicleChassis;
         this.totalDistance = totalDistance;
         this.totalPrice = totalPrice;
         this.date = new Date();
@@ -89,10 +90,6 @@ public class Invoice {
 
     public long getId() {
         return id;
-    }
-
-    public long getVehicle() {
-        return vehicleId;
     }
 
     public double getTotalDistance() {

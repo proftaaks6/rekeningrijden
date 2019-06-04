@@ -16,7 +16,7 @@ import static com.proftaak.invoicesystem.helpers.RestCommuncationHelper.getRespo
 
 @Stateless
 public class LocationPointService {
-    public List<LocationPoint> getLocationPoints(long vehicleId, Date from, Date to){
+    public List<LocationPoint> getLocationPoints(String vehicleChassis, Date from, Date to){
         try {
             String url = "http://localhost:8080/MovementRegistration/v1/registration/vehicle/";
 
@@ -24,7 +24,7 @@ public class LocationPointService {
                 url = "http://movementregistrationservice:8080/deploy/v1/registration/vehicle/";
             }
 
-            url += vehicleId+"/points/from/"+from.getTime()+"/to/"+to.getTime();
+            url += vehicleChassis+"/points/from/"+from.getTime()+"/to/"+to.getTime();
 
             System.out.println(url);
 

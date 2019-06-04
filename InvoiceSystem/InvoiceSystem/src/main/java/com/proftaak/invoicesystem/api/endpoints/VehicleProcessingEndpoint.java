@@ -21,9 +21,9 @@ public class VehicleProcessingEndpoint {
     private VehicleProcessingService service;
 
     @POST
-    @Path("/vehicle/{id}")
-    public Response addNewVehicle(@PathParam("id") int vehicleId){
-        if (service.addNewVehicle(vehicleId)) {
+    @Path("/vehicle/{chassis}")
+    public Response addNewVehicle(@PathParam("chassis") String chassisNumber){
+        if (service.addNewVehicle(chassisNumber)) {
             return Response.ok().build();
         } else {
             return Response.serverError().build();

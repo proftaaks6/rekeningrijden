@@ -86,10 +86,10 @@ public class ClientUser implements Serializable {
         return residence;
     }
 
-    public List<Integer> getOwnedVehicleIds() {
-        List<Integer> list = new ArrayList<>();
+    public List<String> getOwnedVehicleChassisNumbers() {
+        List<String> list = new ArrayList<>();
         for (UserVehicle v : ownedVehicles) {
-            list.add((int)v.getVehicle().getId());
+            list.add(v.getVehicle().getChassisNumber());
         }
 
         return list;

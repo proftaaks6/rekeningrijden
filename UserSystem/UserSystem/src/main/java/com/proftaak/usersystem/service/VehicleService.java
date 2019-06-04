@@ -16,8 +16,8 @@ public class VehicleService {
 
     public boolean addCarToUser(ClientUser user, String chassisNumber){
         Vehicle vehicle = new Vehicle();
-        vehicle.addOwner(new UserVehicle(vehicle, user, new Date()));
         vehicle.setChassisNumber(chassisNumber);
+        vehicle.addOwner(new UserVehicle(vehicle, user, new Date()));
         vehicleDao.save(vehicle);
         return true;
     }

@@ -22,11 +22,5 @@
         <module name="UserSystem.shared" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="DriverApplication.shared" target="1.8" />
-      <module name="MovementRegistrationService.shared" target="1.8" />
-      <module name="rabbitmq" target="1.8" />
-      <module name="UserSystem.shared" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface InvoiceProcessingDao {
     boolean markAsPaid(int invoiceId);
-    List<Invoice> getInvoicesForUser(long[] ids);
+    List<Invoice> getInvoicesForUser(String[] chassisNumbers);
     Invoice addInvoice(Invoice invoice);
     Invoice regenerateInvoice(long invoiceId);
     Invoice getInvoiceById(long id);
