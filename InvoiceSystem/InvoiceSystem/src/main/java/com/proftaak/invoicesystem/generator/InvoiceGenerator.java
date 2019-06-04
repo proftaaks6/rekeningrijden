@@ -41,7 +41,7 @@ public class InvoiceGenerator {
 
     public Invoice regenerateInvoice(Invoice invoice){
         Invoice regeneratedInvoice = generateInvoice(invoice);
-        return processingService.regenerateInvoice(regeneratedInvoice.getId());
+        return regeneratedInvoice;
     }
 
     private Invoice generateInvoice(Invoice invoice){
