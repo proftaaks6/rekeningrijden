@@ -1,5 +1,6 @@
 package com.proftaak.usersystem.service;
 
+import com.proftaak.usersystem.dao.UserDao;
 import com.proftaak.usersystem.dao.VehicleDao;
 import com.proftaak.usersystem.models.ClientUser;
 import com.proftaak.usersystem.models.UserVehicle;
@@ -13,12 +14,15 @@ import java.util.Date;
 public class VehicleService {
     @Inject
     private VehicleDao vehicleDao;
+    @Inject
+    private UserDao userDao;
 
     public boolean addCarToUser(ClientUser user, String chassisNumber){
         Vehicle vehicle = new Vehicle();
         vehicle.setChassisNumber(chassisNumber);
-        vehicle.addOwner(new UserVehicle(vehicle, user, new Date()));
-        vehicleDao.save(vehicle);
+        UserVehicle userVehicle = new UserVehicle(vehicle, user, new Date());
+        user.addOwnedVehicle(userVehicle);
+        userDao.editUser(user);
         return true;
     }
 

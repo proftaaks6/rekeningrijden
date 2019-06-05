@@ -102,4 +102,9 @@ public class ClientUser implements Serializable {
 
         return list;
     }
+
+    public void addOwnedVehicle(UserVehicle userVehicle)
+    {
+        this.ownedVehicles.add(userVehicle);
+    }
 }
