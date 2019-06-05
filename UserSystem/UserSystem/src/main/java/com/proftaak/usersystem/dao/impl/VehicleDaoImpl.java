@@ -15,6 +15,7 @@ public class VehicleDaoImpl implements VehicleDao {
     @Override
     public void save(Vehicle vehicle) {
         em.persist(vehicle);
+        em.flush();
     }
 
     @Override

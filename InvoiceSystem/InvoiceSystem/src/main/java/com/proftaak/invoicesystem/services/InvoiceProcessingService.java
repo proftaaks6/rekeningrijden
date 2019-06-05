@@ -22,6 +22,14 @@ public class InvoiceProcessingService {
     }
 
     public List<Invoice> getInvoicesForUser(String unparsedVehicleIds) {
+        return processingDao.getInvoicesForUser(convertUnparsedVehicleIds(unparsedVehicleIds));
+    }
+
+    public boolean markForGeneration(String unparsedVehicleIds) {
+        return processingDao.markForGeneration(convertUnparsedVehicleIds(unparsedVehicleIds));
+    }
+
+    private String[] convertUnparsedVehicleIds(String unparsedVehicleIds) {
         String[] parsedVehicleIds = unparsedVehicleIds.split(",");
         String[] vehicleIds = new String[parsedVehicleIds.length];
         for (int i = 0; i < parsedVehicleIds.length; i++) {
@@ -29,8 +37,7 @@ public class InvoiceProcessingService {
             vehicleIds[i] = id;
         }
 
-        return processingDao.getInvoicesForUser(vehicleIds);
-
+        return vehicleIds;
     }
 
     public Invoice regenerateInvoice(long invoiceId) {return processingDao.regenerateInvoice(invoiceId);}

@@ -35,7 +35,7 @@ public class ClientUser implements Serializable {
     @Column
     private String residence;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVehicle> ownedVehicles;
 
     @Column(unique = true)

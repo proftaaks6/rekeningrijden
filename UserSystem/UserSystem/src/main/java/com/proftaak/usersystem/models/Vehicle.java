@@ -29,7 +29,7 @@ public class Vehicle implements Serializable {
     @Column
     private String chassisNumber;
 
-    @OneToMany(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     private List<UserVehicle> owners;
 
     public Vehicle() {

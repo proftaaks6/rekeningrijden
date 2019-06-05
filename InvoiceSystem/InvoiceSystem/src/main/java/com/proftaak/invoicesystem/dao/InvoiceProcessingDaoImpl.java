@@ -3,6 +3,7 @@ package com.proftaak.invoicesystem.dao;
 import com.proftaak.invoicesystem.generator.InvoiceGenerator;
 import com.proftaak.invoicesystem.models.Invoice;
 import com.proftaak.invoicesystem.models.SquareRegion;
+import javax.persistence.Query;
 import sun.nio.cs.Surrogate;
 
 import javax.ejb.Stateless;
@@ -52,6 +53,22 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
         }
 
         return invoices;
+    }
+
+    @Override
+    public boolean markForGeneration(String[] chassisNumbers) {
+        for (String chassis : chassisNumbers) {
+            try {
+                Query q = em.createNativeQuery("UPDATE tbl_vehicleproccessing SET LASTPROCESSED = DATE_SUB(curdate(), INTERVAL 1 MONTH) WHERE VEHICLECHASSIS = ?1");
+                q.setParameter(1, chassis);
+                q.executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
