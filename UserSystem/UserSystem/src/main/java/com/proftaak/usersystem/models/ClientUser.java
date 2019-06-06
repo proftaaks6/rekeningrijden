@@ -35,7 +35,7 @@ public class ClientUser implements Serializable {
     @Column
     private String residence;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVehicle> ownedVehicles;
 
     @Column(unique = true)
@@ -101,5 +101,10 @@ public class ClientUser implements Serializable {
         }
 
         return list;
+    }
+
+    public void addOwnedVehicle(UserVehicle userVehicle)
+    {
+        this.ownedVehicles.add(userVehicle);
     }
 }

@@ -78,8 +78,8 @@ public class DriverApplicationService
 		}
 
 		String ids = "";
-		for (int carId : user.getOwnedVehicleIds()) {
-			ids += "," + carId;
+		for (String chassis : user.getOwnedVehiclesChassis()) {
+			ids += "," + chassis;
 		}
 
 		if (ids != "") {

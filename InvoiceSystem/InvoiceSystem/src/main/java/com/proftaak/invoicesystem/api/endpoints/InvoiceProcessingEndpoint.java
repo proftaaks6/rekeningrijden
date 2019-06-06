@@ -61,6 +61,13 @@ public class InvoiceProcessingEndpoint {
         }
     }
 
+    @GET
+    @Path("/markForGeneration/{vehicleIds}")
+    public Response markForGeneration(@PathParam("vehicleIds") String unparsedVehicleIds) throws JsonProcessingException {
+        service.markForGeneration(unparsedVehicleIds);
+        return Response.ok(true).build();
+    }
+
 //    @POST
 //    @Path("/generate")
 //    public Response generateInvoice(

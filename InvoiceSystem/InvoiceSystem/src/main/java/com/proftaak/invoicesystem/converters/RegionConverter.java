@@ -17,6 +17,7 @@ public class RegionConverter {
     public com.proftaak.invoicesystem.models.SquareRegion toSquareEntity(Region region){
         SquareRegion squareRegion = new SquareRegion();
         squareRegion.setPoints(region.getTopLeft().getLongitude(), region.getTopLeft().getLatitude(), region.getBottomRight().getLongitude(), region.getBottomRight().getLatitude());
+        squareRegion.setPrice(region.getPrice());
         try{
             if(region.getId() > -1){
                 squareRegion.setId((int)region.getId());
