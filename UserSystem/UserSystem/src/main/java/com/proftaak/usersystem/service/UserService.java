@@ -21,7 +21,7 @@ public class UserService {
         // Create this user in driversystem
         if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
             RestCommuncationHelper.postRequest("http://driversystem:8080/deploy/v1/driverapplication/createUser",
-                    "username=" + name + "&password=welkom123"); 
+                    "username=" + name + "&password=welkom123");
         } else {
             RestCommuncationHelper.postRequest("http://localhost:8080/DriverSystem/v1/driverapplication/createUser",
                     "username=" + name + "&password=welkom123");

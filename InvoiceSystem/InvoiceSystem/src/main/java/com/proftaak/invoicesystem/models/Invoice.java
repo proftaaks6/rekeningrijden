@@ -39,6 +39,7 @@ public class Invoice {
     private boolean isPaid;
 
     @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -22,7 +22,7 @@ public class GovernmentEmployee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
     @Column

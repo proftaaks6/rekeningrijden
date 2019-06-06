@@ -12,6 +12,7 @@ public class LocationPoint {
     private int id;
 
     @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @Column

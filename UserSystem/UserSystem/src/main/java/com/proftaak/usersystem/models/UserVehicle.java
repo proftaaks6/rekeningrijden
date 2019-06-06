@@ -17,13 +17,17 @@ public class UserVehicle
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
 	@ManyToOne
 	private Vehicle vehicle;
+
 	@ManyToOne
 	private ClientUser user;
+
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
+
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;
