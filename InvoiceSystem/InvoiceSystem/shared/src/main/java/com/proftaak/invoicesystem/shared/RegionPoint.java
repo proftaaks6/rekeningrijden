@@ -2,6 +2,7 @@ package com.proftaak.invoicesystem.shared;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class RegionPoint implements Serializable {
 
@@ -42,6 +43,11 @@ public class RegionPoint implements Serializable {
         RegionPoint that = (RegionPoint) o;
         return Double.compare(that.longitude, longitude) == 0 &&
                 Double.compare(that.latitude, latitude) == 0;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, latitude, longitude);
     }
 
     public int getId() {

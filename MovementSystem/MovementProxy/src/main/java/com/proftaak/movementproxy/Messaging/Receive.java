@@ -52,6 +52,12 @@ public class Receive {
                 channel.queueDeclare(QUEUE_NAME2, false, false, false, null);
             } catch (IOException | TimeoutException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             startReceivingSimulation(consumer, channel, queueName);
         }else{
@@ -61,6 +67,12 @@ public class Receive {
                 channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             } catch (IOException | TimeoutException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             startReceiving(consumer, channel, queueName);
         }
