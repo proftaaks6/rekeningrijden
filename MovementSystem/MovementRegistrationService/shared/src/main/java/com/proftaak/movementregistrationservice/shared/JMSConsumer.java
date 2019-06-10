@@ -11,16 +11,24 @@ public class JMSConsumer {
 
     public JMSConsumer() {
         Channel channel = null;
+        Connection connection = null;
         try {
             //Set up consumer
             ConnectionFactory factory = new ConnectionFactory();
-            Connection connection = null;
+
             connection = factory.newConnection();
             channel = connection.createChannel();
             //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             this.channel = channel;
         }catch (Exception e){
             System.out.println(e);
+        } finally {
+            try {
+                connection.close();
+                channel.close();
+            } catch (IOException | TimeoutException e) {
+                e.printStackTrace();
+            }
         }
     }
 
