@@ -9,10 +9,11 @@ import com.proftaak.invoicesystem.services.LocationPointService;
 import com.proftaak.invoicesystem.services.RegionService;
 import com.proftaak.movementregistrationservice.shared.LocationPoint;
 
-import javax.ejb.*;
+import javax.ejb.Schedule;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Startup
 @Singleton

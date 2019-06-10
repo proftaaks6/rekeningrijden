@@ -41,7 +41,7 @@ public class RegionDatabaseImplementation implements RegionDao{
             provider.getEm().merge(region);
             return true;
         }catch (Exception e){
-            e.printStackTrace();
+
         }
         return false;
     }

@@ -2,10 +2,11 @@ package com.proftaak.driverapplication.converters;
 
 import com.proftaak.driverapplication.models.DriverUser;
 import com.proftaak.driverapplication.service.DriverApplicationService;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class DriverUserConverter

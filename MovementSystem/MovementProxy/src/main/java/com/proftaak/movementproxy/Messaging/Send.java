@@ -1,8 +1,8 @@
 package com.proftaak.movementproxy.Messaging;
 
 import com.proftaak.rabbitmq.ConnectionFactory;
-import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
 import org.apache.log4j.BasicConfigurator;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class Send {
         this.channel = connection.createChannel();
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         } catch (IOException | TimeoutException e) {
-            e.printStackTrace();
+
         }
     }
 
@@ -32,7 +32,7 @@ public class Send {
             this.channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
             System.out.println("Sent message: " + message);
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 }

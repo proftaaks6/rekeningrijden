@@ -2,12 +2,10 @@ package com.proftaak.invoicesystem.services;
 
 import com.proftaak.invoicesystem.dao.InvoiceProcessingDao;
 import com.proftaak.invoicesystem.models.Invoice;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateless

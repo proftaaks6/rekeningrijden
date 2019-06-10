@@ -7,13 +7,13 @@ import com.proftaak.driverapplication.models.LoginAttempt;
 import com.proftaak.driverapplication.security.Secured;
 import com.proftaak.driverapplication.service.DriverApplicationService;
 
-import java.io.IOException;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.List;
 
 @Path(value = "/driverapplication")
 @Produces(MediaType.APPLICATION_JSON)

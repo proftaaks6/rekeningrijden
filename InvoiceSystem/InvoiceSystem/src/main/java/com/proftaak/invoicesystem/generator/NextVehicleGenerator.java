@@ -3,7 +3,6 @@ package com.proftaak.invoicesystem.generator;
 import com.proftaak.invoicesystem.models.VehicleProcessingState;
 
 import javax.ejb.Singleton;
-import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;

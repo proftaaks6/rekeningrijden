@@ -2,9 +2,10 @@ package com.proftaak.driverapplication.dao.impl;
 
 import com.proftaak.driverapplication.dao.LoginAttemptDao;
 import com.proftaak.driverapplication.models.LoginAttempt;
-import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 public class LoginAttemptDaoImpl implements LoginAttemptDao
 {

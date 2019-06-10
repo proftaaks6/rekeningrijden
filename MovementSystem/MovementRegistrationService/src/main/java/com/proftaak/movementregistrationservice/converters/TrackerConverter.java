@@ -1,9 +1,10 @@
 package com.proftaak.movementregistrationservice.converters;
 
 import com.proftaak.movementregistrationservice.models.Tracker;
+
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.Stateless;
 
 
 @Stateless

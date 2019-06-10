@@ -1,6 +1,5 @@
 package com.proftaak.invoicesystem.shared;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 

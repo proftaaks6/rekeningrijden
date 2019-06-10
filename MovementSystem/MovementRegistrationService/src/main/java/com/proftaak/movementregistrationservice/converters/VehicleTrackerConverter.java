@@ -2,10 +2,11 @@ package com.proftaak.movementregistrationservice.converters;
 
 import com.proftaak.movementregistrationservice.models.VehicleTracker;
 import com.proftaak.movementregistrationservice.service.RegistrationService;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class VehicleTrackerConverter {

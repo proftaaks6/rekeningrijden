@@ -2,15 +2,12 @@ package com.proftaak.invoicesystem.dao;
 
 import com.proftaak.invoicesystem.generator.InvoiceGenerator;
 import com.proftaak.invoicesystem.models.Invoice;
-import com.proftaak.invoicesystem.models.SquareRegion;
-import javax.persistence.Query;
-import sun.nio.cs.Surrogate;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
 
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+
 
             return false;
         }
@@ -48,7 +45,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
                 List<Invoice> invoicesForVehicle = em.createNamedQuery("Invoice.GetByVehicleChassis", Invoice.class).setParameter("chassis", chassis).getResultList();
                 invoices.addAll(invoicesForVehicle);
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
         }
 
@@ -63,7 +60,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
                 q.setParameter(1, chassis);
                 q.executeUpdate();
             } catch (Exception e) {
-                e.printStackTrace();
+
                 return false;
             }
         }
@@ -78,7 +75,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
             em.flush();
             return invoice;
         } catch (Exception e) {
-            e.printStackTrace();
+
             return null;
         }
     }
@@ -91,7 +88,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
             em.merge(invoice);
             return invoice;
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
         return null;
     }
@@ -102,7 +99,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
             Invoice invoice = em.createNamedQuery("Invoice.GetById", Invoice.class).setParameter("invoiceId", id).getSingleResult();
             return invoice;
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
         return null;
     }

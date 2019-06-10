@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
             em.flush();
             return user;
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
 
         return null;
@@ -35,7 +35,7 @@ public class UserDaoImpl implements UserDao {
         try {
             return em.createNamedQuery("ClientUser.getByName", ClientUser.class).setParameter("name", name).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+
             return null;
         }
     }
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
         try {
             return em.merge(user);
         } catch (Exception e) {
-            e.printStackTrace();
+
             return null;
         }
     }

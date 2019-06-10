@@ -43,7 +43,7 @@ public class RegionsEndpoint {
             jsonRegion = mapper.readValue(message, JsonRegion.class);
             region = new Region((long)jsonRegion.getId(), new Point(jsonRegion.getTopLeftLat(), jsonRegion.getTopLeftLong()), new Point(jsonRegion.getBottomRightLat(), jsonRegion.getBottomRightLong()), jsonRegion.getTaxRate());
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         regionService.reloadRegionsInMemory();
         return regionService.saveSquareRegion(new RegionConverter().toSquareEntity(region));

@@ -5,10 +5,10 @@ import com.proftaak.movementregistrationservice.service.RegistrationService;
 import com.proftaak.movementregistrationservice.shared.FuelType;
 import com.proftaak.movementregistrationservice.shared.VehicleType;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Stateless

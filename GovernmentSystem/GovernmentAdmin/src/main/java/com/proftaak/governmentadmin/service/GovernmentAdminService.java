@@ -19,6 +19,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class GovernmentAdminService
                 }
 
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
+
         }
 
         return "Failed to register user with username: " + user.getUsername();
@@ -85,13 +86,13 @@ public class GovernmentAdminService
                 return gson.fromJson(json, ClientUser.class);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+
         } catch (HttpException e) {
-            e.printStackTrace();
+
         } catch (ParseException e) {
-            e.printStackTrace();
+
         } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+
         }
 
         return null;
@@ -116,13 +117,13 @@ public class GovernmentAdminService
                 return gson.fromJson(json, new TypeToken<List<ClientUser>>(){}.getType());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+
         } catch (HttpException e) {
-            e.printStackTrace();
+
         } catch (ParseException e) {
-            e.printStackTrace();
+
         } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+
         }
 
         return null;
@@ -137,7 +138,7 @@ public class GovernmentAdminService
             CloseableHttpResponse response = httpclient.execute(httppost);
             return response.getStatusLine().getStatusCode() == 200;
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         return false;
     }
