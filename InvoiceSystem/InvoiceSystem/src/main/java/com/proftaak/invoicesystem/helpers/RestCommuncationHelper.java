@@ -10,8 +10,7 @@ import static javax.ws.rs.core.HttpHeaders.USER_AGENT;
 
 public class RestCommuncationHelper {
 
-    private static Logger LOG = Logger.getLogger(RestCommuncationHelper.class.getName());
-
+    private RestCommuncationHelper(){}
 
     public static String getResponseString(String url, String requestMethode) throws IOException {
         URL obj = new URL(url);

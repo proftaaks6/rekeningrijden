@@ -40,7 +40,7 @@ public class HealthCheck {
 
     @GET
     @Path(value = "/whoami")
-    public String WhoAmI(){
+    public String whoAmI(){
         return "InvoiceSystem";
     }
 }

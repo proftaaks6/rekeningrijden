@@ -85,13 +85,7 @@ public class GovernmentAdminService
                 String json = EntityUtils.toString(entity);
                 return gson.fromJson(json, ClientUser.class);
             }
-        } catch (IOException e) {
-
-        } catch (HttpException e) {
-
-        } catch (ParseException e) {
-
-        } catch (JsonSyntaxException e) {
+        } catch (IOException | HttpException | ParseException | JsonSyntaxException e) {
 
         }
 
@@ -116,13 +110,7 @@ public class GovernmentAdminService
                 String json = EntityUtils.toString(entity);
                 return gson.fromJson(json, new TypeToken<List<ClientUser>>(){}.getType());
             }
-        } catch (IOException e) {
-
-        } catch (HttpException e) {
-
-        } catch (ParseException e) {
-
-        } catch (JsonSyntaxException e) {
+        } catch (IOException | HttpException | ParseException | JsonSyntaxException e) {
 
         }
 

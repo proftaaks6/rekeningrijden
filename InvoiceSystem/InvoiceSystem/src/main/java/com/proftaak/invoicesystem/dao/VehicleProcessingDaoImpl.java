@@ -4,6 +4,7 @@ import com.proftaak.invoicesystem.models.VehicleProcessingState;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
@@ -27,9 +28,7 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
         try {
             return em.createNamedQuery("VehicleProcessingState.getAll", VehicleProcessingState.class).getResultList();
         } catch (Exception e) {
-
-
-            return null;
+            return new ArrayList<>();
         }
     }
 

@@ -9,6 +9,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class RestCommuncationHelper {
+
+    private RestCommuncationHelper(){}
+
     private static HttpURLConnection con;
 
     public static String getRequest(String url) throws IOException {

@@ -33,7 +33,6 @@ public class InvoiceGenerator {
 
     @Schedule(hour = "*", minute = "*", second = "*/30", persistent = false)
     public void generatePeriodically() {
-        System.out.println("tick");
         Invoice invoice = generateInvoice(null);
         if(invoice != null) {
             processingService.addInvoice(invoice);
@@ -41,8 +40,7 @@ public class InvoiceGenerator {
     }
 
     public Invoice regenerateInvoice(Invoice invoice){
-        Invoice regeneratedInvoice = generateInvoice(invoice);
-        return regeneratedInvoice;
+        return generateInvoice(invoice);
     }
 
     private Invoice generateInvoice(Invoice invoice){
@@ -62,8 +60,6 @@ public class InvoiceGenerator {
         } else {
             vehicleChassis = invoice.getVehicleChassis();
         }
-
-        System.out.println("Processing "+ vehicleChassis);
 
         if(vehicleChassis.equals("")){
             return null;
@@ -99,7 +95,6 @@ public class InvoiceGenerator {
         invoice.setTotalPrice(rows.stream().mapToDouble(PriceRow::getPrice).sum());
         invoice.setVehicleChassis(vehicleChassis);
 
-        System.out.println("Total price "+ invoice.getTotalPrice());
         return invoice;
     }
 

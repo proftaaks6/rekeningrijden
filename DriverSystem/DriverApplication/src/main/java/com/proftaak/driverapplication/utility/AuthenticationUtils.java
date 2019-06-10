@@ -2,10 +2,13 @@ package com.proftaak.driverapplication.utility;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class AuthenticationUtils {
+
+    private AuthenticationUtils(){}
     /**
      * Returns SHA-256 encoded string
      * @param password - the string to be encoded
@@ -15,10 +18,10 @@ public class AuthenticationUtils {
      */
     public static String encodeSHA256(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(password.getBytes("UTF-8"));
+        md.update(password.getBytes(StandardCharsets.UTF_8));
         byte[] digest = md.digest();
 
-        return DatatypeConverter.printBase64Binary(digest).toString();
+        return DatatypeConverter.printBase64Binary(digest);
     }
 
 

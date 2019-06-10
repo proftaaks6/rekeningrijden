@@ -27,9 +27,7 @@ public class StartupBean {
             userDao.addUser(user);
 
 
-        } catch (UnsupportedEncodingException e) {
-
-        } catch (NoSuchAlgorithmException e) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
 
         }
 

@@ -96,8 +96,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     @Override
     public Invoice getInvoiceById(long id) {
         try {
-            Invoice invoice = em.createNamedQuery("Invoice.GetById", Invoice.class).setParameter("invoiceId", id).getSingleResult();
-            return invoice;
+            return em.createNamedQuery("Invoice.GetById", Invoice.class).setParameter("invoiceId", id).getSingleResult();
         } catch (Exception e) {
 
         }
