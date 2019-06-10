@@ -1,6 +1,7 @@
 package com.proftaak.governmentadmin.service;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.proftaak.governmentadmin.dao.UserDao;
 import com.proftaak.governmentadmin.models.GovernmentEmployee;
@@ -9,6 +10,7 @@ import com.proftaak.usersystem.shared.ClientUser;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpException;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -59,28 +61,37 @@ public class GovernmentAdminService
                               String residence,
                               String email) throws Exception
     {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost("http://user_system:8080/deploy/v1/usersystem/userInfo");
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpPost httppost = new HttpPost("http://user_system:8080/deploy/v1/usersystem/userInfo");
 
-        // Request parameters and other properties.
-        List<NameValuePair> params = new ArrayList<NameValuePair>(4);
-        params.add(new BasicNameValuePair("name", name));
-        params.add(new BasicNameValuePair("email", email));
-        params.add(new BasicNameValuePair("residence", residence));
-        params.add(new BasicNameValuePair("address", address));
-        httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+            // Request parameters and other properties.
+            List<NameValuePair> params = new ArrayList<NameValuePair>(4);
+            params.add(new BasicNameValuePair("name", name));
+            params.add(new BasicNameValuePair("email", email));
+            params.add(new BasicNameValuePair("residence", residence));
+            params.add(new BasicNameValuePair("address", address));
+            httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
-        //Execute and get the response.
-        CloseableHttpResponse response = httpclient.execute(httppost);
-        HttpEntity entity = response.getEntity();
+            //Execute and get the response.
+            CloseableHttpResponse response = httpclient.execute(httppost);
+            HttpEntity entity = response.getEntity();
 
-        if (response.getStatusLine().getStatusCode() != 200) {
-            throw new HttpException();
-        }
+            if (response.getStatusLine().getStatusCode() != 200) {
+                throw new HttpException();
+            }
 
-        if (entity != null) {
-            String json = EntityUtils.toString(entity);
-            return gson.fromJson(json, ClientUser.class);
+            if (entity != null) {
+                String json = EntityUtils.toString(entity);
+                return gson.fromJson(json, ClientUser.class);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (HttpException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
         }
 
         return null;
@@ -88,20 +99,30 @@ public class GovernmentAdminService
 
     public List<ClientUser> getUsers() throws IOException, HttpException
     {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpget = new HttpGet("http://user_system:8080/deploy/v1/usersystem/users");
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
 
-        //Execute and get the response.
-        CloseableHttpResponse response = httpclient.execute(httpget);
-        HttpEntity entity = response.getEntity();
+            HttpGet httpget = new HttpGet("http://user_system:8080/deploy/v1/usersystem/users");
 
-        if (response.getStatusLine().getStatusCode() != 200) {
-            throw new HttpException();
-        }
+            //Execute and get the response.
+            CloseableHttpResponse response = httpclient.execute(httpget);
+            HttpEntity entity = response.getEntity();
 
-        if (entity != null) {
-            String json = EntityUtils.toString(entity);
-            return gson.fromJson(json, new TypeToken<List<ClientUser>>(){}.getType());
+            if (response.getStatusLine().getStatusCode() != 200) {
+                throw new HttpException();
+            }
+
+            if (entity != null) {
+                String json = EntityUtils.toString(entity);
+                return gson.fromJson(json, new TypeToken<List<ClientUser>>(){}.getType());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (HttpException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
         }
 
         return null;
@@ -109,11 +130,15 @@ public class GovernmentAdminService
 
     public boolean linkCar(int userId, String chassisNumber) throws IOException
     {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpPost httppost = new HttpPost("http://user_system:8080/deploy/v1/usersystem/"+Integer.toString(userId)+"/car/"+chassisNumber);
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpPost httppost = new HttpPost("http://user_system:8080/deploy/v1/usersystem/"+Integer.toString(userId)+"/car/"+chassisNumber);
 
-        //Execute and get the response.
-        CloseableHttpResponse response = httpclient.execute(httppost);
-        return response.getStatusLine().getStatusCode() == 200;
+            //Execute and get the response.
+            CloseableHttpResponse response = httpclient.execute(httppost);
+            return response.getStatusLine().getStatusCode() == 200;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
