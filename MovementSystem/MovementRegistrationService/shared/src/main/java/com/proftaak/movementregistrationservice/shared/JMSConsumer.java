@@ -1,12 +1,9 @@
 package com.proftaak.movementregistrationservice.shared;
 
-import com.proftaak.rabbitmq.ConnectionFactory;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.Consumer;
-
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import com.proftaak.rabbitmq.ConnectionFactory;
+import com.rabbitmq.client.*;
 
 public class JMSConsumer {
     private String QUEUE_NAME = "";
@@ -14,24 +11,15 @@ public class JMSConsumer {
 
     public JMSConsumer() {
         Channel channel = null;
-        Connection connection = null;
-        try {
-            //Set up consumer
-            ConnectionFactory factory = new ConnectionFactory();
+        ConnectionFactory factory = new ConnectionFactory();
 
-            connection = factory.newConnection();
+        try (Connection connection = factory.newConnection()){
+            //Set up consumer
             channel = connection.createChannel();
             //channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             this.channel = channel;
         }catch (Exception e){
             System.out.println(e);
-        } finally {
-            try {
-                connection.close();
-                channel.close();
-            } catch (IOException | TimeoutException e) {
-
-            }
         }
     }
 
