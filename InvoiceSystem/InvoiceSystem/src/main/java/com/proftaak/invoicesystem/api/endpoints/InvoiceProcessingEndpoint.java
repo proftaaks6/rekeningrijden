@@ -32,7 +32,7 @@ public class InvoiceProcessingEndpoint {
 
     @GET
     @Path("/vehicle/{vehicleIds}")
-    public Response getInvoicesForUser(@PathParam("vehicleIds") String unparsedVehicleIds) throws JsonProcessingException {
+    public Response getInvoicesForUser(@PathParam("vehicleIds") String unparsedVehicleIds)  {
         List<Invoice> invoices = service.getInvoicesForUser(unparsedVehicleIds);
         return Response.ok(invoices).build();
     }
@@ -61,7 +61,7 @@ public class InvoiceProcessingEndpoint {
 
     @GET
     @Path("/markForGeneration/{vehicleIds}")
-    public Response markForGeneration(@PathParam("vehicleIds") String unparsedVehicleIds) throws JsonProcessingException {
+    public Response markForGeneration(@PathParam("vehicleIds") String unparsedVehicleIds) {
         service.markForGeneration(unparsedVehicleIds);
         return Response.ok(true).build();
     }

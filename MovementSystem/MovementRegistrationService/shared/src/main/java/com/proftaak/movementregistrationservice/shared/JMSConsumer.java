@@ -38,7 +38,7 @@ public class JMSConsumer {
                 Thread.sleep(1000);
                 startReceiving(consumer, queueName);
             } catch (InterruptedException ignore) {
-
+                Thread.currentThread().interrupt();
             }
         }
     }

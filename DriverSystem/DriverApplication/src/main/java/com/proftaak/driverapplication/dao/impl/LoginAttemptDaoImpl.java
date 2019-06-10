@@ -5,6 +5,7 @@ import com.proftaak.driverapplication.models.LoginAttempt;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginAttemptDaoImpl implements LoginAttemptDao
@@ -28,7 +29,7 @@ public class LoginAttemptDaoImpl implements LoginAttemptDao
 		try {
 			return em.createNamedQuery("LoginAttempt.getByUserId", LoginAttempt.class).setParameter("id", userId).getResultList();
 		}catch (Exception e){
-			return null;
+			return new ArrayList<>();
 		}
 	}
 
@@ -38,7 +39,7 @@ public class LoginAttemptDaoImpl implements LoginAttemptDao
 		try {
 			return em.createNamedQuery("LoginAttempt.getAll", LoginAttempt.class).getResultList();
 		} catch (Exception e) {
-			return null;
+			return new ArrayList<>();
 		}
 	}
 
