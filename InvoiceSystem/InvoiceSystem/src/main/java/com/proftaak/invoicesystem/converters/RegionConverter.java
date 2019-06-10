@@ -23,7 +23,7 @@ public class RegionConverter {
                 squareRegion.setId((int)region.getId());
             }
         }catch (NullPointerException e){
-            e.printStackTrace();
+
         }
 
         return squareRegion;

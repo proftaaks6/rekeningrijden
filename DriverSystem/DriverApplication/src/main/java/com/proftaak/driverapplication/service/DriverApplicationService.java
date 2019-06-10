@@ -9,19 +9,18 @@ import com.proftaak.driverapplication.models.LoginAttempt;
 import com.proftaak.driverapplication.utility.AuthenticationUtils;
 import com.proftaak.driverapplication.utility.RestCommuncationHelper;
 import com.proftaak.invoicesystem.shared.Invoice;
-import com.proftaak.rabbitmq.ConnectionFactory;
 import com.proftaak.usersystem.shared.ClientUser;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.SecurityContext;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.SecurityContext;
 
 @Stateless
 public class DriverApplicationService

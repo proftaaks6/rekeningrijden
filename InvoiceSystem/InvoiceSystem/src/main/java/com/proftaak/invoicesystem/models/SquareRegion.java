@@ -1,13 +1,10 @@
 package com.proftaak.invoicesystem.models;
 
 
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
 
 @Entity
 @Table(name="tbl_squareregion")

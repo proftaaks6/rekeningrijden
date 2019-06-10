@@ -28,9 +28,9 @@ public class StartupBean {
 
 
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+
         }
 
 

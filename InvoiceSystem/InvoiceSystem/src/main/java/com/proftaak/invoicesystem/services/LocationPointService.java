@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.enterprise.util.TypeLiteral;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +31,7 @@ public class LocationPointService {
                     (new TypeLiteral<List<LocationPoint>>(){}).getType(),
                     url, "GET");
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         return Collections.emptyList();
 

@@ -1,16 +1,16 @@
 package com.proftaak.movementregistrationservice.Dao.DaoImplementation;
 
+import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
 import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
-import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
-
 import com.proftaak.movementregistrationservice.models.VehicleTracker;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 @Stateless
 public class RegistrationDaoImplementation implements RegistrationDao{
@@ -94,7 +94,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
                 return vehicle;
             }
         }catch (Exception e){
-            e.printStackTrace();
+
         }
 
         return null;
@@ -139,7 +139,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         try {
             vehicle = em.createNamedQuery("Vehicle.getByChassisNumber", Vehicle.class).setParameter("chassisNumber", chassisNumber).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
 
         return vehicle;

@@ -1,7 +1,5 @@
 package com.proftaak.movementregistrationservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import com.proftaak.movementregistrationservice.converters.VehicleConverter;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
@@ -13,8 +11,6 @@ import com.proftaak.movementregistrationservice.utils.RestCommuncationHelper;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.IOException;
-import java.util.List;
-import javax.xml.stream.Location;
 import java.util.Date;
 import java.util.List;
 
@@ -60,7 +56,7 @@ public class RegistrationService {
                 RestCommuncationHelper.postRequest("http://localhost:8080/InvoiceSystem/v1/vehicleprocessing/vehicle/" + v.getChassisNumber());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+
             return false;
         }
 

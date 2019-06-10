@@ -3,6 +3,7 @@ package com.proftaak.governmentadmin.api.endpoints;
 
 import com.proftaak.governmentadmin.security.Secured;
 import com.proftaak.governmentadmin.service.GovernmentAdminService;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;

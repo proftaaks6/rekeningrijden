@@ -1,10 +1,8 @@
 package com.proftaak.invoicesystem.api.endpoints;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proftaak.invoicesystem.models.Invoice;
 import com.proftaak.invoicesystem.services.InvoiceProcessingService;
-import com.proftaak.invoicesystem.services.VehicleProcessingService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

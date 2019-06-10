@@ -17,7 +17,7 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
             em.persist(new VehicleProcessingState(chassisNumber));
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+
             return false;
         }
     }
@@ -27,7 +27,7 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
         try {
             return em.createNamedQuery("VehicleProcessingState.getAll", VehicleProcessingState.class).getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
+
 
             return null;
         }

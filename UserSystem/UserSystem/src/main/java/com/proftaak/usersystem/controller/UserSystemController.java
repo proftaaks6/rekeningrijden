@@ -2,21 +2,17 @@ package com.proftaak.usersystem.controller;
 
 import com.proftaak.usersystem.converters.ClientUserConverter;
 import com.proftaak.usersystem.models.UserVehicle;
-import com.proftaak.usersystem.models.Vehicle;
 import com.proftaak.usersystem.service.UserService;
 import com.proftaak.usersystem.service.VehicleService;
-
 import com.proftaak.usersystem.shared.ClientUser;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.registry.infomodel.User;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path(value = "/usersystem")
 @Produces(MediaType.APPLICATION_JSON)
