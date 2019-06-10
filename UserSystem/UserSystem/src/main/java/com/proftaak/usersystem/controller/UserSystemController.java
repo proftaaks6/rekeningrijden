@@ -20,7 +20,7 @@ import javax.xml.registry.infomodel.User;
 
 @Path(value = "/usersystem")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
+//@Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
 @Stateless
 public class UserSystemController {
 
@@ -80,6 +80,16 @@ public class UserSystemController {
             return clientUserConverter.toShared(userService.getClientUserById(userId));
         } catch (Exception e)
         {
+            throw new BadRequestException();
+        }
+    }
+
+    @GET
+    @Path("/userId/{username}")
+    public ClientUser getUserByUsername(@PathParam("username") String username) {
+        try {
+            return clientUserConverter.toShared(userService.getClientUserByName(username));
+        } catch (Exception e) {
             throw new BadRequestException();
         }
     }

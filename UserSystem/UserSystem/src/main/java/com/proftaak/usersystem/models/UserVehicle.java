@@ -1,5 +1,6 @@
 package com.proftaak.usersystem.models;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,18 +13,22 @@ import java.util.Date;
 				query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v JOIN ut.user u WHERE v.id = :vehicleId AND u.id = :userId")
 
 })
-public class UserVehicle
+public class UserVehicle implements Serializable
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
 	@ManyToOne
 	private Vehicle vehicle;
+
 	@ManyToOne
 	private ClientUser user;
+
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
+
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;

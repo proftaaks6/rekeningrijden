@@ -7,6 +7,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -21,8 +22,22 @@ public class InvoiceProcessingService {
     }
 
     public List<Invoice> getInvoicesForUser(String unparsedVehicleIds) {
+        return processingDao.getInvoicesForUser(convertUnparsedVehicleIds(unparsedVehicleIds));
+    }
+
+    public boolean markForGeneration(String unparsedVehicleIds) {
+        return processingDao.markForGeneration(convertUnparsedVehicleIds(unparsedVehicleIds));
+    }
+
+    private String[] convertUnparsedVehicleIds(String unparsedVehicleIds) {
         String[] parsedVehicleIds = unparsedVehicleIds.split(",");
-        return processingDao.getInvoicesForUser(parsedVehicleIds);
+        String[] vehicleIds = new String[parsedVehicleIds.length];
+        for (int i = 0; i < parsedVehicleIds.length; i++) {
+            String id = parsedVehicleIds[i];
+            vehicleIds[i] = id;
+        }
+
+        return vehicleIds;
     }
 
     public Invoice regenerateInvoice(long invoiceId) {return processingDao.regenerateInvoice(invoiceId);}

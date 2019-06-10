@@ -1,4 +1,4 @@
-package com.proftaak.invoicesystem.models;
+package com.proftaak.invoicesystem.shared;
 
 
 
@@ -7,35 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
-
-@Entity
-@Table(name="tbl_squareregion")
-@NamedQueries({
-        @NamedQuery(name="SquareRegion.all",
-                query = "SELECT sr FROM SquareRegion sr"),
-        @NamedQuery(name="SquareRegion.allNonDeleted",
-                query = "SELECT sr FROM SquareRegion sr WHERE NOT sr.deleted"),
-        @NamedQuery(name="SquareRegion.getById",
-                query = "SELECT sr FROM SquareRegion sr WHERE sr.id = :id")
-
-})
 public class SquareRegion {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
     private List<RegionPoint> points = new ArrayList<>();
 
-    @Column
     private double price;
 
-    @Column
-    private boolean deleted;
-
-    @Transient
     private List<RegionPoint> cachedOrderedPoints;
 
     public int getId() {
@@ -71,7 +50,7 @@ public class SquareRegion {
         }
         cachedOrderedPoints = getPoints().stream().sorted((o1, o2) ->{
             if(o1.getLongitude() < o2.getLongitude()){ //o1 is left of o2
-                return 1; //always greater
+                return -1; //always greater
             } else {
                 //o2 is at the same x or at the right side
                 if(o1.getLatitude() > o2.getLatitude()){ //o1 is above o2
@@ -94,7 +73,7 @@ public class SquareRegion {
             return false;
         }
         return (
-                getTopLeft().getLongitude() >= point.getLongitude() && getBottomRight().getLongitude() <= point.getLongitude() && getTopLeft().getLatitude() >= point.getLatitude() && getBottomRight().getLatitude() <= point.getLatitude()
+                getTopLeft().getLongitude() <= point.getLongitude() && getBottomRight().getLongitude() >= point.getLongitude() && getTopLeft().getLatitude() >= point.getLatitude() && getBottomRight().getLatitude() <= point.getLatitude()
         );
 
     }
@@ -119,17 +98,5 @@ public class SquareRegion {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 }
