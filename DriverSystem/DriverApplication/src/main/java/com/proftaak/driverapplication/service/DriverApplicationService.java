@@ -82,7 +82,7 @@ public class DriverApplicationService
 			ids += "," + chassis;
 		}
 
-		if (ids != "") {
+		if (ids.equals("")) {
 			if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
 				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/vehicle/" + ids)
 						, new TypeReference<List<Invoice>>(){});

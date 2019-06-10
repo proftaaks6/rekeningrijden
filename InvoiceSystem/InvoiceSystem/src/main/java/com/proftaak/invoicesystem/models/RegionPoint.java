@@ -58,6 +58,11 @@ public class RegionPoint implements Serializable {
                 Double.compare(that.latitude, latitude) == 0;
     }
 
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, latitude, longitude);
+    }
+
     public int getId() {
         return id;
     }
