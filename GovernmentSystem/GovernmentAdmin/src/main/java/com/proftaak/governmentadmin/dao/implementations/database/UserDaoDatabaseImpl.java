@@ -12,7 +12,7 @@ import java.util.List;
 @Stateless
 public class UserDaoDatabaseImpl implements UserDao {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "default")
     private EntityManager em;
 
     public boolean addUser(GovernmentEmployee user) {

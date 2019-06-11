@@ -10,9 +10,9 @@ import java.util.List;
 
 @Stateless
 public class ProxyDaoImplementation implements ProxyDao {
-    @PersistenceContext
-    EntityManager em;
 
+    @PersistenceContext(unitName = "default")
+    private EntityManager em;
 
     @Override
     public boolean addInvalidData(InvalidData data) {
