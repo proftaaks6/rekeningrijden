@@ -86,9 +86,9 @@ public class GovernmentAdminService
                 return gson.fromJson(json, ClientUser.class);
             }
         } catch (IOException | HttpException | ParseException | JsonSyntaxException e) {
+            return null;
 
         }
-
         return null;
     }
 
@@ -111,9 +111,9 @@ public class GovernmentAdminService
                 return gson.fromJson(json, new TypeToken<List<ClientUser>>(){}.getType());
             }
         } catch (IOException | HttpException | ParseException | JsonSyntaxException e) {
+            return null;
 
         }
-
         return null;
     }
 
@@ -126,8 +126,7 @@ public class GovernmentAdminService
             CloseableHttpResponse response = httpclient.execute(httppost);
             return response.getStatusLine().getStatusCode() == 200;
         } catch (IOException e) {
-
+            return false;
         }
-        return false;
     }
 }

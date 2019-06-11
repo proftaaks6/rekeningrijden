@@ -1,5 +1,6 @@
 package com.proftaak.usersystem.shared;
 
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class Vehicle implements Serializable {
 
     private String chassisNumber;
 
+    @Transient
     private List<UserVehicle> owners;
 
     public Vehicle() {

@@ -86,14 +86,6 @@ public class ClientUser implements Serializable {
         return residence;
     }
 
-    public List<String> getOwnedVehicleChassisNumbers() {
-        List<String> list = new ArrayList<>();
-        for (UserVehicle v : ownedVehicles) {
-            list.add(v.getVehicle().getChassisNumber());
-        }
-
-        return list;
-    }
     public List<String> getOwnedVehicleChassis() {
         List<String> list = new ArrayList<>();
         for (UserVehicle v : ownedVehicles) {

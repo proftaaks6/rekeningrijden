@@ -22,10 +22,9 @@ public class RegionConverter {
             if(region.getId() > -1){
                 squareRegion.setId((int)region.getId());
             }
+            return squareRegion;
         }catch (NullPointerException e){
-
+            return null;
         }
-
-        return squareRegion;
     }
 }

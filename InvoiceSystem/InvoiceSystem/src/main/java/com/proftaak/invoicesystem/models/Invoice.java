@@ -10,17 +10,15 @@ import java.util.List;
 
 @Entity
 @Table(name="tbl_invoice")
-@NamedQueries({
-        @NamedQuery(
-                name = "Invoice.GetById",
-                query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
-        ),
-        @NamedQuery(
-                name = "Invoice.GetByVehicleChassis",
-                query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis"
-        )
-}
+@NamedQuery(
+        name = "Invoice.GetById",
+        query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
 )
+@NamedQuery(
+        name = "Invoice.GetByVehicleChassis",
+        query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis"
+)
+
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

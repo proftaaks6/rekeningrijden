@@ -86,7 +86,6 @@ public class InvoiceGenerator {
 
         ArrayList<PriceRow> rows = new ArrayList<>(priceRows.values());
         rows.forEach(PriceRow::calculatePriceBasedOnDistance);
-        //rows = (ArrayList<PriceRow>) rows.stream().filter(x->x.getPrice() >= 0).collect(Collectors.toList());
 
         invoice.setPriceRowList(rows);
         invoice.setDate(now);

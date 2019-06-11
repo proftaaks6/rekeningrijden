@@ -50,10 +50,8 @@ public class UserDaoDatabaseImpl implements UserDao {
         try {
             return em.createNamedQuery("GovernmentEmployee.validateUser", GovernmentEmployee.class).setParameter("username", username).setParameter("password", password).setMaxResults(1).getSingleResult();
         } catch (Exception e) {
-
+            return null;
         }
-
-        return null;
     }
 
 }

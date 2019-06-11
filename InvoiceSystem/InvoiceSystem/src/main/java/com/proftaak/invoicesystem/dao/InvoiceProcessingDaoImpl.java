@@ -45,7 +45,7 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
                 List<Invoice> invoicesForVehicle = em.createNamedQuery("Invoice.GetByVehicleChassis", Invoice.class).setParameter("chassis", chassis).getResultList();
                 invoices.addAll(invoicesForVehicle);
             } catch (Exception e) {
-
+               return new ArrayList<>();
             }
         }
 
@@ -88,9 +88,9 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
             em.merge(invoice);
             return invoice;
         } catch (Exception e) {
-
+            return null;
         }
-        return null;
+
     }
 
     @Override
@@ -98,8 +98,8 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
         try {
             return em.createNamedQuery("Invoice.GetById", Invoice.class).setParameter("invoiceId", id).getSingleResult();
         } catch (Exception e) {
-
+            return null;
         }
-        return null;
+
     }
 }

@@ -131,7 +131,7 @@ public class Vehicle {
             Tracker activeTracker = getActiveTracker();
             activeTracker.disableActiveTracker();
         } catch(UnsupportedOperationException ignored) {
-
+            //error
         }
         this.trackers.add(vehicleTracker);
     }

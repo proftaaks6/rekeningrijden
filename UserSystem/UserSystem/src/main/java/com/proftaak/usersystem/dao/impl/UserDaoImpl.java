@@ -24,10 +24,8 @@ public class UserDaoImpl implements UserDao {
             em.flush();
             return user;
         } catch (Exception e) {
-
+            return null;
         }
-
-        return null;
     }
 
     @Override

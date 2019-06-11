@@ -59,14 +59,13 @@ public class AuthEndpoint {
         DefaultClaims claims = new DefaultClaims();
         claims.put("username", username);
 
-        String jws = Jwts.builder()
+        return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
                 .setExpiration(new Date(new Date().getTime() + 300000))
                 .setClaims(claims)
                 .signWith(AuthenticationFilter.serverKey).compact();
 
-        return jws;
     }
 
 }

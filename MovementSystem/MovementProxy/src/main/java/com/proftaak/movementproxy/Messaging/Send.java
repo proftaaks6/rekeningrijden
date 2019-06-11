@@ -20,7 +20,7 @@ public class Send {
         this.channel = connection.createChannel();
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         } catch (IOException | TimeoutException e) {
-
+            //error
         }
     }
 
@@ -32,7 +32,7 @@ public class Send {
             this.channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
             System.out.println("Sent message: " + message);
         } catch (IOException e) {
-
+            //error
         }
     }
 }

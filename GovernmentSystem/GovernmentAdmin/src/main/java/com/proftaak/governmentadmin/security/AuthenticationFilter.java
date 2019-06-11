@@ -98,7 +98,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                         .build());
     }
 
-    public static String validateToken(String token) throws Exception {
+    public static String validateToken(String token) {
         // Check if the token was issued by the server and if it's not expired
         // Throw an Exception if the token is invalid
         Claims claims =  Jwts.parser().setSigningKey(serverKey).parseClaimsJws(token).getBody();
