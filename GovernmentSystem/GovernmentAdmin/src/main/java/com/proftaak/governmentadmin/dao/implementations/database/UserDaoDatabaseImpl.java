@@ -55,4 +55,12 @@ public class UserDaoDatabaseImpl implements UserDao {
         return null;
     }
 
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    @Override
+    public EntityManager getEm() {
+        return this.em;
+    }
 }

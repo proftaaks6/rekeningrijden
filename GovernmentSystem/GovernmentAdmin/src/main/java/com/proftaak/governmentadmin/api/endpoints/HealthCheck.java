@@ -37,4 +37,10 @@ public class HealthCheck {
     public boolean alive(){
         return true;
     }
+
+    @GET
+    @Path(value = "/whoami")
+    public String WhoAmI(){
+        return "GovernmentAdmin";
+    }
 }

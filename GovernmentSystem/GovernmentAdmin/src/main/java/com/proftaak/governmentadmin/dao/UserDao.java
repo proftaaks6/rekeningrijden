@@ -2,6 +2,7 @@ package com.proftaak.governmentadmin.dao;
 
 import com.proftaak.governmentadmin.models.GovernmentEmployee;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface UserDao {
@@ -11,4 +12,6 @@ public interface UserDao {
     GovernmentEmployee findByUsername(String username);
     List<GovernmentEmployee> getAll();
     GovernmentEmployee validateUser(String username, String password);
+    void setEm(EntityManager em);
+    EntityManager getEm();
 }
