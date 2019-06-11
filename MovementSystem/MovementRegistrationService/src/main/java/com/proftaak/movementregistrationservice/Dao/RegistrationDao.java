@@ -26,4 +26,6 @@ public interface RegistrationDao {
     List<LocationPoint> getLocationPointsForTracker(long trackerId);
     List<LocationPoint> getLocationPointsForVehicle(String chassis, Date start, Date end);
     VehicleTracker getVehicleTracker(long vehicleId, long trackerId);
+    VehicleTracker getActiveVehicleTracker(long vehicleId);
+    VehicleTracker editVehicleTracker(VehicleTracker vehicleTracker);
 }

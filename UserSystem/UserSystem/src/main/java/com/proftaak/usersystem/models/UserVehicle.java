@@ -10,7 +10,9 @@ import java.util.Date;
 )
 @NamedQueries({
 		@NamedQuery(name="UserVehicle.get",
-				query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v JOIN ut.user u WHERE v.id = :vehicleId AND u.id = :userId")
+				query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v JOIN ut.user u WHERE v.id = :vehicleId AND u.id = :userId"),
+		@NamedQuery(name="UserVehicle.getActiveForVehicle",
+				query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v WHERE v.chassisNumber = :chassis AND ut.endDate IS NULL")
 
 })
 public class UserVehicle implements Serializable

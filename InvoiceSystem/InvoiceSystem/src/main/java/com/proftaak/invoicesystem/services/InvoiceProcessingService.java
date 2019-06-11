@@ -42,5 +42,13 @@ public class InvoiceProcessingService {
 
     public Invoice addInvoice(Invoice invoice){return processingDao.addInvoice(invoice);}
 
+    public void addInvoices(List<Invoice> invoices)
+    {
+        for (Invoice invoice : invoices)
+        {
+            processingDao.addInvoice(invoice);
+        }
+    }
+
     public Invoice getInvoiceById(long id){return processingDao.getInvoiceById(id);}
 }

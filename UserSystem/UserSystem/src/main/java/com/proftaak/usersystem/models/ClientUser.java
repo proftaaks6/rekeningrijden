@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 @Entity
 @NamedQueries( {
@@ -86,15 +87,7 @@ public class ClientUser implements Serializable {
         return residence;
     }
 
-    public List<String> getOwnedVehicleChassisNumbers() {
-        List<String> list = new ArrayList<>();
-        for (UserVehicle v : ownedVehicles) {
-            list.add(v.getVehicle().getChassisNumber());
-        }
-
-        return list;
-    }
-    public List<String> getOwnedVehicleChassis() {
+    public List<String> getAllOwnedVehicleChassisNumbers() {
         List<String> list = new ArrayList<>();
         for (UserVehicle v : ownedVehicles) {
             list.add(v.getVehicle().getChassisNumber());

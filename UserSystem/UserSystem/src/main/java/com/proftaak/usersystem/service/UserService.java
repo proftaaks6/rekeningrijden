@@ -18,13 +18,15 @@ public class UserService {
     public ClientUser saveUserInformation(String name, String email, String address, String residence) throws IOException {
         ClientUser user = userDao.saveUserInformation(name, email, address, residence);
 
-        // Create this user in driversystem
+        // Create this user in driversystem and invoicesystem
         if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
             RestCommuncationHelper.postRequest("http://driversystem:8080/deploy/v1/driverapplication/createUser",
                     "username=" + name + "&password=welkom123");
+            RestCommuncationHelper.postRequest("http://invoicesystem:8080/deploy/v1/vehicleprocessing/vehicle/" + user.getId());
         } else {
             RestCommuncationHelper.postRequest("http://localhost:8080/DriverSystem/v1/driverapplication/createUser",
                     "username=" + name + "&password=welkom123");
+            RestCommuncationHelper.postRequest("http://localhost:8080/InvoiceSystem/v1/vehicleprocessing/vehicle/" + user.getId());
         }
 
         return user;
@@ -35,7 +37,7 @@ public class UserService {
 
     }
 
-    public ClientUser getClientUserById(int id){
+    public ClientUser getClientUserById(long id){
         return userDao.getClientUserById(id);
     }
 

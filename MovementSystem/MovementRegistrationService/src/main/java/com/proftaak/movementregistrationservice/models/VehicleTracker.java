@@ -11,7 +11,9 @@ import java.util.Date;
 		)
 @NamedQueries({
 		@NamedQuery(name="VehicleTracker.get",
-				query = "SELECT vt FROM VehicleTracker vt JOIN vt.vehicle v JOIN vt.tracker t WHERE v.id = :vehicleId AND t.id = :trackerId")
+				query = "SELECT vt FROM VehicleTracker vt JOIN vt.vehicle v JOIN vt.tracker t WHERE v.id = :vehicleId AND t.id = :trackerId"),
+		@NamedQuery(name="VehicleTracker.getActiveForVehicle",
+				query = "SELECT vt FROM VehicleTracker vt JOIN vt.vehicle v WHERE v.id = :vehicleId AND vt.endDate IS NULL")
 
 })
 public class VehicleTracker

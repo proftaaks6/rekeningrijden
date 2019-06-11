@@ -2,8 +2,9 @@ package com.proftaak.invoicesystem.api.endpoints;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proftaak.invoicesystem.services.VehicleProcessingService;
+import com.proftaak.invoicesystem.models.Invoice;
 
+import com.proftaak.invoicesystem.services.UserProcessingService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -17,12 +18,12 @@ import javax.ws.rs.core.Response;
 public class VehicleProcessingEndpoint {
 
     @Inject
-    private VehicleProcessingService service;
+    private UserProcessingService service;
 
     @POST
-    @Path("/vehicle/{chassis}")
-    public Response addNewVehicle(@PathParam("chassis") String chassisNumber){
-        if (service.addNewVehicle(chassisNumber)) {
+    @Path("/vehicle/{userId}")
+    public Response addNewVehicle(@PathParam("userId") long userId){
+        if (service.addNewUser(userId)) {
             return Response.ok().build();
         } else {
             return Response.serverError().build();
@@ -32,7 +33,7 @@ public class VehicleProcessingEndpoint {
     @GET
     @Path("/vehicle")
     public String getAllVehicles() throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(service.getAllVehicles());
+        return new ObjectMapper().writeValueAsString(service.getAllUsers());
     }
 
 }

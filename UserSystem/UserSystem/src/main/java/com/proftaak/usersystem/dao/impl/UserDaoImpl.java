@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ClientUser getClientUserById(int id) {
+    public ClientUser getClientUserById(long id) {
         try {
             return em.createNamedQuery("ClientUser.getById", ClientUser.class).setParameter("id", id).getSingleResult();
         }catch (Exception e){

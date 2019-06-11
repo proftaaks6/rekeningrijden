@@ -65,6 +65,11 @@ public class RegistrationService {
     }
 
     public boolean addTrackerToVehicle(long trackerId, long vehicleId){
+        VehicleTracker activeLink = registrationDao.getActiveVehicleTracker(vehicleId);
+        if (activeLink != null) {
+            activeLink.setEndDate(new Date());
+            registrationDao.editVehicleTracker(activeLink);
+        }
         return registrationDao.addTrackerToVehicle(getTrackerById(trackerId), vehicleId);
     }
 
