@@ -83,7 +83,6 @@ public class Receive {
                 }
             }
         };
-        //channel.basicConsume(queueName, true, consumer);
         jmsConsumer.startReceiving(consumer, queueName);
     }
 

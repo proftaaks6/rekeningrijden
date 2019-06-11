@@ -5,20 +5,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@NamedQueries( {
-		@NamedQuery(
-				name = "LoginAttempt.getByUserId",
-				query="SELECT u FROM LoginAttempt u WHERE u.userId = :id"
-		),
-		@NamedQuery(
-				name = "LoginAttempt.getById",
-				query="SELECT u FROM LoginAttempt u WHERE u.id = :id"
-		),
-		@NamedQuery(
-				name = "LoginAttempt.getAll",
-				query="SELECT u FROM LoginAttempt u"
-		)
-})
+@NamedQuery(
+		name = "LoginAttempt.getByUserId",
+		query="SELECT u FROM LoginAttempt u WHERE u.userId = :id"
+)
+@NamedQuery(
+		name = "LoginAttempt.getById",
+		query="SELECT u FROM LoginAttempt u WHERE u.id = :id"
+)
+@NamedQuery(
+		name = "LoginAttempt.getAll",
+		query="SELECT u FROM LoginAttempt u"
+)
 @Table(name="tbl_loginAttempt")
 public class LoginAttempt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

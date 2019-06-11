@@ -48,8 +48,7 @@ public class RegistrationService {
             // Add vehicle to db
             Vehicle v = registrationDao.addVehicle(vehicle);
 
-            //Todo: Fix this "Unknown host exception" error.
-            // Make rest call to invoice system to add vehicle
+
             if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
                 RestCommuncationHelper.postRequest("http://invoicesystem:8080/deploy/v1/vehicleprocessing/vehicle/" + v.getId());
             } else {

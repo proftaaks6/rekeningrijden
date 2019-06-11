@@ -16,7 +16,7 @@ public class AuthenticationUtils {
      * @throws UnsupportedEncodingException if UTF-8 is not supported by the system
      * @throws NoSuchAlgorithmException if SHA-256 is not supported by the system
      */
-    public static String encodeSHA256(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public static String encodeSHA256(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(password.getBytes(StandardCharsets.UTF_8));
         byte[] digest = md.digest();

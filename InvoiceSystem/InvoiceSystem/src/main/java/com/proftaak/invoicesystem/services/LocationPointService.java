@@ -29,9 +29,8 @@ public class LocationPointService {
                     (new TypeLiteral<List<LocationPoint>>(){}).getType(),
                     url, "GET");
         } catch (IOException e) {
-
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
 
     }
     private Object callUrlAndCastResultMethode(Type type, String url, String requestMethode) throws IOException {

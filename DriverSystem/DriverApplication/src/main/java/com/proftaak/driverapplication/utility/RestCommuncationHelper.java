@@ -24,19 +24,7 @@ public class RestCommuncationHelper {
 
             StringBuilder content;
 
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
-                }
-            }
-
-            return content.toString();
+            return getContent(con);
 
         } finally {
 
@@ -57,31 +45,36 @@ public class RestCommuncationHelper {
             con.setRequestMethod("POST");
             con.setRequestProperty("User-Agent", "Java client");
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            con.setRequestProperty("Authorization", "Bearer " + token);
 
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);
             }
 
-            StringBuilder content;
-
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                    content.append(System.lineSeparator());
-                }
-            }
-
-            return content.toString();
+            return getContent(con);
 
         } finally {
 
             con.disconnect();
+        }
+    }
+
+    private static String getContent(HttpURLConnection con){
+        StringBuilder content;
+
+        try (BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()))) {
+
+            String line;
+            content = new StringBuilder();
+
+            while ((line = in.readLine()) != null) {
+                content.append(line);
+                content.append(System.lineSeparator());
+            }
+            return content.toString();
+        }
+        catch (IOException e){
+            return null;
         }
     }
 }

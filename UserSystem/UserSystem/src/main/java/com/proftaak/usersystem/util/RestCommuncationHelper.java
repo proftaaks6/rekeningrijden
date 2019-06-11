@@ -9,6 +9,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class RestCommuncationHelper {
+
+    private RestCommuncationHelper(){}
+
     private static HttpURLConnection con;
 
     public static String getRequest(String url, String token) throws IOException {
@@ -55,7 +58,6 @@ public class RestCommuncationHelper {
             con.setRequestMethod("POST");
             con.setRequestProperty("User-Agent", "Java client");
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            con.setRequestProperty("Authorization", "Bearer " + token);
 
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);

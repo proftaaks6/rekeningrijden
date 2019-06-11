@@ -12,7 +12,7 @@ public class Config
             configFile.load(this.getClass().getClassLoader().
                     getResourceAsStream("config.cfg"));
         }catch(Exception eta){
-            
+            //error
         }
     }
 

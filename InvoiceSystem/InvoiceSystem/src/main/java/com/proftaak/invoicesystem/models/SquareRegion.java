@@ -8,15 +8,12 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name="tbl_squareregion")
-@NamedQueries({
-        @NamedQuery(name="SquareRegion.all",
-                query = "SELECT sr FROM SquareRegion sr"),
-        @NamedQuery(name="SquareRegion.allNonDeleted",
-                query = "SELECT sr FROM SquareRegion sr WHERE NOT sr.deleted"),
-        @NamedQuery(name="SquareRegion.getById",
-                query = "SELECT sr FROM SquareRegion sr WHERE sr.id = :id")
-
-})
+@NamedQuery(name="SquareRegion.all",
+        query = "SELECT sr FROM SquareRegion sr")
+@NamedQuery(name="SquareRegion.allNonDeleted",
+        query = "SELECT sr FROM SquareRegion sr WHERE NOT sr.deleted")
+@NamedQuery(name="SquareRegion.getById",
+        query = "SELECT sr FROM SquareRegion sr WHERE sr.id = :id")
 public class SquareRegion {
 
     @Id

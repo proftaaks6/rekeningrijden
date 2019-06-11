@@ -15,9 +15,9 @@ public class ResponseHelper {
     public static String getResponseFromConnection(HttpURLConnection con) throws IOException {
         int responseCode = con.getResponseCode();
 
-        log.log(Level.INFO,"Made response to : " , con.getURL());
-        log.log(Level.INFO,"Made response with : " , con.getRequestMethod());
-        log.log(Level.INFO,"Response code : " , responseCode);
+        log.log(Level.INFO,"Made response to : %s" , con.getURL());
+        log.log(Level.INFO,"Made response with : %s" , con.getRequestMethod());
+        log.log(Level.INFO,"Response code : %s" , responseCode);
 
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -32,7 +32,7 @@ public class ResponseHelper {
 
             String result = response.toString();
 
-            log.log(Level.INFO,"Response string : " , result);
+            log.log(Level.INFO,"Response string : %s" , result);
             return result;
         } else {
             return null;

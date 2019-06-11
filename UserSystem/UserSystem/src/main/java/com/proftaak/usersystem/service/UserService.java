@@ -17,14 +17,14 @@ public class UserService {
 
     public ClientUser saveUserInformation(String name, String email, String address, String residence) throws IOException {
         ClientUser user = userDao.saveUserInformation(name, email, address, residence);
-
+        String password = "welkom123";
         // Create this user in driversystem
         if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
             RestCommuncationHelper.postRequest("http://driversystem:8080/deploy/v1/driverapplication/createUser",
-                    "username=" + name + "&password=welkom123");
+                    "username=" + name + "&password=" + password);
         } else {
             RestCommuncationHelper.postRequest("http://localhost:8080/DriverSystem/v1/driverapplication/createUser",
-                    "username=" + name + "&password=welkom123");
+                    "username=" + name + "&password=" + password);
         }
 
         return user;
