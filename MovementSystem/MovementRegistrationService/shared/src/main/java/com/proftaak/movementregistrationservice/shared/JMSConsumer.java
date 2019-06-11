@@ -19,7 +19,8 @@ public class JMSConsumer {
         Channel channel = null;
         ConnectionFactory factory = new ConnectionFactory();
 
-        try (Connection connection = factory.newConnection()){
+        try {
+            Connection connection = factory.newConnection();
             //Set up consumer
             channel = connection.createChannel();
             this.channel = channel;
@@ -35,8 +36,8 @@ public class JMSConsumer {
         log.log(Level.INFO,consumer.toString());
         log.log(Level.INFO," [*] Waiting for messages.");
         try {
-            String QUEUE_NAME = "";
-            this.channel.basicConsume(QUEUE_NAME, true, consumer);
+
+            this.channel.basicConsume(queueName, true, consumer);
         } catch (IOException e) {
             try {
                 System.out.println("Retry, queue was not found");
