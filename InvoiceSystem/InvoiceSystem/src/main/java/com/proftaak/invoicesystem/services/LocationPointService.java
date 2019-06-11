@@ -24,7 +24,7 @@ public class LocationPointService {
             }
 
             url += vehicleChassis+"/points/from/"+from.getTime()+"/to/"+to.getTime();
-            
+
             return (List<LocationPoint>) callUrlAndCastResultMethode(
                     (new TypeLiteral<List<LocationPoint>>(){}).getType(),
                     url, "GET");

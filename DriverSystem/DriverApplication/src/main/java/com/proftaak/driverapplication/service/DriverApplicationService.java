@@ -84,7 +84,7 @@ public class DriverApplicationService
 
 		}
 
-		if (sb.equals("")) {
+		if (sb.toString().equals("")) {
 			if(env != null && env.equals("production")) {
 				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/vehicle/" + sb.toString())
 						, new TypeReference<List<Invoice>>(){});
