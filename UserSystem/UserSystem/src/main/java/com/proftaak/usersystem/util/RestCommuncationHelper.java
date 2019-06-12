@@ -45,6 +45,20 @@ public class RestCommuncationHelper {
         }
     }
 
+    private static String getResponseFromConnection(HttpURLConnection con) throws IOException {
+        return ResponseHelper.getResponseFromConnection(con);
+    }
+
+    public static String postRequest(String url) throws IOException
+    {
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+        con.setDoOutput(true);
+
+        return getResponseFromConnection(con);
+    }
+
 
     public static String postRequest(String url, String data) throws IOException {
         byte[] postData = data.getBytes(StandardCharsets.UTF_8);

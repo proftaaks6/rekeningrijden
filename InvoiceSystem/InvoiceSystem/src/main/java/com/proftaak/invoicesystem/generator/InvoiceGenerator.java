@@ -7,11 +7,11 @@ import com.proftaak.invoicesystem.models.SquareRegion;
 import com.proftaak.invoicesystem.services.InvoiceProcessingService;
 import com.proftaak.invoicesystem.services.LocationPointService;
 import com.proftaak.invoicesystem.services.RegionService;
+import com.proftaak.invoicesystem.services.UserVehiclesService;
 import com.proftaak.movementregistrationservice.shared.LocationPoint;
 
-import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import com.proftaak.usersystem.shared.SimpleUserVehicle;
+import javax.ejb.*;
 import javax.inject.Inject;
 import java.util.*;
 
@@ -20,10 +20,13 @@ import java.util.*;
 public class InvoiceGenerator {
 
     @Inject
-    private NextVehicleGenerator generator;
+    private NextUserGenerator generator;
 
     @Inject
     private LocationPointService locationPointService;
+
+    @Inject
+    private UserVehiclesService userVehiclesService;
 
     @Inject
     private RegionService regionService;
@@ -33,68 +36,73 @@ public class InvoiceGenerator {
 
     @Schedule(hour = "*", minute = "*", second = "*/30", persistent = false)
     public void generatePeriodically() {
-        Invoice invoice = generateInvoice(null);
-        if(invoice != null) {
-            processingService.addInvoice(invoice);
-        }
+        processingService.addInvoices(generateInvoices());
     }
 
     public Invoice regenerateInvoice(Invoice invoice){
-        return generateInvoice(invoice);
+        // Invoice regeneratedInvoice = generateInvoice(invoice);
+        // return regeneratedInvoice;
+        return invoice;
     }
 
-    private Invoice generateInvoice(Invoice invoice){
-
+    private List<Invoice> generateInvoices(){
         // Subtract 1 month from date
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, -1);
         Date from = cal.getTime();
 
-        Date now = new Date(); //don't touch this
+        Date now = new Date();
 
-        String vehicleChassis = "";
+        long userId = generator.getNextUserId(from, now);
 
-        if(invoice == null){
-            vehicleChassis = generator.getNextVehicleId(from, now);
-            invoice = new Invoice();
-        } else {
-            vehicleChassis = invoice.getVehicleChassis();
+        if(userId == -1){
+            return Collections.emptyList();
         }
 
-        if(vehicleChassis.equals("")){
-            return null;
-        }
+        System.out.println("Processing " + userId);
+        ArrayList<Invoice> invoices = new ArrayList<>();
 
-        List<LocationPoint> locationPoints = locationPointService.getLocationPoints(vehicleChassis, from, now);
+        List<SimpleUserVehicle> vehicleLinks = userVehiclesService.getVehicleChassisForUser(userId, from, now);
 
-        Map<SquareRegion, PriceRow> priceRows = new HashMap<>();
-        LocationPoint last = null;
-        regionService.reloadRegionsInMemory();
-        for(LocationPoint locationPoint : locationPoints){
-            SquareRegion region = regionService.getRegionContainingPoint(locationPoint.getLatitude(), locationPoint.getLongitude());
-            priceRows.putIfAbsent(region, new PriceRow(region));
-            PriceRow row = priceRows.get(region);
-            if(last != null){
-                double km = distanceInKmBetweenEarthCoordinates(last.getLatitude(), last.getLongitude(), locationPoint.getLatitude(), locationPoint.getLongitude());
-                double total = row.getDistance() + km;
-                row.setDistance(total);
-                row.getLocationPoints().add(new LocationPointConverter().toEntity(locationPoint));
+        for (SimpleUserVehicle vehicleLink :
+                vehicleLinks)
+        {
+            Invoice invoice = new Invoice();
+            List<LocationPoint> locationPoints = locationPointService.getLocationPoints(vehicleLink.getChassisNumber(), vehicleLink.getStartDate(), vehicleLink.getEndDate());
+
+            Map<SquareRegion, PriceRow> priceRows = new HashMap<>();
+            LocationPoint last = null;
+            regionService.reloadRegionsInMemory();
+            for(LocationPoint locationPoint : locationPoints){
+                SquareRegion region = regionService.getRegionContainingPoint(locationPoint.getLatitude(), locationPoint.getLongitude());
+                priceRows.putIfAbsent(region, new PriceRow(region));
+                PriceRow row = priceRows.get(region);
+                if(last != null){
+                    double km = distanceInKmBetweenEarthCoordinates(last.getLatitude(), last.getLongitude(), locationPoint.getLatitude(), locationPoint.getLongitude());
+                    double total = row.getDistance() + km;
+                    row.setDistance(total);
+                    row.getLocationPoints().add(new LocationPointConverter().toEntity(locationPoint));
+                }
+
+                last = locationPoint;
             }
 
-            last = locationPoint;
+            ArrayList<PriceRow> rows = new ArrayList<>(priceRows.values());
+            rows.forEach(PriceRow::calculatePriceBasedOnDistance);
+            //rows = (ArrayList<PriceRow>) rows.stream().filter(x->x.getPrice() >= 0).collect(Collectors.toList());
+
+            invoice.setUserId(userId);
+            invoice.setPriceRowList(rows);
+            invoice.setDate(now);
+            invoice.setPaid(false);
+            invoice.setTotalDistance(rows.stream().mapToDouble(PriceRow::getDistance).sum());
+            invoice.setTotalPrice(rows.stream().mapToDouble(PriceRow::getPrice).sum());
+            invoice.setVehicleChassis(vehicleLink.getChassisNumber());
+
+            invoices.add(invoice);
         }
 
-        ArrayList<PriceRow> rows = new ArrayList<>(priceRows.values());
-        rows.forEach(PriceRow::calculatePriceBasedOnDistance);
-
-        invoice.setPriceRowList(rows);
-        invoice.setDate(now);
-        invoice.setPaid(false);
-        invoice.setTotalDistance(rows.stream().mapToDouble(PriceRow::getDistance).sum());
-        invoice.setTotalPrice(rows.stream().mapToDouble(PriceRow::getPrice).sum());
-        invoice.setVehicleChassis(vehicleChassis);
-
-        return invoice;
+        return invoices;
     }
 
     private double degreesToRadians(double degrees) {

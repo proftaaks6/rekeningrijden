@@ -28,6 +28,9 @@ public class Invoice {
     private String vehicleChassis;
 
     @Column
+    private long userId;
+
+    @Column
     private double totalDistance;
 
     @Column
@@ -105,5 +108,15 @@ public class Invoice {
 
     public void setPriceRowList(List<PriceRow> priceRowList) {
         this.priceRowList = priceRowList;
+    }
+
+    public long getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(long userId)
+    {
+        this.userId = userId;
     }
 }

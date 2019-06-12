@@ -189,4 +189,29 @@ public class RegistrationDaoImplementation implements RegistrationDao{
                 .getSingleResult();
 
     }
+
+    @Override
+    public VehicleTracker getActiveVehicleTracker(long vehicleId)
+    {
+        try
+        {
+            return em
+                    .createNamedQuery("VehicleTracker.getActiveForVehicle", VehicleTracker.class)
+                    .setParameter("vehicleId", vehicleId)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public VehicleTracker editVehicleTracker(VehicleTracker vehicleTracker)
+    {
+        try {
+            return em.merge(vehicleTracker);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

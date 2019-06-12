@@ -8,6 +8,8 @@ public class Invoice {
 
     private long vehicleId;
 
+    private long userId;
+
     private double totalDistance;
 
     private double totalPrice;

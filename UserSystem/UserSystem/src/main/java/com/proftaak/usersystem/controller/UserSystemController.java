@@ -1,11 +1,16 @@
 package com.proftaak.usersystem.controller;
 
 import com.proftaak.usersystem.converters.ClientUserConverter;
+import com.proftaak.usersystem.converters.SimpleUserVehicleConverter;
 import com.proftaak.usersystem.models.UserVehicle;
 import com.proftaak.usersystem.service.UserService;
 import com.proftaak.usersystem.service.VehicleService;
 import com.proftaak.usersystem.shared.ClientUser;
 
+import com.proftaak.usersystem.shared.SimpleUserVehicle;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -28,6 +33,9 @@ public class UserSystemController {
 
     @Inject
     private ClientUserConverter clientUserConverter;
+
+    @Inject
+    private SimpleUserVehicleConverter simpleUserVehicleConverter;
 
     @POST
     @Path("/userInfo")
@@ -103,6 +111,30 @@ public class UserSystemController {
             return new ClientUserConverter().toShared(userService.editUser(user));
         } catch (Exception e) {
             throw new BadRequestException();
+        }
+    }
+
+    @GET
+    @Path("/users/{id}/vehicles")
+    public List<String> getVehicleChassisForUser(@PathParam("id") long userId) {
+        try {
+            com.proftaak.usersystem.models.ClientUser user = userService.getClientUserById(userId);
+            return user.getAllOwnedVehicleChassisNumbers();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
+
+    @GET
+    @Path("/users/{id}/vehicles/from/{startValue}/to/{endValue}")
+    public List<SimpleUserVehicle> getVehicleChassisForUser(@PathParam("id") long userId, @PathParam("startValue") long startValue, @PathParam("endValue") long endValue) {
+        try {
+            Date startDate = new Date(startValue);
+            Date endDate = new Date(endValue);
+            com.proftaak.usersystem.models.ClientUser user = userService.getClientUserById(userId);
+            return simpleUserVehicleConverter.fromUser(user, startDate, endDate);
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
 

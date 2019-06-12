@@ -37,12 +37,16 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
     }
 
     @Override
-    public List<Invoice> getInvoicesForUser(String[] chassisNumbers) {
+    public List<Invoice> getInvoicesForUser(long userId, String[] chassisNumbers) {
         List<Invoice> invoices = new ArrayList<>();
 
         for (String chassis : chassisNumbers) {
             try {
-                List<Invoice> invoicesForVehicle = em.createNamedQuery("Invoice.GetByVehicleChassis", Invoice.class).setParameter("chassis", chassis).getResultList();
+                List<Invoice> invoicesForVehicle = em
+                        .createNamedQuery("Invoice.GetByVehicleChassisAndUser", Invoice.class)
+                        .setParameter("chassis", chassis)
+                        .setParameter("userId", userId)
+                        .getResultList();
                 invoices.addAll(invoicesForVehicle);
             } catch (Exception e) {
                return new ArrayList<>();

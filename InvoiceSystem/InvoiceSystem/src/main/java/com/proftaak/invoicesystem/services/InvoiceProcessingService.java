@@ -19,8 +19,8 @@ public class InvoiceProcessingService {
         return processingDao.markAsPaid(invoiceId);
     }
 
-    public List<Invoice> getInvoicesForUser(String unparsedVehicleIds) {
-        return processingDao.getInvoicesForUser(convertUnparsedVehicleIds(unparsedVehicleIds));
+    public List<Invoice> getInvoicesForUser(long userId, String unparsedVehicleIds) {
+        return processingDao.getInvoicesForUser(userId, convertUnparsedVehicleIds(unparsedVehicleIds));
     }
 
     public boolean markForGeneration(String unparsedVehicleIds) {
@@ -41,6 +41,14 @@ public class InvoiceProcessingService {
     public Invoice regenerateInvoice(long invoiceId) {return processingDao.regenerateInvoice(invoiceId);}
 
     public Invoice addInvoice(Invoice invoice){return processingDao.addInvoice(invoice);}
+
+    public void addInvoices(List<Invoice> invoices)
+    {
+        for (Invoice invoice : invoices)
+        {
+            processingDao.addInvoice(invoice);
+        }
+    }
 
     public Invoice getInvoiceById(long id){return processingDao.getInvoiceById(id);}
 }
