@@ -95,11 +95,17 @@ public class ClientUser implements Serializable {
 
         return list;
     }
-    public List<String> getOwnedVehicleChassis() {
+
+    public List<String> getOwnedVehicleChassis()
+    {
         List<String> list = new ArrayList<>();
-        for (UserVehicle v : ownedVehicles) {
+        for (UserVehicle v : ownedVehicles)
+        {
             list.add(v.getVehicle().getChassisNumber());
         }
+
+        return list;
+    }
 
     public void addOwnedVehicle(UserVehicle userVehicle)
     {

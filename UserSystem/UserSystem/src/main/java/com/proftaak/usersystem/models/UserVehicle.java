@@ -8,12 +8,10 @@ import java.util.Date;
 @Table(name = "tbl_userVehicle",
 		indexes = { @Index(name = "IDX_UserVehicle", columnList = "vehicle_id,user_id")}
 )
-@NamedQueries({
-		@NamedQuery(name="UserVehicle.get",
-				query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v JOIN ut.user u WHERE v.id = :vehicleId AND u.id = :userId"),
-		@NamedQuery(name="UserVehicle.getActiveForVehicle",
-				query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v WHERE v.chassisNumber = :chassis AND ut.endDate IS NULL")
-
+@NamedQuery(name="UserVehicle.get",
+		query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v JOIN ut.user u WHERE v.id = :vehicleId AND u.id = :userId")
+@NamedQuery(name="UserVehicle.getActiveForVehicle",
+		query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v WHERE v.chassisNumber = :chassis AND ut.endDate IS NULL")
 public class UserVehicle implements Serializable
 {
 	@Id
