@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="MovementProxy:war">
-    <output-path>$PROJECT_DIR$/MovementSystem/MovementProxy/target</output-path>
-    <root id="archive" name="MovementProxy.war">
-      <element id="artifact" artifact-name="MovementProxy:war exploded" />
-    </root>
-  </artifact>
-</component>

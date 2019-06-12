@@ -72,24 +72,24 @@ public class DriverApplicationService
 		String env = System.getenv("environment");
 		// get car for user
 		if(env != null && env.equals("production")) {
-			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://usersystem:8080/deploy/v1/usersystem/users/username/" + username), ClientUser.class);
+			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://usersystem:8080/deploy/v1/usersystem/userId/" + username), ClientUser.class);
 		} else {
-			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/UserSystem/v1/usersystem/username/" + username), ClientUser.class);
+			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/UserSystem/v1/usersystem/userId/" + username), ClientUser.class);
 		}
 
 		StringBuilder sb = new StringBuilder();
 
 		for (String chassis : user.getOwnedVehiclesChassis()) {
 			sb.append(chassis + ",");
-
 		}
+		sb.deleteCharAt(sb.lastIndexOf(","));
 
-		if (sb.toString().equals("")) {
+		if (!sb.toString().equals("")) {
 			if(env != null && env.equals("production")) {
-				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/vehicle/" + sb.toString())
+				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + sb.toString())
 						, new TypeReference<List<Invoice>>(){});
 			} else {
-				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/InvoiceSystem/v1/invoicesystem/vehicle/" + sb.toString())
+				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/InvoiceSystem/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + sb.toString())
 						, new TypeReference<List<Invoice>>(){});
 			}
 		} else {

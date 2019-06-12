@@ -31,9 +31,9 @@ public class InvoiceProcessingEndpoint {
     }
 
     @GET
-    @Path("/vehicle/{vehicleIds}")
-    public Response getInvoicesForUser(@PathParam("vehicleIds") String unparsedVehicleIds)  {
-        List<Invoice> invoices = service.getInvoicesForUser(unparsedVehicleIds);
+    @Path("/user/{userId}/vehicles/{vehicleIds}")
+    public Response getInvoicesForUser(@PathParam("userId") long userId, @PathParam("vehicleIds") String unparsedVehicleIds)  {
+        List<Invoice> invoices = service.getInvoicesForUser(userId, unparsedVehicleIds);
         return Response.ok(invoices).build();
     }
 

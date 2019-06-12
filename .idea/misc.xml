@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/DriverSystem/DriverApplication" />
     <file type="web" url="file://$PROJECT_DIR$/GovernmentSystem/GovernmentAdmin" />
@@ -8,29 +9,14 @@
     <file type="web" url="file://$PROJECT_DIR$/MovementSystem/MovementRegistrationService" />
     <file type="web" url="file://$PROJECT_DIR$/UserSystem/UserSystem" />
   </component>
-  <component name="JavaScriptSettings">
-    <option name="languageLevel" value="ES6" />
-  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/DriverSystem/DriverApplication/pom.xml" />
-        <option value="$PROJECT_DIR$/GovernmentSystem/GovernmentAdmin/pom.xml" />
-        <option value="$PROJECT_DIR$/InvoiceSystem/InvoiceSystem/pom.xml" />
-        <option value="$PROJECT_DIR$/MovementSystem/MovementProxy/pom.xml" />
-        <option value="$PROJECT_DIR$/MovementSystem/MovementRegistrationService/pom.xml" />
-        <option value="$PROJECT_DIR$/PoliceSystem/PoliceAdministration/pom.xml" />
-        <option value="$PROJECT_DIR$/PoliceSystem/PoliceEuropeProxy/pom.xml" />
-        <option value="$PROJECT_DIR$/PoliceSystem/PoliceFrontendProxy/pom.xml" />
-        <option value="$PROJECT_DIR$/UserSystem/UserSystem/pom.xml" />
-        <option value="$PROJECT_DIR$/Utils/rabbitmq/pom.xml" />
-        <option value="$PROJECT_DIR$/UserSystem/UserSystem/shared/pom.xml" />
-        <option value="$PROJECT_DIR$/DriverSystem/DriverApplication/shared/pom.xml" />
-        <option value="$PROJECT_DIR$/InvoiceSystem/InvoiceSystem/shared/pom.xml" />
-        <option value="$PROJECT_DIR$/MovementSystem/MovementRegistrationService/shared/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
 </project>

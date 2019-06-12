@@ -16,8 +16,8 @@ import java.util.List;
                 query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
         ),
         @NamedQuery(
-                name = "Invoice.GetByVehicleChassis",
-                query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis"
+                name = "Invoice.GetByVehicleChassisAndUser",
+                query = "SELECT a FROM Invoice a WHERE a.userId = :userId AND a.vehicleChassis = :chassis"
         )
 }
 )
@@ -28,6 +28,9 @@ public class Invoice {
 
     @Column
     private String vehicleChassis;
+
+    @Column
+    private long userId;
 
     @Column
     private double totalDistance;
@@ -107,5 +110,15 @@ public class Invoice {
 
     public void setPriceRowList(List<PriceRow> priceRowList) {
         this.priceRowList = priceRowList;
+    }
+
+    public long getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(long userId)
+    {
+        this.userId = userId;
     }
 }

@@ -23,6 +23,10 @@ public class LocationPointService {
                 url = "http://movementregistrationservice:8080/deploy/v1/registration/vehicle/";
             }
 
+            if (to == null){
+                to = new Date();
+            }
+
             url += vehicleChassis+"/points/from/"+from.getTime()+"/to/"+to.getTime();
 
             return (List<LocationPoint>) callUrlAndCastResultMethode(

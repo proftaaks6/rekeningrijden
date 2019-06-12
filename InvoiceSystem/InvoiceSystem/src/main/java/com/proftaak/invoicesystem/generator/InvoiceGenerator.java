@@ -91,12 +91,15 @@ public class InvoiceGenerator {
             rows.forEach(PriceRow::calculatePriceBasedOnDistance);
             //rows = (ArrayList<PriceRow>) rows.stream().filter(x->x.getPrice() >= 0).collect(Collectors.toList());
 
+            invoice.setUserId(userId);
             invoice.setPriceRowList(rows);
             invoice.setDate(now);
             invoice.setPaid(false);
             invoice.setTotalDistance(rows.stream().mapToDouble(PriceRow::getDistance).sum());
             invoice.setTotalPrice(rows.stream().mapToDouble(PriceRow::getPrice).sum());
             invoice.setVehicleChassis(vehicleLink.getChassisNumber());
+
+            invoices.add(invoice);
         }
 
         return invoices;
