@@ -22,6 +22,26 @@ public class LocationPoint {
         this.originalId = originalId;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setOriginalId(long originalId) {
+        this.originalId = originalId;
+    }
+
     public LocationPoint(){}
 
     public int getId() {

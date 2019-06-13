@@ -10,26 +10,50 @@ public class PriceRow {
 
     private double price;
 
-    private SquareRegion region;
+    private int regionId;
 
     private List<LocationPoint> locationPoints = new ArrayList<>();
 
-    private int vehicleId;
+    public PriceRow(){}
 
-    public PriceRow(long id, double distance, double price, SquareRegion region, List<LocationPoint> locationPoints, int vehicleId) {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
         this.id = id;
-        this.distance = distance;
-        this.price = price;
-        this.region = region;
-        this.locationPoints = locationPoints;
-        this.vehicleId = vehicleId;
     }
 
-    public void calculatePriceBasedOnDistance(){
-        if(region == null){
-            price = 0;
-            return;
-        }
-        price = distance * region.getPrice();
+    public double getDistance() {
+        return distance;
     }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(int regionId) {
+        this.regionId = regionId;
+    }
+
+    public List<LocationPoint> getLocationPoints() {
+        return locationPoints;
+    }
+
+    public void setLocationPoints(List<LocationPoint> locationPoints) {
+        this.locationPoints = locationPoints;
+    }
+    
 }
