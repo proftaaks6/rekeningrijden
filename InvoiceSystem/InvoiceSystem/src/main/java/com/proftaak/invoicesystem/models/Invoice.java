@@ -15,8 +15,8 @@ import java.util.List;
         query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
 )
 @NamedQuery(
-        name = "Invoice.GetByVehicleChassis",
-        query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis"
+        name = "Invoice.GetByVehicleChassisAndUser",
+        query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis AND a.userId = :userId"
 )
 
 public class Invoice {
