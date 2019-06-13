@@ -12,6 +12,7 @@ public class RegionConverter {
         region1.setTopLeft(pointConverter.fromEntity(region.getTopLeft()));
         region1.setBottomRight(pointConverter.fromEntity(region.getBottomRight()));
         region1.setId(region.getId());
+        region1.setPrice(region.getPrice());
         return region1;
     }
     public com.proftaak.invoicesystem.models.SquareRegion toSquareEntity(Region region){
