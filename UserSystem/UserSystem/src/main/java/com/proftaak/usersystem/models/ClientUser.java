@@ -3,6 +3,7 @@ package com.proftaak.usersystem.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -95,8 +96,37 @@ public class ClientUser implements Serializable {
         return list;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setResidence(String residence) {
+        this.residence = residence;
+    }
+
+    public void setOwnedVehicles(List<UserVehicle> ownedVehicles) {
+        this.ownedVehicles = ownedVehicles;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void addOwnedVehicle(UserVehicle userVehicle)
     {
-        this.ownedVehicles.add(userVehicle);
+        if (this.ownedVehicles != null) {
+            this.ownedVehicles.add(userVehicle);
+        } else {
+            this.ownedVehicles = new ArrayList<>();
+            this.ownedVehicles.add(userVehicle);
+        }
     }
 }
