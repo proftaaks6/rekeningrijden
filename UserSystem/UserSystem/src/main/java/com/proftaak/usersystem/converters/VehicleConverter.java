@@ -5,6 +5,7 @@ import com.proftaak.usersystem.service.VehicleService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.client.Client;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,17 @@ public class VehicleConverter
 	@Inject ClientUserConverter clientUserConverter;
 	@Inject UserVehicleConverter userVehicleConverter;
 
+
+
 	public Vehicle toEntity(com.proftaak.usersystem.shared.Vehicle vehicle) {
+		setConverters();
+
 		return vehicleService.getByChassis(vehicle.getChassisNumber());
 	}
 
 	public com.proftaak.usersystem.shared.Vehicle toShared(Vehicle vehicle) {
+		setConverters();
+
 		return new com.proftaak.usersystem.shared.Vehicle(
 				vehicle.getChassisNumber(),
 				userVehicleConverter.toShared(vehicle.getOwners())
@@ -28,11 +35,20 @@ public class VehicleConverter
 	}
 
 	public List<com.proftaak.usersystem.shared.Vehicle> toShared(List<Vehicle> vehicles) {
+		setConverters();
+
 		List<com.proftaak.usersystem.shared.Vehicle> shared = new ArrayList<>();
 		for (Vehicle vehicle : vehicles)
 		{
 			shared.add(toShared(vehicle));
 		}
 		return shared;
+	}
+
+	private void setConverters() {
+		if (clientUserConverter == null || userVehicleConverter == null) {
+			clientUserConverter = new ClientUserConverter();
+			userVehicleConverter = new UserVehicleConverter();
+		}
 	}
 }

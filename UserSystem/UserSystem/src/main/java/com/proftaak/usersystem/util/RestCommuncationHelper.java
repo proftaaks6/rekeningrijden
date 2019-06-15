@@ -16,7 +16,6 @@ public class RestCommuncationHelper {
 
     public static String getRequest(String url, String token) throws IOException {
         try {
-
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
 

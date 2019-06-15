@@ -28,6 +28,10 @@ public class VehicleTracker
 		this.endDate = endDate;
 	}
 
+	public VehicleTracker() {
+
+	}
+
 	public Vehicle getVehicle()
 	{
 		return vehicle;
