@@ -1,9 +1,13 @@
 package com.proftaak.invoicesystem.services;
 
+import com.proftaak.invoicesystem.converters.RegionConverter;
 import com.proftaak.invoicesystem.dao.RegionDao;
 import com.proftaak.invoicesystem.dao.RegionPointDao;
+import com.proftaak.invoicesystem.models.JsonRegion;
 import com.proftaak.invoicesystem.models.SquareRegion;
 
+import com.proftaak.invoicesystem.shared.Point;
+import com.proftaak.invoicesystem.shared.Region;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -22,8 +26,19 @@ public class RegionService {
     @Inject
     private RegionPointDao regionPointDao;
 
+    @Inject
+    private RegionConverter regionConverter;
+
     private List<SquareRegion> regions = new ArrayList<>();
     public boolean saveSquareRegion(SquareRegion region){
+        if (validateSquareRegion(region)) return false;
+
+        region.setPoints(region.getPoints().stream().map(x->regionPointDao.getOrCreateRegionPoint(x.getLongitude(), x.getLatitude())).collect(Collectors.toList()));
+        return regionDao.saveRegion(region);
+    }
+
+    private boolean validateSquareRegion(SquareRegion region)
+    {
         if(region.getPoints().size() != 4){
             return false;
         }
@@ -34,9 +49,7 @@ public class RegionService {
         if(region.getTopLeft().getLatitude() < region.getBottomRight().getLatitude() || region.getTopLeft().getLongitude() < region.getBottomRight().getLongitude()){
             return false;
         }
-
-        region.setPoints(region.getPoints().stream().map(x->regionPointDao.getOrCreateRegionPoint(x.getLongitude(), x.getLatitude())).collect(Collectors.toList()));
-        return regionDao.saveRegion(region);
+        return true;
     }
 
     public boolean removeRegions(){
@@ -62,5 +75,27 @@ public class RegionService {
 
     public List<SquareRegion> getRegions(){
         return regionDao.getAllRegions();
+    }
+
+    public boolean saveNewRegions(List<JsonRegion> regions)
+    {
+        regionDao.removeRegions();
+
+        List<SquareRegion> newRegions = new ArrayList<>();
+
+        for (JsonRegion region : regions)
+        {
+            SquareRegion squareRegion = regionConverter.toSquareEntity(new Region((long)region.getId(), new Point(region.getTopLeftLat(), region.getTopLeftLong()), new Point(region.getBottomRightLat(), region.getBottomRightLong()), region.getTaxRate()));
+            if (!validateSquareRegion(squareRegion)) return false;
+
+            newRegions.add(squareRegion);
+        }
+
+        // new for loop so every region is first validated
+        for (SquareRegion region : newRegions) {
+            regionDao.saveRegion(region);
+        }
+
+        return true;
     }
 }
