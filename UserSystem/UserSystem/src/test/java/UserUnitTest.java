@@ -24,11 +24,11 @@ public class UserUnitTest {
         userVehicle.setId(1);
 
         user = new ClientUser();
-        user.setName("Rick Jeurissen");
-        user.setAddress("Goeiestraat 911");
-        user.setResidence("Uden");
-        user.addOwnedVehicle(userVehicle);
-        user.setEmail("rick@mail.com");
+//        user.setName("Rick Jeurissen");
+//        user.setAddress("Goeiestraat 911");
+//        user.setResidence("Uden");
+//        user.addOwnedVehicle(userVehicle);
+//        user.setEmail("rick@mail.com");
 
         vehicle = new Vehicle();
         vehicle.setChassisNumber("893as9das9d");
