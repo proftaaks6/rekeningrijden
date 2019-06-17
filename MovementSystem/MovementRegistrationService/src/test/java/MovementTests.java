@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
-import javax.xml.stream.Location;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +99,7 @@ public class MovementTests {
         VehicleTrackerConverter converter = new VehicleTrackerConverter();
 
         Assert.assertTrue(true);
+        // todo
 //        com.proftaak.movementregistrationservice.shared.VehicleTracker vt = converter.toShared(vehicleTracker);
 
     }
@@ -110,6 +109,7 @@ public class MovementTests {
         VehicleConverter vc = new VehicleConverter();
 
         Assert.assertTrue(true);
+        // todo
 //        com.proftaak.movementregistrationservice.shared.Vehicle vehicleShared = vc.toShared(vehicle);
 
     }
