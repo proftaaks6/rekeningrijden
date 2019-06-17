@@ -15,7 +15,7 @@ import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
         @NamedQuery(name="SquareRegion.all",
                 query = "SELECT sr FROM SquareRegion sr"),
         @NamedQuery(name="SquareRegion.allNonDeleted",
-                query = "SELECT sr FROM SquareRegion sr WHERE NOT sr.deleted"),
+                query = "SELECT sr FROM SquareRegion sr WHERE sr.deleted = FALSE"),
         @NamedQuery(name="SquareRegion.getById",
                 query = "SELECT sr FROM SquareRegion sr WHERE sr.id = :id")
 

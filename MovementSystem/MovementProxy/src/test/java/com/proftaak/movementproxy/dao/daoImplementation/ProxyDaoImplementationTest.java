@@ -13,7 +13,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 public class ProxyDaoImplementationTest {
 
     private ProxyDao dao = new ProxyDaoImplementation();

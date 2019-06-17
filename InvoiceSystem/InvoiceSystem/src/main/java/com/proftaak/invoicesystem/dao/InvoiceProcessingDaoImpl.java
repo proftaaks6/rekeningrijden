@@ -89,4 +89,14 @@ public class InvoiceProcessingDaoImpl implements InvoiceProcessingDao{
         }
         return null;
     }
+
+    @Override
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    @Override
+    public EntityManager getEm() {
+        return this.em;
+    }
 }

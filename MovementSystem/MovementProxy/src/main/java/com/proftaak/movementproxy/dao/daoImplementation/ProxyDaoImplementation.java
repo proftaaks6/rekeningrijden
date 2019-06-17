@@ -14,6 +14,7 @@ public class ProxyDaoImplementation implements ProxyDao {
     @PersistenceContext(unitName = "default")
     private EntityManager em;
 
+
     @Override
     public boolean addInvalidData(InvalidData data) {
         try{

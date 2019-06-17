@@ -37,4 +37,14 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
     public VehicleProcessingState getVehicleByChassis(String chassis) {
         return em.createNamedQuery("VehicleProcessingState.getByChassis", VehicleProcessingState.class).setParameter("chassis", chassis).getSingleResult();
     }
+
+    @Override
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    @Override
+    public EntityManager getEm() {
+        return this.em;
+    }
 }

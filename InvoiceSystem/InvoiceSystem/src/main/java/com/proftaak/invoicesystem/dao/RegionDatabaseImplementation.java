@@ -4,6 +4,7 @@ import com.proftaak.invoicesystem.models.SquareRegion;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Stateless
@@ -44,5 +45,10 @@ public class RegionDatabaseImplementation implements RegionDao{
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public EntityManager getEm() {
+        return provider.getEm();
     }
 }
