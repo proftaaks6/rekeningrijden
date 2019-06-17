@@ -32,8 +32,6 @@ public class RegionsEndpoint {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public boolean postNewRegion(String message){
-        //Remove old regions first
-        //removeRegions();
 
         //Add new regions
         ObjectMapper mapper = new ObjectMapper();
@@ -42,11 +40,12 @@ public class RegionsEndpoint {
         try {
             jsonRegion = mapper.readValue(message, JsonRegion.class);
             region = new Region((long)jsonRegion.getId(), new Point(jsonRegion.getTopLeftLat(), jsonRegion.getTopLeftLong()), new Point(jsonRegion.getBottomRightLat(), jsonRegion.getBottomRightLong()), jsonRegion.getTaxRate());
+            regionService.reloadRegionsInMemory();
+            return regionService.saveSquareRegion(new RegionConverter().toSquareEntity(region));
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
-        regionService.reloadRegionsInMemory();
-        return regionService.saveSquareRegion(new RegionConverter().toSquareEntity(region));
+
     }
 
     @GET
@@ -66,7 +65,4 @@ public class RegionsEndpoint {
         return regionService.removeRegionById(Integer.parseInt(id));
     }
 
-    private void removeRegions(){
-        regionService.removeRegions();
-    }
 }

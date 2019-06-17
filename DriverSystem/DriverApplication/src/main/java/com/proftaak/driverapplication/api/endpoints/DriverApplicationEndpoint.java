@@ -7,13 +7,13 @@ import com.proftaak.driverapplication.models.LoginAttempt;
 import com.proftaak.driverapplication.security.Secured;
 import com.proftaak.driverapplication.service.DriverApplicationService;
 
-import java.io.IOException;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.List;
 
 @Path(value = "/driverapplication")
 @Produces(MediaType.APPLICATION_JSON)
@@ -56,16 +56,4 @@ public class DriverApplicationEndpoint
             return Response.serverError().build();
         }
     }
-
-//    @POST
-//    @Path("/loginattempt")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response addLoginAttempt(com.proftaak.driverapplication.shared.LoginAttempt loginAttempt) {
-//        try {
-//            driverApplicationService.addLoginAttempt(loginAttemptConverter.toEntity(loginAttempt));
-//            return Response.ok().build();
-//        } catch (Exception e) {
-//            return Response.serverError().build();
-//        }
-//    }
 }

@@ -1,33 +1,22 @@
 package com.proftaak.driverapplication.models;
 
 
+import javax.persistence.*;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@NamedQueries( {
-		@NamedQuery(
-				name = "LoginAttempt.getByUserId",
-				query="SELECT u FROM LoginAttempt u WHERE u.userId = :id"
-		),
-		@NamedQuery(
-				name = "LoginAttempt.getById",
-				query="SELECT u FROM LoginAttempt u WHERE u.id = :id"
-		),
-		@NamedQuery(
-				name = "LoginAttempt.getAll",
-				query="SELECT u FROM LoginAttempt u"
-		)
-})
+@NamedQuery(
+		name = "LoginAttempt.getByUserId",
+		query="SELECT u FROM LoginAttempt u WHERE u.userId = :id"
+)
+@NamedQuery(
+		name = "LoginAttempt.getById",
+		query="SELECT u FROM LoginAttempt u WHERE u.id = :id"
+)
+@NamedQuery(
+		name = "LoginAttempt.getAll",
+		query="SELECT u FROM LoginAttempt u"
+)
 @Table(name="tbl_loginAttempt")
 public class LoginAttempt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

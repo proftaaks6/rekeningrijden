@@ -9,11 +9,11 @@ import java.util.Date;
 		name = "tbl_vehicleTracker",
 		indexes = { @Index(name = "IDX_VehicleTracker", columnList = "vehicle_id,tracker_id", unique = true)}
 		)
-@NamedQueries({
-		@NamedQuery(name="VehicleTracker.get",
-				query = "SELECT vt FROM VehicleTracker vt JOIN vt.vehicle v JOIN vt.tracker t WHERE v.id = :vehicleId AND t.id = :trackerId")
 
-})
+@NamedQuery(
+		name="VehicleTracker.get",
+		query = "SELECT vt FROM VehicleTracker vt JOIN vt.vehicle v JOIN vt.tracker t WHERE v.id = :vehicleId AND t.id = :trackerId"
+)
 public class VehicleTracker
 {
 	@Id

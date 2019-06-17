@@ -10,17 +10,15 @@ import java.util.List;
 
 @Entity
 @Table(name="tbl_invoice")
-@NamedQueries({
-        @NamedQuery(
-                name = "Invoice.GetById",
-                query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
-        ),
-        @NamedQuery(
-                name = "Invoice.GetByVehicleChassis",
-                query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis"
-        )
-}
+@NamedQuery(
+        name = "Invoice.GetById",
+        query = "SELECT a FROM Invoice a WHERE a.id = :invoiceId"
 )
+@NamedQuery(
+        name = "Invoice.GetByVehicleChassisAndUser",
+        query = "SELECT a FROM Invoice a WHERE a.vehicleChassis = :chassis AND a.userId = :userId"
+)
+
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +26,9 @@ public class Invoice {
 
     @Column
     private String vehicleChassis;
+
+    @Column
+    private long userId;
 
     @Column
     private double totalDistance;
@@ -39,6 +40,7 @@ public class Invoice {
     private boolean isPaid;
 
     @Column
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -106,5 +108,15 @@ public class Invoice {
 
     public void setPriceRowList(List<PriceRow> priceRowList) {
         this.priceRowList = priceRowList;
+    }
+
+    public long getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(long userId)
+    {
+        this.userId = userId;
     }
 }

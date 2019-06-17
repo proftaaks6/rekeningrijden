@@ -1,10 +1,9 @@
 package com.proftaak.invoicesystem.api.endpoints;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proftaak.invoicesystem.converters.InvoiceConverter;
+import com.proftaak.invoicesystem.generator.InvoiceGenerator;
 import com.proftaak.invoicesystem.models.Invoice;
 import com.proftaak.invoicesystem.services.InvoiceProcessingService;
-import com.proftaak.invoicesystem.services.VehicleProcessingService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -12,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path(value = "/invoicesystem")
 @Produces(MediaType.APPLICATION_JSON)
@@ -33,9 +33,9 @@ public class InvoiceProcessingEndpoint {
     }
 
     @GET
-    @Path("/vehicle/{vehicleIds}")
-    public Response getInvoicesForUser(@PathParam("vehicleIds") String unparsedVehicleIds) throws JsonProcessingException {
-        List<Invoice> invoices = service.getInvoicesForUser(unparsedVehicleIds);
+    @Path("/user/{userId}/vehicles/{vehicleIds}")
+    public Response getInvoicesForUser(@PathParam("userId") long userId, @PathParam("vehicleIds") String unparsedVehicleIds)  {
+        List<com.proftaak.invoicesystem.shared.Invoice> invoices = service.getInvoicesForUser(userId, unparsedVehicleIds).stream().map(InvoiceConverter::fromEntity).collect(Collectors.toList());
         return Response.ok(invoices).build();
     }
 
@@ -59,6 +59,13 @@ public class InvoiceProcessingEndpoint {
         } else {
             return Response.noContent().build();
         }
+    }
+
+    @GET
+    @Path("/markForGeneration/{vehicleIds}")
+    public Response markForGeneration(@PathParam("vehicleIds") String unparsedVehicleIds) {
+        service.markForGeneration(unparsedVehicleIds);
+        return Response.ok(true).build();
     }
 
 //    @POST

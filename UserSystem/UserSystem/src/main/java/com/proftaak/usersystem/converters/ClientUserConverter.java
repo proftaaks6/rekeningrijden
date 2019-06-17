@@ -3,10 +3,10 @@ package com.proftaak.usersystem.converters;
 import com.proftaak.usersystem.models.ClientUser;
 import com.proftaak.usersystem.service.UserService;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class ClientUserConverter
@@ -19,7 +19,7 @@ public class ClientUserConverter
 	}
 
 	public com.proftaak.usersystem.shared.ClientUser toShared(ClientUser user) {
-		return new com.proftaak.usersystem.shared.ClientUser(user.getId(), user.getName(), user.getAddress(), user.getResidence(), user.getOwnedVehicleChassis(), user.getEmail());
+		return new com.proftaak.usersystem.shared.ClientUser(user.getId(), user.getName(), user.getAddress(), user.getResidence(), user.getAllOwnedVehicleChassisNumbers(), user.getEmail());
 	}
 
 	public List<com.proftaak.usersystem.shared.ClientUser> toShared(List<ClientUser> users) {

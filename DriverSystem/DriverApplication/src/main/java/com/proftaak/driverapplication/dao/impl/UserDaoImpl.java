@@ -6,6 +6,7 @@ import com.proftaak.driverapplication.models.DriverUser;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -21,14 +22,10 @@ public class UserDaoImpl implements UserDao
         try {
             DriverUser user = new DriverUser(username, password);
             em.persist(user);
-//            em.flush();
-
             return user;
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -47,13 +44,12 @@ public class UserDaoImpl implements UserDao
         try {
             return em.createNamedQuery("DriverUser.getAll", DriverUser.class).getResultList();
         } catch (Exception e) {
-            return null;
+            return new ArrayList<>();
         }
     }
 
     @Override
     public DriverUser verifyUser(String username, String password) {
-        DriverUser user = null;
 
         try {
             return em.createNamedQuery("DriverUser.validateUser", DriverUser.class).setParameter("username", username).setParameter("password", password).setMaxResults(1).getSingleResult();

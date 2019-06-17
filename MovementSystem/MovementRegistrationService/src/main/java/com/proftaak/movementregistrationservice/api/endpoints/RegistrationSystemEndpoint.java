@@ -5,16 +5,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proftaak.movementregistrationservice.converters.LocationPointConverter;
 import com.proftaak.movementregistrationservice.converters.TrackerConverter;
 import com.proftaak.movementregistrationservice.converters.VehicleConverter;
-import com.proftaak.movementregistrationservice.models.*;
+import com.proftaak.movementregistrationservice.models.Tracker;
+import com.proftaak.movementregistrationservice.models.Vehicle;
 import com.proftaak.movementregistrationservice.service.RegistrationService;
 
-import java.io.IOException;
-import java.util.Date;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 

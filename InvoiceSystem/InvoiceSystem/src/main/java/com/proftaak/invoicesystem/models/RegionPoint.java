@@ -2,17 +2,13 @@ package com.proftaak.invoicesystem.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name="tbl_regionpoint")
-@NamedQueries({
-        @NamedQuery(name="RegionPoint.getByLongitudeLatitude",
-                query = "SELECT r FROM RegionPoint r WHERE r.longitude = :longitude AND r.latitude = :latitude"),
-
-})
+@NamedQuery(name="RegionPoint.getByLongitudeLatitude",
+        query = "SELECT r FROM RegionPoint r WHERE r.longitude = :longitude AND r.latitude = :latitude"
+)
 public class RegionPoint implements Serializable {
 
     @Id
@@ -56,6 +52,11 @@ public class RegionPoint implements Serializable {
         RegionPoint that = (RegionPoint) o;
         return Double.compare(that.longitude, longitude) == 0 &&
                 Double.compare(that.latitude, latitude) == 0;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, latitude, longitude);
     }
 
     public int getId() {

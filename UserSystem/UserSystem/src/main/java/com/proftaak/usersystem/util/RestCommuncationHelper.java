@@ -9,11 +9,13 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class RestCommuncationHelper {
+
+    private RestCommuncationHelper(){}
+
     private static HttpURLConnection con;
 
     public static String getRequest(String url, String token) throws IOException {
         try {
-
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
 
@@ -42,6 +44,20 @@ public class RestCommuncationHelper {
         }
     }
 
+    private static String getResponseFromConnection(HttpURLConnection con) throws IOException {
+        return ResponseHelper.getResponseFromConnection(con);
+    }
+
+    public static String postRequest(String url) throws IOException
+    {
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("POST");
+        con.setDoOutput(true);
+
+        return getResponseFromConnection(con);
+    }
+
 
     public static String postRequest(String url, String data) throws IOException {
         byte[] postData = data.getBytes(StandardCharsets.UTF_8);
@@ -55,7 +71,6 @@ public class RestCommuncationHelper {
             con.setRequestMethod("POST");
             con.setRequestProperty("User-Agent", "Java client");
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            con.setRequestProperty("Authorization", "Bearer " + token);
 
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);

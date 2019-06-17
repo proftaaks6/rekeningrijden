@@ -1,16 +1,16 @@
 package com.proftaak.movementregistrationservice.Dao.DaoImplementation;
 
+import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
 import com.proftaak.movementregistrationservice.models.LocationPoint;
 import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
-import com.proftaak.movementregistrationservice.Dao.RegistrationDao;
-
 import com.proftaak.movementregistrationservice.models.VehicleTracker;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 @Stateless
 public class RegistrationDaoImplementation implements RegistrationDao{
@@ -94,10 +94,10 @@ public class RegistrationDaoImplementation implements RegistrationDao{
                 return vehicle;
             }
         }catch (Exception e){
-            e.printStackTrace();
+            return null;
         }
-
         return null;
+
     }
 
     @Override
@@ -139,10 +139,10 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         try {
             vehicle = em.createNamedQuery("Vehicle.getByChassisNumber", Vehicle.class).setParameter("chassisNumber", chassisNumber).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            return vehicle;
         }
-
         return vehicle;
+
     }
 
     @Override
@@ -166,30 +166,52 @@ public class RegistrationDaoImplementation implements RegistrationDao{
 	@Override
 	public List<LocationPoint> getLocationPointsForTracker(long trackerId)
 	{
-		List<LocationPoint> locationPoints = em.createNamedQuery("Tracker.getLocationPointsForTracker", LocationPoint.class).getResultList();
-		return locationPoints;
+		return em.createNamedQuery("Tracker.getLocationPointsForTracker", LocationPoint.class).getResultList();
 	}
 
     @Override
     public List<LocationPoint> getLocationPointsForVehicle(String chassis, Date start, Date end)
     {
-        List<LocationPoint> locationPoints = em
+     return em
                 .createNamedQuery("LocationPoint.getLocationPointsForVehicleWithStartAndEndDate", LocationPoint.class)
                 .setParameter("chassis", chassis)
                 .setParameter("startDate", start)
                 .setParameter("endDate", end)
                 .getResultList();
-        return locationPoints;
     }
 
 	@Override
     public VehicleTracker getVehicleTracker(long vehicleId, long trackerId) {
-        VehicleTracker vehicleTracker = em
+        return em
                 .createNamedQuery("VehicleTracker.get", VehicleTracker.class)
                 .setParameter("vehicleId", vehicleId)
                 .setParameter("trackerId", trackerId)
                 .getSingleResult();
 
-        return vehicleTracker;
+    }
+
+    @Override
+    public VehicleTracker getActiveVehicleTracker(long vehicleId)
+    {
+        try
+        {
+            return em
+                    .createNamedQuery("VehicleTracker.getActiveForVehicle", VehicleTracker.class)
+                    .setParameter("vehicleId", vehicleId)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public VehicleTracker editVehicleTracker(VehicleTracker vehicleTracker)
+    {
+        try {
+            return em.merge(vehicleTracker);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -24,10 +24,8 @@ public class UserDaoImpl implements UserDao {
             em.flush();
             return user;
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     @Override
@@ -35,13 +33,13 @@ public class UserDaoImpl implements UserDao {
         try {
             return em.createNamedQuery("ClientUser.getByName", ClientUser.class).setParameter("name", name).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+
             return null;
         }
     }
 
     @Override
-    public ClientUser getClientUserById(int id) {
+    public ClientUser getClientUserById(long id) {
         try {
             return em.createNamedQuery("ClientUser.getById", ClientUser.class).setParameter("id", id).getSingleResult();
         }catch (Exception e){
@@ -64,7 +62,7 @@ public class UserDaoImpl implements UserDao {
         try {
             return em.merge(user);
         } catch (Exception e) {
-            e.printStackTrace();
+
             return null;
         }
     }

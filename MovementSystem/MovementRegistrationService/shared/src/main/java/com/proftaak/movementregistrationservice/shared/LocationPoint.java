@@ -20,6 +20,8 @@ public class LocationPoint {
 
     private Date date;
 
+    public LocationPoint(){}
+
     public LocationPoint(long id, double longitude, double latitude) {
         this.id = id;
         this.longitude = longitude;

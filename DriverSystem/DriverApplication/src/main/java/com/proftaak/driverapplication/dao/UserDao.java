@@ -1,6 +1,7 @@
 package com.proftaak.driverapplication.dao;
 
 import com.proftaak.driverapplication.models.DriverUser;
+
 import java.util.List;
 
 public interface UserDao {

@@ -3,21 +3,19 @@ package com.proftaak.driverapplication.models;
 import javax.persistence.*;
 
 @Entity
-@NamedQueries( {
-        @NamedQuery(
-                name = "DriverUser.getById",
-                query="SELECT u FROM DriverUser u WHERE u.id = :id"
-        ),
-        @NamedQuery(
-                name = "DriverUser.getAll",
-                query="SELECT u FROM DriverUser u"
-        ),
-        @NamedQuery(
-                name = "DriverUser.validateUser",
-                query = "SELECT u FROM DriverUser u WHERE u.username = :username AND u.password = :password"
-        )
-})
-@Table(name="tbl_driverUser")
+
+@NamedQuery(
+        name = "DriverUser.getById",
+        query="SELECT u FROM DriverUser u WHERE u.id = :id"
+)
+@NamedQuery(
+        name = "DriverUser.getAll",
+        query="SELECT u FROM DriverUser u"
+)
+@NamedQuery(
+        name = "DriverUser.validateUser",
+        query = "SELECT u FROM DriverUser u WHERE u.username = :username AND u.password = :password"
+)
 public class DriverUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

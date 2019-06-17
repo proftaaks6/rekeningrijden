@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.enterprise.util.TypeLiteral;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -24,17 +23,18 @@ public class LocationPointService {
                 url = "http://movementregistrationservice:8080/deploy/v1/registration/vehicle/";
             }
 
-            url += vehicleChassis+"/points/from/"+from.getTime()+"/to/"+to.getTime();
+            if (to == null){
+                to = new Date();
+            }
 
-            System.out.println(url);
+            url += vehicleChassis+"/points/from/"+from.getTime()+"/to/"+to.getTime();
 
             return (List<LocationPoint>) callUrlAndCastResultMethode(
                     (new TypeLiteral<List<LocationPoint>>(){}).getType(),
                     url, "GET");
         } catch (IOException e) {
-            e.printStackTrace();
+            return Collections.emptyList();
         }
-        return Collections.emptyList();
 
     }
     private Object callUrlAndCastResultMethode(Type type, String url, String requestMethode) throws IOException {

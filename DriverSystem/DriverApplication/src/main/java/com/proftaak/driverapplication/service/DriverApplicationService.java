@@ -9,19 +9,18 @@ import com.proftaak.driverapplication.models.LoginAttempt;
 import com.proftaak.driverapplication.utility.AuthenticationUtils;
 import com.proftaak.driverapplication.utility.RestCommuncationHelper;
 import com.proftaak.invoicesystem.shared.Invoice;
-import com.proftaak.rabbitmq.ConnectionFactory;
 import com.proftaak.usersystem.shared.ClientUser;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.SecurityContext;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.SecurityContext;
 
 @Stateless
 public class DriverApplicationService
@@ -70,24 +69,27 @@ public class DriverApplicationService
 	public List<Invoice> getUserInvoices() throws IOException {
 		String username = securityContext.getUserPrincipal().getName();
 		ClientUser user;
+		String env = System.getenv("environment");
 		// get car for user
-		if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
-			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://usersystem:8080/deploy/v1/usersystem/users/username/" + username), ClientUser.class);
+		if(env != null && env.equals("production")) {
+			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://usersystem:8080/deploy/v1/usersystem/userId/" + username), ClientUser.class);
 		} else {
-			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/UserSystem/v1/usersystem/username/" + username), ClientUser.class);
+			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/UserSystem/v1/usersystem/userId/" + username), ClientUser.class);
 		}
 
-		String ids = "";
-		for (int carId : user.getOwnedVehicleIds()) {
-			ids += "," + carId;
-		}
+		StringBuilder sb = new StringBuilder();
 
-		if (ids != "") {
-			if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
-				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/vehicle/" + ids)
+		for (String chassis : user.getOwnedVehiclesChassis()) {
+			sb.append(chassis + ",");
+		}
+		sb.deleteCharAt(sb.lastIndexOf(","));
+
+		if (!sb.toString().equals("")) {
+			if(env != null && env.equals("production")) {
+				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + sb.toString())
 						, new TypeReference<List<Invoice>>(){});
 			} else {
-				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/InvoiceSystem/v1/invoicesystem/vehicle/" + ids)
+				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/InvoiceSystem/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + sb.toString())
 						, new TypeReference<List<Invoice>>(){});
 			}
 		} else {
