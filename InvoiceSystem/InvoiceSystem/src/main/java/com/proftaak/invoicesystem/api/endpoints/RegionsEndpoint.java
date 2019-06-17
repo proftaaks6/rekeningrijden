@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.xml.bind.ValidationException;
 
 @Path(value = "/region")
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,9 +32,16 @@ public class RegionsEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean postNewRegions(List<JsonRegion> regions){
+    public Response postNewRegions(List<JsonRegion> regions){
         regionService.reloadRegionsInMemory();
-        return regionService.saveNewRegions(regions);
+        try
+        {
+            regionService.saveNewRegions(regions);
+            return getAllRegions();
+        } catch (ValidationException e)
+        {
+            return Response.serverError().build();
+        }
 
     }
 

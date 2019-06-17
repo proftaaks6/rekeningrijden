@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.xml.bind.ValidationException;
 
 @Stateless
 @Default
@@ -30,8 +31,9 @@ public class RegionService {
     private RegionConverter regionConverter;
 
     private List<SquareRegion> regions = new ArrayList<>();
-    public boolean saveSquareRegion(SquareRegion region){
-        if (validateSquareRegion(region)) return false;
+    public SquareRegion saveSquareRegion(SquareRegion region) throws ValidationException
+    {
+        if (validateSquareRegion(region)) throw new ValidationException("Region object invalid");
 
         region.setPoints(region.getPoints().stream().map(x->regionPointDao.getOrCreateRegionPoint(x.getLongitude(), x.getLatitude())).collect(Collectors.toList()));
         return regionDao.saveRegion(region);
@@ -77,25 +79,25 @@ public class RegionService {
         return regionDao.getAllRegions();
     }
 
-    public boolean saveNewRegions(List<JsonRegion> regions)
+    public List<SquareRegion> saveNewRegions(List<JsonRegion> regions) throws ValidationException
     {
-        regionDao.removeRegions();
-
         List<SquareRegion> newRegions = new ArrayList<>();
 
         for (JsonRegion region : regions)
         {
             SquareRegion squareRegion = regionConverter.toSquareEntity(new Region((long)region.getId(), new Point(region.getTopLeftLat(), region.getTopLeftLong()), new Point(region.getBottomRightLat(), region.getBottomRightLong()), region.getTaxRate()));
-            if (!validateSquareRegion(squareRegion)) return false;
+            if (!validateSquareRegion(squareRegion)) throw new ValidationException("Invalid region object");
 
             newRegions.add(squareRegion);
         }
+
+        regionDao.removeRegions();
 
         // new for loop so every region is first validated
         for (SquareRegion region : newRegions) {
             regionDao.saveRegion(region);
         }
 
-        return true;
+        return newRegions;
     }
 }
