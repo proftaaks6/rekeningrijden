@@ -14,13 +14,14 @@ steps:
     scannerMode: 'Other'
     cliProjectKey: 'proftaaks6_rekeningrijden'
     projectKey: 'proftaaks6_rekeningrijden'
-    extraProperties: 'sonar.projectKey=proftaaks6_rekeningrijden'
+    extraProperties: 'sonar.projectKey=proftaaks6_rekeningrijden
+    sonar.coverageReportPaths=/home/vsts/work/1/s/target/site/cobertura/coverage.xml'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    codeCoverageToolOption: JaCoCo
+    codeCoverageToolOption: Cobertura
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     mavenVersionOption: 'Default'
