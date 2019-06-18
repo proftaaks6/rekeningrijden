@@ -29,6 +29,9 @@
           <element id="archive" name="UserSystem.shared-1.0.jar">
             <element id="module-output" name="UserSystem.shared" />
           </element>
+          <element id="archive" name="resthelpers-1.0.jar">
+            <element id="module-output" name="resthelpers" />
+          </element>
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.8" />
