@@ -171,6 +171,7 @@
                     <configuration>
                         <excludes>
                             <exclude name="org/jboss/jandex/AnnotationInstance"/>
+                            <exclude name="org/jboss/logging/Slf4jLogger"/>
                         </excludes>
                     </configuration>
                 </plugin>
