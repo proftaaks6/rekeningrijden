@@ -32,12 +32,14 @@ public class Tracker {
 	private List<VehicleTracker> vehicleTrackers;
 
     public Tracker() {
-
+        this.locationPoints = new ArrayList<>();
+        this.vehicleTrackers = new ArrayList<>();
     }
 
     public Tracker(boolean active) {
         this.active = active;
-        this.locationPoints =  new ArrayList<>();
+        this.locationPoints = new ArrayList<>();
+        this.vehicleTrackers = new ArrayList<>();
     }
 
     public Tracker(long id, boolean active) {

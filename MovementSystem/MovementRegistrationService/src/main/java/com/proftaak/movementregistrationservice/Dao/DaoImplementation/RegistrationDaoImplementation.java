@@ -9,6 +9,11 @@ import com.proftaak.movementregistrationservice.models.VehicleTracker;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.security.auth.login.Configuration;
 import java.util.Date;
 import java.util.List;
 
@@ -96,7 +101,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
         }catch (Exception e){
             return null;
         }
-        return null;
+        return vehicle;
 
     }
 
@@ -106,10 +111,10 @@ public class RegistrationDaoImplementation implements RegistrationDao{
             Vehicle databaseVehicle = em.createNamedQuery("Vehicle.getById", Vehicle.class).setParameter("id", vehicleId).getSingleResult();
             databaseVehicle.addTracker(new VehicleTracker(databaseVehicle, tracker, new Date()));
             em.merge(databaseVehicle);
+            return true;
         }catch (Exception e){
             return false;
         }
-        return true;
     }
 
     @Override
@@ -166,7 +171,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
 	@Override
 	public List<LocationPoint> getLocationPointsForTracker(long trackerId)
 	{
-		return em.createNamedQuery("Tracker.getLocationPointsForTracker", LocationPoint.class).getResultList();
+		return (List<LocationPoint>) em.createNamedQuery("Tracker.getLocationPointsForTracker").setParameter("id", trackerId).getResultList();
 	}
 
     @Override
@@ -182,6 +187,7 @@ public class RegistrationDaoImplementation implements RegistrationDao{
 
 	@Override
     public VehicleTracker getVehicleTracker(long vehicleId, long trackerId) {
+
         return em
                 .createNamedQuery("VehicleTracker.get", VehicleTracker.class)
                 .setParameter("vehicleId", vehicleId)
@@ -213,5 +219,15 @@ public class RegistrationDaoImplementation implements RegistrationDao{
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    @Override
+    public EntityManager getEm() {
+        return this.em;
     }
 }

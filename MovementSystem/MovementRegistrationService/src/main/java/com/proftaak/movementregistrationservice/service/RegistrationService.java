@@ -104,6 +104,7 @@ public class RegistrationService {
     }
 
     public Tracker getTrackerById(long trackerId) {
-    	return registrationDao.getTrackedById(trackerId);
-	}
+        return registrationDao.getTrackedById(trackerId);
+    }
+
 }
