@@ -20,6 +20,8 @@ class UserDaoImplTest {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         dao.setEm(em);
+
+        dao.saveNewUser("test", "test");
     }
 
     @AfterEach
@@ -44,6 +46,6 @@ class UserDaoImplTest {
 
     @Test
     void verifyUser() {
-        assertNotEquals(null, dao.verifyUser("username", "password"));
+        assertNotEquals(null, dao.verifyUser("test", "test"));
     }
 }
