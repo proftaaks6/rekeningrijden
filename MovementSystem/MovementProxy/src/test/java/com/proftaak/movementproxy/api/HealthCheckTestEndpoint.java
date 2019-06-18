@@ -9,7 +9,7 @@ import org.junit.Test;
 import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.*;
 
-public class HealthCheckTest {
+public class HealthCheckTestEndpoint {
     @Before
     public void setUp() throws Exception {
         String port = System.getProperty("server.port");
