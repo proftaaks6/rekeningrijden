@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class MovementTests {
+public class MovementTest {
     private Tracker tracker;
     private Vehicle vehicle;
     private VehicleTracker vehicleTracker;
