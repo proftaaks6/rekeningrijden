@@ -26,7 +26,7 @@ class LoginAttemptDaoImplTest {
 
         dao.setEm(em);
 
-
+        dao.add(new LoginAttempt(1, new Date(), true));
     }
 
     @After
@@ -51,6 +51,6 @@ class LoginAttemptDaoImplTest {
 
     @Test
     void add() {
-        assertNotEquals(null, dao.add(new LoginAttempt(1, new Date(), true)));
+        assertNotEquals(null, dao.add(new LoginAttempt(2, new Date(), true)));
     }
 }
