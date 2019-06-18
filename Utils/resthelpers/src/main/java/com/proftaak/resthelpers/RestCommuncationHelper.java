@@ -1,10 +1,9 @@
-package com.proftaak.invoicesystem.helpers;
+package com.proftaak.resthelpers;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.logging.Logger;
 
 import static javax.ws.rs.core.HttpHeaders.USER_AGENT;
 

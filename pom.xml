@@ -34,6 +34,7 @@
         <module>PoliceSystem/PoliceFrontendProxy</module>
         <module>GovernmentSystem/GovernmentAdmin</module>
         <module>Utils/rabbitmq</module>
+        <module>Utils/resthelpers</module>
     </modules>
 
     <dependencies>
