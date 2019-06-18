@@ -21,11 +21,11 @@ public class UserService {
         // Create this user in driversystem and invoicesystem
         if(System.getenv("environment") != null && System.getenv("environment").equals("production")) {
             RestCommuncationHelper.postRequest("http://driversystem:8080/deploy/v1/driverapplication/createUser",
-                    "username=" + name + "&password=welkom123");
+                    "userId="+user.getId()+"&username=" + name + "&password=welkom123");
             RestCommuncationHelper.postRequest("http://invoicesystem:8080/deploy/v1/vehicleprocessing/vehicle/" + user.getId());
         } else {
             RestCommuncationHelper.postRequest("http://localhost:8080/DriverSystem/v1/driverapplication/createUser",
-                    "username=" + name + "&password=welkom123");
+                    "userId="+user.getId()+"&username=" + name + "&password=welkom123");
             RestCommuncationHelper.postRequest("http://localhost:8080/InvoiceSystem/v1/vehicleprocessing/vehicle/" + user.getId());
         }
 
