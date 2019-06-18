@@ -3,6 +3,7 @@ package com.proftaak.invoicesystem.dao;
 
 import com.proftaak.invoicesystem.models.Invoice;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface InvoiceProcessingDao {
@@ -12,4 +13,6 @@ public interface InvoiceProcessingDao {
     Invoice addInvoice(Invoice invoice);
     Invoice regenerateInvoice(long invoiceId);
     Invoice getInvoiceById(long id);
+    void setEm(EntityManager em);
+    EntityManager getEm();
 }

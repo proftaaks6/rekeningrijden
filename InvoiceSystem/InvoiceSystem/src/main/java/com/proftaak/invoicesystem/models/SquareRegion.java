@@ -1,19 +1,25 @@
 package com.proftaak.invoicesystem.models;
 
 
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static javax.persistence.LockModeType.PESSIMISTIC_WRITE;
+
 @Entity
 @Table(name="tbl_squareregion")
-@NamedQuery(name="SquareRegion.all",
-        query = "SELECT sr FROM SquareRegion sr")
-@NamedQuery(name="SquareRegion.allNonDeleted",
-        query = "SELECT sr FROM SquareRegion sr WHERE NOT sr.deleted")
-@NamedQuery(name="SquareRegion.getById",
-        query = "SELECT sr FROM SquareRegion sr WHERE sr.id = :id")
+@NamedQueries({
+        @NamedQuery(name="SquareRegion.all",
+                query = "SELECT sr FROM SquareRegion sr"),
+        @NamedQuery(name="SquareRegion.allNonDeleted",
+                query = "SELECT sr FROM SquareRegion sr WHERE sr.deleted = FALSE"),
+        @NamedQuery(name="SquareRegion.getById",
+                query = "SELECT sr FROM SquareRegion sr WHERE sr.id = :id")
+
+})
 public class SquareRegion {
 
     @Id
@@ -88,7 +94,7 @@ public class SquareRegion {
             return false;
         }
         return (
-                getTopLeft().getLongitude() >= point.getLongitude() && getBottomRight().getLongitude() <= point.getLongitude() && getTopLeft().getLatitude() >= point.getLatitude() && getBottomRight().getLatitude() <= point.getLatitude()
+                getTopLeft().getLongitude() <= point.getLongitude() && getBottomRight().getLongitude() >= point.getLongitude() && getTopLeft().getLatitude() >= point.getLatitude() && getBottomRight().getLatitude() <= point.getLatitude()
         );
 
     }

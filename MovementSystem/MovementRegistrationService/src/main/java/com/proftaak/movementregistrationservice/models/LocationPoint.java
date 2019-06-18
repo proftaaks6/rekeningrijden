@@ -49,6 +49,22 @@ public class LocationPoint {
         this.date = date;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public double getLongitude() {
         return longitude;
     }

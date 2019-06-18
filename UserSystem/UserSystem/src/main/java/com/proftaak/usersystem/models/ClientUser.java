@@ -43,6 +43,7 @@ public class ClientUser implements Serializable {
     private String email;
 
     public ClientUser() {
+        this.ownedVehicles = new ArrayList<>();
     }
 
 
@@ -109,6 +110,28 @@ public class ClientUser implements Serializable {
 
     public void addOwnedVehicle(UserVehicle userVehicle)
     {
-        this.ownedVehicles.add(userVehicle);
+        if (this.ownedVehicles != null) {
+            this.ownedVehicles.add(userVehicle);
+        } else {
+            this.ownedVehicles = new ArrayList<>();
+            this.ownedVehicles.add(userVehicle);
+
+        }
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setResidence(String residence) {
+        this.residence = residence;
     }
 }

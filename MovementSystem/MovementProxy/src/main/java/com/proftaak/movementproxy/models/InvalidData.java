@@ -1,5 +1,6 @@
 package com.proftaak.movementproxy.models;
 
+import javax.inject.Named;
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +8,8 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name="InvalidData.getInvalidData",
                 query="SELECT d FROM InvalidData d WHERE d.id = :id"),
+        @NamedQuery(name="InvalidData.getAll",
+                query="SELECT d FROM InvalidData d")
 })
 public class InvalidData {
     @Id

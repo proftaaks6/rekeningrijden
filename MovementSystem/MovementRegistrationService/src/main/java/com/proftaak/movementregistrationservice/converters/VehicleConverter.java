@@ -21,21 +21,33 @@ public class VehicleConverter {
 	RegistrationService registrationService;
 
     public Vehicle toEntity(com.proftaak.movementregistrationservice.shared.Vehicle sharedVehicle){
-    	return registrationService.getVehicleByChassisNumber(sharedVehicle.getChassisNumber());
+        setConverters();
+
+        return registrationService.getVehicleByChassisNumber(sharedVehicle.getChassisNumber());
     }
 
     public com.proftaak.movementregistrationservice.shared.Vehicle toShared(Vehicle vehicle){
+        setConverters();
+
         return new com.proftaak.movementregistrationservice.shared.Vehicle((int)vehicle.getId(),
                 VehicleType.valueOf(vehicle.getVehicleType().getType()), vehicle.getChassisNumber(),
                 FuelType.valueOf(vehicle.getFuelType().getType()), vehicle.getEmission(), vehicleTrackerConverter.toShared(vehicle.getTrackers(), true));
     }
 
     public List<com.proftaak.movementregistrationservice.shared.Vehicle> toShared(List<Vehicle> vehicles){
+        setConverters();
+
         List<com.proftaak.movementregistrationservice.shared.Vehicle> sharedModels = new ArrayList<>();
         for (Vehicle vehicle : vehicles) {
             sharedModels.add(toShared(vehicle));
         }
 
         return sharedModels;
+    }
+
+    private void setConverters() {
+        if (vehicleTrackerConverter == null ) {
+            vehicleTrackerConverter = new VehicleTrackerConverter();
+        }
     }
 }

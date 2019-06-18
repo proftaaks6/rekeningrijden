@@ -4,6 +4,7 @@ import com.proftaak.invoicesystem.models.SquareRegion;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Stateless
@@ -13,13 +14,10 @@ public class RegionDatabaseImplementation implements RegionDao{
     EntityManagerProvider provider;
 
     @Override
-    public boolean saveRegion(SquareRegion region) {
-        if(region.getId() > -1){
-            removeRegionById(region.getId());
-        }
+    public SquareRegion saveRegion(SquareRegion region) {
         region.setId(0);
         provider.getEm().persist(region);
-        return true;
+        return region;
     }
 
     @Override
@@ -29,7 +27,10 @@ public class RegionDatabaseImplementation implements RegionDao{
 
     @Override
     public boolean removeRegions() {
-        provider.getEm().remove(getAllRegions());
+        for (SquareRegion region : getAllRegions())
+        {
+            removeRegionById(region.getId());
+        }
         return true;
     }
 
@@ -44,5 +45,10 @@ public class RegionDatabaseImplementation implements RegionDao{
             return false;
         }
 
+    }
+
+    @Override
+    public EntityManager getEm() {
+        return provider.getEm();
     }
 }
