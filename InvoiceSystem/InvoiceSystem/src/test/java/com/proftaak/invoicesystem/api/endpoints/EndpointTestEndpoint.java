@@ -13,7 +13,7 @@ import java.util.Date;
 import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.*;
 
-public class EndpointTest {
+public class EndpointTestEndpoint {
 
     private String token;
 
