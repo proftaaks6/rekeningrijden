@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 @Entity
 @NamedQueries( {
@@ -35,13 +36,14 @@ public class ClientUser implements Serializable {
     @Column
     private String residence;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserVehicle> ownedVehicles;
 
     @Column(unique = true)
     private String email;
 
     public ClientUser() {
+        this.ownedVehicles = new ArrayList<>();
     }
 
 
@@ -86,7 +88,7 @@ public class ClientUser implements Serializable {
         return residence;
     }
 
-    public List<String> getOwnedVehicleChassisNumbers() {
+    public List<String> getAllOwnedVehicleChassisNumbers() {
         List<String> list = new ArrayList<>();
         for (UserVehicle v : ownedVehicles) {
             list.add(v.getVehicle().getChassisNumber());
@@ -94,12 +96,42 @@ public class ClientUser implements Serializable {
 
         return list;
     }
-    public List<String> getOwnedVehicleChassis() {
+
+    public List<String> getOwnedVehicleChassis()
+    {
         List<String> list = new ArrayList<>();
-        for (UserVehicle v : ownedVehicles) {
+        for (UserVehicle v : ownedVehicles)
+        {
             list.add(v.getVehicle().getChassisNumber());
         }
 
         return list;
+    }
+
+    public void addOwnedVehicle(UserVehicle userVehicle)
+    {
+        if (this.ownedVehicles != null) {
+            this.ownedVehicles.add(userVehicle);
+        } else {
+            this.ownedVehicles = new ArrayList<>();
+            this.ownedVehicles.add(userVehicle);
+
+        }
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setResidence(String residence) {
+        this.residence = residence;
     }
 }

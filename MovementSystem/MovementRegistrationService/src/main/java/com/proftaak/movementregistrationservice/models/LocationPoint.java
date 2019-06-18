@@ -4,15 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 @Entity
 @Table(name="tbl_locationMessage")
-@NamedQueries({
-        @NamedQuery(name="LocationPoint.getLocationPointsForVehicleWithStartAndEndDate",
-                query = "SELECT lp FROM LocationPoint lp " +
-                        "   JOIN lp.tracker t " +
-                        "   JOIN t.vehicleTrackers vts " +
-                        "   JOIN vts.vehicle v "+
-                        "WHERE v.chassisNumber = :chassis AND lp.date >= :startDate AND lp.date < :endDate"),
+@NamedQuery(name="LocationPoint.getLocationPointsForVehicleWithStartAndEndDate",
+        query = "SELECT lp FROM LocationPoint lp " +
+                "   JOIN lp.tracker t " +
+                "   JOIN t.vehicleTrackers vts " +
+                "   JOIN vts.vehicle v "+
+                "WHERE v.chassisNumber = :chassis AND lp.date >= :startDate AND lp.date < :endDate")
 
-})
 public class LocationPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,6 +46,22 @@ public class LocationPoint {
     public LocationPoint(double longitude, double latitude, Date date) {
         this.longitude = longitude;
         this.latitude = latitude;
+        this.date = date;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setDate(Date date) {
         this.date = date;
     }
 

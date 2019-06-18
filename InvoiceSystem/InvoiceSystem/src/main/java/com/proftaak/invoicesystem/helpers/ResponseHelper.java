@@ -8,16 +8,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ResponseHelper {
-    static Logger LOG = Logger.getLogger(ResponseHelper.class.getName());
+
+    private ResponseHelper(){}
+
+    static Logger log = Logger.getLogger(ResponseHelper.class.getName());
     public static String getResponseFromConnection(HttpURLConnection con) throws IOException {
         int responseCode = con.getResponseCode();
 
-        LOG.log(Level.INFO,"Made response to : " + con.getURL());
-        LOG.log(Level.INFO,"Made response with : " + con.getRequestMethod());
-        LOG.log(Level.INFO,"Response code : " + responseCode);
+        log.log(Level.INFO,"Made response to : %s" , con.getURL());
+        log.log(Level.INFO,"Made response with : %s" , con.getRequestMethod());
+        log.log(Level.INFO,"Response code : %s" , responseCode);
 
-
-        System.out.println("Response Code made to url :: " + responseCode);
         if (responseCode == HttpURLConnection.HTTP_OK) { // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
@@ -31,7 +32,7 @@ public class ResponseHelper {
 
             String result = response.toString();
 
-            LOG.log(Level.INFO,"Response string : " + result);
+            log.log(Level.INFO,"Response string : %s" , result);
             return result;
         } else {
             return null;

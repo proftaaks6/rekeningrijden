@@ -15,6 +15,6 @@ public class Kickoff {
 
     @PostConstruct
     public void start(){
-        DriverUser user = em.find(DriverUser.class, 1);
+        em.find(DriverUser.class, 1);
     }
 }

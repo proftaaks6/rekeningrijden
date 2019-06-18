@@ -1,13 +1,14 @@
 package com.proftaak.invoicesystem.shared;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 public class Invoice {
     private long id;
 
-    private long vehicleId;
+    private String vehicleChassis;
+
+    private long userId;
 
     private double totalDistance;
 
@@ -24,12 +25,67 @@ public class Invoice {
 
     }
 
-    public Invoice(int vehicleId, double totalDistance, double totalPrice) {
-        this.vehicleId = vehicleId;
-        this.totalDistance = totalDistance;
-        this.totalPrice = totalPrice;
-        this.date = new Date();
-        this.isPaid = false;
+    public long getId() {
+        return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getVehicleChassis() {
+        return vehicleChassis;
+    }
+
+    public void setVehicleChassis(String vehicleChassis) {
+        this.vehicleChassis = vehicleChassis;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public double getTotalDistance() {
+        return totalDistance;
+    }
+
+    public void setTotalDistance(double totalDistance) {
+        this.totalDistance = totalDistance;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List<PriceRow> getPriceRowList() {
+        return priceRowList;
+    }
+
+    public void setPriceRowList(List<PriceRow> priceRowList) {
+        this.priceRowList = priceRowList;
+    }
 }

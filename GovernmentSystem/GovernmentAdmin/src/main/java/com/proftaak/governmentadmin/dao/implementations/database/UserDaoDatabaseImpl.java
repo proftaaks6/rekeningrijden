@@ -2,6 +2,7 @@ package com.proftaak.governmentadmin.dao.implementations.database;
 
 import com.proftaak.governmentadmin.dao.UserDao;
 import com.proftaak.governmentadmin.models.GovernmentEmployee;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -53,10 +54,8 @@ public class UserDaoDatabaseImpl implements UserDao {
         try {
             return em.createNamedQuery("GovernmentEmployee.validateUser", GovernmentEmployee.class).setParameter("username", username).setParameter("password", password).setMaxResults(1).getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     @Override

@@ -1,29 +1,33 @@
 package com.proftaak.usersystem.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "tbl_userVehicle",
 		indexes = { @Index(name = "IDX_UserVehicle", columnList = "vehicle_id,user_id")}
 )
-@NamedQueries({
-		@NamedQuery(name="UserVehicle.get",
-				query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v JOIN ut.user u WHERE v.id = :vehicleId AND u.id = :userId")
-
-})
-public class UserVehicle
+@NamedQuery(name="UserVehicle.get",
+		query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v JOIN ut.user u WHERE v.id = :vehicleId AND u.id = :userId")
+@NamedQuery(name="UserVehicle.getActiveForVehicle",
+		query = "SELECT ut FROM UserVehicle ut JOIN ut.vehicle v WHERE v.chassisNumber = :chassis AND ut.endDate IS NULL")
+public class UserVehicle implements Serializable
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
 	@ManyToOne
 	private Vehicle vehicle;
+
 	@ManyToOne
 	private ClientUser user;
+
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
+
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endDate;

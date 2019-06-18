@@ -12,19 +12,20 @@ public class RegionConverter {
         region1.setTopLeft(pointConverter.fromEntity(region.getTopLeft()));
         region1.setBottomRight(pointConverter.fromEntity(region.getBottomRight()));
         region1.setId(region.getId());
+        region1.setPrice(region.getPrice());
         return region1;
     }
     public com.proftaak.invoicesystem.models.SquareRegion toSquareEntity(Region region){
         SquareRegion squareRegion = new SquareRegion();
         squareRegion.setPoints(region.getTopLeft().getLongitude(), region.getTopLeft().getLatitude(), region.getBottomRight().getLongitude(), region.getBottomRight().getLatitude());
+        squareRegion.setPrice(region.getPrice());
         try{
             if(region.getId() > -1){
                 squareRegion.setId((int)region.getId());
             }
+            return squareRegion;
         }catch (NullPointerException e){
-            e.printStackTrace();
+            return null;
         }
-
-        return squareRegion;
     }
 }

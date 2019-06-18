@@ -11,8 +11,6 @@ import java.util.concurrent.TimeoutException;
 
 public class ConnectionFactory extends com.rabbitmq.client.ConnectionFactory {
 
-    private Config config = new Config();
-
     public ConnectionFactory(){
         super();
         setUsername("guest");

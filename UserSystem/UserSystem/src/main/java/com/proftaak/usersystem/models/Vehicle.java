@@ -6,20 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NamedQueries( {
-        @NamedQuery(
-                name = "Vehicle.getByChassis",
-                query="SELECT v FROM Vehicle v WHERE v.chassisNumber = :chassis"
-        ),
-        @NamedQuery(
-                name = "Vehicle.getById",
-                query="SELECT v FROM Vehicle v WHERE v.id = :id"
-        ),
-        @NamedQuery(
-                name = "Vehicle.getAll",
-                query="SELECT v FROM Vehicle v"
-        )
-})
+@NamedQuery(
+        name = "Vehicle.getByChassis",
+        query="SELECT v FROM Vehicle v WHERE v.chassisNumber = :chassis"
+)
+@NamedQuery(
+        name = "Vehicle.getById",
+        query="SELECT v FROM Vehicle v WHERE v.id = :id"
+)
+@NamedQuery(
+        name = "Vehicle.getAll",
+        query="SELECT v FROM Vehicle v"
+)
 @Table(name="tbl_car")
 public class Vehicle implements Serializable {
     @Id
@@ -29,7 +27,7 @@ public class Vehicle implements Serializable {
     @Column
     private String chassisNumber;
 
-    @OneToMany(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
     private List<UserVehicle> owners;
 
     public Vehicle() {

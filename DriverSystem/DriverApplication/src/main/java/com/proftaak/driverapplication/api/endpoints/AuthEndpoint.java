@@ -7,15 +7,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.DefaultClaims;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Logger;
 
 import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
@@ -49,7 +48,7 @@ public class AuthEndpoint {
                 return Response.status(UNAUTHORIZED).build();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+
             return Response.status(UNAUTHORIZED).build();
         }
     }
@@ -60,14 +59,13 @@ public class AuthEndpoint {
         DefaultClaims claims = new DefaultClaims();
         claims.put("username", username);
 
-        String jws = Jwts.builder()
+        return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
                 .setExpiration(new Date(new Date().getTime() + 300000))
                 .setClaims(claims)
                 .signWith(AuthenticationFilter.serverKey).compact();
 
-        return jws;
     }
 
 }

@@ -1,20 +1,19 @@
 package com.proftaak.invoicesystem.dao;
 
-import com.proftaak.invoicesystem.models.VehicleProcessingState;
-
+import com.proftaak.invoicesystem.models.UserProcessingState;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
+public class UserProcessingDaoImpl implements UserProcessingDao {
 
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public boolean addNewVehicle(String chassisNumber) {
+    public boolean addNewUser(long userId) {
         try {
-            em.persist(new VehicleProcessingState(chassisNumber));
+            em.persist(new UserProcessingState(userId));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -23,9 +22,9 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
     }
 
     @Override
-    public List<VehicleProcessingState> getAllVehicles() {
+    public List<UserProcessingState> getAllUsers() {
         try {
-            return em.createNamedQuery("VehicleProcessingState.getAll", VehicleProcessingState.class).getResultList();
+            return em.createNamedQuery("UserProcessingState.getAll", UserProcessingState.class).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -34,8 +33,8 @@ public class VehicleProcessingDaoImpl implements VehicleProcessingDao {
     }
 
     @Override
-    public VehicleProcessingState getVehicleByChassis(String chassis) {
-        return em.createNamedQuery("VehicleProcessingState.getByChassis", VehicleProcessingState.class).setParameter("chassis", chassis).getSingleResult();
+    public UserProcessingState getUserById(long userId) {
+        return em.createNamedQuery("UserProcessingState.getByUserId", UserProcessingState.class).setParameter("userId", userId).getSingleResult();
     }
 
     @Override

@@ -15,7 +15,7 @@ public class RegionPointDatabaseImplementation implements RegionPointDao {
     @Override
     public RegionPoint getOrCreateRegionPoint(double longitude, double latitude) {
         List<RegionPoint> regionPoint = provider.getEm().createNamedQuery("RegionPoint.getByLongitudeLatitude").setParameter("longitude", longitude).setParameter("latitude", latitude).setMaxResults(1).getResultList();
-        if(regionPoint == null || regionPoint.size() == 0){
+        if(regionPoint == null || regionPoint.isEmpty()){
             RegionPoint point = new RegionPoint(longitude, latitude);
             provider.getEm().persist(point);
             return point;

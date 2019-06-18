@@ -1,6 +1,5 @@
 package com.proftaak.movementregistrationservice.utils;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -10,7 +9,7 @@ import static javax.ws.rs.core.HttpHeaders.USER_AGENT;
 
 public class RestCommuncationHelper {
 
-    private static Logger LOG = Logger.getLogger(RestCommuncationHelper.class.getName());
+    private RestCommuncationHelper(){}
 
 
     public static String getResponseString(String url, String requestMethode) throws IOException {
@@ -26,10 +25,6 @@ public class RestCommuncationHelper {
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("POST");
         con.setDoOutput(true);
-//        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-//        wr.writeBytes(data);
-//        wr.flush();
-//        wr.close();
 
         return getResponseFromConnection(con);
     }

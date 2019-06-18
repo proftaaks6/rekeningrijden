@@ -9,7 +9,7 @@ import org.junit.Test;
 import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.*;
 
-public class AuthEndpointTest {
+public class AuthEndpointTestEndpoint {
     private String token;
 
     @Before

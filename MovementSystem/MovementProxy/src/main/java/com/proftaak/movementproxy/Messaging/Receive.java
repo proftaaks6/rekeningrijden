@@ -38,7 +38,6 @@ public class Receive {
 
     private void initQueue(String queueName, boolean simulation){
         ConnectionFactory factory = new ConnectionFactory();
-        Connection connection = null;
         Channel channel = null;
         consumer = new JMSConsumer();
         channel = consumer.getChannel();
@@ -46,8 +45,7 @@ public class Receive {
 
         //Open queue
         if(simulation){
-            try {
-                connection = factory.newConnection();
+            try (Connection connection = factory.newConnection()) {
                 channel = connection.createChannel();
                 channel.queueDeclare(QUEUE_NAME2, false, false, false, null);
             } catch (IOException | TimeoutException e) {
@@ -55,8 +53,7 @@ public class Receive {
             }
             startReceivingSimulation(consumer, channel, queueName);
         }else{
-            try {
-                connection = factory.newConnection();
+            try (Connection connection = factory.newConnection()) {
                 channel = connection.createChannel();
                 channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             } catch (IOException | TimeoutException e) {
@@ -86,7 +83,6 @@ public class Receive {
                 }
             }
         };
-        //channel.basicConsume(queueName, true, consumer);
         jmsConsumer.startReceiving(consumer, queueName);
     }
 
