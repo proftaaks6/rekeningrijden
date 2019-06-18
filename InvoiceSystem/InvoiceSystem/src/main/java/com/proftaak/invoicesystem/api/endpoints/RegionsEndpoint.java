@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.xml.bind.ValidationException;
 
 @Path(value = "/region")
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,19 +32,15 @@ public class RegionsEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public boolean postNewRegion(String message){
-
-        //Add new regions
-        ObjectMapper mapper = new ObjectMapper();
-        JsonRegion jsonRegion = null;
-        Region region = null;
-        try {
-            jsonRegion = mapper.readValue(message, JsonRegion.class);
-            region = new Region((long)jsonRegion.getId(), new Point(jsonRegion.getTopLeftLat(), jsonRegion.getTopLeftLong()), new Point(jsonRegion.getBottomRightLat(), jsonRegion.getBottomRightLong()), jsonRegion.getTaxRate());
-            regionService.reloadRegionsInMemory();
-            return regionService.saveSquareRegion(new RegionConverter().toSquareEntity(region));
-        } catch (IOException e) {
-            return false;
+    public Response postNewRegions(List<JsonRegion> regions){
+        regionService.reloadRegionsInMemory();
+        try
+        {
+            regionService.saveNewRegions(regions);
+            return getAllRegions();
+        } catch (ValidationException e)
+        {
+            return Response.serverError().build();
         }
 
     }

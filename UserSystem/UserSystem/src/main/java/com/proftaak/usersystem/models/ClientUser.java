@@ -110,7 +110,13 @@ public class ClientUser implements Serializable {
 
     public void addOwnedVehicle(UserVehicle userVehicle)
     {
-        this.ownedVehicles.add(userVehicle);
+        if (this.ownedVehicles != null) {
+            this.ownedVehicles.add(userVehicle);
+        } else {
+            this.ownedVehicles = new ArrayList<>();
+            this.ownedVehicles.add(userVehicle);
+
+        }
     }
 
     public void setName(String name) {
