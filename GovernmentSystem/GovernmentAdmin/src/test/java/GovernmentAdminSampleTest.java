@@ -1,11 +1,12 @@
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class GovernmentAdminSampleTest {
+public class GovernmentAdminSampleTest {
 
     @Test
-    void sample(){
+    public void sample(){
         assertThat( "Government Admin werkt!", true);
     }
 }
