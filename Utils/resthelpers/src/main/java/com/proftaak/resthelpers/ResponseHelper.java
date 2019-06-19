@@ -1,4 +1,4 @@
-package com.proftaak.invoicesystem.helpers;
+package com.proftaak.resthelpers;
 
 import java.io.BufferedReader;
 import java.io.IOException;

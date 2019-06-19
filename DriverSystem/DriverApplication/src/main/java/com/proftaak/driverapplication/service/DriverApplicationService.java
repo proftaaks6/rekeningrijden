@@ -2,6 +2,7 @@ package com.proftaak.driverapplication.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.proftaak.driverapplication.dao.LoginAttemptDao;
 import com.proftaak.driverapplication.dao.UserDao;
 import com.proftaak.driverapplication.models.DriverUser;
@@ -11,6 +12,9 @@ import com.proftaak.driverapplication.utility.RestCommuncationHelper;
 import com.proftaak.invoicesystem.shared.Invoice;
 import com.proftaak.usersystem.shared.ClientUser;
 
+import com.proftaak.usersystem.shared.SimpleUserVehicle;
+import com.proftaak.usersystem.shared.UserVehicle;
+import java.util.Arrays;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Context;
@@ -30,15 +34,28 @@ public class DriverApplicationService
 	@Inject
 	private LoginAttemptDao loginAttemptDao;
 
-	@Context
-	private SecurityContext securityContext;
+	private String env = System.getenv("environment");
 
 	public DriverUser getUserById(long id) {
 		return userDao.getDriverUserById(id);
 	}
 
-	public DriverUser saveNewUser(String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-		return userDao.saveNewUser(username, AuthenticationUtils.encodeSHA256(password));
+	public ClientUser getClientUserByName(String username) {
+		try
+		{
+			if(env != null && env.equals("production")) {
+				return new ObjectMapper().readValue(com.proftaak.resthelpers.RestCommuncationHelper.getResponseString("http://usersystem:8080/deploy/v1/usersystem/userId/" + username, "GET"), ClientUser.class);
+			} else {
+				return new ObjectMapper().readValue(com.proftaak.resthelpers.RestCommuncationHelper.getResponseString("http://localhost:8080/UserSystem/v1/usersystem/userId/" + username, "GET"), ClientUser.class);
+			}
+		} catch (IOException e)
+		{
+			return null;
+		}
+	}
+
+	public DriverUser saveNewUser(long userId, String username, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+		return userDao.saveNewUser(userId, username, AuthenticationUtils.encodeSHA256(password));
 	}
 
 	public List<LoginAttempt> getUserStatistics(long userId) {
@@ -66,16 +83,29 @@ public class DriverApplicationService
 		return loginAttemptDao.add(loginAttempt);
 	}
 
-	public List<Invoice> getUserInvoices() throws IOException {
-		String username = securityContext.getUserPrincipal().getName();
-		ClientUser user;
-		String env = System.getenv("environment");
-		// get car for user
-		if(env != null && env.equals("production")) {
-			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://usersystem:8080/deploy/v1/usersystem/userId/" + username), ClientUser.class);
+	public Invoice[] getUserInvoices(String username) throws IOException {
+		ClientUser user = this.getClientUserByName(username);
+		String unparsedVehicleIds = getUnparsedVehicleIds(user);
+
+		if (!unparsedVehicleIds.equals("")) {
+			if(env != null && env.equals("production")) {
+				return new Gson().fromJson(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + unparsedVehicleIds)
+						, Invoice[].class);
+			} else {
+				return new Gson().fromJson(RestCommuncationHelper.getRequest("http://localhost:8080/InvoiceSystem/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + unparsedVehicleIds)
+						, Invoice[].class);
+			}
 		} else {
-			user = new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/UserSystem/v1/usersystem/userId/" + username), ClientUser.class);
+			return new Invoice[0];
 		}
+	}
+
+	public Invoice getInvoiceById(long invoiceId, String username) throws IOException {
+		List<Invoice> userInvoices = Arrays.asList(this.getUserInvoices(username));
+		return userInvoices.stream().filter(x -> x.getId() == invoiceId).findFirst().orElseGet(null);
+	}
+
+	private String getUnparsedVehicleIds(ClientUser user) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -84,18 +114,39 @@ public class DriverApplicationService
 		}
 		sb.deleteCharAt(sb.lastIndexOf(","));
 
-		if (!sb.toString().equals("")) {
-			if(env != null && env.equals("production")) {
-				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + sb.toString())
-						, new TypeReference<List<Invoice>>(){});
-			} else {
-				return new ObjectMapper().readValue(RestCommuncationHelper.getRequest("http://localhost:8080/InvoiceSystem/v1/invoicesystem/user/"+user.getId()+"/vehicles/" + sb.toString())
-						, new TypeReference<List<Invoice>>(){});
-			}
+		return sb.toString();
+	}
+
+	public SimpleUserVehicle[] getUserVehicles(String username) throws IOException {
+		ClientUser user = this.getClientUserByName(username);
+
+		Date from = new Date(0);
+		Date to = new Date();
+		if(env != null && env.equals("production")) {
+			return new Gson().fromJson(RestCommuncationHelper.getRequest("http://usersystem:8080/deploy/v1/usersystem/users/"+user.getId()+"/vehicles/from/"+from.getTime()+"/to/"+to.getTime())
+					, SimpleUserVehicle[].class);
 		} else {
-			return new ArrayList<>();
+			return new Gson().fromJson(RestCommuncationHelper.getRequest("http://localhost:8080/UserSystem/v1/usersystem/users/"+user.getId()+"/vehicles/from/"+from.getTime()+"/to/"+to.getTime())
+					, SimpleUserVehicle[].class);
+		}
+	}
+
+	public boolean payInvoice(long invoiceId, String username) throws IOException {
+		Invoice invoice = getInvoiceById(invoiceId, username);
+		if (invoice == null) return false;
+		try
+		{
+			if (env != null && env.equals("production"))
+			{
+				RestCommuncationHelper.getRequest("http://invoicesystem:8080/deploy/v1/invoicesystem/markAsPaid/" + invoiceId);
+			} else
+			{
+				RestCommuncationHelper.getRequest("http://localhost:8080/InvoiceSystem/v1/invoicesystem/markAsPaid/" + invoiceId);
+			}
+		} catch (Exception e) {
+			return false;
 		}
 
-
+		return true;
 	}
 }

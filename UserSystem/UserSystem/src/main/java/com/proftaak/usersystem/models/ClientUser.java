@@ -43,6 +43,7 @@ public class ClientUser implements Serializable {
     private String email;
 
     public ClientUser() {
+        this.ownedVehicles = new ArrayList<>();
     }
 
 

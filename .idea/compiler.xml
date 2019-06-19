@@ -8,12 +8,20 @@
         <outputRelativeToContentRoot value="true" />
         <module name="PoliceFrontendProxy" />
         <module name="MovementProxy" />
+        <module name="rabbitmq (1)" />
         <module name="DriverApplication" />
+        <module name="resthelpers" />
         <module name="UserSystem.shared" />
         <module name="InvoiceSystem" />
         <module name="rabbitmq" />
         <module name="MovementRegistrationService" />
-        <module name="GovernmentAdmin" />
+        <module name="MovementRegistrationService.shared" />
+        <module name="PoliceAdministration" />
+        <module name="PoliceEuropeProxy" />
+        <module name="PoliceFrontendProxy" />
+        <module name="rabbitmq" />
+        <module name="rabbitmq (1)" />
+        <module name="resthelpers" />
         <module name="UserSystem" />
         <module name="InvoiceSystem.shared" />
         <module name="DriverApplication.shared" />
@@ -22,11 +30,5 @@
         <module name="MovementRegistrationService.shared" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="DriverApplication.shared" target="1.8" />
-      <module name="MovementRegistrationService.shared" target="1.8" />
-      <module name="rabbitmq" target="1.8" />
-      <module name="UserSystem.shared" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

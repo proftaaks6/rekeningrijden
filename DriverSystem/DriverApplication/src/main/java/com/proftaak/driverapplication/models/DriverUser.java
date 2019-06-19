@@ -17,7 +17,6 @@ import javax.persistence.*;
         query = "SELECT u FROM DriverUser u WHERE u.username = :username AND u.password = :password"
 )
 public class DriverUser {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
 
@@ -29,10 +28,10 @@ public class DriverUser {
 
     public DriverUser(){}
 
-    public DriverUser(String username, String password) {
+    public DriverUser(long id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
-
     }
 
     public long getId() {

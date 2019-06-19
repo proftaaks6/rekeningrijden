@@ -10,6 +10,7 @@ import com.proftaak.driverapplication.service.DriverApplicationService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -27,19 +28,12 @@ public class DriverApplicationEndpoint
     @Inject
     private LoginAttemptConverter loginAttemptConverter;
 
-    @GET
-    @Secured
-    @Path("/getInvoices")
-    public Response getInvoices() throws IOException {
-        return Response.ok(driverApplicationService.getUserInvoices()).build();
-    }
-
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
     @Path("/createUser")
-    public Response addNewUser(@FormParam("username") String username, @FormParam("password") String password) {
+    public Response addNewUser(@FormParam("userId") long userId, @FormParam("username") String username, @FormParam("password") String password) {
         try {
-            DriverUser user = driverApplicationService.saveNewUser(username, password);
+            DriverUser user = driverApplicationService.saveNewUser(userId, username, password);
             return Response.ok().entity(driverUserConverter.toShared(user)).build();
         } catch (Exception e) {
             return Response.serverError().build();

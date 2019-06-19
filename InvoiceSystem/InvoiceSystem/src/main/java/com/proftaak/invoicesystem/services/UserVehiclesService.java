@@ -9,7 +9,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import java.util.Date;
 import javax.enterprise.util.TypeLiteral;
-import static com.proftaak.invoicesystem.helpers.RestCommuncationHelper.getResponseString;
+
+import static com.proftaak.resthelpers.RestCommuncationHelper.getResponseString;
 
 @Stateless
 public class UserVehiclesService
