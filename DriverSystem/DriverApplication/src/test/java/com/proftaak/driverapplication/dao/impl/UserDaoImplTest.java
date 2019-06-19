@@ -21,7 +21,7 @@ class UserDaoImplTest {
         em.getTransaction().begin();
         dao.setEm(em);
 
-        dao.saveNewUser("test", "test");
+        dao.saveNewUser(1,"test", "test");
     }
 
     @AfterEach
@@ -31,7 +31,7 @@ class UserDaoImplTest {
 
     @Test
     void saveNewUser() {
-        assertNotEquals(null, dao.saveNewUser("username", "password"));
+        assertNotEquals(null, dao.saveNewUser(2,"username", "password"));
     }
 
     @Test
