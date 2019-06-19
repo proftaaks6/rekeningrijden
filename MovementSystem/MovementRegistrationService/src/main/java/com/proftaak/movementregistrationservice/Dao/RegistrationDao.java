@@ -5,6 +5,7 @@ import com.proftaak.movementregistrationservice.models.Tracker;
 import com.proftaak.movementregistrationservice.models.Vehicle;
 import com.proftaak.movementregistrationservice.models.VehicleTracker;
 
+import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface RegistrationDao {
     VehicleTracker getVehicleTracker(long vehicleId, long trackerId);
     VehicleTracker getActiveVehicleTracker(long vehicleId);
     VehicleTracker editVehicleTracker(VehicleTracker vehicleTracker);
+    void setEm(EntityManager em);
+    EntityManager getEm();
 }

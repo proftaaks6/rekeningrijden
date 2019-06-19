@@ -49,4 +49,14 @@ public class LoginAttemptDaoImpl implements LoginAttemptDao
 		em.flush();
 		return loginAttempt;
 	}
+
+	@Override
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
+	@Override
+	public EntityManager getEm() {
+		return this.em;
+	}
 }

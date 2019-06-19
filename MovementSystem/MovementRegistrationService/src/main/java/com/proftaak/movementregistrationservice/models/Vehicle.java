@@ -126,6 +126,8 @@ public class Vehicle {
         this.trackers = trackers;
     }
 
+
+
     public void addTracker(VehicleTracker vehicleTracker) {
         try {
             Tracker activeTracker = getActiveTracker();
