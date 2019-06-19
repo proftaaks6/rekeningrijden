@@ -3,24 +3,20 @@ package com.proftaak.driverapplication.dao.impl;
 import com.proftaak.driverapplication.models.LoginAttempt;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import java.util.Date;
-
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
-class LoginAttemptDaoImplTest {
+public class LoginAttemptDaoImplTest {
 
     private LoginAttemptDaoImpl dao = new LoginAttemptDaoImpl();
 
     @Before
-    void setUp() {
+    public void setUp() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("h2");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -36,22 +32,22 @@ class LoginAttemptDaoImplTest {
     }
 
     @Test
-    void getById() {
+    public void getById() {
         assertNotEquals(null, dao.getById(1));
     }
 
     @Test
-    void getByUserId() {
+    public void getByUserId() {
         assertNotEquals(null, dao.getByUserId(1));
     }
 
     @Test
-    void getAll() {
+    public void getAll() {
         assertNotEquals(null, dao.getAll());
     }
 
     @Test
-    void add() {
+    public void add() {
         assertNotEquals(null, dao.add(new LoginAttempt(2, new Date(), true)));
     }
 }

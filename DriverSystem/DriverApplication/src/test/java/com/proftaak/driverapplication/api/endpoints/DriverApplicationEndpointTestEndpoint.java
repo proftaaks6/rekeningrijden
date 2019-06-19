@@ -3,20 +3,20 @@ package com.proftaak.driverapplication.api.endpoints;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static com.jayway.restassured.RestAssured.given;
 
-class DriverApplicationEndpointTest {
+public class DriverApplicationEndpointTestEndpoint {
 
     private static String token;
     private static String url = "http://localhost:8080/DriverSystem/v1/";
     private static final String AUTHORIZATION_HEADER = "Authorization";
 
-    @BeforeAll
-    public static void setUp() {
+    @Before
+    public void setUp() {
 //        String port = System.getProperty("server.port");
 //        if (port == null) {
 //            RestAssured.port = 8080;
@@ -54,17 +54,17 @@ class DriverApplicationEndpointTest {
     }
 
     @Test
-    void getInvoices() {
+    public void getInvoices() {
         given().header(AUTHORIZATION_HEADER, token).when().get(url + "driverapplication/getInvoices").then().statusCode(200);
     }
 
     @Test
-    void addNewUser() {
+    public void addNewUser() {
         given().formParam("username", "test").formParam("password", "Test123").header(AUTHORIZATION_HEADER, token).when().post(url + "driverapplication/createUser").then().statusCode(200);
     }
 
     @Test
-    void getUserStatistics() {
+    public void getUserStatistics() {
         given().pathParam("id", 1).header(AUTHORIZATION_HEADER, token).when().get(url + "driverapplication/{id}").then().statusCode(200);
     }
 }
