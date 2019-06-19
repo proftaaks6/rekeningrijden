@@ -27,7 +27,6 @@
           <element id="library" level="project" name="Maven: io.jsonwebtoken:jjwt-jackson:0.10.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.6" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.6" />
           <element id="library" level="project" name="Maven: com.h2database:h2:1.2.140" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.3.6.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" />
