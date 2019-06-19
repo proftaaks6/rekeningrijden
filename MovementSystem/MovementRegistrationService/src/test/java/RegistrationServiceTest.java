@@ -1,10 +1,11 @@
-package com.proftaak.movementregistrationservice.service;
-
 import com.proftaak.movementregistrationservice.Dao.DaoImplementation.RegistrationDaoImplementation;
 import com.proftaak.movementregistrationservice.models.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+//import org.junit.jupiter.api.AfterEach;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,12 +17,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RegistrationServiceTest {
+public class RegistrationServiceTest {
 
     private RegistrationDaoImplementation dao = new RegistrationDaoImplementation();
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("h2");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -34,28 +35,28 @@ class RegistrationServiceTest {
         dao.addTrackerToVehicle(dao.getTrackedById(1), 1);
     }
 
-    @AfterEach
-    void tearDown() {
+    @After
+    public void tearDown() {
         dao.getEm().getTransaction().rollback();
     }
 
     @Test
-    void addTracker() {
+    public void addTracker() {
         assertTrue(dao.addTracker(new Tracker(true)));
     }
 
     @Test
-    void editTrackerActiveStatus() {
+    public void editTrackerActiveStatus() {
         assertTrue(dao.editTrackerActiveStatus(false, 1));
     }
 
     @Test
-    void editTrackerLocationPoints() {
+    public void editTrackerLocationPoints() {
         assertTrue(dao.addTrackerLocationPiont(new LocationPoint(51.44083, 5.47778, new Date()), 1));
     }
 
     @Test
-    void editTrackerVehicle() {
+    public void editTrackerVehicle() {
         Vehicle vehicle = dao.getAllVehicles().get(0);
         vehicle.setStolen(true);
         Tracker tracker = dao.getAllTrackers().get(0);
@@ -63,55 +64,55 @@ class RegistrationServiceTest {
     }
 
     @Test
-    void removeTracker() {
+    public void removeTracker() {
         assertTrue(dao.removeTracker(1));
     }
 
     @Test
-    void addVehicle() {
+    public void addVehicle() {
         assertNotNull(dao.addVehicle(new Vehicle(VehicleType.BIG_TRUCK, "chasisnumber",  FuelType.DIESEL, 1.2, false)));
     }
 
     @Test
-    void addTrackerToVehicle() {
+    public void addTrackerToVehicle() {
         Vehicle vehicle = dao.getAllVehicles().get(0);
         assertTrue(dao.addTrackerToVehicle(new Tracker(false), vehicle.getId()));
     }
 
     @Test
-    void removeVehicle() {
+    public void removeVehicle() {
         Vehicle vehicle = dao.getAllVehicles().get(0);
         assertTrue(dao.removeVehicle(vehicle.getId()));
     }
 
     @Test
-    void getVehicleByChassisNumber() {
+    public void getVehicleByChassisNumber() {
         assertNotNull(dao.getVehicleByChassisNumber("asdffhngtresthdryger"));
     }
 
     @Test
-    void getStolenVehicles() {
+    public void getStolenVehicles() {
         assertNotNull(dao.getStolenVehicles());
     }
 
     @Test
-    void getAllVehicles() {
+    public void getAllVehicles() {
         assertNotNull(dao.getAllVehicles());
     }
 
     @Test
-    void getAllTrackers() {
+    public void getAllTrackers() {
         assertNotNull(dao.getAllTrackers());
     }
 
     @Test
-    void getLocationPointsForTracker() {
+    public void getLocationPointsForTracker() {
         Tracker tracker = dao.getAllTrackers().get(0);
         assertNotNull(dao.getLocationPointsForTracker(tracker.getId()));
     }
 
     @Test
-    void getLocationPointsForVehicle() {
+    public void getLocationPointsForVehicle() {
         LocalDate localDate = LocalDate.now().minusMonths(1);
         assertNotNull(dao.getLocationPointsForVehicle("asdffhngtresthdryger", Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()), new Date()));
     }
@@ -126,7 +127,7 @@ class RegistrationServiceTest {
 //    }
 
     @Test
-    void getTrackerById() {
+    public void getTrackerById() {
         assertNotNull(dao.getTrackedById(1));
     }
 }
