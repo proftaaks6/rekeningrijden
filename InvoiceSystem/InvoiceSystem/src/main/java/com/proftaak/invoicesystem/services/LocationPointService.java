@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import static com.proftaak.resthelpers.RestCommuncationHelper.getResponseString;
+import static com.proftaak.invoicesystem.helpers.RestCommuncationHelper.getResponseString;
 
 @Stateless
 public class LocationPointService {

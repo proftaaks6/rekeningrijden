@@ -81,7 +81,7 @@ public class PriceRow {
 
     public void calculatePriceBasedOnDistance(){
         if(region == null){
-            price = distance * 0.12;
+            price = 0;
             return;
         }
         price = distance * region.getPrice();

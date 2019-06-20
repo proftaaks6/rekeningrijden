@@ -8,7 +8,6 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,6 @@ public class InvoiceProcessingDaoImplTest {
     @Test
     public void markAsPaid() {
         Invoice invoice = dao.getInvoiceById(1);
-        dao.markAsPaid(1);
         invoice.setPaid(true);
         assertTrue(dao.getInvoiceById(1).isPaid());
     }
@@ -52,8 +50,6 @@ public class InvoiceProcessingDaoImplTest {
 
     @Test
     public void getInvoiceById() {
-        String[] string = new String[20];
-        assertEquals(0, dao.getInvoicesForUser(1, string).size());
         assertEquals(100, dao.getInvoiceById(1).getTotalPrice(), 0.01);
     }
 }

@@ -55,7 +55,7 @@ public class InvoiceProcessingEndpoint {
     public Response getInvoiceById(@PathParam("id") long id){
         Invoice invoice = service.getInvoiceById(id);
         if(invoice != null){
-            return Response.ok(InvoiceConverter.fromEntity(invoice)).build();
+            return Response.ok(invoice).build();
         } else {
             return Response.noContent().build();
         }

@@ -1,7 +1,6 @@
 package com.proftaak.usersystem.shared;
 
 import java.util.Date;
-import javax.json.bind.annotation.JsonbDateFormat;
 
 public class SimpleUserVehicle
 {
@@ -9,7 +8,7 @@ public class SimpleUserVehicle
 
 	private Date startDate;
 
-	private Date endDate;
+	private Date endDate;final
 
 	public String getChassisNumber()
 	{

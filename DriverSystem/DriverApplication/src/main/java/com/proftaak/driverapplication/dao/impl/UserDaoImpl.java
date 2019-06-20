@@ -17,10 +17,10 @@ public class UserDaoImpl implements UserDao
     private EntityManager em;
 
     @Override
-    public DriverUser saveNewUser(long userId, String username, String password)
+    public DriverUser saveNewUser(String username, String password)
     {
         try {
-            DriverUser user = new DriverUser(userId, username, password);
+            DriverUser user = new DriverUser(username, password);
             em.persist(user);
             return user;
         } catch (Exception e) {

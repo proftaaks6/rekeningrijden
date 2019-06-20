@@ -125,6 +125,7 @@ class RegistrationServiceTest {
 //        assertNotNull(dao.getVehicleTracker(vehicle.getId(), tracker.getId()));
 //    }
 
+    //comment
     @Test
     void getTrackerById() {
         assertNotNull(dao.getTrackedById(1));

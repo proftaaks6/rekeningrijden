@@ -1,12 +1,11 @@
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class MovementProxySampleTest {
+class MovementProxySampleTest {
 
     @Test
-    public void sample(){
+    void sample(){
         assertThat( "Movement Proxy werkt!", true);
     }
 }

@@ -94,7 +94,7 @@ public class SquareRegion {
             return false;
         }
         return (
-                getTopLeft().getLongitude() >= point.getLongitude() && getBottomRight().getLongitude() <= point.getLongitude() && getTopLeft().getLatitude() >= point.getLatitude() && getBottomRight().getLatitude() <= point.getLatitude()
+                getTopLeft().getLongitude() <= point.getLongitude() && getBottomRight().getLongitude() >= point.getLongitude() && getTopLeft().getLatitude() >= point.getLatitude() && getBottomRight().getLatitude() <= point.getLatitude()
         );
 
     }

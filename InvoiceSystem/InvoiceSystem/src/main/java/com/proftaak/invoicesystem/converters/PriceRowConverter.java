@@ -16,8 +16,7 @@ public class PriceRowConverter {
         row.setLocationPoints(entity.getLocationPoints().stream().map(LocationPointInvoiceConverter::fromEntity).collect(Collectors.toList()));
         row.setId(entity.getId());
         row.setPrice(entity.getPrice());
-        if (entity.getRegion() != null)
-            row.setRegionId(entity.getRegion().getId());
+        row.setRegionId(entity.getRegion().getId());
         return row;
     }
 }

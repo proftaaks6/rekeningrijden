@@ -1,12 +1,11 @@
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class InvoiceSystemSampleTest {
+class InvoiceSystemSampleTest {
 
     @Test
-    public void sample(){
+    void sample(){
         assertThat( "Invoice System werkt!", true);
     }
 }
