@@ -1,11 +1,12 @@
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class UserSystemSampleTest {
+public class UserSystemSampleTest {
 
     @Test
-    void sample(){
+    public void sample(){
         assertThat( "User System werkt!", true);
     }
 }

@@ -2,6 +2,7 @@ package com.proftaak.invoicesystem.shared;
 
 import java.util.Date;
 import java.util.List;
+import javax.json.bind.annotation.JsonbDateFormat;
 
 public class Invoice {
     private long id;
@@ -14,7 +15,7 @@ public class Invoice {
 
     private double totalPrice;
 
-    private boolean isPaid;
+    private boolean paid;
 
     private Date date;
 
@@ -66,11 +67,11 @@ public class Invoice {
     }
 
     public boolean isPaid() {
-        return isPaid;
+        return paid;
     }
 
     public void setPaid(boolean paid) {
-        isPaid = paid;
+        this.paid = paid;
     }
 
     public Date getDate() {

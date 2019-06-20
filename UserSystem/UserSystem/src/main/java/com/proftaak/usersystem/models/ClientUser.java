@@ -115,7 +115,6 @@ public class ClientUser implements Serializable {
         } else {
             this.ownedVehicles = new ArrayList<>();
             this.ownedVehicles.add(userVehicle);
-
         }
     }
 

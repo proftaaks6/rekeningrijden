@@ -8,28 +8,44 @@
         <version>1.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+    <properties>
+        <jacoco.version>0.7.5.201505241946</jacoco.version>
+        <javaee.api.version>8.0</javaee.api.version>
+    </properties>
     <packaging>war</packaging>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>MovementRegistrationService</artifactId>
 
-    <build>
-        <finalName>MovementRegistration</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-    </build>
-
-
     <dependencies>
+                <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <version>4.12</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <version>1.7.12</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                    <version>2.8.5</version>
+                </dependency>
         <dependency>
             <groupId>proftaak-s6</groupId>
             <artifactId>MovementRegistrationService.shared</artifactId>
             <version>1.0</version>
             <scope>compile</scope>
         </dependency>
+                <dependency>
+                    <groupId>javax</groupId>
+                    <artifactId>javaee-api</artifactId>
+                    <version>${javaee.api.version}</version>
+                    <scope>provided</scope>
+                </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -51,7 +67,37 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.3.6.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.3.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+
+    <build>
+        <finalName>MovementRegistration</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <skipMain>true</skipMain>
+                    <skip>true</skip>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 
 </project>

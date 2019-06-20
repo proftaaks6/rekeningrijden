@@ -1,11 +1,12 @@
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class MovementRegistrationServiceSampleTest {
+public class MovementRegistrationServiceSampleTest {
 
     @Test
-    void sample(){
+    public void sample(){
         assertThat( "Movement Registration Service werkt!", true);
     }
 }
