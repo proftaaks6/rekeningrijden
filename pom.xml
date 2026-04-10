@@ -13,7 +13,7 @@
     <properties>
         <javaee.api.version>8.0</javaee.api.version>
         <junit.version>4.11</junit.version>
-        <activemq.version>5.15.8</activemq.version>
+        <activemq.version>5.19.4</activemq.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
